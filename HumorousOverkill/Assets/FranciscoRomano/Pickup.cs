@@ -11,6 +11,7 @@ public class Pickup : MonoBehaviour
 	
 	void Start ()
     {
+        // set collider as trigger
         GetComponent<BoxCollider>().isTrigger = true;
 	}
 
@@ -21,6 +22,8 @@ public class Pickup : MonoBehaviour
         {
             // send event to player
             GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(type, amount);
+            // destroy current game object
+            Destroy(gameObject);
         }
     }
 
