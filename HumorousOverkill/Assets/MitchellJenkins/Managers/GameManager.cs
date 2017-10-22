@@ -11,5 +11,4 @@ struct GameInfo {
 [RequireComponent(typeof(PlayerManager))]
 public class GameManager : MonoBehaviour {
     [SerializeField] GameInfo m_gameInfo;
-    [SerializeField] PlayerInfo m_playerInfo;
 }

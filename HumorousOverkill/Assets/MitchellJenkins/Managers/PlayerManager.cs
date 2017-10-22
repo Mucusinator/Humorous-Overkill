@@ -17,6 +17,17 @@ struct PlayerInfo {
 }
 
 public class PlayerManager : GameEventListener {
+    public Player m_ply;
+    [SerializeField] PlayerInfo m_playerInfo;
 
-    
+    public override void HandleEvent (GameEvent e) {
+        switch (e) {
+        case GameEvent.PICKUP_HEALTH:
+            m_ply.AddHealth(m_playerInfo.m_pickupHealthAmount);
+            break;
+        default:
+            break;
+        }
+    }
+
 }
