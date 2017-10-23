@@ -9,10 +9,18 @@ public class Shooting : MonoBehaviour {
     public Camera fpsCam;
     public ParticleSystem flash;
     public float impactForce = 30f;
-    
 
+    public Animator animator;
 
     public float ShotsPerMinute = 100f;
+
+
+    public int maxAmmo = 10;
+    private int currentAmmo;
+    public float reloadTime = 2.5f;
+
+
+    private bool isReloading;
 
     private float nextTimeToFire = 0f;
     public FireRate FireRateSelection;
@@ -24,13 +32,39 @@ public class Shooting : MonoBehaviour {
 
     }
 
+    public enum GunType
+    {
+        SHOTGUN,
+        RIFLE
+
+    }
+
 
     [SerializeField]
     private float ShotsPerSecond;
-    
+
+
+    void Start()
+    {
+        currentAmmo = maxAmmo;
+    }
 
 
 	void Update () {
+
+
+        if (isReloading)
+        {
+            return;
+        }
+
+        if (currentAmmo <= 0)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
+
+
 
         ShotsPerSecond = ShotsPerMinute / 60f;
         //If the user presses the left mouse button, perform the shoot function.
@@ -57,6 +91,20 @@ public class Shooting : MonoBehaviour {
         }
 	}
 
+
+
+    IEnumerator Reload()
+    {
+
+        isReloading = true;
+        animator.SetBool("Reloading", true);
+        yield return new WaitForSeconds(reloadTime - 0.25f);
+        animator.SetBool("Reloading", false);
+        yield return new WaitForSeconds(0.25f);
+        currentAmmo = maxAmmo;
+        isReloading = false;
+        
+    }
 
     void Shoot()
     {
@@ -85,7 +133,15 @@ public class Shooting : MonoBehaviour {
             }
 
         }
+        currentAmmo--;
     }
 
+
+
+    void OnEnable()
+    {
+        isReloading = false;
+        animator.SetBool("Reloading", false);
+    }
 }
 
