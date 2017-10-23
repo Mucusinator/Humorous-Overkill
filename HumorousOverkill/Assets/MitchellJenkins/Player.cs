@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
 public class Player : MonoBehaviour {
-    private PlayerInfo m_plyInfo;
+    [SerializeField]public PlayerInfo m_plyInfo;
+    void Start () {
+        m_plyInfo = GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().GetPlayerInfo;
+    }
 
     public bool isHealthFull{
         get { return m_plyInfo.m_playerHealth == 100 ? true : false; }
