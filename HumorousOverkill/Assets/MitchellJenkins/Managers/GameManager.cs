@@ -9,6 +9,19 @@ struct GameInfo {
 }
 
 [RequireComponent(typeof(PlayerManager))]
-public class GameManager : MonoBehaviour {
+public class GameManager : GameEventListener {
     [SerializeField] GameInfo m_gameInfo;
+
+    public override void HandleEvent (GameEvent e) {
+        switch (e) {
+        // Player
+        case GameEvent.PICKUP_AMMO:
+        case GameEvent.PICKUP_HEALTH:
+            this.GetComponent<PlayerManager>().HandleEvent(e);
+            break;
+        default:
+            break;
+        }
+    }
+
 }
