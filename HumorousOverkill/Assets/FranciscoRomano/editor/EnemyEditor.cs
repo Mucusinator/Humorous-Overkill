@@ -6,6 +6,7 @@ using System.Collections.Generic;
 [CustomEditor(typeof(EnemyManager))]
 public class EnemyEditor : Editor
 {
+    bool needsRepaint = true;
     EnemyManager enemyManager;
 
     void OnEnable()
@@ -29,13 +30,18 @@ public class EnemyEditor : Editor
 
         if (guiEvent.type == EventType.mouseDown && guiEvent.button == 0)
         {
+            Undo.RecordObject(enemyManager, "Add Point");
             enemyManager.m_editor_spawnpoints.Add(target);
             Debug.Log("add :: { " + target.x + ", " + target.y + ", " + target.z + " }");
         }
 
-        foreach (Vector3 position in enemyManager.m_editor_spawnpoints)
+        for (int i = 0; i < enemyManager.m_editor_spawnpoints.Count; i++)
         {
-            Handles.DrawSolidDisc(position, Vector3.up, 0.5f);
+            Vector3 linePoint = enemyManager.m_editor_spawnpoints[(i + 1) % enemyManager.m_editor_spawnpoints.Count];
+            Handles.color = Color.black;
+            Handles.DrawDottedLine(enemyManager.m_editor_spawnpoints[i], linePoint, 4);
+            Handles.color = Color.magenta;
+            Handles.DrawSolidDisc(enemyManager.m_editor_spawnpoints[i], Vector3.up, 0.5f);
         }
 
         // prevent unity from deselecting object
