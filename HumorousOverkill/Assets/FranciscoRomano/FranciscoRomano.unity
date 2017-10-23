@@ -636,6 +636,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc501f25fc5bed418079405d5a89cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_enemyInfo:
+    m_enemyHealth_type1: 0
+    m_enemyHealth_type2: 0
+    m_enemySpeed_type1: 0
+    m_enemySpeed_type2: 0
+    m_enemyDamage_type1: 0
+    m_enemyDamage_type2: 0
+    m_enemyAmmoDropRate: 0
   m_editor_spawnpoints: []
 --- !u!1 &2059719501
 GameObject:

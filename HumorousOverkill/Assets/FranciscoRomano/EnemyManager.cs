@@ -44,8 +44,5 @@ public class EnemyManager : GameEventListener
         }
     }
 
-    struct EnemyInfo
-    {
 
-    }
 }
