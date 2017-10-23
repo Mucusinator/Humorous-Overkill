@@ -28,29 +28,33 @@ public class DroneAI : MonoBehaviour
 
     void wander()
     {
-        Vector3 direction = currentTarget - transform.position;
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnSpeed * Time.deltaTime);
-
-        //transform.LookAt(currentTarget);
-        transform.Translate(transform.forward * wanderSpeed * Time.deltaTime, Space.World);
-
-        if(Physics.Raycast(transform.position, transform.forward * avoidRadius, out hitInfo))
-        {
-            if(hitInfo.collider.gameObject.tag == "Avoid")
-            {
-                pickTarget();
-            }
-        }
-
         // if we are within the margin of error pick a new target
         if ((transform.position - currentTarget).sqrMagnitude < Mathf.Pow(errorMargin, 2))
         {
             pickTarget();
         }
+
+        // avoid walls
+        Debug.DrawRay(transform.position, transform.forward.normalized * avoidRadius, Color.cyan);
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, avoidRadius))
+        {
+            if (hitInfo.collider.gameObject.tag == "Avoid")
+            {
+                Debug.Log("I will avoid " + hitInfo.collider.gameObject.name);
+                pickTarget();
+            }
+        }
+
+        Vector3 direction = currentTarget - transform.position;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnSpeed * Time.deltaTime);
+
+        //transform.LookAt(currentTarget);
+        transform.Translate(transform.forward * wanderSpeed * Time.deltaTime, Space.World);
     }
 
     void pickTarget()
     {
+        // make a good guess
         currentTarget = transform.position + getRandomVector(targetRadius);
 
         // TODO: avoid walls etc
