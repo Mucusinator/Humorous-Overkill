@@ -447,7 +447,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -604,6 +604,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1265723601}
+  - component: {fileID: 1265723602}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Manager
@@ -624,6 +625,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1265723602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1265723600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc501f25fc5bed418079405d5a89cf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_editor_spawnpoints: []
 --- !u!1 &2059719501
 GameObject:
   m_ObjectHideFlags: 0
