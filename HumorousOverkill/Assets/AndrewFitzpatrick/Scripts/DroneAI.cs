@@ -27,7 +27,7 @@ public class DroneAI : MonoBehaviour
         Vector3 direction = (currentTarget - transform.position).normalized;
         Quaternion toRotation = Quaternion.FromToRotation(transform.forward, direction);
 
-        turnTime = Mathf.Min(1.0f, turnTime + (1.0f / turnSpeed * Time.deltaTime);
+        turnTime = Mathf.Min(1.0f, turnTime + (1.0f / turnSpeed * Time.deltaTime));
 
 
         transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, turnTime);
