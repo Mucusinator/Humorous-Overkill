@@ -1,5 +1,9 @@
 ﻿public enum GameEvent
 {
+    // UI Enum
+    UI_HEALTH,
+    UI_AMMO_MAX,
+    UI_AMMO_CUR,
     // Game Enum
     GAME_STATE_MENU,
     GAME_STATE_START,
