@@ -34,28 +34,26 @@ public class DroneAI : MonoBehaviour
             pickTarget();
         }
 
-        // avoid walls
-        //Debug.DrawRay(transform.position, transform.forward.normalized * avoidRadius, Color.cyan);
-        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, avoidRadius))
-        {
-            if (hitInfo.collider.gameObject.tag == "Avoid")
-            {
-                Debug.Log("I will avoid " + hitInfo.collider.gameObject.name);
-                pickTarget();
-            }
-        }
-
-        Vector3 direction = Vector3.zero - transform.position;
+        Vector3 direction = currentTarget - transform.position;
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnSpeed * Time.deltaTime);
 
-        //transform.LookAt(currentTarget);
-        transform.Translate((currentTarget - transform.position) * wanderSpeed * Time.deltaTime, Space.World);
+        transform.Translate(transform.forward * wanderSpeed * Time.deltaTime, Space.World);
     }
 
     void pickTarget()
     {
         // make a good guess
         currentTarget = transform.position + getRandomVector(targetRadius);
+
+        if(Physics.Raycast(transform.position, currentTarget - transform.position, out hitInfo, targetRadius))
+        {
+            if (hitInfo.collider.gameObject.tag == "Avoid")
+            {
+                Debug.Log("I will avoid " + hitInfo.collider.gameObject.name);
+                currentTarget.x += (currentTarget.x < hitInfo.point.x ? avoidRadius : -avoidRadius);
+                currentTarget.z += (currentTarget.z < hitInfo.point.z ? avoidRadius : -avoidRadius);
+            }
+        }
 
         // TODO: avoid walls etc
     }
