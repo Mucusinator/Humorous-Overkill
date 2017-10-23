@@ -45,7 +45,7 @@ public class DroneAI : MonoBehaviour
         // make a good guess
         currentTarget = transform.position + getRandomVector(targetRadius);
 
-        if(Physics.Raycast(transform.position, (currentTarget - transform.position).normalized, out hitInfo, avoidRadius))
+        if(Physics.Raycast(transform.position, currentTarget - transform.position, out hitInfo, targetRadius))
         {
             if (hitInfo.collider.gameObject.tag == "Avoid")
             {
