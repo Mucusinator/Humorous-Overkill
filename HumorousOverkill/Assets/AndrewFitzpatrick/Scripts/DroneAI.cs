@@ -35,7 +35,7 @@ public class DroneAI : MonoBehaviour
         }
 
         // avoid walls
-        Debug.DrawRay(transform.position, transform.forward.normalized * avoidRadius, Color.cyan);
+        //Debug.DrawRay(transform.position, transform.forward.normalized * avoidRadius, Color.cyan);
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo, avoidRadius))
         {
             if (hitInfo.collider.gameObject.tag == "Avoid")
@@ -45,11 +45,11 @@ public class DroneAI : MonoBehaviour
             }
         }
 
-        Vector3 direction = currentTarget - transform.position;
+        Vector3 direction = Vector3.zero - transform.position;
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnSpeed * Time.deltaTime);
 
         //transform.LookAt(currentTarget);
-        transform.Translate(transform.forward * wanderSpeed * Time.deltaTime, Space.World);
+        transform.Translate((currentTarget - transform.position) * wanderSpeed * Time.deltaTime, Space.World);
     }
 
     void pickTarget()
