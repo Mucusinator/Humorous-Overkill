@@ -18,12 +18,19 @@ struct PlayerInfo {
 
 public class PlayerManager : GameEventListener {
     public Player m_ply;
+
+    // Weapon Script.
+    //public Weapon m_weapon;
     [SerializeField] PlayerInfo m_playerInfo;
 
     public override void HandleEvent (GameEvent e) {
         switch (e) {
         case GameEvent.PICKUP_HEALTH:
             m_ply.AddHealth(m_playerInfo.m_pickupHealthAmount);
+            break;
+        case GameEvent.PICKUP_AMMO:
+            // Calls the add ammo function from the ammo script using the enum.
+            //m_weapon.AddAmmo(m_playerInfo.m_pickupAmmoAmount);
             break;
         default:
             break;
