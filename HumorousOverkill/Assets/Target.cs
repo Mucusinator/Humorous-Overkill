@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class Target : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public float health = 50f;
+    
+
+    // Replace this with the game manager handler event "DealDamage".
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+        if (health <= 0f)
+        {
+            // Replace this with the game manager handler event "KillEnemy".
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
+    }
+
 }
