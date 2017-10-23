@@ -9,26 +9,51 @@ public class Shooting : MonoBehaviour {
     public Camera fpsCam;
     public ParticleSystem flash;
     public float impactForce = 30f;
-    private float ShotsPerSecond;
+    
 
 
     public float ShotsPerMinute = 100f;
-    private float nextTimeToFire = 0f;
 
-	
+    private float nextTimeToFire = 0f;
+    public FireRate FireRateSelection;
+
+
+    public enum FireRate {
+        SEMIAUTO,
+        FULLAUTO
+
+    }
+
+
+    [SerializeField]
+    private float ShotsPerSecond;
     
 
 
 	void Update () {
-        
-        
+
+        ShotsPerSecond = ShotsPerMinute / 60f;
         //If the user presses the left mouse button, perform the shoot function.
-        if (Input.GetButton("Fire1") && Time.time >=  nextTimeToFire)
+
+        if (FireRateSelection == FireRate.FULLAUTO)
         {
-            
-            nextTimeToFire = Time.time + 60f / ShotsPerMinute;
-            Shoot();
-            
+            if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
+            {
+
+                nextTimeToFire = Time.time + 60f / ShotsPerMinute;
+                Shoot();
+
+            }
+        }
+        else
+        {
+            if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
+            {
+
+                nextTimeToFire = Time.time + 60f / ShotsPerMinute;
+                Shoot();
+
+            }
         }
 	}
 
