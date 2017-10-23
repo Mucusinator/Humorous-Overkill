@@ -21,7 +21,7 @@ public class Pickup : MonoBehaviour
         if (collider.tag == "Player")
         {
             // send event to player
-            GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(type);
+            GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>().HandleEvent(type);
             // destroy current game object
             Destroy(gameObject);
         }

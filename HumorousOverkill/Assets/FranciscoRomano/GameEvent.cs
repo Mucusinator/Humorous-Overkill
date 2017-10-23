@@ -7,7 +7,7 @@
     GAME_STATE_RESTART,
     GAME_STATE_CONTINUE,
     // Enemy Enum
-
+    
     // Player Enum
     PICKUP_HEALTH,
     PICKUP_AMMO
