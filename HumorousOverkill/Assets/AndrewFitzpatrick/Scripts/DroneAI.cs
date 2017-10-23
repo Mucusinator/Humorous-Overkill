@@ -48,8 +48,8 @@ public class DroneAI : MonoBehaviour
         Vector3 direction = Vector3.zero - transform.position;
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnSpeed * Time.deltaTime);
 
-        //transform.LookAt(currentTarget);
-        transform.Translate((currentTarget - transform.position) * wanderSpeed * Time.deltaTime, Space.World);
+        transform.LookAt(currentTarget);
+        transform.Translate(transform.forward * wanderSpeed * Time.deltaTime, Space.World);
     }
 
     void pickTarget()
