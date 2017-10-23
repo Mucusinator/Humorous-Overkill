@@ -7,25 +7,47 @@ public class DroneAI : MonoBehaviour
 {
     // wandering
     [Header("Wander Behavior")]
-    public float wanderRadius;
-    public float wanderJitter;
-    public float wanderDistance;
-    private Vector3 previousTarget;
+    public float targetRadius;
+    public float errorMargin;
+    public float wanderSpeed;
+    public float turnSpeed;
+    public bool showGizmos = false;
+    private Vector3 currentTarget;
+    [SerializeField]
+    private float turnTime = 0.0f;
 
 	void Update ()
     {
-        // target random point on wander radius
-        Vector3 target = getRandomVector(wanderRadius);
-
-        // add jitter and renormalize to wander radius
-        target += getRandomVector(wanderJitter);
-        target.Normalize();
-        target *= wanderRadius;
-
-        target += transform.forward.normalized * wanderDistance;
-
-        transform.Translate(target * Time.deltaTime);
+        wander();
 	}
+
+    void wander()
+    {
+        // look at target and move forward
+        Vector3 direction = (currentTarget - transform.position).normalized;
+        Quaternion toRotation = Quaternion.FromToRotation(transform.forward, direction);
+
+        turnTime = Mathf.Min(1.0f, turnTime + (1.0f / turnSpeed * Time.deltaTime);
+
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, turnTime);
+        transform.Translate(transform.forward * wanderSpeed * Time.deltaTime);
+
+        // if we are within the margin of error pick a new target
+        if((transform.position - currentTarget).sqrMagnitude < Mathf.Pow(errorMargin, 2))
+        {
+            pickTarget();
+        }
+    }
+
+    void pickTarget()
+    {
+        currentTarget = transform.position + getRandomVector(targetRadius);
+
+        // TODO: avoid walls etc
+
+        turnTime = 0.0f;
+    }
 
     Vector3 getRandomVector(float radius)
     {
@@ -35,9 +57,17 @@ public class DroneAI : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        UnityEditor.Handles.color = Color.red;
-        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, wanderRadius);
-        UnityEditor.Handles.color = Color.yellow;
-        UnityEditor.Handles.DrawWireDisc(transform.position + Vector3.forward * wanderRadius, Vector3.up, wanderJitter);
+        if(showGizmos)
+        {
+            // display targetRadius
+            UnityEditor.Handles.color = Color.red;
+            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, targetRadius);
+
+            // show currentVelocity
+            UnityEditor.Handles.color = Color.green;
+            UnityEditor.Handles.DrawLine(transform.position, currentTarget);
+
+            Gizmos.DrawWireSphere(currentTarget, 0.5f);
+        }
     }
 }
