@@ -4,8 +4,44 @@ using System.Collections;
 using System.Collections.Generic;
 
 [CustomEditor(typeof(EnemyManager))]
-public class EnemyEditor : Editor
+public class EnemyManagerEditor : Editor
 {
+    EnemyManager manager = null;
+
+    int selected = 0;
+    string[] options = new string[]
+    {
+            "Stage1", "Stage2", "Stage3"
+    };
+
+    void OnEnable()
+    {
+        // store enemy manager
+        manager = (EnemyManager)target;
+    }
+
+    void CreateNewStage()
+    {
+
+    }
+
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        if (GUILayout.Button("Create New Stage"))
+        {
+
+        }
+
+
+        GUILayout.Label("Current Selected Stage:");
+        selected = EditorGUILayout.Popup(selected, options);
+        //if (GUILayout.Button("Create Wave"))
+        //{
+
+        //}
+    }
     //EnemyManager enemyManager;
 
     //void OnEnable()
@@ -35,7 +71,7 @@ public class EnemyEditor : Editor
     //        enemyManager.m_editor_spawnpoints.Add(target);
     //        Debug.Log("add :: { " + target.x + ", " + target.y + ", " + target.z + " }");
     //    }
-        
+
     //    // draw points on screen
     //    for (int i = 0; i < enemyManager.m_editor_spawnpoints.Count; i++)
     //    {

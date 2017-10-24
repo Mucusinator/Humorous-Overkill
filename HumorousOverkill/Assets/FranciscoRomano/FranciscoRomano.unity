@@ -667,18 +667,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc501f25fc5bed418079405d5a89cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_enemySpawners:
-  - type: 1
-    target: {fileID: 731194455}
-  - type: 0
-    target: {fileID: 1835367604}
-  - type: 0
-    target: {fileID: 1503029329}
-  m_enemySpawnRegions:
-  - size: {x: 10.61, y: 14.93}
-    position: {x: 7.47, y: 0, z: -1.58}
-  - size: {x: 16.86, y: 7.4}
-    position: {x: 14.82, y: 0, z: -13.15}
 --- !u!1 &1503029329
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,7 +753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8111a9629116ca844918b74ad1c49a89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_healthTEST: 1
+  m_healthTEST: 0.582
   m_ammoCurTEST: 99
   m_ammoMaxTEST: 99
   m_playerStatsHealth:
