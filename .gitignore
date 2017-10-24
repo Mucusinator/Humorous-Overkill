@@ -18,7 +18,7 @@ ExportedObj/
 *.tmp
 *.user
 *.userprefs
-*.pidb
+*.pidbgit 
 *.booproj
 *.svd
 *.pdb
@@ -32,3 +32,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+*.unity
+HumorousOverkill/Assets/AndrewFitzpatrick/Materials/pink.mat
+*.meta
+*.mat
