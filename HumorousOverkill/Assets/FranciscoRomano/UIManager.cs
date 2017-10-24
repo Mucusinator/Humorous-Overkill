@@ -12,22 +12,21 @@ public class UIManager : GameEventListener
     public UIText m_playerStatsMaxAmmo = new UIText();
     public UIText m_playerStatsCurAmmo = new UIText();
 
-    public void OnValidate()
-    {
-        Debug.Log("sup");
-        if (m_playerStatsHealth == null) return;
-        if (m_playerStatsCurAmmo == null) return;
-        if (m_playerStatsMaxAmmo == null) return;
-        if (m_playerStatsHealth.m_width == 0)   
-        {
-            m_playerStatsHealth.m_width = m_playerStatsHealth.m_image.rectTransform.rect.width;
-            m_playerStatsHealth.m_height = m_playerStatsHealth.m_image.rectTransform.rect.height;
-        }
+    //public void OnValidate()
+    //{
+    //    if (m_playerStatsHealth == null) return;
+    //    if (m_playerStatsCurAmmo == null) return;
+    //    if (m_playerStatsMaxAmmo == null) return;
+    //    if (m_playerStatsHealth.m_width == 0)   
+    //    {
+    //        m_playerStatsHealth.m_width = m_playerStatsHealth.m_image.rectTransform.rect.width;
+    //        m_playerStatsHealth.m_height = m_playerStatsHealth.m_image.rectTransform.rect.height;
+    //    }
 
-        HandleEvent(GameEvent.UI_HEALTH, m_healthTEST);
-        HandleEvent(GameEvent.UI_AMMO_CUR, m_ammoCurTEST);
-        HandleEvent(GameEvent.UI_AMMO_MAX, m_ammoMaxTEST);
-    }
+    //    HandleEvent(GameEvent.UI_HEALTH, m_healthTEST);
+    //    HandleEvent(GameEvent.UI_AMMO_CUR, m_ammoCurTEST);
+    //    HandleEvent(GameEvent.UI_AMMO_MAX, m_ammoMaxTEST);
+    //}
 
     public override void HandleEvent(GameEvent e)
     {

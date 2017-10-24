@@ -55,9 +55,10 @@ GameObject:
   - component: {fileID: 4900368147491298}
   - component: {fileID: 95452314120933984}
   - component: {fileID: 114791238074334392}
+  - component: {fileID: 65055675598693878}
   m_Layer: 0
   m_Name: Drone
-  m_TagString: Untagged
+  m_TagString: Avoid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,7 +126,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1440600439475284}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4442739854160052}
@@ -251,6 +252,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1468779662357326}
   m_Mesh: {fileID: 4300002, guid: 8b8aeae7241b24f428b1e10cf957c915, type: 3}
+--- !u!65 &65055675598693878
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1440600439475284}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95452314120933984
 Animator:
   serializedVersion: 3
@@ -279,9 +292,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f188fb713b7abb449af0d2c659668995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetRadius: 10
+  targetRadius: 5
   errorMargin: 2
   wanderSpeed: 5
   turnSpeed: 3
-  avoidRadius: 4
-  showGizmos: 0
+  avoidRadius: 5
+  showGizmos: 1
+  currentTarget: {x: 0, y: 0, z: 0}
