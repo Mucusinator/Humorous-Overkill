@@ -13,8 +13,12 @@ public class DonutAI : MonoBehaviour
     public float deployTime;
     private bool deployed;
     public float donutCircumference;
+    private Transform modelTransform;
 
-	void Start ()
+    // debug
+    public Vector3 target;
+
+    void Start ()
     {
         // get values from manager
         // health
@@ -25,17 +29,21 @@ public class DonutAI : MonoBehaviour
         // attackRange
         // deployTime
         findCircumference();
+        modelTransform = GetComponentsInChildren<Transform>()[1];
 	}
-	
-	void Update ()
+
+    void Update ()
     {
         roll();
 	}
 
     void roll()
     {
-        transform.Rotate(new Vector3(0, 0, rollSpeed * 360 / donutCircumference) * Time.deltaTime);
-        transform.Translate(-Vector3.right * rollSpeed * Time.deltaTime, Space.World);
+        Vector3 direction = (target - transform.position).normalized;
+        modelTransform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnSpeed * Time.deltaTime);
+
+        modelTransform.Rotate(new Vector3(0, rollSpeed * 360 / donutCircumference, 0) * Time.deltaTime);
+        transform.Translate(direction * rollSpeed * Time.deltaTime, Space.World);
     }
 
     void findCircumference()
