@@ -2,19 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< HEAD
-public class DroneAI : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-=======
 public class DroneAI : GameEventListener
 {
     // wandering
@@ -122,5 +109,4 @@ public class DroneAI : GameEventListener
     {
 
     }
->>>>>>> 8d29368bc6ca7a2e8dc5c3dde82becf4c30862be
 }
