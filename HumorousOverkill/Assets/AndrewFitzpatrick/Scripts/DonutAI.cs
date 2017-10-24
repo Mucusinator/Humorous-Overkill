@@ -32,6 +32,7 @@ public class DonutAI : MonoBehaviour
 
     void roll()
     {
-
+        transform.Rotate(new Vector3(0, rollSpeed, 0) * Time.deltaTime);
+        transform.Translate(transform.right * rollSpeed * Time.deltaTime);
     }
 }
