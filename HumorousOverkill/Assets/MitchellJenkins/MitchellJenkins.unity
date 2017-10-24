@@ -149,7 +149,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (8)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -163,19 +163,109 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &43174170 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 297857796}
+--- !u!114 &43174173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43174170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &43174174
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43174170}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &87246296 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
     type: 2}
   m_PrefabInternal: {fileID: 1892257025}
+--- !u!1 &101373794 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 35d70a6335c1aaf4c91a1ace2e925574, type: 3}
+  m_PrefabInternal: {fileID: 380223432}
+--- !u!4 &101373795 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 35d70a6335c1aaf4c91a1ace2e925574, type: 3}
+  m_PrefabInternal: {fileID: 380223432}
+--- !u!95 &101373796 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 9500000, guid: 35d70a6335c1aaf4c91a1ace2e925574,
+    type: 3}
+  m_PrefabInternal: {fileID: 380223432}
+--- !u!54 &101373799
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 101373794}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &125255979 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
     type: 2}
   m_PrefabInternal: {fileID: 38337359}
+--- !u!1 &133491962 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1730841260}
+--- !u!114 &133491965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 133491962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &133491966
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 133491962}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &145800695
 Prefab:
   m_ObjectHideFlags: 0
@@ -217,7 +307,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (19)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -230,6 +320,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -344,7 +438,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (30)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -358,9 +452,71 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &205151669 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1859713254}
+--- !u!114 &205151672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 205151669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &205151673
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 205151669}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &231313963 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 335279727}
+--- !u!114 &231313966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 231313963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &231313967
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 231313963}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &236195903
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,6 +596,64 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &242053976 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 799869172}
+--- !u!114 &242053979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 242053976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &242053980
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 242053976}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &270878057 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 145800695}
+--- !u!114 &270878060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 270878057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &270878061
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 270878057}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &297857796
 Prefab:
   m_ObjectHideFlags: 0
@@ -481,7 +695,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (6)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -495,9 +709,71 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &327096038 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 792352824}
+--- !u!114 &327096041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 327096038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &327096042
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 327096038}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &335248241 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1439921078}
+--- !u!114 &335248244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 335248241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &335248245
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 335248241}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &335279727
 Prefab:
   m_ObjectHideFlags: 0
@@ -539,7 +815,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (22)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -552,6 +828,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -582,7 +862,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 35d70a6335c1aaf4c91a1ace2e925574, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.10021316
+      value: -0.10021317
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 35d70a6335c1aaf4c91a1ace2e925574, type: 3}
       propertyPath: m_LocalRotation.y
@@ -594,11 +874,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 35d70a6335c1aaf4c91a1ace2e925574, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.994966
+      value: 0.99496603
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 35d70a6335c1aaf4c91a1ace2e925574, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 35d70a6335c1aaf4c91a1ace2e925574, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -607,11 +887,69 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 35d70a6335c1aaf4c91a1ace2e925574, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &380895945 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1598059929}
+--- !u!114 &380895948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 380895945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &380895949
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 380895945}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &393551871 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
     type: 2}
   m_PrefabInternal: {fileID: 1399487224}
+--- !u!1 &405766488 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 430795740}
+--- !u!114 &405766491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 405766488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &405766492
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 405766488}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &417196801 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
@@ -658,7 +996,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (12)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -672,9 +1010,42 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &433123764 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1414968908}
+--- !u!114 &433123767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 433123764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &433123768
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 433123764}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &468695983 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
@@ -739,6 +1110,10 @@ Prefab:
       propertyPath: m_BackGroundColor.b
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_IsPrefabParent: 0
@@ -747,6 +1122,64 @@ Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
     type: 2}
   m_PrefabInternal: {fileID: 188193748}
+--- !u!1 &504761166 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 719453126}
+--- !u!114 &504761169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 504761166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &504761170
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 504761166}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &518330652 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1455314954}
+--- !u!114 &518330655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 518330652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &518330656
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 518330652}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &536044549 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
@@ -798,11 +1231,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (11)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -812,6 +1249,93 @@ Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
     type: 2}
   m_PrefabInternal: {fileID: 1485539367}
+--- !u!1 &679290888 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 750982460}
+--- !u!114 &679290891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 679290888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &679290892
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 679290888}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &702271848 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1144289792}
+--- !u!114 &702271851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 702271848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &702271852
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 702271848}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &710444410 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1895076118}
+--- !u!114 &710444413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 710444410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &710444414
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 710444410}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &712894768 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
@@ -858,7 +1382,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (13)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -871,6 +1395,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -916,7 +1444,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (34)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -930,6 +1458,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
   m_IsPrefabParent: 0
@@ -938,6 +1470,35 @@ Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
     type: 2}
   m_PrefabInternal: {fileID: 1730462450}
+--- !u!1 &772950377 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1488660524}
+--- !u!114 &772950380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 772950377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &772950381
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 772950377}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &792352824
 Prefab:
   m_ObjectHideFlags: 0
@@ -979,7 +1540,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (28)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -992,6 +1553,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -1037,7 +1602,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (25)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -1050,6 +1615,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -1095,7 +1664,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (29)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -1109,9 +1678,42 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &809669494 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1397806720}
+--- !u!114 &809669497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 809669494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &809669498
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 809669494}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &831942372 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
@@ -1183,6 +1785,14 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
   m_IsPrefabParent: 0
@@ -1227,7 +1837,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (4)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -1244,6 +1854,10 @@ Prefab:
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.y
       value: 40.032387
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -1378,7 +1992,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (32)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -1392,6 +2006,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
   m_IsPrefabParent: 0
@@ -1399,6 +2017,64 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_PrefabInternal: {fileID: 474348184}
+--- !u!1 &1056891741 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1485539367}
+--- !u!114 &1056891744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1056891741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1056891745
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1056891741}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1060868914 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1399487224}
+--- !u!114 &1060868917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1060868914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1060868918
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1060868914}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1072239584
 Prefab:
   m_ObjectHideFlags: 0
@@ -1440,7 +2116,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (31)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -1454,9 +2130,71 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1108793126 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1877340628}
+--- !u!114 &1108793129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1108793126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1108793130
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1108793126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1123929850 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1000828419}
+--- !u!114 &1123929853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1123929850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1123929854
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1123929850}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1124822086 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
@@ -1503,7 +2241,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (18)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -1516,6 +2254,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -1600,7 +2342,7 @@ Transform:
   m_LocalScale: {x: 1, y: 20, z: 48}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1156955144 stripped
 Transform:
@@ -1745,7 +2487,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1081645578
+  randomSeed: -2101051168
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4964,13 +5706,71 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: -28.704, y: 147.822, z: -91.747}
+--- !u!1 &1223617101 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1378578081}
+--- !u!114 &1223617104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1223617101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1223617105
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1223617101}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1260244648 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
     type: 2}
   m_PrefabInternal: {fileID: 1072239584}
+--- !u!1 &1280894186 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 579861316}
+--- !u!114 &1280894189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1280894186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1280894190
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1280894186}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1287543920
 GameObject:
   m_ObjectHideFlags: 0
@@ -5049,7 +5849,7 @@ ParticleSystem:
   serializedVersion: 5
   lengthInSec: 5
   simulationSpeed: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -5099,7 +5899,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1916327285
+  randomSeed: -1577126907
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5147,8 +5947,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 20
-      minScalar: 3
+      scalar: 30
+      minScalar: 30
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5252,7 +6052,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0.2
-      minScalar: 0.1
+      minScalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5564,7 +6364,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.41565418
+      value: 0.17789605
       mode: 0
       spread: 0
       speed:
@@ -5741,8 +6541,8 @@ ParticleSystem:
     m_BurstCount: 1
     m_Bursts:
     - time: 0
-      minCount: 1000
-      maxCount: 10000
+      minCount: 1
+      maxCount: 1
       cycleCount: 1
       repeatInterval: 0.01
   SizeModule:
@@ -6023,7 +6823,7 @@ ParticleSystem:
         ctime6: 65535
         ctime7: 0
         atime0: 0
-        atime1: 14264
+        atime1: 3855
         atime2: 39707
         atime3: 65535
         atime4: 0
@@ -6035,24 +6835,24 @@ ParticleSystem:
         m_NumAlphaKeys: 4
       minGradient:
         serializedVersion: 2
-        key0: {r: 0, g: 1, b: 0.6689656, a: 0}
-        key1: {r: 0.4896555, g: 0, b: 1, a: 1}
-        key2: {r: 1, g: 0, b: 0, a: 1}
-        key3: {r: 0.862069, g: 1, b: 0, a: 0}
-        key4: {r: 0.28275847, g: 1, b: 0, a: 0}
+        key0: {r: 0.4896555, g: 0, b: 1, a: 0}
+        key1: {r: 1, g: 0, b: 0, a: 1}
+        key2: {r: 0.862069, g: 1, b: 0, a: 1}
+        key3: {r: 0.28275847, g: 1, b: 0, a: 0}
+        key4: {r: 1, g: 1, b: 1, a: 0}
         key5: {r: 1, g: 1, b: 1, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
-        ctime0: 0
-        ctime1: 9830
-        ctime2: 26600
-        ctime3: 37972
-        ctime4: 51079
+        ctime0: 193
+        ctime1: 26600
+        ctime2: 37972
+        ctime3: 51079
+        ctime4: 65535
         ctime5: 65535
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 7517
+        atime1: 2506
         atime2: 24672
         atime3: 65535
         atime4: 0
@@ -6060,7 +6860,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_NumColorKeys: 6
+        m_NumColorKeys: 5
         m_NumAlphaKeys: 4
   UVModule:
     enabled: 0
@@ -8313,13 +9113,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1287543920}
-  m_LocalRotation: {x: -0.71599144, y: 0.5987911, z: -0.0268916, w: 0.35788587}
-  m_LocalPosition: {x: -13.578999, y: -0.39, z: 22.650002}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.11912487, y: -0, z: -0, w: 0.99287933}
+  m_LocalPosition: {x: 0, y: 0.042000055, z: 0.39399987}
+  m_LocalScale: {x: 0.2, y: 0.19999999, z: 0.19999999}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: -28.704, y: 147.822, z: -91.747}
+  m_Father: {fileID: 101373795}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -13.683001, y: 0, z: 0}
 --- !u!1 &1306437479
 GameObject:
   m_ObjectHideFlags: 0
@@ -8400,8 +9200,37 @@ Transform:
   m_LocalScale: {x: 50, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1335593698 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1796441860}
+--- !u!114 &1335593701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1335593698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1335593702
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1335593698}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1347266629
 Prefab:
   m_ObjectHideFlags: 0
@@ -8443,7 +9272,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (5)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -8456,6 +9285,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -8506,7 +9339,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (24)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -8519,6 +9352,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -8569,7 +9406,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (23)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -8582,6 +9419,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -8627,7 +9468,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (1)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -8641,9 +9482,42 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1410523286 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 2122887719}
+--- !u!114 &1410523289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1410523286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1410523290
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1410523286}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1414968908
 Prefab:
   m_ObjectHideFlags: 0
@@ -8685,7 +9559,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (21)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -8699,9 +9573,42 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1438400019 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1892257025}
+--- !u!114 &1438400022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1438400019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1438400023
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1438400019}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1439921078
 Prefab:
   m_ObjectHideFlags: 0
@@ -8743,7 +9650,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (10)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -8756,6 +9663,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -8801,7 +9712,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (33)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -8814,6 +9725,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -8859,7 +9774,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (35)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -8872,6 +9787,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -8922,7 +9841,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (27)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -8935,6 +9854,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -9180,7 +10103,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (20)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -9193,6 +10116,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -9282,7 +10209,7 @@ Transform:
   m_LocalScale: {x: 1, y: 20, z: 48}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1598059929
 Prefab:
@@ -9325,7 +10252,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (7)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -9339,9 +10266,100 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1604112638 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1730462450}
+--- !u!114 &1604112641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1604112638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1604112642
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1604112638}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1647192677 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 38337359}
+--- !u!114 &1647192680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1647192677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1647192681
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1647192677}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1660662898 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1347266629}
+--- !u!114 &1660662901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1660662898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1660662902
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1660662898}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1685472397 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
@@ -9551,7 +10569,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (17)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -9564,6 +10582,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -9609,7 +10631,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (16)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -9622,6 +10644,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -9636,6 +10662,35 @@ Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
     type: 2}
   m_PrefabInternal: {fileID: 1560380417}
+--- !u!1 &1791412193 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 804121776}
+--- !u!114 &1791412196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1791412193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1791412197
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1791412193}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1796441860
 Prefab:
   m_ObjectHideFlags: 0
@@ -9677,7 +10732,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (14)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -9690,6 +10745,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -9983,7 +11042,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -620108765
+  randomSeed: 587840834
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -13202,7 +14261,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: -28.704, y: 147.822, z: -91.747}
 --- !u!1001 &1859713254
 Prefab:
@@ -13245,7 +14304,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (2)
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -13330,7 +14393,7 @@ Transform:
   m_LocalScale: {x: 50, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1877340628
 Prefab:
@@ -13373,7 +14436,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (26)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -13386,6 +14449,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -13431,7 +14498,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (9)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -13444,6 +14511,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
@@ -13489,7 +14560,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (3)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -13503,9 +14574,42 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1896185435 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 885895797}
+--- !u!114 &1896185438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1896185435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1896185439
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1896185435}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1907501069 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
@@ -13516,6 +14620,87 @@ Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
     type: 2}
   m_PrefabInternal: {fileID: 1455314954}
+--- !u!1 &1925432992 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+  m_PrefabInternal: {fileID: 474348184}
+--- !u!114 &1925432993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1925432992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5acba949896f71a48a22557ea03962b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunDamage: 50
+  range: 10000
+  fpsCam: {fileID: 1925432996}
+  flash: {fileID: 1287543922}
+  impactForce: 30
+  animator: {fileID: 101373796}
+  ShotsPerMinute: 6000
+  maxAmmo: 700
+  reloadTime: 2.5
+  FireRateSelection: 1
+  ShotsPerSecond: 0
+--- !u!20 &1925432996 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 2000000, guid: 5e9e851c0e142814dac026a256ba2ac0,
+    type: 2}
+  m_PrefabInternal: {fileID: 474348184}
+--- !u!114 &1925432997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1925432992}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05ad6ce695924a149ad4b7783b3b65aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pelletCount: 8
+  fpsCam: {fileID: 1925432996}
+  pelletDamage: 8
+  impactForce: 30
+  animator: {fileID: 101373796}
+  spreadWidth: 2
+  range: 10
+  maxAmmo: 10
+  currentAmmo: 0
+  reloadTime: 2.5
+--- !u!1 &1966279892 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1560380417}
+--- !u!114 &1966279895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1966279892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &1966279896
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1966279892}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &2004886308 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
@@ -13526,6 +14711,93 @@ Transform:
   m_PrefabParentObject: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
     type: 2}
   m_PrefabInternal: {fileID: 579861316}
+--- !u!1 &2025581141 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 188193748}
+--- !u!114 &2025581144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2025581141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &2025581145
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2025581141}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2057859268 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1072239584}
+--- !u!114 &2057859271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2057859268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &2057859272
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2057859268}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2098177126 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5,
+    type: 2}
+  m_PrefabInternal: {fileID: 856351457}
+--- !u!114 &2098177129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2098177126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+--- !u!65 &2098177130
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2098177126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.03, z: 0.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2122887719
 Prefab:
   m_ObjectHideFlags: 0
@@ -13567,7 +14839,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_Name
-      value: CupcakeDrone_Asset_v02 (15)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4790673913139636, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_LocalScale.x
@@ -13580,6 +14852,10 @@ Prefab:
     - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479325095866262, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7fe2768f1e08794e8c8c29c9d536bc5, type: 2}
