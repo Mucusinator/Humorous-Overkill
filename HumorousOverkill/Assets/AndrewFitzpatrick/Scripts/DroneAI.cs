@@ -14,10 +14,28 @@ public class DroneAI : MonoBehaviour
     public float avoidRadius;
     public bool showGizmos = false;
     private Vector3 currentTarget;
-    private RaycastHit hitInfo;
+    private RaycastHit wanderHitInfo;
+
+    // health / attacking
+    [Header("Health / Attacking")]
+    public float health;
+    public float damage;
+    public float fireRate;
+    public float accuracy;
 
     void Start()
     {
+        // get values from manager
+        // targetRadius
+        // errorMargin
+        // wanderSpeed
+        // turnSpeed
+        // avoidRadius
+        // health
+        // damage
+        // fireRate
+        // accuracy
+
         pickTarget();
     }
 
@@ -34,14 +52,14 @@ public class DroneAI : MonoBehaviour
             pickTarget();
         }
 
-        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, avoidRadius))
+        if (Physics.Raycast(transform.position, transform.forward, out wanderHitInfo, avoidRadius))
         {
-            if (hitInfo.collider.gameObject.tag == "Avoid")
+            if (wanderHitInfo.collider.gameObject.tag == "Avoid")
             {
                 //Debug.Log("Hit at " + hitInfo.point);
                 //Debug.DrawLine(hitInfo.point, hitInfo.point + hitInfo.normal, Color.blue);
                 //Debug.Break();
-                currentTarget += hitInfo.normal * avoidRadius;
+                currentTarget += wanderHitInfo.normal * avoidRadius;
             }
         }
 
