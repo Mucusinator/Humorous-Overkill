@@ -37,7 +37,7 @@ public class PlayerManager : GameEventListener {
         switch (e) {
         case GameEvent.PICKUP_HEALTH:
             // calls a function add health to the player
-            m_ply.AddHealth(m_playerInfo.m_pickupHealthAmount);
+            //m_ply.AddHealth(m_playerInfo.m_pickupHealthAmount);
             break;
         case GameEvent.PICKUP_AMMO:
             // Calls the add ammo function from the ammo script using the enum.
