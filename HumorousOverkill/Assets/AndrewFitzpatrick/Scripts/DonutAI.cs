@@ -18,6 +18,7 @@ public class DonutAI : MonoBehaviour
 
     // debug
     public GameObject target;
+    private Animator animator;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class DonutAI : MonoBehaviour
         findCircumference();
         modelTransform = GetComponentsInChildren<Transform>()[1];
         changeColor(Color.white);
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -95,19 +97,22 @@ public class DonutAI : MonoBehaviour
         if (deployTimer < deployStages[0]) // number of seconds of fall over animation
         {
             // play fall over animation
-            changeColor(Color.red);
+            //changeColor(Color.red);
+            animator.SetInteger("attackState", 1);
             Debug.Log("falling over");
         }
         else if(deployTimer < deployStages[1])  // deployed
         {
             // shoot at player
-            changeColor(Color.green);
+            //changeColor(Color.green);
+            animator.SetInteger("attackState", 2);
             Debug.Log("deployed and shooting");
         }
         else if(deployTimer < deployStages[2]) // number of frames of get up animation
         {
             // play get up animation
-            changeColor(Color.blue);
+            // changeColor(Color.blue);
+            animator.SetInteger("attackState", 3);
             Debug.Log("getting up");
         }
         else
@@ -116,7 +121,8 @@ public class DonutAI : MonoBehaviour
             // resume movement
             deployed = false;
             deployTimer = 0;
-            changeColor(Color.white);
+            //changeColor(Color.white);
+            animator.SetInteger("attackState", 0);
             Debug.Log("moving to player");
         }
     }
