@@ -28,6 +28,8 @@ public class shotgunShoot : MonoBehaviour {
     public float reloadTime = 2.5f;
 
 
+    public ParticleSystem shotgunBlast;
+
     private bool isReloading;
 
     void Start()
@@ -51,6 +53,7 @@ public class shotgunShoot : MonoBehaviour {
         // If the player holds the fire button, for the amount of pellets, shoot a raycast.
         if (Input.GetButtonDown("Fire1"))
         {
+            shotgunBlast.Play();
             for (int i = 0; i < pelletCount; ++i)
             {
                 ShootRay();

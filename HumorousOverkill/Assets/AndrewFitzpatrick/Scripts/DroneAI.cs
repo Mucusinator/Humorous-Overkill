@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class DroneAI : MonoBehaviour
+public class DroneAI : GameEventListener
 {
     // wandering
     [Header("Wander Behavior")]
@@ -104,5 +104,10 @@ public class DroneAI : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(currentTarget, 0.5f);
         }
+    }
+
+    public virtual void HandleEvent()
+    {
+
     }
 }
