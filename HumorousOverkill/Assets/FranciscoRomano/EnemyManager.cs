@@ -16,19 +16,24 @@ using System.Collections.Generic;
 
 public class EnemyManager : GameEventListener
 {
-    [SerializeField] EnemyInfo m_enemyInfo;
-
-    //[HideInInspector]
-    public List<Vector3> m_editor_spawnpoints = new List<Vector3>();
+    //[SerializeField] EnemyInfo m_enemyInfo;
+    public List<EnemySpawner> m_enemySpawners = new List<EnemySpawner>();
+    public List<EnemySpawnRegion> m_enemySpawnRegions = new List<EnemySpawnRegion>();
 
     void OnDrawGizmos()
     {
-        //Gizmos.color = new Color(0, 1, 0, 0.3f);
-        //foreach (Vector3 position in m_editor_spawnpoints)
-        //{
-        //    Gizmos.DrawSphere(position, 1);
-        //}
+        Gizmos.color = Color.red;
+        foreach (EnemySpawner spawner in m_enemySpawners)
+        {
+            if (spawner.target == null) continue;
+            Gizmos.DrawWireSphere(spawner.target.transform.position, 1);
+        }
 
+        Gizmos.color = Color.green;
+        foreach (EnemySpawnRegion region in m_enemySpawnRegions)
+        {
+            Gizmos.DrawWireCube(transform.position + region.position, new Vector3(region.size.x, 0, region.size.y));
+        }
     }
 
     public override void HandleEvent (GameEvent e)
@@ -44,5 +49,23 @@ public class EnemyManager : GameEventListener
         }
     }
 
+    public enum EnemyType
+    {
+        TYPE_0,
+        TYPE_1,
+    }
 
+    [System.Serializable]
+    public struct EnemySpawner
+    {
+        public EnemyType type;
+        public GameObject target;
+    }
+
+    [System.Serializable]
+    public struct EnemySpawnRegion
+    {
+        public Vector2 size;
+        public Vector3 position;
+    }
 }
