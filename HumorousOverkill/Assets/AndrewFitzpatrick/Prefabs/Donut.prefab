@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23270357730670510}
   - component: {fileID: 65293560820076026}
   m_Layer: 0
-  m_Name: pPlane20
+  m_Name: DonutMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,13 +52,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1315547694550460}
-  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4736255558247092}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!4 &4736255558247092
 Transform:
   m_ObjectHideFlags: 1
@@ -66,8 +66,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1561584855604792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 6.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0, y: 2, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4644919712581632}
   m_Father: {fileID: 0}
@@ -122,8 +122,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1081802, y: 0.34168956, z: 1.1081805}
-  m_Center: {x: 0, y: -0.00093480945, z: 0.000000029802322}
+  m_Size: {x: 1.0000001, y: 0.30833396, z: 1.0000004}
+  m_Center: {x: 0, y: -0.00084355474, z: 0.000000059604645}
 --- !u!95 &95969849375364336
 Animator:
   serializedVersion: 3
@@ -160,3 +160,4 @@ MonoBehaviour:
   attackRange: 0
   deployTime: 0
   donutCircumference: 0
+  target: {x: 30, y: 2, z: 0}
