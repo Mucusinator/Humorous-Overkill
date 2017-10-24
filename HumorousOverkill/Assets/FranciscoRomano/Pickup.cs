@@ -18,13 +18,13 @@ public class Pickup : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         // check if player
-        //if (collider.tag == "Player" && !collider.GetComponent<Player>().isHealthFull)
-        //{
-        //    // send event to player
-        //    GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>().HandleEvent(type);
-        //    // destroy current game object
-        //    Destroy(gameObject);
-        //}
+        if (collider.tag == "Player" && !collider.GetComponent<Player>().isHealthFull)
+        {
+            // send event to player
+            GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>().HandleEvent(type);
+            // destroy current game object
+            Destroy(gameObject);
+        }
     }
 
 }
