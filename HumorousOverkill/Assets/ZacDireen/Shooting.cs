@@ -112,6 +112,7 @@ public class Shooting : MonoBehaviour {
     {
 
         flash.Play();
+
         // A variable that will store the imformation gathered from the raycast.
         RaycastHit hit;
         Debug.DrawRay(ShootBeamFrom.transform.position, fpsCam.transform.forward * 100, Color.blue, 3.0f);
@@ -119,9 +120,13 @@ public class Shooting : MonoBehaviour {
         //if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) ;
         if (Physics.Raycast(ShootBeamFrom.transform.position, fpsCam.transform.forward, out hit, range)) ;
         {
+<<<<<<< HEAD
             
+=======
+>>>>>>> 281ad149e022977db5d3996ddb1d8b101ca1da96
             // Put in place the takeDamage event handler for the game manager here.
             //GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(GameEvent.)
+            Debug.DrawLine(fpsCam.transform.position, hit.point, Color.black, 3.0f);
 
             Debug.Log(hit.transform.name);
             Target target = hit.transform.GetComponent<Target>();
