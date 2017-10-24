@@ -9,6 +9,8 @@ public class Shooting : MonoBehaviour {
     public Camera fpsCam;
     public ParticleSystem flash;
     public float impactForce = 30f;
+    public GameObject ShootBeamFrom;
+
 
     public Animator animator;
 
@@ -113,7 +115,8 @@ public class Shooting : MonoBehaviour {
         RaycastHit hit;
 
         // If we hit something with our shot raycast.
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) ;
+        //if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) ;
+        if (Physics.Raycast(ShootBeamFrom.transform.position, fpsCam.transform.forward, out hit, range)) ;
         {
 
             // Put in place the takeDamage event handler for the game manager here.
