@@ -31,8 +31,4 @@ sysinfo.txt
 
 # Builds
 *.apk
-*.unitypackage
-*.unity
-HumorousOverkill/Assets/AndrewFitzpatrick/Materials/pink.mat
 *.meta
-*.mat
