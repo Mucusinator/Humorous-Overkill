@@ -13,27 +13,49 @@ public class shotgunShoot : MonoBehaviour {
     public float pelletDamage = 8f;
     // The force each pellet has when it hits a target.
     public float impactForce = 30.0f;
-    
-    
+
+
+    public Animator animator;
+
     //This controls the spread width of the cone.
     public float spreadWidth = 2f;
     // This controls the range of the cone.
     public float range = 10f;
 
-    
 
+    public int maxAmmo = 10;
+    public int currentAmmo;
+    public float reloadTime = 2.5f;
+
+
+    private bool isReloading;
+
+    void Start()
+    {
+        currentAmmo = maxAmmo;
+    }
 
     void Update()
     {
+        if (isReloading)
+        {
+            return;
+        }
 
+        if (currentAmmo <= 0)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
 
         // If the player holds the fire button, for the amount of pellets, shoot a raycast.
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire1"))
         {
             for (int i = 0; i < pelletCount; ++i)
             {
                 ShootRay();
             }
+            currentAmmo--;
         }
     }
 
@@ -80,5 +102,23 @@ public class shotgunShoot : MonoBehaviour {
                 hit.rigidbody.AddForce(-hit.normal * impactForce);
             }
         }
+    }
+
+    void OnEnable()
+    {
+        isReloading = false;
+        animator.SetBool("Reloading", false);
+    }
+    IEnumerator Reload()
+    {
+
+        isReloading = true;
+        animator.SetBool("Reloading", true);
+        yield return new WaitForSeconds(reloadTime - 0.25f);
+        animator.SetBool("Reloading", false);
+        yield return new WaitForSeconds(0.25f);
+        currentAmmo = maxAmmo;
+        isReloading = false;
+
     }
 }
