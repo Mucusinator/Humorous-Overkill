@@ -39,21 +39,14 @@ public class shotgunShoot : MonoBehaviour {
 
     void Update()
     {
-        if (isReloading)
-        {
-            return;
-        }
-
-        if (currentAmmo <= 0)
-        {
-            StartCoroutine(Reload());
-            return;
-        }
+       
 
         // If the player holds the fire button, for the amount of pellets, shoot a raycast.
         if (Input.GetButtonDown("Fire1"))
         {
+            
             shotgunBlast.Play();
+        
             for (int i = 0; i < pelletCount; ++i)
             {
                 ShootRay();
