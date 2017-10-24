@@ -52,13 +52,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1315547694550460}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4736255558247092}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!4 &4736255558247092
 Transform:
   m_ObjectHideFlags: 1
@@ -66,8 +66,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1561584855604792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 3, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalPosition: {x: -0, y: 2, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4644919712581632}
   m_Father: {fileID: 0}
@@ -86,7 +86,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 565baba3fea55d948a91767425c025a5, type: 2}
+  - {fileID: 2100000, guid: 9fdba7b94c4f32e488bd0e661c3ccc79, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,7 +111,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1315547694550460}
-  m_Mesh: {fileID: 4300000, guid: ba74af3fcde14d04ab0890a3846d911e, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 09ec69df5785b9347a882063dcd5e9ed, type: 3}
 --- !u!65 &65293560820076026
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -122,8 +122,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000004, y: 0.30833402, z: 1.0000004}
-  m_Center: {x: -1.1987634e-17, y: -0.0008435549, z: 0.000000059604645}
+  m_Size: {x: 1.0000001, y: 0.30833396, z: 1.0000004}
+  m_Center: {x: 0, y: -0.00084355474, z: 0.000000059604645}
 --- !u!95 &95969849375364336
 Animator:
   serializedVersion: 3
@@ -155,9 +155,9 @@ MonoBehaviour:
   health: 0
   damage: 0
   fireRate: 0
-  rollSpeed: 5
-  turnSpeed: 3
+  rollSpeed: 1
+  turnSpeed: 0
   attackRange: 0
   deployTime: 0
   donutCircumference: 0
-  target: {x: 30, y: 2, z: 30}
+  target: {x: 30, y: 2, z: 0}
