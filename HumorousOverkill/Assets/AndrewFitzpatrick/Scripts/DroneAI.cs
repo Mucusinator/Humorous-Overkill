@@ -18,9 +18,14 @@ public class DroneAI : GameEventListener
     // health / attacking
     [Header("Health / Attacking")]
     public float health;
-    public float damage;
     public float fireRate;
     public float accuracy;
+    public float attackRange;
+    public GameObject player;
+    public PlayerManager playerManager;
+    private float shotTimer = 0;
+    private RaycastHit shotHitInfo;
+    public GameObject projectile; // we are firing projectiles
 
     void Start()
     {
@@ -36,6 +41,8 @@ public class DroneAI : GameEventListener
         // accuracy
 
         pickTarget();
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>();
     }
 
 	void Update ()
@@ -66,7 +73,15 @@ public class DroneAI : GameEventListener
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnSpeed * Time.deltaTime);
 
         transform.Translate(transform.forward * wanderSpeed * Time.deltaTime, Space.World);
-        //Debug.DrawLine(transform.position, currentTarget, Color.cyan);
+
+        if(nearPlayer())
+        {
+            shootPlayer();
+        }
+        else
+        {
+            shotTimer = 0;
+        }
     }
 
     void pickTarget()
@@ -81,6 +96,42 @@ public class DroneAI : GameEventListener
     {
         Vector2 vec2D = Random.insideUnitCircle.normalized * radius;
         return new Vector3(vec2D.x, 0, vec2D.y);
+    }
+
+    // returns true if the player is within range
+    bool nearPlayer()
+    {
+        Vector3 playerOffset = player.transform.position - transform.position;
+        playerOffset.y = 0;
+
+        return playerOffset.magnitude < Mathf.Pow(attackRange, 2);
+    }
+
+    // shoot at player
+    void shootPlayer()
+    {
+        // increase shot timer
+        shotTimer += Time.deltaTime;
+
+        if(shotTimer > (1 / fireRate))
+        {
+            // pick a point around the player using accuracy
+            Vector3 accuracyOffset = Random.insideUnitCircle * accuracy;
+            accuracyOffset.z = accuracyOffset.y;
+            accuracyOffset.y = 0;
+
+            Vector3 shotPoint = player.transform.position + accuracyOffset;
+
+            // shoot at the point
+            Debug.DrawLine(transform.position + transform.forward, shotPoint, Color.yellow);
+
+            GameObject currentProjectile = Instantiate(projectile, transform.position + transform.forward, Quaternion.identity) as GameObject;
+            currentProjectile.GetComponent<Rigidbody>().AddForce((shotPoint - currentProjectile.transform.position).normalized * 5, ForceMode.Impulse);
+            Destroy(currentProjectile, 5);
+
+            // reset shot timer
+            shotTimer = 0;
+        }
     }
 
     void OnDrawGizmosSelected()

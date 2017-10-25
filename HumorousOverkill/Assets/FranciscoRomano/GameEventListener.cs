@@ -34,9 +34,15 @@ public class GameEventListener : MonoBehaviour
         Debug.LogWarning("GameEventListener :: Please override 'void HandleEvent(GameEvent e)' function!");
     }
 
-    public virtual void HandleEvent(GameEvent e, float amount)
+    public virtual void HandleEvent(GameEvent e, float value)
     {
         // handle event here
-        Debug.LogWarning("GameEventListener :: Please override 'void HandleEvent(GameEvent e, float amount)' function!");
+        Debug.LogWarning("GameEventListener :: Please override 'void HandleEvent(GameEvent e, float value)' function!");
+    }
+
+    public virtual void HandleEvent(GameEvent e, Object value)
+    {
+        // handle event here
+        Debug.LogWarning("GameEventListener :: Please override 'void HandleEvent(GameEvent e, Object value)' function!");
     }
 }

@@ -10,7 +10,6 @@ public class DonutAI : MonoBehaviour
     public float rollSpeed;
     public float turnSpeed;
     public float attackRange;
-    public List<float> deployStages;
     private bool deployed;
     public float donutCircumference;
     private Transform modelTransform;
@@ -18,7 +17,7 @@ public class DonutAI : MonoBehaviour
 
     // debug
     public GameObject target;
-    private Animator animator;
+    private Animator myAnimator;
 
     void Start()
     {
@@ -33,7 +32,7 @@ public class DonutAI : MonoBehaviour
         findCircumference();
         modelTransform = GetComponentsInChildren<Transform>()[1];
         changeColor(Color.white);
-        animator = GetComponent<Animator>();
+        myAnimator = GetComponent<Animator>();
     }
 
     void Update()
@@ -58,16 +57,17 @@ public class DonutAI : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnSpeed * Time.deltaTime);
 
         // A wheel moves forward a distance equal to its circumference with each rotation.
-        modelTransform.Rotate(new Vector3(0, rollSpeed * 360 / donutCircumference, 0) * Time.deltaTime);
+        modelTransform.Rotate(new Vector3(0, rollSpeed * 360 / donutCircumference, 0) * Time.deltaTime, Space.Self);
 
         // roll forward
-        transform.Translate(transform.forward * rollSpeed * Time.deltaTime, Space.World);
+        transform.Translate(transform.right * rollSpeed * Time.deltaTime, Space.World);
 
         // look for player
         // deploy if within attackRange
         if((transform.position - target.transform.position).magnitude < Mathf.Pow(attackRange, 2))
         {
             deployed = true;
+            myAnimator.Play(0, 0, 0.0f);
         }
     }
 
@@ -91,39 +91,13 @@ public class DonutAI : MonoBehaviour
     // fall over and attack player
     void deploySequence()
     {
-        // increase deployTimer
-        deployTimer += Time.deltaTime;
+        // enable animator
+        myAnimator.enabled = true;
 
-        if (deployTimer < deployStages[0]) // number of seconds of fall over animation
+        if (myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
         {
-            // play fall over animation
-            //changeColor(Color.red);
-            animator.SetInteger("attackState", 1);
-            Debug.Log("falling over");
-        }
-        else if(deployTimer < deployStages[1])  // deployed
-        {
-            // shoot at player
-            //changeColor(Color.green);
-            animator.SetInteger("attackState", 2);
-            Debug.Log("deployed and shooting");
-        }
-        else if(deployTimer < deployStages[2]) // number of frames of get up animation
-        {
-            // play get up animation
-            // changeColor(Color.blue);
-            animator.SetInteger("attackState", 3);
-            Debug.Log("getting up");
-        }
-        else
-        {
-            // no longer deployed
-            // resume movement
-            deployed = false;
-            deployTimer = 0;
-            //changeColor(Color.white);
-            animator.SetInteger("attackState", 0);
-            Debug.Log("moving to player");
+            // reset and disable the animator
+            myAnimator.enabled = false;
         }
     }
 
