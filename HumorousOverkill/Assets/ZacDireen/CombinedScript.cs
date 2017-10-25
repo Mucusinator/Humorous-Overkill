@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CombinedScript : MonoBehaviour {
 
@@ -68,6 +69,9 @@ public class CombinedScript : MonoBehaviour {
     public GunType gunType;
     // This is where the raycasts of the weapon will begin from.
     public GameObject StartOfRaycast;
+    // This is the UI text element for the UI.
+    public Text Ammo;
+
     // This is the Fire Rate of the rifle.
     public enum FireRate
     {
@@ -102,6 +106,19 @@ public class CombinedScript : MonoBehaviour {
 	void Update () {
 
 
+        if (Input.GetKeyDown(KeyCode.Mouse1) && gunType == GunType.RIFLE)
+        {
+            if (fireRate == FireRate.FULLAUTO)
+            {
+                fireRate = FireRate.SEMIAUTO;
+            }
+            else
+            {
+                fireRate = FireRate.FULLAUTO;
+            }
+        }
+
+
         int previousSelectedWeapon = SelectedWeapon;
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
@@ -113,12 +130,12 @@ public class CombinedScript : MonoBehaviour {
             else
             {
                 SelectedWeapon++;
-                gunType++;
+                
             }
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
-            if (SelectedWeapon < 0)
+            if (SelectedWeapon <= 0)
             {
                 SelectedWeapon = transform.childCount - 1;
           
@@ -126,7 +143,7 @@ public class CombinedScript : MonoBehaviour {
             else
             {
                 SelectedWeapon--;
-                gunType--;
+                
             }
         }
         if (previousSelectedWeapon != SelectedWeapon)
@@ -134,9 +151,25 @@ public class CombinedScript : MonoBehaviour {
             SelectWeapon();
         }
 
+
+        if (SelectedWeapon == 0)
+        {
+            if (isReloading)
+            {
+                return;
+            }
+
+            if (currentRifleAmmo <= 0)
+            {
+                StartCoroutine(Reload());
+                return;
+            }
+        }
+        
         //if (gunType == GunType.SHOTGUN)
         if(SelectedWeapon == 1)
         {
+
             if (isReloading)
             {
                 return;
@@ -149,70 +182,55 @@ public class CombinedScript : MonoBehaviour {
             }
            
         }
-
-        //if (gunType == GunType.RIFLE)
-        if(SelectedWeapon == 2)
+        if (SelectedWeapon == 0)
         {
-            if (isReloading)
-            {
-                return;
-            }
-
-            if (currentRifleAmmo <= 0)
-            {
-                StartCoroutine(Reload());
-                return;
-            }
-            
-
+            gunType = GunType.RIFLE;
         }
-
-        if (Input.GetButtonDown("Fire1"))
+        if (SelectedWeapon == 1)
         {
-            //if (gunType == GunType.SHOTGUN)
-            if (SelectedWeapon == 1)
-            {
-                for (int i = 0; i < pelletCount; i++)
-                {
-                    ShootRay();
-                }
-                currentShotgunAmmo--;
-
-            }
-            //if (gunType == GunType.RIFLE)
-            if (SelectedWeapon == 2)
-            {
-
-                ShotsPerSecond = RoundsPerMinute / 60f;
-                //If the user presses the left mouse button, perform the shoot function.
-
-                if (fireRate == FireRate.FULLAUTO)
-                {
-                    if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
-                    {
-
-                        nextTimeToFire = Time.time + 60f / RoundsPerMinute;
-                        Shoot();
-
-                    }
-                }
-                else
-                {
-                    if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
-                    {
-
-                        nextTimeToFire = Time.time + 60f / RoundsPerMinute;
-                        Shoot();
-
-                    }
-                }
-            }
-
+            gunType = GunType.SHOTGUN;
         }
 
 
 
-    }
+   
+
+        if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.SEMIAUTO)
+        {
+            nextTimeToFire = Time.time + 60f / RoundsPerMinute;
+            Shoot();
+        }
+        if (Input.GetButton("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.FULLAUTO)
+        {
+            nextTimeToFire = Time.time + 60f / RoundsPerMinute;
+            Shoot();
+        }
+        if (Input.GetButtonDown("Fire1") && gunType == GunType.SHOTGUN)
+        {
+            ShotgunMuzzleEffect.Play();
+
+            for (int i = 0; i < pelletCount; ++i)
+            {
+                ShootRay();
+            }
+            currentShotgunAmmo--;
+        }
+
+
+
+        if (gunType == GunType.RIFLE)
+        {
+            Ammo.text = currentRifleAmmo + " / " + maxRifleAmmo;
+        }
+        if (gunType == GunType.SHOTGUN)
+        {
+            Ammo.text = currentShotgunAmmo + " / " + maxShotgunAmmo;
+        }
+
+
+
+
+        }
 
     IEnumerator Reload()
     {
