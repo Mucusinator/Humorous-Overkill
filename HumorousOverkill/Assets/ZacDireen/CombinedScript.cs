@@ -195,17 +195,17 @@ public class CombinedScript : MonoBehaviour {
 
    
 
-        if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.SEMIAUTO)
+        if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.SEMIAUTO && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 60f / RoundsPerMinute;
             Shoot();
         }
-        if (Input.GetButton("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.FULLAUTO)
+        if (Input.GetButton("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.FULLAUTO && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 60f / RoundsPerMinute;
             Shoot();
         }
-        if (Input.GetButtonDown("Fire1") && gunType == GunType.SHOTGUN)
+        if (Input.GetButtonDown("Fire1") && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
         {
             ShotgunMuzzleEffect.Play();
 
@@ -274,7 +274,7 @@ public class CombinedScript : MonoBehaviour {
     }
     void Shoot()
     {
-
+        currentRifleAmmo--;
         RifleMuzzleEffect.Play();
         // A variable that will store the imformation gathered from the raycast.
         RaycastHit hit;
@@ -301,7 +301,7 @@ public class CombinedScript : MonoBehaviour {
             }
 
         }
-        currentRifleAmmo--;
+        
     }
 
     void ShootRay()
