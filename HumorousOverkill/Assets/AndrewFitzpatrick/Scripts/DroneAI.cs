@@ -124,8 +124,10 @@ public class DroneAI : GameEventListener
 
             // shoot at the point
             Debug.DrawLine(transform.position + transform.forward, shotPoint, Color.yellow);
-            GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().SendEvent(GameEvent.PICKUP_HEALTH); // change to take damage
-            Debug.Log("I hit the player");
+
+            GameObject currentProjectile = Instantiate(projectile, transform.position + transform.forward, Quaternion.identity) as GameObject;
+            currentProjectile.GetComponent<Rigidbody>().AddForce((shotPoint - currentProjectile.transform.position).normalized * 5, ForceMode.Impulse);
+            Destroy(currentProjectile, 5);
 
             // reset shot timer
             shotTimer = 0;
