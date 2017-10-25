@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -17,5 +16,25 @@ using System.Collections.Generic;
 
 public class EnemyManager : GameEventListener
 {
-    
+    public EnemySpawner m_currentSpawner;
+    //public List<EnemySpawnManager>
+
+    public override void HandleEvent(GameEvent e)
+    {
+        switch(e)
+        {
+            //case GameEvent
+        }
+    }
+
+    public override void HandleEvent(GameEvent e, Object value)
+    {
+        switch(e)
+        {
+            // store enemy spawner
+            case GameEvent.CLASS_TYPE_ENEMY_SPAWNER:
+                m_currentSpawner = (EnemySpawner)value;
+                break;
+        }
+    }
 }
