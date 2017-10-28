@@ -8,27 +8,37 @@ namespace FR
     public class SpawnWave
     {
         // :: variables
-        public int activeUnits = 0;
-        public List<Vector3> spawnPoints = new List<Vector3>();
-        public List<SpawnUnit> spawnUnits = new List<SpawnUnit>();
+        public int activeUnits;
+        public float spawnrate;
+        public List<Vector3> points;
+        public List<SpawnUnit> units;
         // :: initializers
+        public SpawnWave()
+        {
+            // default values
+            units = new List<SpawnUnit>();
+            points = new List<Vector3>();
+            spawnrate = 1.0f;
+            activeUnits = 0;
+        }
         public SpawnWave(SpawnWave other)
         {
+            // shallow copy
+            units = new List<SpawnUnit>(other.units);
+            points = new List<Vector3>(other.points);
+            spawnrate = other.spawnrate;
             activeUnits = other.activeUnits;
-            spawnPoints = new List<Vector3>(other.spawnPoints);
-            spawnUnits = new List<SpawnUnit>(other.spawnUnits);
-
         }
         // :: class functions
         public bool isEmpty()
         {
             // check if depleted
-            return spawnUnits.Count == 0;
+            return units.Count == 0;
         }
         public bool isComplete()
         {
             // check if complete
-            return activeUnits == 0;
+            return isEmpty() && activeUnits == 0;
         }
         public void RemoveUnit()
         {
@@ -43,19 +53,17 @@ namespace FR
         public GameObject CreateUnit(Quaternion rotation, Transform parent)
         {
             // create unit
-            Debug.Log("random between 0 - " + spawnUnits.Count);
-            return CreateUnit(Random.Range(0, spawnUnits.Count), rotation, parent);
+            return CreateUnit(Random.Range(0, units.Count), rotation, parent);
         }
         public GameObject CreateUnit(int unit, Quaternion rotation, Transform parent)
         {
             // create unit
-            return CreateUnit(unit, Random.Range(0, spawnPoints.Count), rotation, parent);
+            return CreateUnit(unit, Random.Range(0, points.Count), rotation, parent);
         }
         public GameObject CreateUnit(int unit, int point, Quaternion rotation, Transform parent)
         {
             // create unit
-            Debug.Log("random = " + unit + ":: MAX(" + spawnUnits.Count + ")");
-            return CreateUnit(spawnUnits[unit], spawnPoints[point], rotation, parent);
+            return CreateUnit(units[unit], points[point], rotation, parent);
         }
         public GameObject CreateUnit(SpawnUnit unit, Vector3 position, Quaternion rotation, Transform parent)
         {
@@ -66,7 +74,7 @@ namespace FR
             if (unit.isEmpty())
             {
                 // remove unit
-                spawnUnits.Remove(unit);
+                units.Remove(unit);
                 unit = null;
             }
             // return unit

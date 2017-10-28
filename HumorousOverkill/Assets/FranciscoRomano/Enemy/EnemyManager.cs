@@ -16,6 +16,47 @@ using System.Collections.Generic;
 
 public class EnemyManager : GameEventListener
 {
+    private float elapsedTime = 0.0f;
+    public EnemySpawner spawner = null;
+
+    void Start()
+    {
+        elapsedTime = Time.time;
+        spawner = GetComponentInChildren<EnemySpawner>();
+    }
+
+    void Update()
+    {
+        if (spawner.stage.isComplete())
+        {
+            Debug.Log("Finished!");
+            return;
+        }
+
+        if (spawner.stage.isWaveComplete())
+        {
+            Debug.Log("wave");
+            elapsedTime = Time.time;
+            spawner.HandleEvent(GameEvent.ENEMY_WAVE_NEXT);
+        }
+        else
+        {
+            if (Time.time - elapsedTime > spawner.stage.GetUnitSpawnRate())
+            {
+                Debug.Log("unit");
+                elapsedTime = Time.time;
+                if (spawner.stage.isWaveEmpty())
+                {
+                    spawner.HandleEvent(GameEvent.ENEMY_DIED);
+                }
+                else
+                {
+                    spawner.HandleEvent(GameEvent.ENEMY_SPAWN);
+                }
+            }
+        }
+        
+    }
 
     public override void HandleEvent(GameEvent e)
     {

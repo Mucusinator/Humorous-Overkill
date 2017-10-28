@@ -8,25 +8,22 @@ namespace FR
     public class SpawnUnit
     {
         // :: variables
-        public int amount = 0;
-        public GameObject prefab = null;
+        public int amount;
+        public GameObject prefab;
         // :: initializers
-        SpawnUnit(SpawnUnit other)
+        public SpawnUnit() : this(null, 0) {}
+        public SpawnUnit(SpawnUnit other) : this(other.prefab, other.amount) {}
+        public SpawnUnit(GameObject prefab, int amount)
         {
-            // shallow copy
-            amount = other.amount;
-            prefab = other.prefab;
+            // initialize
+            this.amount = amount;
+            this.prefab = prefab;
         }
         // :: class functions
         public bool isEmpty()
         {
             // check if depleted
             return amount == 0;
-        }
-        public SpawnUnit clone()
-        {
-            // return shallow copy
-            return new SpawnUnit(this);
         }
         public GameObject create(Vector3 position, Quaternion rotation, Transform parent)
         {

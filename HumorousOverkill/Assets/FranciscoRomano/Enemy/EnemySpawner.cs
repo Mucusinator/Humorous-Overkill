@@ -4,21 +4,30 @@ using System.Collections.Generic;
 
 public class EnemySpawner : GameEventListener
 {
+    public bool NEXT = false;
     public bool SPAWN = false;
     
+    public EnemyStage stage = new EnemyStage();
     public List<FR.SpawnWave> waves = new List<FR.SpawnWave>();
 
     void Start()
     {
-
+        // set wave list
+        stage.waveList = waves;
+        stage.Reset();
     }
 
     void Update()
     {
+        
+        if (NEXT)
+        {
+            HandleEvent(GameEvent.ENEMY_WAVE_NEXT);
+            NEXT = false;
+        }
         if (SPAWN)
         {
             HandleEvent(GameEvent.ENEMY_SPAWN);
-            // reset spawn
             SPAWN = false;
         }
     }
@@ -38,7 +47,7 @@ public class EnemySpawner : GameEventListener
         if (waves.Count == 0) return;
 
         Gizmos.color = new Color(0, 1, 0, 0.5f);
-        foreach (Vector3 point in waves[0].spawnPoints)
+        foreach (Vector3 point in waves[stage.waveIndex].points)
         {
             Gizmos.DrawSphere(point + transform.position, 0.5f);
         }
@@ -52,36 +61,25 @@ public class EnemySpawner : GameEventListener
             SPAWN = true;
         }
     }
-    
-    public bool isComplete()
-    {
-        // check wave status
-        return waves.Count == 0;
-    }
-    public bool isWaveComplete()
-    {
-        // check wave status
-        return waves[0].isComplete();
-    }
 
     public override void HandleEvent(GameEvent e)
     {
         // check status
-        if (waves.Count == 0) return;
+        if (stage.isComplete()) return;
         // check game event
         switch (e)
         {
             // remove enemy unit
             case GameEvent.ENEMY_DIED:
-                if (!waves[0].isEmpty()) waves[0].RemoveUnit();
+                stage.RemoveUnit();
                 break;
             // create enemy unit
             case GameEvent.ENEMY_SPAWN:
-                if (!waves[0].isEmpty()) waves[0].CreateUnit(transform);
+                Destroy(stage.CreateUnit(transform), 5);
                 break;
             // skip to next wave
             case GameEvent.ENEMY_WAVE_NEXT:
-                waves.RemoveAt(0);
+                stage.NextWave();
                 break;
         }
     }
