@@ -10,19 +10,29 @@ namespace FR
         // :: variables
         public int amount = 0;
         public GameObject prefab = null;
-
         // :: initializers
+        SpawnUnit(SpawnUnit other)
+        {
+            // shallow copy
+            amount = other.amount;
+            prefab = other.prefab;
+        }
         // :: class functions
         public bool isEmpty()
         {
             // check if depleted
             return amount == 0;
         }
-        public GameObject Instantiate(Vector3 position, Quaternion rotation, Transform parent)
+        public SpawnUnit clone()
+        {
+            // return shallow copy
+            return new SpawnUnit(this);
+        }
+        public GameObject create(Vector3 position, Quaternion rotation, Transform parent)
         {
             amount--;
             // instantiate prefab
-            return Object.Instantiate(prefab, position, rotation, parent);
+            return Object.Instantiate(prefab, parent.position + position, rotation, parent);
         }
     }
 }

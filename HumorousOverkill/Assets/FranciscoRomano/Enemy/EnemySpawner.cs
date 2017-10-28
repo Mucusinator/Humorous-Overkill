@@ -4,66 +4,86 @@ using System.Collections.Generic;
 
 public class EnemySpawner : GameEventListener
 {
-    public int spawnRate = 0;
-    public int activeUnits = 0;
-    public bool isWaveComplete = false;
+    public bool SPAWN = false;
+    
     public List<FR.SpawnWave> waves = new List<FR.SpawnWave>();
 
-    public void Start()
+    void Start()
     {
 
     }
 
-    public override void HandleEvent(GameEvent e)
+    void Update()
     {
-        // check status
-        if (waves[0].isEmpty()) return;
-        // check game event
-        switch (e)
+        if (SPAWN)
         {
-            // remove unit
-            case GameEvent.ENEMY_DIED:
-                activeUnits--;
-                break;
-            // create unit
-            case GameEvent.ENEMY_SPAWN:
-                activeUnits++;
-                GameObject unit = waves[0].Instantiate(Quaternion.identity, transform);
-                Destroy(unit, 5);
-                break;
+            HandleEvent(GameEvent.ENEMY_SPAWN);
+            // reset spawn
+            SPAWN = false;
         }
     }
 
-    public void OnDrawGizmos()
+    void OnEnable()
+    {
+        Debug.Log("enabled");
+    }
+
+    void OnDisable()
+    {
+        Debug.Log("disabled");
+    }
+
+    void OnDrawGizmos()
     {
         if (waves.Count == 0) return;
 
-        Gizmos.color = Color.green;
-        foreach (FR.SpawnPoint point in waves[0].points)
+        Gizmos.color = new Color(0, 1, 0, 0.5f);
+        foreach (Vector3 point in waves[0].spawnPoints)
         {
-            Gizmos.DrawSphere(point.position + transform.position, 0.1f);
+            Gizmos.DrawSphere(point + transform.position, 0.5f);
         }
     }
 
     void OnTriggerEnter(Collider collider)
     {
         // check if player
-        Debug.Log("Im aliveeeeee!!!!!!!!!!");
         if (collider.tag == "Player")
         {
-            foreach (FR.SpawnPoint point in waves[0].points)
-            {
-                foreach (FR.SpawnUnit unit in point.units)
-                {
-                    point.Instantiate(Quaternion.identity, transform);
-                }
-            }
+            SPAWN = true;
         }
     }
-
-    public override void HandleEvent(GameEvent e, float value)
+    
+    public bool isComplete()
     {
-        base.HandleEvent(e, value);
+        // check wave status
+        return waves.Count == 0;
+    }
+    public bool isWaveComplete()
+    {
+        // check wave status
+        return waves[0].isComplete();
+    }
+
+    public override void HandleEvent(GameEvent e)
+    {
+        // check status
+        if (waves.Count == 0) return;
+        // check game event
+        switch (e)
+        {
+            // remove enemy unit
+            case GameEvent.ENEMY_DIED:
+                if (!waves[0].isEmpty()) waves[0].RemoveUnit();
+                break;
+            // create enemy unit
+            case GameEvent.ENEMY_SPAWN:
+                if (!waves[0].isEmpty()) waves[0].CreateUnit(transform);
+                break;
+            // skip to next wave
+            case GameEvent.ENEMY_WAVE_NEXT:
+                waves.RemoveAt(0);
+                break;
+        }
     }
 }
 
