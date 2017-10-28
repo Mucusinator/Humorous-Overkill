@@ -16,14 +16,13 @@ using System.Collections.Generic;
 
 public class EnemyManager : GameEventListener
 {
-    public EnemySpawner m_currentSpawner;
-    //public List<EnemySpawnManager>
 
     public override void HandleEvent(GameEvent e)
     {
         switch(e)
         {
-            //case GameEvent
+            default:
+                break;
         }
     }
 
@@ -31,9 +30,7 @@ public class EnemyManager : GameEventListener
     {
         switch(e)
         {
-            // store enemy spawner
-            case GameEvent.CLASS_TYPE_ENEMY_SPAWNER:
-                m_currentSpawner = (EnemySpawner)value;
+            default:
                 break;
         }
     }

@@ -6,7 +6,7 @@ public class GameEventListener : MonoBehaviour
 {
     private GameEventListener m_listener = null;
     
-	void Awake ()
+    void Awake ()
     {
         // fetch parent listener
         GameEventListener listener = GetComponentInParent<GameEventListener>();
@@ -16,7 +16,7 @@ public class GameEventListener : MonoBehaviour
             // set parent listener
             m_listener = listener;
         }
-	}
+    }
     
     public void SendEvent(GameEvent e)
     {
@@ -28,7 +28,7 @@ public class GameEventListener : MonoBehaviour
         }
     }
 
-	public virtual void HandleEvent (GameEvent e)
+    public virtual void HandleEvent (GameEvent e)
     {
         // handle event here
         Debug.LogWarning("GameEventListener :: Please override 'void HandleEvent(GameEvent e)' function!");

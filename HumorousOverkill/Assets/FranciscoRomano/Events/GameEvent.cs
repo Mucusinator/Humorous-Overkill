@@ -9,11 +9,12 @@
     /**************************************************************************************************/
     /** ENEMY MANAGER STATES **************************************************************************/
     
-        ENEMY_STATE_DIED,
-        ENEMY_STATE_WAVE_END,
-        ENEMY_STATE_STAGE_END,
-        ENEMY_STATE_WAVE_BEGIN,
-        ENEMY_STATE_STAGE_BEGIN,
+        ENEMY_DIED,
+        ENEMY_SPAWN,
+        ENEMY_STAGE_PAUSED,
+        ENEMY_STAGE_TIMEOUT,
+        ENEMY_STAGE_CONTINUE,
+        ENEMY_STAGE_COMPLETE,
 
     /**************************************************************************************************/
 

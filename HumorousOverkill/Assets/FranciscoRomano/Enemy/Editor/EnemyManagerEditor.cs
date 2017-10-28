@@ -6,42 +6,42 @@ using System.Collections.Generic;
 [CustomEditor(typeof(EnemyManager))]
 public class EnemyManagerEditor : Editor
 {
-    EnemyManager manager = null;
+    //EnemyManager manager = null;
 
-    int selected = 0;
-    string[] options = new string[]
-    {
-            "Stage1", "Stage2", "Stage3"
-    };
+    //int selected = 0;
+    //string[] options = new string[]
+    //{
+    //        "Stage1", "Stage2", "Stage3"
+    //};
 
-    void OnEnable()
-    {
-        // store enemy manager
-        manager = (EnemyManager)target;
-    }
+    //void OnEnable()
+    //{
+    //    // store enemy manager
+    //    manager = (EnemyManager)target;
+    //}
 
-    void CreateNewStage()
-    {
+    //void CreateNewStage()
+    //{
 
-    }
+    //}
 
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
+    //public override void OnInspectorGUI()
+    //{
+    //    DrawDefaultInspector();
 
-        if (GUILayout.Button("Create New Stage"))
-        {
+    //    if (GUILayout.Button("Create New Stage"))
+    //    {
 
-        }
+    //    }
 
 
-        GUILayout.Label("Current Selected Stage:");
-        selected = EditorGUILayout.Popup(selected, options);
-        //if (GUILayout.Button("Create Wave"))
-        //{
+    //    GUILayout.Label("Current Selected Stage:");
+    //    selected = EditorGUILayout.Popup(selected, options);
+    //    //if (GUILayout.Button("Create Wave"))
+    //    //{
 
-        //}
-    }
+    //    //}
+    //}
     //EnemyManager enemyManager;
 
     //void OnEnable()

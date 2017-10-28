@@ -4,127 +4,163 @@ using System.Collections.Generic;
 
 public class EnemySpawner : GameEventListener
 {
-    public bool m_waveComplete = false;
-    public bool m_stageComplete = false;
-    public EnemyManager m_manager = null;
-    public List<Vector3> m_points = new List<Vector3>();
-    public List<SpawnerWave> m_waves = new List<SpawnerWave>();
+    public int spawnRate = 0;
+    public int activeUnits = 0;
+    public bool isWaveComplete = false;
+    public List<FR.SpawnWave> waves = new List<FR.SpawnWave>();
 
-    void Start()
+    public void Start()
     {
 
-    }
-
-    void CheckCurrentState()
-    {
-        // check stage state
-        if (m_stageComplete == false)
-        {
-            // check wave state
-            if (m_waveComplete == false)
-            {
-                // check wave active units
-                if (m_waves[0].activeUnits == 0)
-                {
-                    m_waves.RemoveAt(0);
-                    // update wave state
-                    m_waveComplete = true;
-                    // notify enemy manager
-                    m_manager.HandleEvent(GameEvent.ENEMY_STATE_WAVE_END);
-                }
-            }
-            // check for waves left
-            if (m_waves.Count == 0)
-            {
-                // update stage state
-                m_stageComplete = true;
-                // notify enemy manager
-                m_manager.HandleEvent(GameEvent.ENEMY_STATE_STAGE_END);
-            }
-        }
-    }
-
-    public bool NextUnit()
-    {
-        // validate call
-        if (m_waveComplete) return false;
-        if (m_stageComplete) return false;
-        if (m_waves.Count == 0) return false;
-        // spawn next unit
-        m_waves[0].Instantiate(m_points[Random.Range(0, m_points.Count)], transform);
-        // return true
-        return true;
-    }
-
-    public void OnTriggerEnter(Collider collider)
-    {
-        // check if player entered
-        if (collider.tag == "Player")
-        {
-            // pass current spawner to manager
-            m_manager.HandleEvent(GameEvent.CLASS_TYPE_ENEMY_SPAWNER, this);
-        }
     }
 
     public override void HandleEvent(GameEvent e)
     {
-        // check if complete
-        if (m_stageComplete) return;
-        // check current event
-        switch(e)
+        // check status
+        if (waves[0].isEmpty()) return;
+        // check game event
+        switch (e)
         {
-            // check if enemy died
-            case GameEvent.ENEMY_STATE_DIED:
-                // update active units
-                //SpawnerWave wave = m_waves[0];
-                //wave.activeUnits -= 1;
-                //m_waves[0] = wave;
-                m_waves[0].RemoveActiveUnit();
-                // check current state
-                CheckCurrentState();
-                // send event to manager
-                HandleEvent(e, m_waves[0].activeUnits);
+            // remove unit
+            case GameEvent.ENEMY_DIED:
+                activeUnits--;
                 break;
-            // check current wave state
-            case GameEvent.ENEMY_STATE_WAVE_BEGIN:
-                // update wave state
-                m_waveComplete = false;
-                break;
-            // check current stage state
-            case GameEvent.ENEMY_STATE_STAGE_BEGIN:
-                // update stage state
-                m_stageComplete = false;
+            // create unit
+            case GameEvent.ENEMY_SPAWN:
+                activeUnits++;
+                GameObject unit = waves[0].Instantiate(Quaternion.identity, transform);
+                Destroy(unit, 5);
                 break;
         }
     }
 
-    [System.Serializable]
-    public class SpawnerWave
+    public void OnDrawGizmos()
     {
-        [HideInInspector]
-        public int activeUnits;
-        public List<int> units;
-        public List<GameObject> prefabs;
+        if (waves.Count == 0) return;
 
-        public void Instantiate(Vector3 position, Transform parent)
+        Gizmos.color = Color.green;
+        foreach (FR.SpawnPoint point in waves[0].points)
         {
-            // get random unit index
-            int index = Random.Range(0, units.Count);
-            // instantiate random prefab
-            Object.Instantiate(prefabs[units[index]], position, new Quaternion(), parent);
-            // update current wave values
-            activeUnits++;
-            units[index]--;
-            if (units[index] == 0)
+            Gizmos.DrawSphere(point.position + transform.position, 0.1f);
+        }
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        // check if player
+        Debug.Log("Im aliveeeeee!!!!!!!!!!");
+        if (collider.tag == "Player")
+        {
+            foreach (FR.SpawnPoint point in waves[0].points)
             {
-                // remove depleted unit
-                units.RemoveAt(index);
+                foreach (FR.SpawnUnit unit in point.units)
+                {
+                    point.Instantiate(Quaternion.identity, transform);
+                }
             }
         }
+    }
 
-        public void RemoveActiveUnit() { activeUnits--; }
+    public override void HandleEvent(GameEvent e, float value)
+    {
+        base.HandleEvent(e, value);
     }
 }
+
+// ################################################################################################## //
+// ############################################# LATEST ############################################# //
+// ################################################################################################## //
+//void Start()
+//{
+
+//}
+
+//void CheckCurrentState()
+//{
+//    // check stage state
+//    if (m_stageComplete == false)
+//    {
+//        // check wave state
+//        if (m_waveComplete == false)
+//        {
+//            // check wave active units
+//            if (m_waves[0].activeUnits == 0)
+//            {
+//                m_waves.RemoveAt(0);
+//                // update wave state
+//                m_waveComplete = true;
+//                // notify enemy manager
+//                m_manager.HandleEvent(GameEvent.ENEMY_STATE_WAVE_END);
+//            }
+//        }
+//        // check for waves left
+//        if (m_waves.Count == 0)
+//        {
+//            // update stage state
+//            m_stageComplete = true;
+//            // notify enemy manager
+//            m_manager.HandleEvent(GameEvent.ENEMY_STATE_STAGE_END);
+//        }
+//    }
+//}
+
+//public bool NextUnit()
+//{
+//    // validate call
+//    if (m_waveComplete) return false;
+//    if (m_stageComplete) return false;
+//    if (m_waves.Count == 0) return false;
+//    // spawn next unit
+//    m_waves[0].Instantiate(m_points[Random.Range(0, m_points.Count)], transform);
+//    // return true
+//    return true;
+//}
+
+//public void OnTriggerEnter(Collider collider)
+//{
+//    // check if player entered
+//    if (collider.tag == "Player")
+//    {
+//        // pass current spawner to manager
+//        m_manager.HandleEvent(GameEvent.CLASS_TYPE_ENEMY_SPAWNER, this);
+//    }
+//}
+
+//public override void HandleEvent(GameEvent e)
+//{
+//    // check if complete
+//    if (m_stageComplete) return;
+//    // check current event
+//    switch (e)
+//    {
+//        // check if enemy died
+//        case GameEvent.ENEMY_STATE_DIED:
+//            // update active units
+//            //SpawnerWave wave = m_waves[0];
+//            //wave.activeUnits -= 1;
+//            //m_waves[0] = wave;
+//            m_waves[0].RemoveActiveUnit();
+//            // check current state
+//            CheckCurrentState();
+//            // send event to manager
+//            HandleEvent(e, m_waves[0].activeUnits);
+//            break;
+//        // check current wave state
+//        case GameEvent.ENEMY_STATE_WAVE_BEGIN:
+//            // update wave state
+//            m_waveComplete = false;
+//            break;
+//        // check current stage state
+//        case GameEvent.ENEMY_STATE_STAGE_BEGIN:
+//            // update stage state
+//            m_stageComplete = false;
+//            break;
+//    }
+//}
+
+// ################################################################################################## //
+// ################################################################################################## //
+// ################################################################################################## //
 
 
 //public bool m_TEST_SPAWN = false;
