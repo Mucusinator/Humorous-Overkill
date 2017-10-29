@@ -3,45 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [EventHandler.BindListener("playerManager", typeof(PlayerManager))]
+[EventHandler.BindListener("enemyManager", typeof(EnemyManager))]
 public class DroneAI : EventHandler.EventHandle
 {
-    // wandering
-    [Header("Wander Behavior")]
-    public float targetRadius;
-    public float errorMargin;
-    public float wanderSpeed;
-    public float turnSpeed;
-    public float avoidRadius;
+    public DroneEnemyInfo myInfo;
     public bool showGizmos = false;
+
     private Vector3 currentTarget;
     private RaycastHit wanderHitInfo;
 
     // health / attacking
     [Header("Health / Attacking")]
-    public float health; // health of the drone
-    public float fireRate; // number of projectiles fired in one second
-    private float shotTimer = 0; // private variable used for shot timing
-    public float accuracy; // accuracy of the drone when shooting (less is better)
-    public float attackRange; // distance to fire at the player from
-    public float projectileLifetime; // time that projectiles will exist before getting destroyed
-    public float shotForce; // effects speed of projectiles
     public GameObject player; // reference to the player
     public GameObject projectile; // projectile prefab
+    private float shotTimer = 0;
     public bool freeze = false;
 
     void Start()
     {
         GetEventListener("playerManager").HandleEvent(GameEvent.ENEMY_SPAWN);
-        // get values from manager
-        // targetRadius
-        // errorMargin
-        // wanderSpeed
-        // turnSpeed
-        // avoidRadius
-        // health
-        // damage
-        // fireRate
-        // accuracy
+        myInfo = GetEventListener("enemyManager").gameObject.GetComponent<EnemyManager>().defaultDroneInfo;
 
         pickTarget();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -58,26 +39,26 @@ public class DroneAI : EventHandler.EventHandle
     void wander()
     {
         // if we are within the margin of error pick a new target
-        if ((transform.position - currentTarget).sqrMagnitude < Mathf.Pow(errorMargin, 2))
+        if ((transform.position - currentTarget).sqrMagnitude < Mathf.Pow(myInfo.errorMargin, 2))
         {
             pickTarget();
         }
 
-        if (Physics.Raycast(transform.position, transform.forward, out wanderHitInfo, avoidRadius))
+        if (Physics.Raycast(transform.position, transform.forward, out wanderHitInfo, myInfo.avoidRadius))
         {
             if (wanderHitInfo.collider.gameObject.tag == "Avoid")
             {
                 //Debug.Log("Hit at " + hitInfo.point);
                 //Debug.DrawLine(hitInfo.point, hitInfo.point + hitInfo.normal, Color.blue);
                 //Debug.Break();
-                currentTarget += wanderHitInfo.normal * avoidRadius;
+                currentTarget += wanderHitInfo.normal * myInfo.avoidRadius;
             }
         }
 
         Vector3 direction = currentTarget - transform.position;
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), myInfo.turnSpeed * Time.deltaTime);
 
-        transform.Translate(transform.forward * wanderSpeed * Time.deltaTime, Space.World);
+        transform.Translate(transform.forward * myInfo.wanderSpeed * Time.deltaTime, Space.World);
 
         if(nearPlayer())
         {
@@ -92,7 +73,7 @@ public class DroneAI : EventHandler.EventHandle
     void pickTarget()
     {
         // make a good guess
-        currentTarget = transform.position + getRandomVector(targetRadius);
+        currentTarget = transform.position + getRandomVector(myInfo.targetRadius);
 
         // TODO: avoid walls etc
     }
@@ -109,7 +90,7 @@ public class DroneAI : EventHandler.EventHandle
         Vector3 playerOffset = player.transform.position - transform.position;
         playerOffset.y = 0;
 
-        return playerOffset.magnitude < Mathf.Pow(attackRange, 2);
+        return playerOffset.magnitude < Mathf.Pow(myInfo.attackRange, 2);
     }
 
     // shoot at player
@@ -119,10 +100,10 @@ public class DroneAI : EventHandler.EventHandle
         shotTimer += Time.deltaTime;
 
         // when shot timer reaches 1 / fire rate
-        if(shotTimer > (1 / fireRate))
+        if(shotTimer > (1 / myInfo.fireRate))
         {
             // pick a point around the player using accuracy
-            Vector3 accuracyOffset = Random.insideUnitCircle * accuracy;
+            Vector3 accuracyOffset = Random.insideUnitCircle * myInfo.accuracy;
             accuracyOffset.z = accuracyOffset.y;
             accuracyOffset.y = 0;
 
@@ -134,9 +115,9 @@ public class DroneAI : EventHandler.EventHandle
             // create the projectile
             GameObject currentProjectile = Instantiate(projectile, transform.position + transform.forward, Quaternion.identity) as GameObject;
             // add impulse force to the projectile towards the player at shotForce
-            currentProjectile.GetComponent<Rigidbody>().AddForce((shotPoint - currentProjectile.transform.position).normalized * shotForce, ForceMode.Impulse);
+            currentProjectile.GetComponent<Rigidbody>().AddForce((shotPoint - currentProjectile.transform.position).normalized * myInfo.shotForce, ForceMode.Impulse);
             // destroy the projectile after a set time
-            Destroy(currentProjectile, 5);
+            Destroy(currentProjectile, myInfo.projectileLifetime);
 
             // reset shot timer
             shotTimer = 0;
@@ -149,15 +130,15 @@ public class DroneAI : EventHandler.EventHandle
         {
             // display targetRadius
             UnityEditor.Handles.color = Color.red;
-            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, targetRadius);
+            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, myInfo.targetRadius);
 
             // display margin of error
             UnityEditor.Handles.color = Color.yellow;
-            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, errorMargin);
+            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, myInfo.errorMargin);
 
             // show currentVelocity
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, transform.position + transform.forward * wanderSpeed);
+            Gizmos.DrawLine(transform.position, transform.position + transform.forward * myInfo.wanderSpeed);
 
             // display current target
             Gizmos.color = Color.green;

@@ -2,8 +2,28 @@
 using System.Collections;
 using System.Collections.Generic;
 
-// Struct holding all the Game info
-[System.Serializable] struct EnemyInfo
+// Struct holding all the drone enemy info
+[System.Serializable]
+public struct DroneEnemyInfo
+{
+    public float targetRadius;
+    public float errorMargin;
+    public float wanderSpeed;
+    public float turnSpeed;
+    public float avoidRadius;
+
+    public float health; // health of the drone
+    public float fireRate; // number of projectiles fired in one second
+    public float accuracy; // accuracy of the drone when shooting (less is better)
+    public float attackRange; // distance to fire at the player from
+    public float projectileLifetime; // time that projectiles will exist before getting destroyed
+    public float shotForce; // effects speed of projectiles
+    public float ammoDropRate; // chance to drop ammo (0 = never 1 = always)
+}
+
+// Struct holding all the donut enemy info
+[System.Serializable]
+public struct DonutEnemyInfo
 {
     public int m_enemyHealth_type1;
     public int m_enemyHealth_type2;
@@ -14,12 +34,15 @@ using System.Collections.Generic;
     public int m_enemyAmmoDropRate;
 }
 
-public class EnemyManager : GameEventListener
+public class EnemyManager : EventHandler.EventHandle
 {
     // variables
     private float elapsedTime = 0.0f;
     [HideInInspector]
     public EnemySpawner spawner = null;
+
+    public DroneEnemyInfo defaultDroneInfo;
+
     // class functions [UnityEngine.MonoBehaviour]
     void OnGUI()
     {
@@ -76,11 +99,11 @@ public class EnemyManager : GameEventListener
         foreach (Vector3 point in spawner.enemyStage.points) Gizmos.DrawSphere(point + spawner.transform.position, 0.5f);
     }
     // class functions [GameEventListener]
-    public override void HandleEvent(GameEvent e, float value)
+    public override bool HandleEvent(GameEvent e, float value)
     {
-        
+        return true;
     }
-    public override void HandleEvent(GameEvent e, Object value)
+    public override bool HandleEvent(GameEvent e, Object value)
     {
         switch(e)
         {
@@ -90,5 +113,6 @@ public class EnemyManager : GameEventListener
                 spawner.Begin();
                 break;
         }
+        return true;
     }
 }
