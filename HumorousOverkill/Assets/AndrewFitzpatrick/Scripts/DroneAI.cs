@@ -17,15 +17,16 @@ public class DroneAI : GameEventListener
 
     // health / attacking
     [Header("Health / Attacking")]
-    public float health;
-    public float fireRate;
-    public float accuracy;
-    public float attackRange;
-    public GameObject player;
-    public PlayerManager playerManager;
-    private float shotTimer = 0;
-    private RaycastHit shotHitInfo;
-    public GameObject projectile; // we are firing projectiles
+    public float health; // health of the drone
+    public float fireRate; // number of projectiles fired in one second
+    private float shotTimer = 0; // private variable used for shot timing
+    public float accuracy; // accuracy of the drone when shooting (less is better)
+    public float attackRange; // distance to fire at the player from
+    public float projectileLifetime; // time that projectiles will exist before getting destroyed
+    public float shotForce; // effects speed of projectiles
+    public GameObject player; // reference to the player
+    public PlayerManager playerManager; // reference to the player manager
+    public GameObject projectile; // projectile prefab
 
     void Start()
     {
@@ -113,6 +114,7 @@ public class DroneAI : GameEventListener
         // increase shot timer
         shotTimer += Time.deltaTime;
 
+        // when shot timer reaches 1 / fire rate
         if(shotTimer > (1 / fireRate))
         {
             // pick a point around the player using accuracy
@@ -125,8 +127,11 @@ public class DroneAI : GameEventListener
             // shoot at the point
             Debug.DrawLine(transform.position + transform.forward, shotPoint, Color.yellow);
 
+            // create the projectile
             GameObject currentProjectile = Instantiate(projectile, transform.position + transform.forward, Quaternion.identity) as GameObject;
-            currentProjectile.GetComponent<Rigidbody>().AddForce((shotPoint - currentProjectile.transform.position).normalized * 5, ForceMode.Impulse);
+            // add impulse force to the projectile towards the player at shotForce
+            currentProjectile.GetComponent<Rigidbody>().AddForce((shotPoint - currentProjectile.transform.position).normalized * shotForce, ForceMode.Impulse);
+            // destroy the projectile after a set time
             Destroy(currentProjectile, 5);
 
             // reset shot timer
