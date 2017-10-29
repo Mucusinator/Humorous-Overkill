@@ -18,7 +18,7 @@ ExportedObj/
 *.tmp
 *.user
 *.userprefs
-*.pidb
+*.pidbgit 
 *.booproj
 *.svd
 *.pdb
@@ -31,4 +31,4 @@ sysinfo.txt
 
 # Builds
 *.apk
-*.unitypackage
+*.meta
