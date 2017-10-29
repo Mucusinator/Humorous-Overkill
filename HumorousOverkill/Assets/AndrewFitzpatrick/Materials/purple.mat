@@ -6,10 +6,17 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+<<<<<<< HEAD:HumorousOverkill/Assets/AndrewFitzpatrick/Materials/purple.mat
   m_Name: purple
   m_Shader: {fileID: 4800000, guid: 43deba40f4fdb87448014ea4a5f3ee81, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
+=======
+  m_Name: DarkPink
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+>>>>>>> parent of 7c398ac... Updated colliders:HumorousOverkill_Design/Assets/AmyCampbell/LevelAssets/Materials/DarkPink.mat
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -70,7 +77,6 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Threshold: 5
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
