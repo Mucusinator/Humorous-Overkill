@@ -9,10 +9,10 @@
 
 [RequireComponent(typeof(PlayerManager))]
 [RequireComponent(typeof(EnemyManager))]
-public class GameManager : GameEventListener {
+public class GameManager : EventHandler.EventHandle {
     [SerializeField] GameInfo m_gameInfo;
 
-    public override void HandleEvent (GameEvent e) {
+    public override bool HandleEvent (GameEvent e) {
         switch (e) {
         // UI
         case GameEvent.GAME_STATE_CONTINUE:
@@ -29,7 +29,7 @@ public class GameManager : GameEventListener {
             break;
         default:
             break;
-        }
+        } return true;
     }
 
 }

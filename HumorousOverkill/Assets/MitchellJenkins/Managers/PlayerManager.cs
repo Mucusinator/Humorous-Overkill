@@ -22,7 +22,7 @@ using UnityEngine;
     public float m_gunReloadSpeed_type2;
 }
 
-public class PlayerManager : GameEventListener {
+public class PlayerManager : EventHandler.EventHandle {
     public Player m_ply;
 
     // Weapon Script.
@@ -33,7 +33,7 @@ public class PlayerManager : GameEventListener {
     public PlayerInfo GetPlayerInfo { get { return m_playerInfo; } }
 
     // Override for the handle event system
-    public override void HandleEvent (GameEvent e) {
+    public override bool HandleEvent (GameEvent e) {
         switch (e) {
         case GameEvent.PICKUP_HEALTH:
             // calls a function add health to the player
@@ -45,7 +45,7 @@ public class PlayerManager : GameEventListener {
             break;
         default:
             break;
-        }
+        } return true;
     }
 
 }
