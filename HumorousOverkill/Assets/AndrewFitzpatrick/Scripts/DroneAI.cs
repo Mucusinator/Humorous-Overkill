@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroneAI : GameEventListener
+[EventHandler.BindListener("playerManager", typeof(PlayerManager))]
+public class DroneAI : EventHandler.EventHandle
 {
     // wandering
     [Header("Wander Behavior")]
@@ -25,11 +26,12 @@ public class DroneAI : GameEventListener
     public float projectileLifetime; // time that projectiles will exist before getting destroyed
     public float shotForce; // effects speed of projectiles
     public GameObject player; // reference to the player
-    public PlayerManager playerManager; // reference to the player manager
     public GameObject projectile; // projectile prefab
+    public bool freeze = false;
 
     void Start()
     {
+        GetEventListener("playerManager").HandleEvent(GameEvent.ENEMY_SPAWN);
         // get values from manager
         // targetRadius
         // errorMargin
@@ -43,12 +45,14 @@ public class DroneAI : GameEventListener
 
         pickTarget();
         player = GameObject.FindGameObjectWithTag("Player");
-        playerManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>();
     }
 
 	void Update ()
     {
-        wander();
+        if(!freeze)
+        {
+            wander();
+        }
 	}
 
     void wander()
@@ -161,8 +165,8 @@ public class DroneAI : GameEventListener
         }
     }
 
-    public virtual void HandleEvent()
+    public override bool HandleEvent(GameEvent e)
     {
-
+        return true; // TODO
     }
 }
