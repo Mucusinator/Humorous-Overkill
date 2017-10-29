@@ -4,47 +4,23 @@ using System.Collections.Generic;
 
 public class EnemySpawner : GameEventListener
 {
-    public bool NEXT = false;
-    public bool SPAWN = false;
-    
+    public bool started = false;
     public EnemyStage stage = new EnemyStage();
-    public List<FR.SpawnWave> waves = new List<FR.SpawnWave>();
+    public EnemyManager manager = null;
 
-    void Start()
-    {
-        // set wave list
-        stage.waves = waves;
-        stage.reset();
-    }
+    //void OnEnable()
+    //{
+    //    Debug.Log("enabled");
+    //}
 
-    void Update()
-    {
-        
-        if (NEXT)
-        {
-            HandleEvent(GameEvent.ENEMY_WAVE_NEXT);
-            NEXT = false;
-        }
-        if (SPAWN)
-        {
-            HandleEvent(GameEvent.ENEMY_SPAWN);
-            SPAWN = false;
-        }
-    }
-
-    void OnEnable()
-    {
-        Debug.Log("enabled");
-    }
-
-    void OnDisable()
-    {
-        Debug.Log("disabled");
-    }
+    //void OnDisable()
+    //{
+    //    Debug.Log("disabled");
+    //}
 
     void OnDrawGizmos()
     {
-        if (waves.Count == 0) return;
+        if (stage.waves.Count == 0) return;
 
         Gizmos.color = new Color(0, 1, 0, 0.5f);
         foreach (Vector3 point in stage.points)
@@ -58,7 +34,14 @@ public class EnemySpawner : GameEventListener
         // check if player
         if (collider.tag == "Player")
         {
-            SPAWN = true;
+            // notify manager
+            Debug.Log("entered stage");
+            if (started == false)
+            {
+                stage.reset();
+                started = true;
+            }
+            manager.HandleEvent(GameEvent.CLASS_TYPE_ENEMY_SPAWNER, this);
         }
     }
 
@@ -72,10 +55,12 @@ public class EnemySpawner : GameEventListener
             // remove enemy unit
             case GameEvent.ENEMY_DIED:
                 stage.removeUnit();
+                if (stage.isWaveComplete()) manager.HandleEvent(GameEvent.ENEMY_WAVE_COMPLETE);
                 break;
             // create enemy unit
             case GameEvent.ENEMY_SPAWN:
                 Destroy(stage.createUnit(transform), 5);
+                if (stage.isWaveEmpty()) manager.HandleEvent(GameEvent.ENEMY_WAVE_EMPTY);
                 break;
             // skip to next wave
             case GameEvent.ENEMY_WAVE_NEXT:

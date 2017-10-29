@@ -12,6 +12,8 @@
         ENEMY_DIED,
         ENEMY_SPAWN,
         ENEMY_WAVE_NEXT,
+        ENEMY_WAVE_EMPTY,
+        ENEMY_WAVE_COMPLETE,
 
     /**************************************************************************************************/
 

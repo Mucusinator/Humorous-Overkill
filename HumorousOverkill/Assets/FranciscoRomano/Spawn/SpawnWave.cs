@@ -37,27 +37,27 @@ namespace FR
             // check if complete
             return isEmpty() && activeUnits == 0;
         }
-        public void RemoveUnit()
+        public void removeUnit()
         {
             // remove unit
             activeUnits--;
         }
-        public GameObject CreateUnit(Vector3 position, Transform parent)
+        public GameObject createUnit(Vector3 position, Transform parent)
         {
             // create unit
-            return CreateUnit(position, Quaternion.identity, parent);
+            return createUnit(position, Quaternion.identity, parent);
         }
-        public GameObject CreateUnit(Vector3 position, Quaternion rotation, Transform parent)
+        public GameObject createUnit(Vector3 position, Quaternion rotation, Transform parent)
         {
             // create unit
-            return CreateUnit(Random.Range(0, units.Count), position, rotation, parent);
+            return createUnit(Random.Range(0, units.Count), position, rotation, parent);
         }
-        public GameObject CreateUnit(int index, Vector3 position, Quaternion rotation, Transform parent)
+        public GameObject createUnit(int index, Vector3 position, Quaternion rotation, Transform parent)
         {
             // create unit
-            return CreateUnit(units[index], position, rotation, parent);
+            return createUnit(units[index], position, rotation, parent);
         }
-        public GameObject CreateUnit(SpawnUnit unit, Vector3 position, Quaternion rotation, Transform parent)
+        public GameObject createUnit(SpawnUnit unit, Vector3 position, Quaternion rotation, Transform parent)
         {
             // create unit
             activeUnits++;

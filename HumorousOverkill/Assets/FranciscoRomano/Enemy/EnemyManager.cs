@@ -18,24 +18,36 @@ public class EnemyManager : GameEventListener
 {
     private float elapsedTime = 0.0f;
     public EnemySpawner spawner = null;
-
-    void Start()
+    
+    void OnGUI()
     {
-        elapsedTime = Time.time;
-        spawner = GetComponentInChildren<EnemySpawner>();
+        if (spawner == null) return;
+        if (!spawner.stage.isComplete())
+        {
+            GUI.Box(new Rect(0, 0, 420, 180), "");
+            // stage status
+            GUI.Label(new Rect(10, 20, 400, 20), "---------------------------------------- Stage ----------------------------------------");
+            GUI.Label(new Rect(10, 40, 400, 20), "is complete? = " + spawner.stage.isComplete().ToString());
+            // current wave status
+            GUI.Label(new Rect(10, 60, 400, 20), "------------------------------------ Current  Wave ------------------------------------");
+            GUI.Label(new Rect(10, 80, 400, 20), "is empty? = " + spawner.stage.wave.isEmpty().ToString());
+            GUI.Label(new Rect(10, 100, 400, 20), "is complete? = " + spawner.stage.wave.isComplete().ToString());
+            GUI.Label(new Rect(10, 120, 400, 20), "spawn rate = " + spawner.stage.wave.spawnRate);
+            GUI.Label(new Rect(10, 140, 400, 20), "active units = " + spawner.stage.wave.activeUnits);
+            GUI.Label(new Rect(10, 160, 400, 20), "---------------------------------------------------------------------------------------");
+        }
     }
 
     void Update()
     {
-        if (spawner.stage.isComplete())
-        {
-            Debug.Log("Finished!");
-            return;
-        }
-
+        // check if null
+        if (spawner == null) return;
+        // check if complete
+        if (spawner.stage.isComplete()) return;
+        // check if wave complete
         if (spawner.stage.isWaveComplete())
         {
-            Debug.Log("wave");
+            // next wave
             elapsedTime = Time.time;
             spawner.HandleEvent(GameEvent.ENEMY_WAVE_NEXT);
         }
@@ -43,35 +55,22 @@ public class EnemyManager : GameEventListener
         {
             if (Time.time - elapsedTime > spawner.stage.getWaveSpawnRate())
             {
-                Debug.Log("unit");
+                // next unit
                 elapsedTime = Time.time;
-                if (spawner.stage.isWaveEmpty())
-                {
-                    spawner.HandleEvent(GameEvent.ENEMY_DIED);
-                }
-                else
-                {
-                    spawner.HandleEvent(GameEvent.ENEMY_SPAWN);
-                }
+                spawner.HandleEvent(GameEvent.ENEMY_DIED);
+                spawner.HandleEvent(GameEvent.ENEMY_SPAWN);
             }
         }
         
-    }
-
-    public override void HandleEvent(GameEvent e)
-    {
-        switch(e)
-        {
-            default:
-                break;
-        }
     }
 
     public override void HandleEvent(GameEvent e, Object value)
     {
         switch(e)
         {
-            default:
+            case GameEvent.CLASS_TYPE_ENEMY_SPAWNER:
+                Debug.Log("Hello!");
+                spawner = (EnemySpawner)value;
                 break;
         }
     }
