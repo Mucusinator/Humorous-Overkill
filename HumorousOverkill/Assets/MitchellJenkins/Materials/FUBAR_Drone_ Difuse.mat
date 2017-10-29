@@ -8,8 +8,13 @@ Material:
   m_PrefabInternal: {fileID: 0}
 <<<<<<< HEAD:HumorousOverkill/Assets/MitchellJenkins/Materials/FUBAR_Drone_ Difuse.mat
 <<<<<<< HEAD:HumorousOverkill/Assets/MitchellJenkins/Materials/FUBAR_Drone_ Difuse.mat
+<<<<<<< HEAD:HumorousOverkill/Assets/MitchellJenkins/Materials/FUBAR_Drone_ Difuse.mat
   m_Name: FUBAR_Drone_ Difuse
   m_Shader: {fileID: 4800000, guid: 588d7463fef6a8c41b0059c4b7fd037e, type: 3}
+=======
+  m_Name: lambert2
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+>>>>>>> parent of 7c398ac... Updated colliders:HumorousOverkill_Design/Assets/AmyCampbell/LevelAssets/Models_FBX/Materials/lambert2.mat
 =======
   m_Name: lambert2
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
