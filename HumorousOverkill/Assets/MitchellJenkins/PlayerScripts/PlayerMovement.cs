@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using EventHandler;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour {
     private float m_airV = 0f;
 
     void Start () {
+        
         m_camera    = this.GetComponent<Camera>();
         m_cc        = this.GetComponent<Player>()._CharacterController;
         m_ply       = this.GetComponent<Player>()._PlayerInfo;

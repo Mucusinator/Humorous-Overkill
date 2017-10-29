@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using EventHandler;
 
+[BindListener("PlayerManager", typeof(PlayerManager))]
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(Rigidbody))]
-public class Player : GameEventListener {
+public class Player : EventHandle {
 
     private Animator m_animator;
     private PlayerInfo m_ply;
@@ -15,10 +17,14 @@ public class Player : GameEventListener {
     [SerializeField] private bool m_cameraEnabled = true;
     [SerializeField] private bool m_movementEnabled = true;
 
-    void Awake () {
-        m_ply = GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().GetPlayerInfo;
+    void Start () {
+        m_ply = GetEventListener("PlayerManager").gameObject.GetComponent<PlayerManager>().GetPlayerInfo;
         m_cc = this.GetComponent<CharacterController>() as CharacterController;
         m_rb = this.GetComponent<Rigidbody>() as Rigidbody;
+
+        m_animator.runtimeAnimatorController = m_animatorController;
+        m_cc.center = new Vector3(0f, 1f, 0f);
+        m_cc.height = 1.8f;
     }
 
     public CharacterController _CharacterController {
@@ -49,13 +55,7 @@ public class Player : GameEventListener {
         else if (m_ply.m_playerHealth < 0) m_ply.m_playerHealth = 0;
     }
 
-    void Start () {
-        m_animator.runtimeAnimatorController = m_animatorController;
-        m_cc.center = new Vector3(0f, 1f, 0f);
-        m_cc.height = 1.8f;
-    }
-
-    public override void HandleEvent (GameEvent e, float amount) {
-        
+    public override bool HandleEvent (GameEvent e) {
+        return true;
     }
 }
