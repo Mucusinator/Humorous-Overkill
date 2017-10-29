@@ -117,7 +117,7 @@ public class DroneAI : EventHandler.EventHandle
             // add impulse force to the projectile towards the player at shotForce
             currentProjectile.GetComponent<Rigidbody>().AddForce((shotPoint - currentProjectile.transform.position).normalized * myInfo.shotForce, ForceMode.Impulse);
             // destroy the projectile after a set time
-            Destroy(currentProjectile, 5);
+            Destroy(currentProjectile, myInfo.projectileLifetime);
 
             // reset shot timer
             shotTimer = 0;
