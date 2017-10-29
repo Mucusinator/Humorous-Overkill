@@ -13,8 +13,8 @@ public class EnemySpawner : GameEventListener
     void Start()
     {
         // set wave list
-        stage.waveList = waves;
-        stage.Reset();
+        stage.waves = waves;
+        stage.reset();
     }
 
     void Update()
@@ -47,7 +47,7 @@ public class EnemySpawner : GameEventListener
         if (waves.Count == 0) return;
 
         Gizmos.color = new Color(0, 1, 0, 0.5f);
-        foreach (Vector3 point in waves[stage.waveIndex].points)
+        foreach (Vector3 point in stage.points)
         {
             Gizmos.DrawSphere(point + transform.position, 0.5f);
         }
@@ -71,15 +71,15 @@ public class EnemySpawner : GameEventListener
         {
             // remove enemy unit
             case GameEvent.ENEMY_DIED:
-                stage.RemoveUnit();
+                stage.removeUnit();
                 break;
             // create enemy unit
             case GameEvent.ENEMY_SPAWN:
-                Destroy(stage.CreateUnit(transform), 5);
+                Destroy(stage.createUnit(transform), 5);
                 break;
             // skip to next wave
             case GameEvent.ENEMY_WAVE_NEXT:
-                stage.NextWave();
+                stage.nextWave();
                 break;
         }
     }

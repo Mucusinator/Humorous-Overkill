@@ -6,34 +6,38 @@ using System.Collections.Generic;
 public class EnemyStage
 {
     // :: variables
+    [HideInInspector]
     public int waveIndex;
     public FR.SpawnWave current;
-    public List<FR.SpawnWave> waveList;
+    public List<Vector3> points;
+    [HideInInspector]
+    public List<FR.SpawnWave> waves;
     // :: initializers
     public EnemyStage()
     {
         // initialize
+        waves = new List<FR.SpawnWave>();
+        points = new List<Vector3>();
         current = null;
-        waveList = new List<FR.SpawnWave>();
         waveIndex = 0;
     }
     // :: class functions
-    public void Reset()
+    public void reset()
     {
         // reset values
-        current = new FR.SpawnWave(waveList[0]);
+        current = new FR.SpawnWave(waves[0]);
         waveIndex = 0;
     }
-    public void NextWave()
+    public void nextWave()
     {
         // check status
-        if (waveIndex + 1 == waveList.Count) return;
+        if (waveIndex + 1 == waves.Count) return;
         // change current wave
         int activeUnits = current.activeUnits;
-        current = new FR.SpawnWave(waveList[++waveIndex]);
+        current = new FR.SpawnWave(waves[++waveIndex]);
         current.activeUnits = activeUnits;
     }
-    public void RemoveUnit()
+    public void removeUnit()
     {
         // check status
         if (current.activeUnits == 0) return;
@@ -43,7 +47,7 @@ public class EnemyStage
     public bool isComplete()
     {
         // check status
-        return current.isComplete() && (waveIndex + 1) == waveList.Count;
+        return current.isComplete() && (waveIndex + 1) == waves.Count;
     }
     public bool isWaveEmpty()
     {
@@ -55,16 +59,16 @@ public class EnemyStage
         // check if wave complete
         return current.isComplete();
     }
-    public float GetUnitSpawnRate()
+    public float getWaveSpawnRate()
     {
         // return wave spawnrate
-        return current.spawnrate;
+        return current.spawnRate;
     }
-    public GameObject CreateUnit(Transform parent)
+    public GameObject createUnit(Transform parent)
     {
         // check status
         if (current.isEmpty()) return null;
         // create enemy unit
-        return current.CreateUnit(parent);
+        return current.CreateUnit(points[Random.Range(0, points.Count)], parent);
     }
 }

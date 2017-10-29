@@ -41,7 +41,7 @@ public class EnemyManager : GameEventListener
         }
         else
         {
-            if (Time.time - elapsedTime > spawner.stage.GetUnitSpawnRate())
+            if (Time.time - elapsedTime > spawner.stage.getWaveSpawnRate())
             {
                 Debug.Log("unit");
                 elapsedTime = Time.time;
