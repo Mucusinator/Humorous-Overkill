@@ -34,7 +34,7 @@ public struct DonutEnemyInfo
     public int m_enemyAmmoDropRate;
 }
 
-public class EnemyManager : GameEventListener
+public class EnemyManager : EventHandler.EventHandle
 {
     // variables
     private float elapsedTime = 0.0f;
@@ -99,11 +99,11 @@ public class EnemyManager : GameEventListener
         foreach (Vector3 point in spawner.enemyStage.points) Gizmos.DrawSphere(point + spawner.transform.position, 0.5f);
     }
     // class functions [GameEventListener]
-    public override void HandleEvent(GameEvent e, float value)
+    public override bool HandleEvent(GameEvent e, float value)
     {
-        
+        return true;
     }
-    public override void HandleEvent(GameEvent e, Object value)
+    public override bool HandleEvent(GameEvent e, Object value)
     {
         switch(e)
         {
@@ -113,5 +113,6 @@ public class EnemyManager : GameEventListener
                 spawner.Begin();
                 break;
         }
+        return true;
     }
 }
