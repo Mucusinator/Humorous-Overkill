@@ -6,7 +6,6 @@ using System.Collections.Generic;
 public class EnemyStage
 {
     // :: variables
-    [HideInInspector]
     public int waveIndex;
     public FR.SpawnWave wave;
     public List<Vector3> points;
@@ -58,16 +57,11 @@ public class EnemyStage
         // check if wave complete
         return wave.isComplete();
     }
-    public float getWaveSpawnRate()
-    {
-        // return wave spawnrate
-        return wave.spawnRate;
-    }
     public GameObject createUnit(Transform parent)
     {
         // check status
         if (wave.isEmpty()) return null;
         // create enemy unit
-        return wave.createUnit(points[Random.Range(0, points.Count)], parent);
+        return wave.createUnit(points[Random.Range(0, points.Count)], Quaternion.identity, parent);
     }
 }

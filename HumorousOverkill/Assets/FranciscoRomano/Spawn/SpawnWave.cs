@@ -42,11 +42,6 @@ namespace FR
             // remove unit
             activeUnits--;
         }
-        public GameObject createUnit(Vector3 position, Transform parent)
-        {
-            // create unit
-            return createUnit(position, Quaternion.identity, parent);
-        }
         public GameObject createUnit(Vector3 position, Quaternion rotation, Transform parent)
         {
             // create unit
@@ -55,19 +50,13 @@ namespace FR
         public GameObject createUnit(int index, Vector3 position, Quaternion rotation, Transform parent)
         {
             // create unit
-            return createUnit(units[index], position, rotation, parent);
-        }
-        public GameObject createUnit(SpawnUnit unit, Vector3 position, Quaternion rotation, Transform parent)
-        {
-            // create unit
             activeUnits++;
-            GameObject instance = unit.create(position, rotation, parent);
+            GameObject instance = units[index].create(position, rotation, parent);
             // check if depleted
-            if (unit.isEmpty())
+            if (units[index].isEmpty())
             {
                 // remove unit
-                units.Remove(unit);
-                unit = null;
+                units.RemoveAt(index);
             }
             // return unit
             return instance;

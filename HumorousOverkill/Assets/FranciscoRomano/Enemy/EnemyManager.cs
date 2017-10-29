@@ -16,61 +16,78 @@ using System.Collections.Generic;
 
 public class EnemyManager : GameEventListener
 {
+    // variables
     private float elapsedTime = 0.0f;
+    [HideInInspector]
     public EnemySpawner spawner = null;
-    
+    // class functions [UnityEngine.MonoBehaviour]
     void OnGUI()
     {
+        // check spawner status
         if (spawner == null) return;
-        if (!spawner.stage.isComplete())
+        if (!spawner.IsStageComplete())
         {
-            GUI.Box(new Rect(0, 0, 420, 180), "");
-            // stage status
-            GUI.Label(new Rect(10, 20, 400, 20), "---------------------------------------- Stage ----------------------------------------");
-            GUI.Label(new Rect(10, 40, 400, 20), "is complete? = " + spawner.stage.isComplete().ToString());
-            // current wave status
-            GUI.Label(new Rect(10, 60, 400, 20), "------------------------------------ Current  Wave ------------------------------------");
-            GUI.Label(new Rect(10, 80, 400, 20), "is empty? = " + spawner.stage.wave.isEmpty().ToString());
-            GUI.Label(new Rect(10, 100, 400, 20), "is complete? = " + spawner.stage.wave.isComplete().ToString());
-            GUI.Label(new Rect(10, 120, 400, 20), "spawn rate = " + spawner.stage.wave.spawnRate);
-            GUI.Label(new Rect(10, 140, 400, 20), "active units = " + spawner.stage.wave.activeUnits);
-            GUI.Label(new Rect(10, 160, 400, 20), "---------------------------------------------------------------------------------------");
+            // draw box
+            GUI.Box(new Rect(0, 0, 220, 180), "");
+            // draw stage status
+            GUI.Label(new Rect(10, 20, 200, 20), "-------------------- Stage --------------------");
+            GUI.Label(new Rect(10, 40, 200, 20), "is complete? = " + spawner.IsStageComplete().ToString());
+            // draw stage wave status
+            GUI.Label(new Rect(10,  60, 200, 20), "---------------- Current  Wave ----------------");
+            GUI.Label(new Rect(10,  80, 200, 20), "is empty? = " + spawner.IsWaveEmpty().ToString());
+            GUI.Label(new Rect(10, 100, 200, 20), "is complete? = " + spawner.IsWaveComplete().ToString());
+            GUI.Label(new Rect(10, 120, 200, 20), "spawn rate = " + spawner.GetWaveSpawnRate());
+            GUI.Label(new Rect(10, 140, 200, 20), "active units = " + spawner.GetWaveActiveUnits());
+            GUI.Label(new Rect(10, 160, 200, 20), "----------------------------------------------");
         }
     }
-
     void Update()
     {
-        // check if null
+        // check spawner status
         if (spawner == null) return;
-        // check if complete
-        if (spawner.stage.isComplete()) return;
-        // check if wave complete
-        if (spawner.stage.isWaveComplete())
+        if (!spawner.IsStageComplete())
         {
-            // next wave
-            elapsedTime = Time.time;
-            spawner.HandleEvent(GameEvent.ENEMY_WAVE_NEXT);
-        }
-        else
-        {
-            if (Time.time - elapsedTime > spawner.stage.getWaveSpawnRate())
+            // check wave status
+            if (spawner.IsWaveComplete())
             {
-                // next unit
+                // next wave
                 elapsedTime = Time.time;
-                spawner.HandleEvent(GameEvent.ENEMY_DIED);
-                spawner.HandleEvent(GameEvent.ENEMY_SPAWN);
+                spawner.HandleEvent(GameEvent.ENEMY_WAVE_NEXT);
+            }
+            else
+            {
+                // check elapsed time
+                if (Time.time - elapsedTime > spawner.GetWaveSpawnRate())
+                {
+                    // next unit
+                    elapsedTime = Time.time;
+                    spawner.HandleEvent(GameEvent.ENEMY_DIED);
+                    spawner.HandleEvent(GameEvent.ENEMY_SPAWN); // ###### REMOVE THIS LINE AFTER ###### //
+                }
             }
         }
+    }
+    void OnDrawGizmos()
+    {
+        // check spawner status
+        if (spawner == null) return;
+        // display current stage
+        Gizmos.color = new Color(0, 1, 0, 0.5f);
+        foreach (Vector3 point in spawner.enemyStage.points) Gizmos.DrawSphere(point + spawner.transform.position, 0.5f);
+    }
+    // class functions [GameEventListener]
+    public override void HandleEvent(GameEvent e, float value)
+    {
         
     }
-
     public override void HandleEvent(GameEvent e, Object value)
     {
         switch(e)
         {
+            // called on trigger enter
             case GameEvent.CLASS_TYPE_ENEMY_SPAWNER:
-                Debug.Log("Hello!");
                 spawner = (EnemySpawner)value;
+                spawner.Begin();
                 break;
         }
     }
