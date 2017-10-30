@@ -19,6 +19,8 @@ public class CombinedScript : MonoBehaviour {
     public float maxRifleAmmo = 15.0f;
     // This is the amount of ammo the rifle currently has.
     private float currentRifleAmmo;
+    // THis is the magazine size.
+    public float rifleMagSize;
     // This is the reload time of the rifle.
     public float reloadRifleTime = 2.5f;
     // private field showing the shots per second.
@@ -36,6 +38,8 @@ public class CombinedScript : MonoBehaviour {
     public float PelletDamage = 3.0f;
     // This is the amount of pellets the shotgun has.
     public int pelletCount = 8;
+    // This is the mag tube size.
+    public int magTubeSize = 6;
     // This is the Shotguns muzzle effect.
     public ParticleSystem ShotgunMuzzleEffect;
     // This is the amount of force applied to the target when they are hit with a pellet.
@@ -98,7 +102,7 @@ public class CombinedScript : MonoBehaviour {
     void Start () {
 
         SelectWeapon();
-        currentRifleAmmo = maxRifleAmmo;
+        currentRifleAmmo = rifleMagSize;
         currentShotgunAmmo = maxShotgunAmmo;
     }
 	
@@ -159,7 +163,7 @@ public class CombinedScript : MonoBehaviour {
                 return;
             }
 
-            if (currentRifleAmmo <= 0)
+            if (currentRifleAmmo <= 0 && maxRifleAmmo > 0)
             {
                 StartCoroutine(Reload());
                 return;
@@ -197,15 +201,22 @@ public class CombinedScript : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.SEMIAUTO && Time.time >= nextTimeToFire)
         {
-            nextTimeToFire = Time.time + 60f / RoundsPerMinute;
-            Shoot();
+            
+            if (currentRifleAmmo <= 0)
+            {
+                nextTimeToFire = Time.time + 60f / RoundsPerMinute;
+                Shoot();
+            }
         }
         if (Input.GetButton("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.FULLAUTO && Time.time >= nextTimeToFire)
         {
-            nextTimeToFire = Time.time + 60f / RoundsPerMinute;
-            Shoot();
+            if (currentRifleAmmo > 0)
+            {
+                nextTimeToFire = Time.time + 60f / RoundsPerMinute;
+                Shoot();
+            }
         }
-        if (Input.GetButtonDown("Fire1") && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
+        if (Input.GetButtonDown("Fire1") && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire && maxShotgunAmmo > 0)
         {
             ShotgunMuzzleEffect.Play();
 
@@ -240,8 +251,20 @@ public class CombinedScript : MonoBehaviour {
             animator.SetBool("Reloading", true);
             yield return new WaitForSeconds(reloadRifleTime - 0.25f);
             animator.SetBool("Reloading", false);
-            yield return new WaitForSeconds(0.25f);
-            currentRifleAmmo = maxRifleAmmo;
+          
+                yield return new WaitForSeconds(0.25f);
+            
+                //currentRifleAmmo = maxRifleAmmo;
+            if (maxRifleAmmo < rifleMagSize)
+            {
+                currentRifleAmmo = maxRifleAmmo;
+                maxRifleAmmo = 0;
+            }
+            else
+            {
+                currentRifleAmmo = rifleMagSize;
+                maxRifleAmmo -= rifleMagSize;
+            }
             isReloading = false;
         }
         if (gunType == GunType.SHOTGUN)

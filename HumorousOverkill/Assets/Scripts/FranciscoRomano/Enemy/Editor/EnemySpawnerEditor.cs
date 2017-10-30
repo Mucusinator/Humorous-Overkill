@@ -1,75 +1,25 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using EventHandler;
 using System.Collections;
 using System.Collections.Generic;
 
-[CustomEditor(typeof(EnemyManager))]
-public class EnemyManagerEditor : Editor
+[CustomEditor(typeof(EnemySpawner))]
+public class EnemySpawnerEditor : Editor
 {
     bool isEditingStage = false;
 
     int temp_stage_waves = 0;
 
-    //EnemyManager enemyManager = null;
-
-    void OnEnable()
-    {
-        // store class
-        //enemyManager = (EnemyManager)target;
-    }
-
     void OnSceneGUI()
     {
-        Event e = Event.current;
-        if (isEditingStage)
-        {
-            Ray mouseRay = HandleUtility.GUIPointToWorldRay(e.mousePosition);
-            float height = 0.0f;
-            float length = (height - mouseRay.origin.y) / mouseRay.direction.y;
-            Vector3 target = mouseRay.origin + mouseRay.direction * length;
-
-            // check if left mouse pressed
-            if (e.type == EventType.mouseDown && e.button == 0)
-            {
-                Debug.Log("add :: { " + target.x + ", " + target.y + ", " + target.z + " }");
-            }
-
-            // draw point on screen
-            Handles.color = new Color(0.0f, 1.0f, 0.0f, 0.5f);
-            Handles.DrawSolidDisc(target, Vector3.up, 0.5f);
-
-            // prevent unity from deselecting object
-            if (e.type == EventType.layout)
-            {
-                HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
-            }
-        }
+        
     }
 
     public override void OnInspectorGUI()
     {
         // draw defaults
         DrawDefaultInspector();
-        
-        if (isEditingStage)
-        {
-            EditorGUILayout.LabelField("Creating Stage", EditorStyles.boldLabel);
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.PrefixLabel("waves:");
-            temp_stage_waves = EditorGUILayout.IntField(temp_stage_waves);
-            EditorGUILayout.EndHorizontal();
-
-            if (GUILayout.Button("Create")) isEditingStage = false;
-            if (GUILayout.Button("Cancel")) isEditingStage = false;
-        }
-        else
-        {
-            EditorGUILayout.LabelField("Enemy Manager Editor", EditorStyles.boldLabel);
-
-
-            isEditingStage = GUILayout.Button("Create Stage");
-        }
     }
 
     //int selected = 0;
