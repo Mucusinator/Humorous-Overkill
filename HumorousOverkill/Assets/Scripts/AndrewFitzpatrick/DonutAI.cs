@@ -60,7 +60,7 @@ public class DonutAI : EventHandler.EventHandle
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(Vector3.up * 90) * Quaternion.LookRotation(direction), myInfo.turnSpeed * Time.deltaTime);
 
         // A wheel moves forward a distance equal to its circumference with each rotation.
-        //modelTransform.Rotate(new Vector3(0, myInfo.rollSpeed * 360 / donutCircumference, 0) * Time.deltaTime, Space.Self);
+        //myAnimator.GetCurrentAnimatorStateInfo(0).speedMultiplier = 
 
         // roll forward
         transform.Translate(-transform.right * myInfo.rollSpeed * Time.deltaTime, Space.World);
