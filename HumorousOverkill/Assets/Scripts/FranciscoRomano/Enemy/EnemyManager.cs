@@ -19,19 +19,21 @@ public struct DroneEnemyInfo
     public float projectileLifetime; // time that projectiles will exist before getting destroyed
     public float shotForce; // effects speed of projectiles
     public float ammoDropRate; // chance to drop ammo (0 = never 1 = always)
+    public float explosionForce;
+    public float explosionRadius;
 }
 
 // Struct holding all the donut enemy info
 [System.Serializable]
 public struct DonutEnemyInfo
 {
-    public int m_enemyHealth_type1;
-    public int m_enemyHealth_type2;
-    public float m_enemySpeed_type1;
-    public float m_enemySpeed_type2;
-    public float m_enemyDamage_type1;
-    public float m_enemyDamage_type2;
-    public int m_enemyAmmoDropRate;
+    public float health;
+    public float damage;
+    public float fireRate;
+    public float rollSpeed;
+    public float turnSpeed;
+    public float attackRange;
+    public float ammoDropRate;
 }
 
 public class EnemyManager : EventHandler.EventHandle
@@ -42,6 +44,7 @@ public class EnemyManager : EventHandler.EventHandle
     public EnemySpawner spawner = null;
 
     public DroneEnemyInfo defaultDroneInfo;
+    public DonutEnemyInfo defaultDonutInfo;
 
     // class functions [UnityEngine.MonoBehaviour]
     void OnGUI()
@@ -90,15 +93,7 @@ public class EnemyManager : EventHandler.EventHandle
             }
         }
     }
-    void OnDrawGizmos()
-    {
-        // check spawner status
-        if (spawner == null) return;
-        // display current stage
-        Gizmos.color = new Color(0, 1, 0, 0.5f);
-        foreach (Vector3 point in spawner.enemyStage.points) Gizmos.DrawSphere(point + spawner.transform.position, 0.5f);
-    }
-    // class functions [GameEventListener]
+    // class functions [EventHandle]
     public override bool HandleEvent(GameEvent e)
     {
         switch(e)
