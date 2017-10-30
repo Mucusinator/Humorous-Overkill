@@ -15,7 +15,7 @@ public class killDrone : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hitInfo))
             {
-                if (hitInfo.collider.gameObject.name == "Cupcake(Clone)")
+                if(hitInfo.collider.gameObject.GetComponent<DroneAI>() != null)
                 {
                     hitInfo.collider.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, 1);
                 }
