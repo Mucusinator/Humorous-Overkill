@@ -57,13 +57,13 @@ public class DonutAI : EventHandler.EventHandle
         direction.y = 0;
 
         // rotate parent to look at target
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), myInfo.turnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction, Vector3.up), myInfo.turnSpeed * Time.deltaTime);
 
         // A wheel moves forward a distance equal to its circumference with each rotation.
-        //modelTransform.Rotate(new Vector3(0, myInfo.rollSpeed * 360 / donutCircumference, 0) * Time.deltaTime, Space.Self);
+        modelTransform.Rotate(new Vector3(0, 0, myInfo.rollSpeed * 360 / donutCircumference) * Time.deltaTime, Space.Self);
 
         // roll forward
-        //transform.Translate(transform.right * myInfo.rollSpeed * Time.deltaTime, Space.World);
+        transform.Translate(transform.forward * myInfo.rollSpeed * Time.deltaTime, Space.World);
 
         // look for player
         // deploy if within attackRange
@@ -83,7 +83,7 @@ public class DonutAI : EventHandler.EventHandle
         float size = donutCollider.size.x;
 
         // debug the diameter of the mesh
-        Debug.Log("the diameter of the donut is " + size);
+        //Debug.Log("the diameter of the donut is " + size);
 
         // circumference is 2PIr aka PI * diameter
         // also takes into account scaling
