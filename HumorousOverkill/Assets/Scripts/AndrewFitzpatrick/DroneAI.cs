@@ -14,7 +14,7 @@ public class DroneAI : EventHandler.EventHandle
 
     // health / attacking
     [Header("Health / Attacking")]
-    public GameObject player; // reference to the player
+    private GameObject player; // reference to the player
     public GameObject projectile; // projectile prefab
     private float shotTimer = 0;
     public bool freeze = false;
@@ -148,6 +148,23 @@ public class DroneAI : EventHandler.EventHandle
 
     public override bool HandleEvent(GameEvent e)
     {
+        // Health is depleted
+        if (myInfo.health <= 0)
+        {
+            Debug.Log("I have died.");
+            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
+            foreach(Transform child in transform)
+            {
+                MeshCollider newMeshCollider = child.gameObject.AddComponent<MeshCollider>();
+                newMeshCollider.convex = true;
+                child.gameObject.AddComponent<Rigidbody>();
+                child.GetComponent<Rigidbody>().AddExplosionForce(10.0f, transform.position, 3.0f);
+            }
+        }
+        // fully delete in 5 seconds
+        Destroy(this.gameObject, 5);
+        // disable this script
+        this.enabled = false;
         return true; // TODO
     }
 }
