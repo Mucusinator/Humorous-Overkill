@@ -22,7 +22,6 @@ public class DroneAI : EventHandler.EventHandle
 
     void Start()
     {
-        GetEventListener("playerManager").HandleEvent(GameEvent.ENEMY_SPAWN);
         myInfo = GetEventListener("enemyManager").gameObject.GetComponent<EnemyManager>().defaultDroneInfo;
 
         pickTarget();
@@ -77,10 +76,7 @@ public class DroneAI : EventHandler.EventHandle
 
     void pickTarget()
     {
-        // make a good guess
         currentTarget = transform.position + getRandomVector(myInfo.targetRadius);
-
-        // TODO: avoid walls etc
     }
 
     Vector3 getRandomVector(float radius)
@@ -187,12 +183,19 @@ public class DroneAI : EventHandler.EventHandle
         }
     }
 
-    public override bool HandleEvent(GameEvent e)
+    public override bool HandleEvent(GameEvent e, float value)
     {
         // Health is depleted
-        if (e == GameEvent.ENEMY_DIED)
+        if (e == GameEvent.ENEMY_DAMAGED)
         {
-            die();
+            // subtract health
+            myInfo.health -= value;
+
+            // if the health is now 0 we die
+            if(myInfo.health <= 0)
+            {
+                die();
+            }
         }
 
         return true; // TODO
