@@ -18,6 +18,7 @@ public class DroneAI : EventHandler.EventHandle
     public GameObject projectile; // projectile prefab
     private float shotTimer = 0;
     public bool freeze = false;
+    public bool dead = false;
 
     void Start()
     {
@@ -30,9 +31,13 @@ public class DroneAI : EventHandler.EventHandle
 
 	void Update ()
     {
-        if(!freeze)
+        if(!freeze && !dead)
         {
             wander();
+        }
+        else if(dead)
+        {
+            HandleEvent(GameEvent.ENEMY_DIED);
         }
 	}
 
@@ -124,6 +129,38 @@ public class DroneAI : EventHandler.EventHandle
         }
     }
 
+    // disable all AI and explode into pieces
+    void die()
+    {
+        // debug
+        Debug.Log("I have died.");
+
+        // tell enemy manager that an enemy has died
+        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
+
+        // disable animation
+        GetComponent<Animator>().enabled = false;
+
+        // loop through children
+        foreach (Transform child in transform)
+        {
+            // add boxCollider
+            BoxCollider newBoxCollider = child.gameObject.AddComponent<BoxCollider>();
+
+            // add RigidBody
+            child.gameObject.AddComponent<Rigidbody>();
+
+            // add explosion force to launch the model
+            child.GetComponent<Rigidbody>().AddExplosionForce(myInfo.explosionForce, transform.position - Vector3.up * myInfo.explosionRadius, myInfo.explosionRadius);
+        }
+
+        // disable this script to prevent any more actions
+        this.enabled = false;
+
+        // fully delete this gameObject after a set number of seconds
+        Destroy(this.gameObject, 5);
+}
+
     void OnDrawGizmosSelected()
     {
         if(showGizmos)
@@ -151,20 +188,9 @@ public class DroneAI : EventHandler.EventHandle
         // Health is depleted
         if (myInfo.health <= 0)
         {
-            Debug.Log("I have died.");
-            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
-            foreach(Transform child in transform)
-            {
-                MeshCollider newMeshCollider = child.gameObject.AddComponent<MeshCollider>();
-                newMeshCollider.convex = true;
-                child.gameObject.AddComponent<Rigidbody>();
-                child.GetComponent<Rigidbody>().AddExplosionForce(10.0f, transform.position, 3.0f);
-            }
+            die();
         }
-        // fully delete in 5 seconds
-        Destroy(this.gameObject, 5);
-        // disable this script
-        this.enabled = false;
+
         return true; // TODO
     }
 }
