@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class killDrone : MonoBehaviour
+public class killEnemies : MonoBehaviour
 {
 	
 	// Update is called once per frame
@@ -18,6 +18,10 @@ public class killDrone : MonoBehaviour
                 if(hitInfo.collider.gameObject.GetComponent<DroneAI>() != null)
                 {
                     hitInfo.collider.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, 1);
+                }
+                if (hitInfo.collider.gameObject.GetComponent<DonutAI>() != null)
+                {
+                    hitInfo.collider.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, 1);
                 }
             }
         }
