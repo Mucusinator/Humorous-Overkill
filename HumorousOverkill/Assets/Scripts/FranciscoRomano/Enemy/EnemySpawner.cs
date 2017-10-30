@@ -6,6 +6,7 @@ using System.Collections.Generic;
 [BindListener("EnemyManager", typeof(EnemyManager))]
 public class EnemySpawner : EventHandle
 {
+    [HideInInspector]
     public bool activated = false;
     public EnemyStage enemyStage = new EnemyStage();
     
