@@ -22,9 +22,9 @@ public class Player : EventHandle {
         m_cc = this.GetComponent<CharacterController>() as CharacterController;
         m_rb = this.GetComponent<Rigidbody>() as Rigidbody;
 
-        //m_animator.runtimeAnimatorController = m_animatorController;
-        m_cc.center = new Vector3(0f, 1f, 0f);
-        m_cc.height = 1.8f;
+        // m_animator.runtimeAnimatorController = m_animatorController;
+        // m_cc.center = new Vector3(0f, 1f, 0f);
+        // m_cc.height = 1.8f;
     }
 
     public CharacterController _CharacterController {

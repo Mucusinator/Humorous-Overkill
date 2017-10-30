@@ -217,6 +217,7 @@ namespace EventHandler {
         #endregion
     }
 
+    [UnityEditor.CanEditMultipleObjects]
     [UnityEditor.CustomEditor(typeof(EventHandle), true)]
     public class EventHandleEditor : UnityEditor.Editor {
         #region PRIVATE VARIABLES
