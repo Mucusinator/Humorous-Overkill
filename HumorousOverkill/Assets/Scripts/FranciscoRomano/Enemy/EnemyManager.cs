@@ -19,6 +19,8 @@ public struct DroneEnemyInfo
     public float projectileLifetime; // time that projectiles will exist before getting destroyed
     public float shotForce; // effects speed of projectiles
     public float ammoDropRate; // chance to drop ammo (0 = never 1 = always)
+    public float explosionForce;
+    public float explosionRadius;
 }
 
 // Struct holding all the donut enemy info
@@ -90,15 +92,7 @@ public class EnemyManager : EventHandler.EventHandle
             }
         }
     }
-    void OnDrawGizmos()
-    {
-        // check spawner status
-        if (spawner == null) return;
-        // display current stage
-        Gizmos.color = new Color(0, 1, 0, 0.5f);
-        foreach (Vector3 point in spawner.enemyStage.points) Gizmos.DrawSphere(point + spawner.transform.position, 0.5f);
-    }
-    // class functions [GameEventListener]
+    // class functions [EventHandle]
     public override bool HandleEvent(GameEvent e)
     {
         switch(e)
