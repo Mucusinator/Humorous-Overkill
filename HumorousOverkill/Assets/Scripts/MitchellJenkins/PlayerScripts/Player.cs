@@ -9,6 +9,7 @@ using EventHandler;
 public class Player : EventHandle {
 
     private Animator m_animator;
+    [SerializeField]
     private PlayerInfo m_ply;
     private CharacterController m_cc;
     private RuntimeAnimatorController m_animatorController;
