@@ -2,41 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DonutAI : MonoBehaviour
+[EventHandler.BindListener("playerManager", typeof(PlayerManager))]
+[EventHandler.BindListener("enemyManager", typeof(EnemyManager))]
+public class DonutAI : EventHandler.EventHandle
 {
-    public float health;
-    public float damage;
-    public float fireRate;
-    public float rollSpeed;
-    public float turnSpeed;
-    public float attackRange;
+    enum ANIMATIONSTATE { ROLL, DEPLOY, RAISEGUN, SHOOT, LOWERGUN, GETUP };
+
+    // stores stats
+    public DonutEnemyInfo myInfo;
+
     private bool deployed;
-    public float donutCircumference;
+    private float donutCircumference;
     private Transform modelTransform;
     private float deployTimer = 0;
-
-    // debug
-    public GameObject target;
+    private GameObject target;
     private Animator myAnimator;
 
     void Start()
     {
-        // get values from manager
-        // health
-        // damage
-        // fireRate
-        // rollSpeed
-        // turnSpeed
-        // attackRange
-        // deployTime
+        // get default values from enemyManager
+        myInfo = GetEventListener("enemyManager").gameObject.GetComponent<EnemyManager>().defaultDonutInfo;
+
+        // calculate circumference (needed for rolling)
         findCircumference();
+
+        // find modelTransform
         modelTransform = GetComponentsInChildren<Transform>()[1];
-        changeColor(Color.white);
+
+        // store animator
         myAnimator = GetComponent<Animator>();
+
+        // use player as target
+        target = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
+        // either deploy or roll
         if(deployed)
         {
             deploySequence();
@@ -47,6 +49,7 @@ public class DonutAI : MonoBehaviour
         }
     }
 
+    // attempts to approach the player by rolling
     void roll()
     {
         // find direction to target
@@ -54,20 +57,19 @@ public class DonutAI : MonoBehaviour
         direction.y = 0;
 
         // rotate parent to look at target
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), myInfo.turnSpeed * Time.deltaTime);
 
         // A wheel moves forward a distance equal to its circumference with each rotation.
-        modelTransform.Rotate(new Vector3(0, rollSpeed * 360 / donutCircumference, 0) * Time.deltaTime, Space.Self);
+        //modelTransform.Rotate(new Vector3(0, myInfo.rollSpeed * 360 / donutCircumference, 0) * Time.deltaTime, Space.Self);
 
         // roll forward
-        transform.Translate(transform.right * rollSpeed * Time.deltaTime, Space.World);
+        //transform.Translate(transform.right * myInfo.rollSpeed * Time.deltaTime, Space.World);
 
         // look for player
         // deploy if within attackRange
-        if((transform.position - target.transform.position).magnitude < Mathf.Pow(attackRange, 2))
+        if((transform.position - target.transform.position).magnitude < Mathf.Pow(myInfo.attackRange, 2))
         {
             deployed = true;
-            myAnimator.Play(0, 0, 0.0f);
         }
     }
 
@@ -91,22 +93,35 @@ public class DonutAI : MonoBehaviour
     // fall over and attack player
     void deploySequence()
     {
-        // enable animator
-        myAnimator.enabled = true;
-
-        if (myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        // if the current animation is finished
+        if (myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && !myAnimator.IsInTransition(0))
         {
-            // reset and disable the animator
-            myAnimator.enabled = false;
-        }
-    }
-
-    void changeColor(Color newColor)
-    {
-        MeshRenderer[] childMeshes = GetComponentsInChildren<MeshRenderer>();
-        foreach (MeshRenderer currentMesh in childMeshes)
-        {
-            currentMesh.material.SetColor("_Color", newColor);
+            // switch to the next animation / do stuff
+            switch (myAnimator.GetInteger("animationState"))
+            {
+                case (int)ANIMATIONSTATE.ROLL:
+                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.DEPLOY);
+                    break;
+                case (int)ANIMATIONSTATE.DEPLOY:
+                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.RAISEGUN);
+                    break;
+                case (int)ANIMATIONSTATE.RAISEGUN:
+                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.SHOOT);
+                    // TODO: actually shoot
+                    break;
+                case (int)ANIMATIONSTATE.SHOOT:
+                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.LOWERGUN);
+                    break;
+                case (int)ANIMATIONSTATE.LOWERGUN:
+                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.GETUP);
+                    break;
+                case (int)ANIMATIONSTATE.GETUP:
+                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.ROLL);
+                    deployed = false;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

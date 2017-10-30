@@ -27,13 +27,13 @@ public struct DroneEnemyInfo
 [System.Serializable]
 public struct DonutEnemyInfo
 {
-    public int m_enemyHealth_type1;
-    public int m_enemyHealth_type2;
-    public float m_enemySpeed_type1;
-    public float m_enemySpeed_type2;
-    public float m_enemyDamage_type1;
-    public float m_enemyDamage_type2;
-    public int m_enemyAmmoDropRate;
+    public float health;
+    public float damage;
+    public float fireRate;
+    public float rollSpeed;
+    public float turnSpeed;
+    public float attackRange;
+    public float ammoDropRate;
 }
 
 public class EnemyManager : EventHandler.EventHandle
@@ -44,6 +44,7 @@ public class EnemyManager : EventHandler.EventHandle
     public EnemySpawner spawner = null;
 
     public DroneEnemyInfo defaultDroneInfo;
+    public DonutEnemyInfo defaultDonutInfo;
 
     // class functions [UnityEngine.MonoBehaviour]
     void OnGUI()
