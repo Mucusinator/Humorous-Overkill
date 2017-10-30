@@ -154,6 +154,16 @@ public class CombinedScript : EventHandle {
         {
             SelectWeapon();
         }
+        if (SelectedWeapon == 0)
+        {
+            gunType = GunType.RIFLE;
+
+        }
+        if (SelectedWeapon == 1)
+        {
+
+            gunType = GunType.SHOTGUN;
+        }
 
         if (gunType == GunType.RIFLE)
         {
@@ -189,6 +199,7 @@ public class CombinedScript : EventHandle {
 
             if (currentRifleAmmo <= 0 && maxRifleAmmo > 0)
             {
+                gunType = GunType.RIFLE;
                 StartCoroutine(Reload());
               
                 return;
@@ -219,19 +230,27 @@ public class CombinedScript : EventHandle {
             }
            
         }
-        //if (SelectedWeapon == 0)
-        //{
-        //    gunType = GunType.RIFLE;
 
-        //}
-        //if (SelectedWeapon == 1)
-        //{
 
-        //    gunType = GunType.SHOTGUN;
-        //}
 
-        
-
+        if (Input.GetKey(KeyCode.R))
+        {
+            switch (gunType)
+            {
+                case GunType.SHOTGUN:
+                    maxShotgunAmmo += currentShotgunAmmo;
+                    currentShotgunAmmo = 0;
+                    StartCoroutine(Reload());
+                    break;
+                case GunType.RIFLE:
+                    maxRifleAmmo += currentRifleAmmo;
+                    currentRifleAmmo = 0;
+                    StartCoroutine(Reload());
+                    break;
+                default:
+                    break;
+            }
+        }
    
 
         if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.SEMIAUTO && Time.time >= nextTimeToFire)
@@ -354,7 +373,7 @@ public class CombinedScript : EventHandle {
                 // Put in place the takeDamage event handler for the game manager here.
                 //GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(GameEvent.)
 
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
                 //Target target = hit.transform.GetComponent<Target>();
 
 
