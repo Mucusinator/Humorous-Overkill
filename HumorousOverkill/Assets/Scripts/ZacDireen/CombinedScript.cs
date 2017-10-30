@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EventHandler;
 
-public class CombinedScript : MonoBehaviour {
+[BindListener("Enemy", typeof(EnemyManager))]
+[BindListener("Player",typeof(PlayerManager))] 
+public class CombinedScript : EventHandle {
 
     // Rifle/Laser Variables.
 
@@ -49,9 +52,9 @@ public class CombinedScript : MonoBehaviour {
     // This is the shotguns range.
     public float Range = 10f;
     // This is the amount maximum amount of ammo the shotgun has.
-    public float maxShotgunAmmo = 8.0f;
+    public int maxShotgunAmmo = 8;
     // This is the amount of ammo the shotgun currently has.
-    private float currentShotgunAmmo;
+    private int currentShotgunAmmo;
     // This is the reload time of the shotgun.
     public float reloadShotgunTime = 2.5f;
     // This is the shotgun delay so it is not spammable.
@@ -71,10 +74,13 @@ public class CombinedScript : MonoBehaviour {
     public FireRate fireRate;
     // This is the two different weapon types.
     public GunType gunType;
-    // This is where the raycasts of the weapon will begin from.
-    public GameObject StartOfRaycast;
+    // This is where the player raycast of the camera will begin from.
+    public GameObject StartOfPlayerRaycast;
+    // Weapon Raycast.
+    public GameObject WeaponRaycast;
     // This is the UI text element for the UI.
     public Text Ammo;
+
 
     // This is the Fire Rate of the rifle.
     public enum FireRate
@@ -93,6 +99,8 @@ public class CombinedScript : MonoBehaviour {
 
 
 
+    
+
 
 
 
@@ -103,12 +111,68 @@ public class CombinedScript : MonoBehaviour {
 
         SelectWeapon();
         currentRifleAmmo = rifleMagSize;
-        currentShotgunAmmo = maxShotgunAmmo;
+        currentShotgunAmmo = magTubeSize;
+        currentShotgunAmmo = 0;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
+        int previousSelectedWeapon = SelectedWeapon;
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            if (SelectedWeapon >= transform.childCount - 1)
+            {
+                SelectedWeapon = 0;
+
+            }
+            else
+            {
+                SelectedWeapon++;
+
+                //gunType++;    
+
+            }
+        }
+        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            if (SelectedWeapon <= 0)
+            {
+                SelectedWeapon = transform.childCount - 1;
+
+
+            }
+            else
+            {
+                SelectedWeapon--;
+
+
+            }
+        }
+        if (previousSelectedWeapon != SelectedWeapon)
+        {
+            SelectWeapon();
+        }
+        if (SelectedWeapon == 0)
+        {
+            gunType = GunType.RIFLE;
+
+        }
+        if (SelectedWeapon == 1)
+        {
+
+            gunType = GunType.SHOTGUN;
+        }
+
+        if (gunType == GunType.RIFLE)
+        {
+            Ammo.text = currentRifleAmmo + " / " + maxRifleAmmo;
+        }
+        if (gunType == GunType.SHOTGUN)
+        {
+            Ammo.text = currentShotgunAmmo + " / " + maxShotgunAmmo;
+        }
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && gunType == GunType.RIFLE)
         {
@@ -123,37 +187,7 @@ public class CombinedScript : MonoBehaviour {
         }
 
 
-        int previousSelectedWeapon = SelectedWeapon;
-
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-        {
-            if (SelectedWeapon >= transform.childCount - 1)
-            {
-                SelectedWeapon = 0;
-            }
-            else
-            {
-                SelectedWeapon++;
-                
-            }
-        }
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-        {
-            if (SelectedWeapon <= 0)
-            {
-                SelectedWeapon = transform.childCount - 1;
-          
-            }
-            else
-            {
-                SelectedWeapon--;
-                
-            }
-        }
-        if (previousSelectedWeapon != SelectedWeapon)
-        {
-            SelectWeapon();
-        }
+  
 
 
         if (SelectedWeapon == 0)
@@ -165,7 +199,9 @@ public class CombinedScript : MonoBehaviour {
 
             if (currentRifleAmmo <= 0 && maxRifleAmmo > 0)
             {
+                gunType = GunType.RIFLE;
                 StartCoroutine(Reload());
+              
                 return;
             }
         }
@@ -173,36 +209,54 @@ public class CombinedScript : MonoBehaviour {
         //if (gunType == GunType.SHOTGUN)
         if(SelectedWeapon == 1)
         {
+            if (maxShotgunAmmo == 0 && currentShotgunAmmo == 0)
+            {
+                SelectedWeapon = 0;
+                gunType = GunType.RIFLE;
+                SelectWeapon();
+            }
 
             if (isReloading)
             {
                 return;
             }
 
-            if (currentShotgunAmmo <= 0)
+            if (currentShotgunAmmo <= 0 && maxShotgunAmmo > 0)
             {
+                gunType = GunType.SHOTGUN;
                 StartCoroutine(Reload());
+                
                 return;
             }
            
         }
-        if (SelectedWeapon == 0)
+
+
+
+        if (Input.GetKey(KeyCode.R))
         {
-            gunType = GunType.RIFLE;
+            switch (gunType)
+            {
+                case GunType.SHOTGUN:
+                    maxShotgunAmmo += currentShotgunAmmo;
+                    currentShotgunAmmo = 0;
+                    StartCoroutine(Reload());
+                    break;
+                case GunType.RIFLE:
+                    maxRifleAmmo += currentRifleAmmo;
+                    currentRifleAmmo = 0;
+                    StartCoroutine(Reload());
+                    break;
+                default:
+                    break;
+            }
         }
-        if (SelectedWeapon == 1)
-        {
-            gunType = GunType.SHOTGUN;
-        }
-
-
-
    
 
         if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.SEMIAUTO && Time.time >= nextTimeToFire)
         {
             
-            if (currentRifleAmmo <= 0)
+            if (currentRifleAmmo > 0)
             {
                 nextTimeToFire = Time.time + 60f / RoundsPerMinute;
                 Shoot();
@@ -216,27 +270,22 @@ public class CombinedScript : MonoBehaviour {
                 Shoot();
             }
         }
-        if (Input.GetButtonDown("Fire1") && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire && maxShotgunAmmo > 0)
+        if (Input.GetButtonDown("Fire1") && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
         {
-            ShotgunMuzzleEffect.Play();
-
-            for (int i = 0; i < pelletCount; ++i)
+            if (currentShotgunAmmo > 0)
             {
-                ShootRay();
+                ShotgunMuzzleEffect.Play();
+                currentShotgunAmmo--;
+                for (int i = 0; i < pelletCount; ++i)
+                {
+                    ShootRay();
+                }
+                
+
             }
-            currentShotgunAmmo--;
         }
 
 
-
-        if (gunType == GunType.RIFLE)
-        {
-            Ammo.text = currentRifleAmmo + " / " + maxRifleAmmo;
-        }
-        if (gunType == GunType.SHOTGUN)
-        {
-            Ammo.text = currentShotgunAmmo + " / " + maxShotgunAmmo;
-        }
 
 
 
@@ -273,8 +322,18 @@ public class CombinedScript : MonoBehaviour {
             animator.SetBool("Reloading", true);
             yield return new WaitForSeconds(reloadShotgunTime - 0.25f);
             animator.SetBool("Reloading", false);
+            if (maxShotgunAmmo < magTubeSize)
+            {
+                currentShotgunAmmo = maxShotgunAmmo;
+                maxShotgunAmmo = 0;
+            }
+            else
+            {
+                currentShotgunAmmo = magTubeSize;
+                maxShotgunAmmo -= magTubeSize;
+            }
             yield return new WaitForSeconds(0.25f);
-            currentShotgunAmmo = maxShotgunAmmo;
+            //currentShotgunAmmo = maxShotgunAmmo;
             isReloading = false;
         }
     }
@@ -301,28 +360,32 @@ public class CombinedScript : MonoBehaviour {
         RifleMuzzleEffect.Play();
         // A variable that will store the imformation gathered from the raycast.
         RaycastHit hit;
-        Debug.DrawRay(StartOfRaycast.transform.position, StartOfRaycast.transform.forward * 100, Color.blue, 3.0f);
+        Debug.DrawRay(StartOfPlayerRaycast.transform.position, StartOfPlayerRaycast.transform.forward * Range, Color.red, 3.0f);
         // If we hit something with our shot raycast.
         //if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) ;
-        if (Physics.Raycast(StartOfRaycast.transform.position, StartOfRaycast.transform.forward, out hit, RifleRange)) ;
+        if (Physics.Raycast(StartOfPlayerRaycast.transform.position, StartOfPlayerRaycast.transform.forward*Range, out hit, RifleRange));
         {
-
-            // Put in place the takeDamage event handler for the game manager here.
-            //GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(GameEvent.)
-
-            Debug.Log(hit.transform.name);
-            Target target = hit.transform.GetComponent<Target>();
-
-            if (hit.rigidbody != null)
+            if (hit.transform != null)
             {
-                hit.rigidbody.AddForce(-hit.normal * impactForce);
-            }
 
-            if (target != null)
-            {
-                target.TakeDamage(RifleDamage);
-            }
+                Debug.DrawRay(WeaponRaycast.transform.position, hit.point - transform.position, Color.blue, 3.0f);
 
+                // Put in place the takeDamage event handler for the game manager here.
+                //GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(GameEvent.)
+
+                //Debug.Log(hit.transform.name);
+                //Target target = hit.transform.GetComponent<Target>();
+
+
+
+                if (hit.transform.tag == "Target")
+                {
+                    hit.transform.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
+                    //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
+                    //target.TakeDamage(RifleDamage);
+                    
+                }
+            }
         }
         
     }
@@ -346,29 +409,33 @@ public class CombinedScript : MonoBehaviour {
 
         //Make the direction match the transform
         //It is like converting the Vector3.forward to transform.forward
-        direction = StartOfRaycast.transform.TransformDirection(direction.normalized);
+        direction = StartOfPlayerRaycast.transform.TransformDirection(direction.normalized);
 
         //Raycast and debug
-        Ray r = new Ray(StartOfRaycast.transform.position, direction);
+        Ray r = new Ray(WeaponRaycast.transform.position, direction);
 
         // the object that gets hit from the raycast.
         RaycastHit hit;
         if (Physics.Raycast(r, out hit))
         {
+            
+
+            Debug.DrawLine(WeaponRaycast.transform.position, hit.point, Color.black, 3.0f);
 
 
-            Debug.DrawLine(StartOfRaycast.transform.position, hit.point, Color.black, 3.0f);
-
-
-            Target shotgunTarget = hit.transform.GetComponent<Target>();
-            if (shotgunTarget != null)
+            //Target shotgunTarget = hit.transform.GetComponent<Target>();
+            //if (shotgunTarget != null)
+            //{
+            //    shotgunTarget.TakeDamage(PelletDamage);
+            //}
+            if (hit.transform.tag == "Target")
             {
-                shotgunTarget.TakeDamage(PelletDamage);
+                GetEventListener("Enemy").HandleEvent(GameEvent.ENEMY_DAMAGED, hit.transform.gameObject);
+
+                hit.transform.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
+                //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
             }
-            if (hit.rigidbody != null)
-            {
-                hit.rigidbody.AddForce(-hit.normal * impactForce);
-            }
+
         }
     }
     void OnEnable()

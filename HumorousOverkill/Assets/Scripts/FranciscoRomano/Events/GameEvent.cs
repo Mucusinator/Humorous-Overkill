@@ -14,6 +14,7 @@
         ENEMY_WAVE_NEXT,
         ENEMY_WAVE_EMPTY,
         ENEMY_WAVE_COMPLETE,
+        ENEMY_DAMAGED,
 
     /**************************************************************************************************/
 
