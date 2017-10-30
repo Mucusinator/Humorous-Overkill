@@ -82,9 +82,6 @@ public class DonutAI : EventHandler.EventHandle
         // get the "x" size of the collider (actually y)
         float size = donutCollider.size.x;
 
-        // debug the diameter of the mesh
-        Debug.Log("the diameter of the donut is " + size);
-
         // circumference is 2PIr aka PI * diameter
         // also takes into account scaling
         donutCircumference = (size * Mathf.PI * transform.localScale.y);
