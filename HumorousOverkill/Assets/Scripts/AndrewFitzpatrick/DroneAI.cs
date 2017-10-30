@@ -141,17 +141,21 @@ public class DroneAI : EventHandler.EventHandle
         // disable animation
         GetComponent<Animator>().enabled = false;
 
+        GetComponent<BoxCollider>().enabled = false;
+
         // loop through children
-        foreach (Transform child in transform)
+        Transform[] childTransforms = GetComponentsInChildren<Transform>();
+        foreach (Transform child in childTransforms)
         {
             // add boxCollider
-            BoxCollider newBoxCollider = child.gameObject.AddComponent<BoxCollider>();
+            MeshCollider newCollider = child.gameObject.AddComponent<MeshCollider>();
+            newCollider.convex = true;
 
             // add RigidBody
             child.gameObject.AddComponent<Rigidbody>();
 
             // add explosion force to launch the model
-            child.GetComponent<Rigidbody>().AddExplosionForce(myInfo.explosionForce, transform.position - Vector3.up * myInfo.explosionRadius, myInfo.explosionRadius);
+            child.GetComponent<Rigidbody>().AddExplosionForce(myInfo.explosionForce, transform.position, myInfo.explosionRadius);
         }
 
         // disable this script to prevent any more actions
@@ -186,7 +190,7 @@ public class DroneAI : EventHandler.EventHandle
     public override bool HandleEvent(GameEvent e)
     {
         // Health is depleted
-        if (myInfo.health <= 0)
+        if (e == GameEvent.ENEMY_DIED)
         {
             die();
         }
