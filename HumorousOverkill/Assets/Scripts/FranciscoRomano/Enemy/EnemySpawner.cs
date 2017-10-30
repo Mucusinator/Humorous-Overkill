@@ -1,25 +1,21 @@
 ﻿using UnityEngine;
+using EventHandler;
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnemySpawner : GameEventListener
+[BindListener("EnemyManager", typeof(EnemyManager))]
+public class EnemySpawner : EventHandle
 {
     public bool activated = false;
     public EnemyStage enemyStage = new EnemyStage();
-    public EnemyManager enemyManager = null;
     
-    void Start()
-    {
-        // get enemy manager
-        enemyManager = GetComponentInParent<EnemyManager>();
-    }
     void OnTriggerEnter(Collider collider)
     {
         // check if player
         if (collider.tag == "Player")
         {
             // notify manager
-            enemyManager.HandleEvent(GameEvent.CLASS_TYPE_ENEMY_SPAWNER, this);
+            GetEventListener("EnemyManager").HandleEvent(GameEvent.CLASS_TYPE_ENEMY_SPAWNER, this);
         }
     }
 
@@ -65,7 +61,7 @@ public class EnemySpawner : GameEventListener
         return enemyStage.wave.activeUnits;
     }
 
-    public override void HandleEvent(GameEvent e)
+    public override bool HandleEvent(GameEvent e)
     {
         // check game event
         switch (e)
@@ -83,5 +79,6 @@ public class EnemySpawner : GameEventListener
                 enemyStage.nextWave();
                 break;
         }
+        return true;
     }
 }

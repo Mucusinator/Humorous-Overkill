@@ -99,8 +99,15 @@ public class EnemyManager : EventHandler.EventHandle
         foreach (Vector3 point in spawner.enemyStage.points) Gizmos.DrawSphere(point + spawner.transform.position, 0.5f);
     }
     // class functions [GameEventListener]
-    public override bool HandleEvent(GameEvent e, float value)
+    public override bool HandleEvent(GameEvent e)
     {
+        switch(e)
+        {
+            // enemy unit dies
+            case GameEvent.ENEMY_DIED:
+                spawner.HandleEvent(e);
+                break;
+        }
         return true;
     }
     public override bool HandleEvent(GameEvent e, Object value)
