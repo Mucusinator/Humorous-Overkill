@@ -6,7 +6,9 @@ using System.Collections.Generic;
 public class EnemyStage
 {
     // :: variables
+    [HideInInspector]
     public int waveIndex;
+    [HideInInspector]
     public FR.SpawnWave wave;
     public List<Vector3> points;
     public List<FR.SpawnWave> waves;
