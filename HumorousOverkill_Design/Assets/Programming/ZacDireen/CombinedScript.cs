@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using EventHandler;
 
-public class CombinedScript : MonoBehaviour {
+[BindListener("Enemy", typeof(EnemyManager))]
+[BindListener("Player",typeof(PlayerManager))] 
+public class CombinedScript : EventHandle {
 
     // Rifle/Laser Variables.
 
@@ -18,6 +22,8 @@ public class CombinedScript : MonoBehaviour {
     public float maxRifleAmmo = 15.0f;
     // This is the amount of ammo the rifle currently has.
     private float currentRifleAmmo;
+    // THis is the magazine size.
+    public float rifleMagSize;
     // This is the reload time of the rifle.
     public float reloadRifleTime = 2.5f;
     // private field showing the shots per second.
@@ -35,6 +41,8 @@ public class CombinedScript : MonoBehaviour {
     public float PelletDamage = 3.0f;
     // This is the amount of pellets the shotgun has.
     public int pelletCount = 8;
+    // This is the mag tube size.
+    public int magTubeSize = 6;
     // This is the Shotguns muzzle effect.
     public ParticleSystem ShotgunMuzzleEffect;
     // This is the amount of force applied to the target when they are hit with a pellet.
@@ -44,9 +52,9 @@ public class CombinedScript : MonoBehaviour {
     // This is the shotguns range.
     public float Range = 10f;
     // This is the amount maximum amount of ammo the shotgun has.
-    public float maxShotgunAmmo = 8.0f;
+    public int maxShotgunAmmo = 8;
     // This is the amount of ammo the shotgun currently has.
-    private float currentShotgunAmmo;
+    private int currentShotgunAmmo;
     // This is the reload time of the shotgun.
     public float reloadShotgunTime = 2.5f;
     // This is the shotgun delay so it is not spammable.
@@ -66,8 +74,20 @@ public class CombinedScript : MonoBehaviour {
     public FireRate fireRate;
     // This is the two different weapon types.
     public GunType gunType;
-    // This is where the raycasts of the weapon will begin from.
-    public GameObject StartOfRaycast;
+    // This is where the player raycast of the camera will begin from.
+    public GameObject StartOfPlayerRaycast;
+    // Weapon Raycast.
+    public GameObject WeaponRaycast;
+    // This is the UI text element for the UI.
+    public Text Ammo;
+
+    public GameObject EndOfGun;
+
+    public Camera fpsCam;
+
+    public LineRenderer shotTrail;
+
+
     // This is the Fire Rate of the rifle.
     public enum FireRate
     {
@@ -85,6 +105,8 @@ public class CombinedScript : MonoBehaviour {
 
 
 
+    
+
 
 
 
@@ -94,13 +116,14 @@ public class CombinedScript : MonoBehaviour {
     void Start () {
 
         SelectWeapon();
-        currentRifleAmmo = maxRifleAmmo;
-        currentShotgunAmmo = maxShotgunAmmo;
+        currentRifleAmmo = rifleMagSize;
+        currentShotgunAmmo = magTubeSize;
+        currentShotgunAmmo = 0;
+        shotTrail = GetComponent<LineRenderer>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-
 
         int previousSelectedWeapon = SelectedWeapon;
 
@@ -109,121 +132,240 @@ public class CombinedScript : MonoBehaviour {
             if (SelectedWeapon >= transform.childCount - 1)
             {
                 SelectedWeapon = 0;
+
             }
             else
             {
                 SelectedWeapon++;
-                gunType++;
+
+                //gunType++;    
+
             }
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
-            if (SelectedWeapon < 0)
+            if (SelectedWeapon <= 0)
             {
                 SelectedWeapon = transform.childCount - 1;
-          
+
+
             }
             else
             {
                 SelectedWeapon--;
-                gunType--;
+
+
             }
         }
         if (previousSelectedWeapon != SelectedWeapon)
         {
             SelectWeapon();
         }
+        if (SelectedWeapon == 0)
+        {
+            gunType = GunType.RIFLE;
 
-        //if (gunType == GunType.SHOTGUN)
-        if(SelectedWeapon == 1)
+        }
+        if (SelectedWeapon == 1)
+        {
+
+            gunType = GunType.SHOTGUN;
+        }
+
+        if (gunType == GunType.RIFLE)
+        {
+            Ammo.text = currentRifleAmmo + " / " + maxRifleAmmo;
+        }
+        if (gunType == GunType.SHOTGUN)
+        {
+            Ammo.text = currentShotgunAmmo + " / " + maxShotgunAmmo;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1) && gunType == GunType.RIFLE)
+        {
+            if (fireRate == FireRate.FULLAUTO)
+            {
+                fireRate = FireRate.SEMIAUTO;
+            }
+            else
+            {
+                fireRate = FireRate.FULLAUTO;
+            }
+        }
+
+
+  
+
+
+        if (SelectedWeapon == 0)
         {
             if (isReloading)
             {
                 return;
             }
 
-            if (currentShotgunAmmo <= 0)
+            if (currentRifleAmmo <= 0 && maxRifleAmmo > 0)
             {
+                gunType = GunType.RIFLE;
                 StartCoroutine(Reload());
+              
+                return;
+            }
+        }
+        
+        //if (gunType == GunType.SHOTGUN)
+        if(SelectedWeapon == 1)
+        {
+            if (maxShotgunAmmo == 0 && currentShotgunAmmo == 0)
+            {
+                SelectedWeapon = 0;
+                gunType = GunType.RIFLE;
+                SelectWeapon();
+            }
+
+            if (isReloading)
+            {
+                
+                return;
+            }
+
+            if (currentShotgunAmmo <= 0 && maxShotgunAmmo > 0)
+            {
+                gunType = GunType.SHOTGUN;
+                StartCoroutine(Reload());
+                
                 return;
             }
            
         }
 
-        //if (gunType == GunType.RIFLE)
-        if(SelectedWeapon == 2)
+
+
+        if (Input.GetKey(KeyCode.R))
         {
-            if (isReloading)
+            switch (gunType)
             {
-                return;
+                case GunType.SHOTGUN:
+                    maxShotgunAmmo += currentShotgunAmmo;
+                    currentShotgunAmmo = 0;
+                    StartCoroutine(Reload());
+                    break;
+                case GunType.RIFLE:
+                    maxRifleAmmo += currentRifleAmmo;
+                    currentRifleAmmo = 0;
+                    StartCoroutine(Reload());
+                    break;
+                default:
+                    break;
             }
-
-            if (currentRifleAmmo <= 0)
-            {
-                StartCoroutine(Reload());
-                return;
-            }
-            
-
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE)
         {
-            //if (gunType == GunType.SHOTGUN)
-            if (SelectedWeapon == 1)
+            shotTrail.enabled = true;
+        }
+        if (Input.GetButtonUp("Fire1") || isReloading && gunType == GunType.RIFLE)
+        {
+            shotTrail.enabled = false;
+        }
+
+        if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.SEMIAUTO && Time.time >= nextTimeToFire)
+        {
+
+            if (currentRifleAmmo > 0)
             {
-                for (int i = 0; i < pelletCount; i++)
-                {
-                    ShootRay();
-                }
+                nextTimeToFire = Time.time + 60f / RoundsPerMinute;
+                //StartCoroutine(Shot());
+                Shoot();
+            }
+        }
+        else
+        {
+            //shotTrail.enabled = false;
+        }
+
+        if (Input.GetButton("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.FULLAUTO && Time.time >= nextTimeToFire)
+        {
+            if (currentRifleAmmo > 0)
+            {
+                nextTimeToFire = Time.time + 60f / RoundsPerMinute;
+                //StartCoroutine(Shot());
+                Shoot();
+                //shotTrail.enabled = true;
+            }
+        }
+        else
+        {
+            //shotTrail.enabled = false;
+        }
+
+        if (Input.GetButtonDown("Fire1") && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
+        {
+            if (currentShotgunAmmo > 0)
+            {
+                ShotgunMuzzleEffect.Play();
                 currentShotgunAmmo--;
+                for (int i = 0; i < pelletCount; ++i)
+                {
+                    //StartCoroutine(Shot());
+                    ShootRay();
+                    
+                }
+                
 
             }
-            //if (gunType == GunType.RIFLE)
-            if (SelectedWeapon == 2)
-            {
-
-                ShotsPerSecond = RoundsPerMinute / 60f;
-                //If the user presses the left mouse button, perform the shoot function.
-
-                if (fireRate == FireRate.FULLAUTO)
-                {
-                    if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
-                    {
-
-                        nextTimeToFire = Time.time + 60f / RoundsPerMinute;
-                        Shoot();
-
-                    }
-                }
-                else
-                {
-                    if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
-                    {
-
-                        nextTimeToFire = Time.time + 60f / RoundsPerMinute;
-                        Shoot();
-
-                    }
-                }
-            }
-
         }
 
 
 
+
+
+
+        }
+
+    private IEnumerator Shot()
+    {
+        var shotDelay = 0.5f;
+        if (gunType == GunType.RIFLE)
+        {
+            //shotDelay = 0;
+            shotTrail.enabled = true;
+            yield return shotDelay;
+            shotTrail.enabled = false;
+        }
+        if (gunType == GunType.SHOTGUN)
+        {
+            shotDelay = 0;
+            shotTrail.enabled = true;
+            yield return shotDelay;
+            shotTrail.enabled = false;
+        }
     }
+
 
     IEnumerator Reload()
     {
         if (gunType == GunType.RIFLE)
         {
+            shotTrail.enabled = false;
             isReloading = true;
             animator.SetBool("Reloading", true);
             yield return new WaitForSeconds(reloadRifleTime - 0.25f);
             animator.SetBool("Reloading", false);
-            yield return new WaitForSeconds(0.25f);
-            currentRifleAmmo = maxRifleAmmo;
+          
+                yield return new WaitForSeconds(0.25f);
+            
+                //currentRifleAmmo = maxRifleAmmo;
+            if (maxRifleAmmo < rifleMagSize)
+            {
+                currentRifleAmmo = maxRifleAmmo;
+                maxRifleAmmo = 0;
+            }
+            else
+            {
+                currentRifleAmmo = rifleMagSize;
+                maxRifleAmmo -= rifleMagSize;
+            }
             isReloading = false;
         }
         if (gunType == GunType.SHOTGUN)
@@ -232,8 +374,18 @@ public class CombinedScript : MonoBehaviour {
             animator.SetBool("Reloading", true);
             yield return new WaitForSeconds(reloadShotgunTime - 0.25f);
             animator.SetBool("Reloading", false);
+            if (maxShotgunAmmo < magTubeSize)
+            {
+                currentShotgunAmmo = maxShotgunAmmo;
+                maxShotgunAmmo = 0;
+            }
+            else
+            {
+                currentShotgunAmmo = magTubeSize;
+                maxShotgunAmmo -= magTubeSize;
+            }
             yield return new WaitForSeconds(0.25f);
-            currentShotgunAmmo = maxShotgunAmmo;
+            //currentShotgunAmmo = maxShotgunAmmo;
             isReloading = false;
         }
     }
@@ -256,35 +408,61 @@ public class CombinedScript : MonoBehaviour {
     }
     void Shoot()
     {
-
+        currentRifleAmmo--;
         RifleMuzzleEffect.Play();
         // A variable that will store the imformation gathered from the raycast.
-        RaycastHit hit;
-        Debug.DrawRay(StartOfRaycast.transform.position, StartOfRaycast.transform.forward * 100, Color.blue, 3.0f);
-        // If we hit something with our shot raycast.
-        //if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) ;
-        if (Physics.Raycast(StartOfRaycast.transform.position, StartOfRaycast.transform.forward, out hit, RifleRange)) ;
+        RaycastHit hit, hit2;
+        //Debug.DrawRay(StartOfPlayerRaycast.transform.position, fpsCam.transform.forward * Range, Color.red, 3.0f);
+        Debug.DrawRay(fpsCam.transform.position, fpsCam.transform.forward * Range, Color.red, 3.0f);
+
+        shotTrail.SetPosition(0, EndOfGun.transform.position);
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward * Range, out hit, RifleRange))
         {
 
-            // Put in place the takeDamage event handler for the game manager here.
-            //GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(GameEvent.)
-
-            Debug.Log(hit.transform.name);
-            Target target = hit.transform.GetComponent<Target>();
-
-            if (hit.rigidbody != null)
+            // If we hit something with our shot raycast.
+            //if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) ;
+            Debug.DrawRay(EndOfGun.transform.position, hit.point - transform.position, Color.blue, 3.0f);
+            if (Physics.Raycast(EndOfGun.transform.position, hit.point - transform.position, out hit2, RifleRange))
             {
-                hit.rigidbody.AddForce(-hit.normal * impactForce);
-            }
 
-            if (target != null)
-            {
-                target.TakeDamage(RifleDamage);
-            }
 
+                if (hit.transform != null)
+                {
+                    shotTrail.SetPosition(1, hit2.point);
+
+                    // Put in place the takeDamage event handler for the game manager here.
+                    //GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(GameEvent.)
+
+                    //Debug.Log(hit.transform.name);
+                    //Target target = hit.transform.GetComponent<Target>();
+
+
+
+                    if (hit.transform.tag == "Target")
+                    {
+                        hit.transform.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
+                        //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
+                        //target.TakeDamage(RifleDamage);
+
+                    }
+                }
+            }
         }
-        currentRifleAmmo--;
+        else
+        {
+            Vector3 centreCam = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+
+            shotTrail.SetPosition(1, centreCam + (fpsCam.transform.forward * Range));
+            //shotTrail.SetPosition(1, fpsCam.transform.position + (EndOfGun.transform.forward * Range));
+        }
     }
+        
+        
+        
+       
+        
+    
+
 
     void ShootRay()
     {
@@ -305,29 +483,39 @@ public class CombinedScript : MonoBehaviour {
 
         //Make the direction match the transform
         //It is like converting the Vector3.forward to transform.forward
-        direction = StartOfRaycast.transform.TransformDirection(direction.normalized);
+        direction = fpsCam.transform.TransformDirection(direction.normalized);
 
+        
         //Raycast and debug
-        Ray r = new Ray(StartOfRaycast.transform.position, direction);
+        Ray r = new Ray(WeaponRaycast.transform.position, direction);
 
         // the object that gets hit from the raycast.
         RaycastHit hit;
         if (Physics.Raycast(r, out hit))
         {
 
+            Debug.DrawLine(StartOfPlayerRaycast.transform.position, hit.point, Color.black, 3.0f);
 
-            Debug.DrawLine(StartOfRaycast.transform.position, hit.point, Color.black, 3.0f);
 
-
-            Target shotgunTarget = hit.transform.GetComponent<Target>();
-            if (shotgunTarget != null)
+            //Target shotgunTarget = hit.transform.GetComponent<Target>();
+            //if (shotgunTarget != null)
+            //{
+            //    shotgunTarget.TakeDamage(PelletDamage);
+            //}
+            if (hit.transform.tag == "Target")
             {
-                shotgunTarget.TakeDamage(PelletDamage);
+                GetEventListener("Enemy").HandleEvent(GameEvent.ENEMY_DAMAGED, hit.transform.gameObject);
+
+                hit.transform.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
+                //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
             }
-            if (hit.rigidbody != null)
-            {
-                hit.rigidbody.AddForce(-hit.normal * impactForce);
-            }
+
+        }
+        else
+        {
+            //Vector3 centreCam = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+
+            Debug.DrawLine(StartOfPlayerRaycast.transform.position, fpsCam.transform.forward * Range, Color.green,3.0f);
         }
     }
     void OnEnable()
