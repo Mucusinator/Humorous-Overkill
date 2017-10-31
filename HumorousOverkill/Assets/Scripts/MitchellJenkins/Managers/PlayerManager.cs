@@ -29,7 +29,7 @@ public class PlayerManager : EventHandler.EventHandle {
     //public Weapon m_weapon;
 
     // Player info
-    [SerializeField] PlayerInfo m_playerInfo;
+    public PlayerInfo m_playerInfo;
     public PlayerInfo GetPlayerInfo { get { return m_playerInfo; } }
 
     // Override for the handle event system

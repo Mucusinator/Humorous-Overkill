@@ -3,16 +3,18 @@
 	Properties
 	{
 		_Color ("Color", Color) = (1,1,1,1)
-		_MainTex ("Albedo (RGB)", 2D) = "white" {}
+		_MainTex ("First Texture", 2D) = "white" {}
+		_MainTex2 ("Second Texture", 2D) = "black" {}
+		_TextureBlendFac("Texture Blend Factor", Range(0, 1)) = 0.5
 		_Threshold("Threshold", Range(1, 20)) = 5
 		_Cutoff("Alpha Cutoff", Range(0, 1)) = 0.5
 		_Ambient("Ambient Lighting", Range(0, 1)) = 0
 	}
-	SubShader
+		SubShader
 		{
-		Tags { "RenderType"="Opaque" }
+		Tags { "RenderType" = "Opaque" }
 		LOD 200
-		
+	
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types
 		#pragma surface surf CelShading fullforwardshadows
@@ -21,6 +23,8 @@
 		#pragma target 3.0
 
 		sampler2D _MainTex;
+		sampler2D _MainTex2;
+		float _TextureBlendFac;
 		fixed4 _Color;
 		float _Threshold;
 		float _Cutoff;
@@ -43,14 +47,14 @@
 			// apply color
 			half4 color;
 			color.rgb = s.Albedo * _LightColor0.rgb * ramp * (atten * 2);
-			color.a = 0;
+			color.a = s.Alpha;
 			return color;
 		}
-
 
 		struct Input
 		{
 			float2 uv_MainTex : TEXCOORD0;
+			float2 uv_MainTex2 : TEXCOORD1;
 		};
 
 		// Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
@@ -63,9 +67,13 @@
 		void surf (Input IN, inout SurfaceOutput o)
 		{
 			// sample texture / color
-			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+			fixed4 t1 = tex2D(_MainTex, IN.uv_MainTex); // first texture
+			fixed4 t2 = tex2D(_MainTex2, IN.uv_MainTex2); // second texture
+
+			fixed4 c = (t1 + (t2 * _TextureBlendFac)) * _Color;
+
 			o.Albedo = c.rgb;
-			o.Alpha = c.a;
+			o.Alpha = 0;
 		}
 		ENDCG
 	}

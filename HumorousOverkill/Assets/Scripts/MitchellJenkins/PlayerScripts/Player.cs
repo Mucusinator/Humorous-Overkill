@@ -5,10 +5,10 @@ using EventHandler;
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(Rigidbody))]
 public class Player : EventHandle {
 
     private Animator m_animator;
+    [SerializeField]
     private PlayerInfo m_ply;
     private CharacterController m_cc;
     private RuntimeAnimatorController m_animatorController;
@@ -20,7 +20,6 @@ public class Player : EventHandle {
     void Start () {
         m_ply = GetEventListener("PlayerManager").gameObject.GetComponent<PlayerManager>().GetPlayerInfo;
         m_cc = this.GetComponent<CharacterController>() as CharacterController;
-        m_rb = this.GetComponent<Rigidbody>() as Rigidbody;
 
         // m_animator.runtimeAnimatorController = m_animatorController;
         // m_cc.center = new Vector3(0f, 1f, 0f);
