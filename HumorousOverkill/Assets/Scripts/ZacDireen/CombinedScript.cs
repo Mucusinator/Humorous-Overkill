@@ -259,6 +259,14 @@ public class CombinedScript : EventHandle {
             }
         }
 
+        if (Input.GetButtonDown("Fire1"))
+        {
+            shotTrail.enabled = true;
+        }
+        if (Input.GetButtonUp("Fire1"))
+        {
+            shotTrail.enabled = false;
+        }
 
         if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.SEMIAUTO && Time.time >= nextTimeToFire)
         {
@@ -268,13 +276,13 @@ public class CombinedScript : EventHandle {
                 nextTimeToFire = Time.time + 60f / RoundsPerMinute;
                 //StartCoroutine(Shot());
                 Shoot();
-                shotTrail.enabled = true;
             }
         }
         else
         {
-            shotTrail.enabled = false;
+            //shotTrail.enabled = false;
         }
+
         if (Input.GetButton("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.FULLAUTO && Time.time >= nextTimeToFire)
         {
             if (currentRifleAmmo > 0)
@@ -282,14 +290,14 @@ public class CombinedScript : EventHandle {
                 nextTimeToFire = Time.time + 60f / RoundsPerMinute;
                 //StartCoroutine(Shot());
                 Shoot();
-                shotTrail.enabled = true;
+                //shotTrail.enabled = true;
             }
         }
         else
         {
-            shotTrail.enabled = false;
-
+            //shotTrail.enabled = false;
         }
+
         if (Input.GetButtonDown("Fire1") && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
         {
             if (currentShotgunAmmo > 0)
