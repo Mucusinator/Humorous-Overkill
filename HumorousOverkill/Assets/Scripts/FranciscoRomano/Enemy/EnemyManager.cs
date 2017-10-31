@@ -8,6 +8,7 @@ public struct DroneEnemyInfo
 {
     public float targetRadius;
     public float errorMargin;
+    public float damage;
     public float wanderSpeed;
     public float turnSpeed;
     public float avoidRadius;
@@ -32,7 +33,9 @@ public struct DonutEnemyInfo
     public float fireRate;
     public float rollSpeed;
     public float turnSpeed;
-    public float attackRange;
+    public float deployRange;
+    public float hitRange;
+    public float accuracy;
     public float ammoDropRate;
 }
 
@@ -87,8 +90,8 @@ public class EnemyManager : EventHandler.EventHandle
                 {
                     // next unit
                     elapsedTime = Time.time;
-                    spawner.HandleEvent(GameEvent.ENEMY_DIED);
-                    //spawner.HandleEvent(GameEvent.ENEMY_SPAWN); // ###### REMOVE THIS LINE AFTER ###### //
+                    //spawner.HandleEvent(GameEvent.ENEMY_DIED);
+                    spawner.HandleEvent(GameEvent.ENEMY_SPAWN);
                 }
             }
         }
