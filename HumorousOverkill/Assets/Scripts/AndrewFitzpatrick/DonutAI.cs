@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [EventHandler.BindListener("playerManager", typeof(PlayerManager))]
 [EventHandler.BindListener("enemyManager", typeof(EnemyManager))]
@@ -17,6 +18,7 @@ public class DonutAI : EventHandler.EventHandle
     private float deployTimer = 0;
     private GameObject target;
     private Animator myAnimator;
+    private RaycastHit hitInfo;
 
     void Start()
     {
@@ -91,33 +93,37 @@ public class DonutAI : EventHandler.EventHandle
     void deploySequence()
     {
         // if the current animation is finished
+        switch (myAnimator.GetInteger("animationState"))
+        {
+            case (int)ANIMATIONSTATE.SHOOT:
+                Debug.Log("Donut is shooting");
+                Debug.DrawRay(transform.position, -transform.right * 1000, Color.red);
+                if (Physics.Raycast(transform.position, -transform.right, out hitInfo))
+                {
+                    if (hitInfo.collider.gameObject.tag == "Player")
+                    {
+                        hitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
+                        GameObject.Find("hurt").GetComponent<Image>().color = Color.red;
+                        Debug.Log("Donut has hit the player");
+                    }
+                }
+                break;
+        }
+
+        // switch to the next animation
         if (myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && !myAnimator.IsInTransition(0))
         {
-            // switch to the next animation / do stuff
-            switch (myAnimator.GetInteger("animationState"))
+            GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 1, 1, 0);
+            // next animation
+            if (myAnimator.GetInteger("animationState") != (int)ANIMATIONSTATE.GETUP)
             {
-                case (int)ANIMATIONSTATE.ROLL:
-                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.DEPLOY);
-                    break;
-                case (int)ANIMATIONSTATE.DEPLOY:
-                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.RAISEGUN);
-                    break;
-                case (int)ANIMATIONSTATE.RAISEGUN:
-                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.SHOOT);
-                    // TODO: actually shoot
-                    break;
-                case (int)ANIMATIONSTATE.SHOOT:
-                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.LOWERGUN);
-                    break;
-                case (int)ANIMATIONSTATE.LOWERGUN:
-                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.GETUP);
-                    break;
-                case (int)ANIMATIONSTATE.GETUP:
-                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.ROLL);
-                    deployed = false;
-                    break;
-                default:
-                    break;
+                myAnimator.SetInteger("animationState", myAnimator.GetInteger("animationState") + 1);
+            }
+            else
+            {
+                // back to roll
+                myAnimator.SetInteger("animationState", 0);
+                deployed = false;
             }
         }
     }

@@ -88,7 +88,7 @@ public class EnemyManager : EventHandler.EventHandle
                     // next unit
                     elapsedTime = Time.time;
                     spawner.HandleEvent(GameEvent.ENEMY_DIED);
-                    spawner.HandleEvent(GameEvent.ENEMY_SPAWN); // ###### REMOVE THIS LINE AFTER ###### //
+                    //spawner.HandleEvent(GameEvent.ENEMY_SPAWN); // ###### REMOVE THIS LINE AFTER ###### //
                 }
             }
         }
