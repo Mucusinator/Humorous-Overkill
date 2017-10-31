@@ -1,43 +1,51 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class DonutAI : MonoBehaviour
+[EventHandler.BindListener("playerManager", typeof(PlayerManager))]
+[EventHandler.BindListener("enemyManager", typeof(EnemyManager))]
+public class DonutAI : EventHandler.EventHandle
 {
-    public float health;
-    public float damage;
-    public float fireRate;
-    public float rollSpeed;
-    public float turnSpeed;
-    public float attackRange;
-    public List<float> deployStages;
+    enum ANIMATIONSTATE { ROLL, DEPLOY, RAISEGUN, SHOOT, LOWERGUN, GETUP };
+
+    // stores stats
+    public DonutEnemyInfo myInfo;
+
     private bool deployed;
-    public float donutCircumference;
+    private float donutCircumference;
     private Transform modelTransform;
-    private float deployTimer = 0;
+    private GameObject target;
+    private Animator myAnimator;
+    private RaycastHit hitInfo;
 
-    // debug
-    public GameObject target;
-    private Animator animator;
-
-    void Start()
+    public override void Awake()
     {
-        // get values from manager
-        // health
-        // damage
-        // fireRate
-        // rollSpeed
-        // turnSpeed
-        // attackRange
-        // deployTime
+        base.Awake();
+
+        // use player as target
+        target = GameObject.FindGameObjectWithTag("Player");
+
+        // calculate circumference (needed for rolling)
         findCircumference();
+
+        Vector3 position = transform.position;
+        position.y = 1.5f;
+        transform.position = position;
+
+        // get default values from enemyManager
+        myInfo = GetEventListener("enemyManager").gameObject.GetComponent<EnemyManager>().defaultDonutInfo;
+
+        // find modelTransform
         modelTransform = GetComponentsInChildren<Transform>()[1];
-        changeColor(Color.white);
-        animator = GetComponent<Animator>();
+
+        // store animator
+        myAnimator = GetComponent<Animator>();
     }
 
     void Update()
     {
+        // either deploy or roll
         if(deployed)
         {
             deploySequence();
@@ -48,6 +56,7 @@ public class DonutAI : MonoBehaviour
         }
     }
 
+    // attempts to approach the player by rolling
     void roll()
     {
         // find direction to target
@@ -55,17 +64,16 @@ public class DonutAI : MonoBehaviour
         direction.y = 0;
 
         // rotate parent to look at target
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(Vector3.up * 90) * Quaternion.LookRotation(direction), myInfo.turnSpeed * Time.deltaTime);
 
         // A wheel moves forward a distance equal to its circumference with each rotation.
-        modelTransform.Rotate(new Vector3(0, rollSpeed * 360 / donutCircumference, 0) * Time.deltaTime);
+        //myAnimator.GetCurrentAnimatorStateInfo(0).speedMultiplier = 
 
         // roll forward
-        transform.Translate(transform.forward * rollSpeed * Time.deltaTime, Space.World);
+        transform.Translate(-transform.right * myInfo.rollSpeed * Time.deltaTime, Space.World);
 
-        // look for player
-        // deploy if within attackRange
-        if((transform.position - target.transform.position).magnitude < Mathf.Pow(attackRange, 2))
+        // deploy if within deployRange
+        if(nearPlayer())
         {
             deployed = true;
         }
@@ -80,9 +88,6 @@ public class DonutAI : MonoBehaviour
         // get the "x" size of the collider (actually y)
         float size = donutCollider.size.x;
 
-        // debug the diameter of the mesh
-        Debug.Log("the diameter of the donut is " + size);
-
         // circumference is 2PIr aka PI * diameter
         // also takes into account scaling
         donutCircumference = (size * Mathf.PI * transform.localScale.y);
@@ -91,48 +96,103 @@ public class DonutAI : MonoBehaviour
     // fall over and attack player
     void deploySequence()
     {
-        // increase deployTimer
-        deployTimer += Time.deltaTime;
+        ANIMATIONSTATE currentAnimationState = (ANIMATIONSTATE)myAnimator.GetInteger("animationState");
 
-        if (deployTimer < deployStages[0]) // number of seconds of fall over animation
+        // if the current animation is finished
+        switch (currentAnimationState)
         {
-            // play fall over animation
-            //changeColor(Color.red);
-            animator.SetInteger("attackState", 1);
-            Debug.Log("falling over");
+            case ANIMATIONSTATE.SHOOT:
+                Vector3 aimPoint = -transform.right * myInfo.hitRange;
+                Vector2 randomOffset = Random.insideUnitCircle * myInfo.accuracy;
+                aimPoint.x += randomOffset.x;
+                aimPoint.y += randomOffset.y;
+
+                Debug.DrawRay(transform.position, aimPoint, Color.red);
+                if (Physics.Raycast(transform.position, aimPoint, out hitInfo))
+                {
+                    if (hitInfo.collider.gameObject.tag == "Player")
+                    {
+                        GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.5f);
+                        hitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
+                    }
+                    else
+                    {
+                        GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.0f);
+                    }
+                }
+
+                // keep shooting the player until they are out of range
+                if (!nearPlayer())
+                {
+                    myAnimator.SetInteger("animationState", myAnimator.GetInteger("animationState") + 1);
+                }
+                else
+                {
+                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.SHOOT);
+                }
+                break;
         }
-        else if(deployTimer < deployStages[1])  // deployed
+
+        // switch to the next animation
+        if (myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && !myAnimator.IsInTransition(0))
         {
-            // shoot at player
-            //changeColor(Color.green);
-            animator.SetInteger("attackState", 2);
-            Debug.Log("deployed and shooting");
-        }
-        else if(deployTimer < deployStages[2]) // number of frames of get up animation
-        {
-            // play get up animation
-            // changeColor(Color.blue);
-            animator.SetInteger("attackState", 3);
-            Debug.Log("getting up");
-        }
-        else
-        {
-            // no longer deployed
-            // resume movement
-            deployed = false;
-            deployTimer = 0;
-            //changeColor(Color.white);
-            animator.SetInteger("attackState", 0);
-            Debug.Log("moving to player");
+            GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.0f);
+
+            // run next animation (if the player is withing range
+            switch (myAnimator.GetInteger("animationState"))
+            {
+                case (int)ANIMATIONSTATE.GETUP:
+                    // transition back to rolling
+                    myAnimator.SetInteger("animationState", 0);
+                    deployed = false;
+                    break;
+                default:
+                    // transition into the next animation
+                    myAnimator.SetInteger("animationState", myAnimator.GetInteger("animationState") + 1);
+                    break;
+            }
         }
     }
 
-    void changeColor(Color newColor)
+    // TODO: make fancy
+    void die()
     {
-        MeshRenderer[] childMeshes = GetComponentsInChildren<MeshRenderer>();
-        foreach (MeshRenderer currentMesh in childMeshes)
+        // tell enemy manager that an enemy has died
+        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
+
+        // destroy this gameobject
+        Destroy(this.gameObject);
+    }
+
+    // returns wheather we are within the deploy range
+    bool nearPlayer()
+    {
+        return (transform.position - target.transform.position).magnitude < Mathf.Pow(myInfo.deployRange, 2);
+    }
+
+    public override bool HandleEvent(GameEvent e, float value)
+    {
+        switch (e)
         {
-            currentMesh.material.SetColor("_Color", newColor);
+            case GameEvent.ENEMY_DAMAGED:
+                myInfo.health -= value;
+                if(myInfo.health <= 0)
+                {
+                    die();
+                }
+                break;
         }
+        return true;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // display accuracy / range
+        UnityEditor.Handles.color = Color.red;
+        UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange + Vector3.up * myInfo.accuracy);
+        UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - Vector3.up * myInfo.accuracy);
+        UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange + transform.forward * myInfo.accuracy);
+        UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - transform.forward * myInfo.accuracy);
+        UnityEditor.Handles.DrawWireDisc(transform.position -transform.right * myInfo.hitRange, transform.right, myInfo.accuracy);
     }
 }

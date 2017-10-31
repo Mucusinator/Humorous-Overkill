@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Avoid
   - Manager
+  - Projectile
   layers:
   - Default
   - TransparentFX

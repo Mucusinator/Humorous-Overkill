@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1985851191506964}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 8, z: 0}
+  m_LocalPosition: {x: 0, y: 8, z: 5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4696494649010684}
@@ -289,16 +289,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1985851191506964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f188fb713b7abb449af0d2c659668995, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f706446b8bd7054385c5c2d2c3bb163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetRadius: 5
-  errorMargin: 3
-  wanderSpeed: 5
-  turnSpeed: 3
-  avoidRadius: 5
-  showGizmos: 1
-  health: 0
-  damage: 0
-  fireRate: 0
-  accuracy: 0
+  myInfo:
+    targetRadius: 0
+    errorMargin: 0
+    damage: 0
+    wanderSpeed: 0
+    turnSpeed: 0
+    avoidRadius: 0
+    health: 0
+    fireRate: 0
+    accuracy: 0
+    attackRange: 0
+    projectileLifetime: 0
+    shotForce: 0
+    ammoDropRate: 0
+    explosionForce: 0
+    explosionRadius: 0
+  showGizmos: 0
+  projectile: {fileID: 1174558791365592, guid: 34170b26aeae56d47aa9f18b2e0d696f, type: 2}
+  freeze: 0
+  dead: 0

@@ -8,10 +8,11 @@ public struct DroneEnemyInfo
 {
     public float targetRadius;
     public float errorMargin;
+    public float damage;
     public float wanderSpeed;
     public float turnSpeed;
     public float avoidRadius;
-    public float damage;
+
     public float health; // health of the drone
     public float fireRate; // number of projectiles fired in one second
     public float accuracy; // accuracy of the drone when shooting (less is better)
@@ -32,7 +33,9 @@ public struct DonutEnemyInfo
     public float fireRate;
     public float rollSpeed;
     public float turnSpeed;
-    public float attackRange;
+    public float deployRange;
+    public float hitRange;
+    public float accuracy;
     public float ammoDropRate;
 }
 
@@ -87,8 +90,8 @@ public class EnemyManager : EventHandler.EventHandle
                 {
                     // next unit
                     elapsedTime = Time.time;
+                    //spawner.HandleEvent(GameEvent.ENEMY_DIED);
                     spawner.HandleEvent(GameEvent.ENEMY_SPAWN);
-                    spawner.HandleEvent(GameEvent.ENEMY_DIED); // ###### REMOVE THIS LINE AFTER ###### //
                 }
             }
         }
@@ -100,6 +103,10 @@ public class EnemyManager : EventHandler.EventHandle
         {
             // enemy unit dies
             case GameEvent.ENEMY_DIED:
+                if(spawner == null)
+                {
+                    return false;
+                }
                 spawner.HandleEvent(e);
                 break;
         }
@@ -107,11 +114,10 @@ public class EnemyManager : EventHandler.EventHandle
     }
     public override bool HandleEvent(GameEvent e, Object value)
     {
-        switch (e)
+        switch(e)
         {
             // called on trigger enter
             case GameEvent.CLASS_TYPE_ENEMY_SPAWNER:
-                Debug.Log("Marcus is here");
                 spawner = (EnemySpawner)value;
                 spawner.Begin();
                 break;

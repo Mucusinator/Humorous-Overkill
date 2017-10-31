@@ -454,9 +454,12 @@ public class CombinedScript : EventHandle {
 
 
 
-                    if (hit.transform.tag == "Target")
+                    if (hit.transform.tag == "Avoid")
                     {
-                        hit.transform.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
+                        if(hit.transform.gameObject.GetComponent<DroneAI>() != null)
+                        {
+                            hit.transform.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                        }
                         //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
                         //target.TakeDamage(RifleDamage);
 

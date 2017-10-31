@@ -29,7 +29,7 @@ namespace FR
         {
             amount--;
             // instantiate prefab
-            return Object.Instantiate(prefab, parent.position + position, rotation, parent);
+            return Object.Instantiate(prefab, parent.position + position, rotation);
         }
     }
 }
