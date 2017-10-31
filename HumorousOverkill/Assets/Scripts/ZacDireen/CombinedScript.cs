@@ -81,6 +81,12 @@ public class CombinedScript : EventHandle {
     // This is the UI text element for the UI.
     public Text Ammo;
 
+    public GameObject EndOfGun;
+
+    public Camera fpsCam;
+
+    public LineRenderer shotTrail;
+
 
     // This is the Fire Rate of the rifle.
     public enum FireRate
@@ -113,6 +119,7 @@ public class CombinedScript : EventHandle {
         currentRifleAmmo = rifleMagSize;
         currentShotgunAmmo = magTubeSize;
         currentShotgunAmmo = 0;
+        shotTrail = GetComponent<LineRenderer>();
     }
 	
 	// Update is called once per frame
@@ -251,24 +258,37 @@ public class CombinedScript : EventHandle {
                     break;
             }
         }
-   
+
 
         if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.SEMIAUTO && Time.time >= nextTimeToFire)
         {
-            
+
             if (currentRifleAmmo > 0)
             {
                 nextTimeToFire = Time.time + 60f / RoundsPerMinute;
+                //StartCoroutine(Shot());
                 Shoot();
+                shotTrail.enabled = true;
             }
+        }
+        else
+        {
+            shotTrail.enabled = false;
         }
         if (Input.GetButton("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.FULLAUTO && Time.time >= nextTimeToFire)
         {
             if (currentRifleAmmo > 0)
             {
                 nextTimeToFire = Time.time + 60f / RoundsPerMinute;
+                //StartCoroutine(Shot());
                 Shoot();
+                shotTrail.enabled = true;
             }
+        }
+        else
+        {
+            shotTrail.enabled = false;
+
         }
         if (Input.GetButtonDown("Fire1") && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
         {
@@ -278,7 +298,9 @@ public class CombinedScript : EventHandle {
                 currentShotgunAmmo--;
                 for (int i = 0; i < pelletCount; ++i)
                 {
-                    ShootRay();
+                    StartCoroutine(Shot());
+                    
+                    
                 }
                 
 
@@ -291,6 +313,26 @@ public class CombinedScript : EventHandle {
 
 
         }
+
+    private IEnumerator Shot()
+    {
+        var shotDelay = 0.5f;
+        if (gunType == GunType.RIFLE)
+        {
+            //shotDelay = 0;
+            shotTrail.enabled = true;
+            yield return shotDelay;
+            shotTrail.enabled = false;
+        }
+        if (gunType == GunType.SHOTGUN)
+        {
+            shotDelay = 0;
+            shotTrail.enabled = true;
+            yield return shotDelay;
+            shotTrail.enabled = false;
+        }
+    }
+
 
     IEnumerator Reload()
     {
@@ -359,36 +401,58 @@ public class CombinedScript : EventHandle {
         currentRifleAmmo--;
         RifleMuzzleEffect.Play();
         // A variable that will store the imformation gathered from the raycast.
-        RaycastHit hit;
-        Debug.DrawRay(StartOfPlayerRaycast.transform.position, StartOfPlayerRaycast.transform.forward * Range, Color.red, 3.0f);
-        // If we hit something with our shot raycast.
-        //if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) ;
-        if (Physics.Raycast(StartOfPlayerRaycast.transform.position, StartOfPlayerRaycast.transform.forward*Range, out hit, RifleRange));
+        RaycastHit hit, hit2;
+        //Debug.DrawRay(StartOfPlayerRaycast.transform.position, fpsCam.transform.forward * Range, Color.red, 3.0f);
+        Debug.DrawRay(fpsCam.transform.position, fpsCam.transform.forward * Range, Color.red, 3.0f);
+
+        shotTrail.SetPosition(0, EndOfGun.transform.position);
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward * Range, out hit, RifleRange))
         {
-            if (hit.transform != null)
+
+            // If we hit something with our shot raycast.
+            //if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) ;
+            Debug.DrawRay(EndOfGun.transform.position, hit.point - transform.position, Color.blue, 3.0f);
+            if (Physics.Raycast(EndOfGun.transform.position, hit.point - transform.position, out hit2, RifleRange))
             {
 
-                Debug.DrawRay(WeaponRaycast.transform.position, hit.point - transform.position, Color.blue, 3.0f);
 
-                // Put in place the takeDamage event handler for the game manager here.
-                //GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(GameEvent.)
-
-                //Debug.Log(hit.transform.name);
-                //Target target = hit.transform.GetComponent<Target>();
-
-
-
-                if (hit.transform.tag == "Target")
+                if (hit.transform != null)
                 {
-                    hit.transform.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
-                    //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
-                    //target.TakeDamage(RifleDamage);
-                    
+                    shotTrail.SetPosition(1, hit2.point);
+
+                    // Put in place the takeDamage event handler for the game manager here.
+                    //GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(GameEvent.)
+
+                    //Debug.Log(hit.transform.name);
+                    //Target target = hit.transform.GetComponent<Target>();
+
+
+
+                    if (hit.transform.tag == "Target")
+                    {
+                        hit.transform.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
+                        //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
+                        //target.TakeDamage(RifleDamage);
+
+                    }
                 }
             }
         }
-        
+        else
+        {
+            Vector3 centreCam = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+
+            shotTrail.SetPosition(1, centreCam + (fpsCam.transform.forward * Range));
+            //shotTrail.SetPosition(1, fpsCam.transform.position + (EndOfGun.transform.forward * Range));
+        }
     }
+        
+        
+        
+       
+        
+    
+
 
     void ShootRay()
     {
@@ -411,6 +475,7 @@ public class CombinedScript : EventHandle {
         //It is like converting the Vector3.forward to transform.forward
         direction = StartOfPlayerRaycast.transform.TransformDirection(direction.normalized);
 
+        shotTrail.SetPosition(0, EndOfGun.transform.position);
         //Raycast and debug
         Ray r = new Ray(WeaponRaycast.transform.position, direction);
 
@@ -418,8 +483,8 @@ public class CombinedScript : EventHandle {
         RaycastHit hit;
         if (Physics.Raycast(r, out hit))
         {
-            
 
+            shotTrail.SetPosition(1, hit.point);
             Debug.DrawLine(WeaponRaycast.transform.position, hit.point, Color.black, 3.0f);
 
 
@@ -436,6 +501,12 @@ public class CombinedScript : EventHandle {
                 //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
             }
 
+        }
+        else
+        {
+            Vector3 centreCam = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+
+            shotTrail.SetPosition(1, centreCam + (fpsCam.transform.forward * Range));
         }
     }
     void OnEnable()
