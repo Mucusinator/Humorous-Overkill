@@ -225,6 +225,7 @@ public class CombinedScript : EventHandle {
 
             if (isReloading)
             {
+                
                 return;
             }
 
@@ -259,11 +260,11 @@ public class CombinedScript : EventHandle {
             }
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE)
         {
             shotTrail.enabled = true;
         }
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire1") || isReloading && gunType == GunType.RIFLE)
         {
             shotTrail.enabled = false;
         }
@@ -306,8 +307,8 @@ public class CombinedScript : EventHandle {
                 currentShotgunAmmo--;
                 for (int i = 0; i < pelletCount; ++i)
                 {
-                    StartCoroutine(Shot());
-                    
+                    //StartCoroutine(Shot());
+                    ShootRay();
                     
                 }
                 
@@ -346,6 +347,7 @@ public class CombinedScript : EventHandle {
     {
         if (gunType == GunType.RIFLE)
         {
+            shotTrail.enabled = false;
             isReloading = true;
             animator.SetBool("Reloading", true);
             yield return new WaitForSeconds(reloadRifleTime - 0.25f);
@@ -481,9 +483,9 @@ public class CombinedScript : EventHandle {
 
         //Make the direction match the transform
         //It is like converting the Vector3.forward to transform.forward
-        direction = StartOfPlayerRaycast.transform.TransformDirection(direction.normalized);
+        direction = fpsCam.transform.TransformDirection(direction.normalized);
 
-        shotTrail.SetPosition(0, EndOfGun.transform.position);
+        
         //Raycast and debug
         Ray r = new Ray(WeaponRaycast.transform.position, direction);
 
@@ -492,8 +494,7 @@ public class CombinedScript : EventHandle {
         if (Physics.Raycast(r, out hit))
         {
 
-            shotTrail.SetPosition(1, hit.point);
-            Debug.DrawLine(WeaponRaycast.transform.position, hit.point, Color.black, 3.0f);
+            Debug.DrawLine(StartOfPlayerRaycast.transform.position, hit.point, Color.black, 3.0f);
 
 
             //Target shotgunTarget = hit.transform.GetComponent<Target>();
@@ -512,9 +513,9 @@ public class CombinedScript : EventHandle {
         }
         else
         {
-            Vector3 centreCam = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+            //Vector3 centreCam = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
 
-            shotTrail.SetPosition(1, centreCam + (fpsCam.transform.forward * Range));
+            Debug.DrawLine(StartOfPlayerRaycast.transform.position, fpsCam.transform.forward * Range, Color.green,3.0f);
         }
     }
     void OnEnable()
