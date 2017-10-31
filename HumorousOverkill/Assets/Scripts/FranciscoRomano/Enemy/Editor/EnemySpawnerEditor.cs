@@ -15,12 +15,15 @@ public class EnemySpawnerEditor : Editor
     EnemySpawner component = null;
     PointsEditor pointsEditor = new PointsEditor();
     RegionEditor regionEditor = new RegionEditor();
+    EnemySpawnerRegionEditor new_regionEditor = null;
+    //EnemySpawnerRegionEditor region
     
     void OnEnable()
     {
         // store variable of target
         component = target as EnemySpawner;
         transform = component.transform;
+        new_regionEditor = new EnemySpawnerRegionEditor(component);
     }
 
     void OnSceneGUI()
@@ -29,8 +32,10 @@ public class EnemySpawnerEditor : Editor
 
         if (isEditingRegion)
         {
-            regionEditor.render(e);
-            regionEditor.update(e);
+            new_regionEditor.update(e);
+            new_regionEditor.render(e);
+            //regionEditor.render(e);
+            //regionEditor.update(e);
         }
         else if (isEditingPoints)
         {
@@ -48,8 +53,9 @@ public class EnemySpawnerEditor : Editor
         {
             // component region layout
             GUILayout.Label("Editing Region:", EditorStyles.boldLabel);
+            new_regionEditor.maximumX = Mathf.Max(EditorGUILayout.FloatField("height", new_regionEditor.maximumX), 1);
             if (GUILayout.Button("Go Back")) { ResetDefaults(); };
-            if (GUILayout.Button("Confirm")) { ConfirmRegion(); };
+            if (GUILayout.Button("Confirm")) { new_regionEditor.setdata(); };
         }
         else if (isEditingPoints)
         {
@@ -96,7 +102,6 @@ public class EnemySpawnerEditor : Editor
             float offsetZ = Mathf.Lerp(regionEditor.points[0].z, regionEditor.points[2].z, 0.5f);
             // update current collider
             component.transform.position = new Vector3(offsetX, 0.5f, offsetZ);
-            component.GetComponent<BoxCollider>().enabled = true;
             component.GetComponent<BoxCollider>().center = new Vector3();
             component.GetComponent<BoxCollider>().size = new Vector3(sizeX, 1.0f, sizeZ);
         }
@@ -113,7 +118,7 @@ public class EnemySpawnerEditor : Editor
     {
         // prepair editor
         isEditingRegion = true;
-        component.GetComponent<BoxCollider>().enabled = false;
+        new_regionEditor.prepair();
     }
 
     void DisplayEditPoints()
@@ -160,9 +165,10 @@ public class EnemySpawnerEditor : Editor
 
     class RegionEditor
     {
-        public float height = 0;
         public bool isEditing = false;
         public bool isComplete = false;
+        public float yAxis = 0.0f;
+        public float height = 1.0f;
         public Vector3[] points = new Vector3[4];
         public static Color color = new Color(1.0f, 0.0f, 1.0f, 0.5f);
 
@@ -178,13 +184,17 @@ public class EnemySpawnerEditor : Editor
             if (isEditing)
             {
                 // calculate point
-                points[1] = new Vector3(points[0].x, height, points[2].z);
+                points[1] = new Vector3(points[0].x, yAxis, points[2].z);
                 points[2] = GetMousePoint(e);
-                points[3] = new Vector3(points[2].x, height, points[0].z);
+                points[3] = new Vector3(points[2].x, yAxis, points[0].z);
             }
             // draw region lines
             Handles.color = color;
             Handles.DrawLine(points[0], points[2]);
+
+            Handles.DrawLine(points[0], points[0] + Vector3.up * height);
+            Handles.DrawLine(points[0] + Vector3.up * height, points[2]);
+
             Handles.DrawDottedLine(points[0], points[1], 5);
             Handles.DrawDottedLine(points[0], points[3], 5);
             Handles.DrawDottedLine(points[2], points[1], 5);
@@ -217,73 +227,9 @@ public class EnemySpawnerEditor : Editor
             // get screen to world position
             Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
             // calculate point length
-            float length = (height - ray.origin.y) / ray.direction.y;
+            float length = (yAxis - ray.origin.y) / ray.direction.y;
             // calculate point
             return ray.origin + ray.direction * length;
         }
     }
-
-    //int selected = 0;
-    //string[] options = new string[]
-    //{
-    //        "Stage1", "Stage2", "Stage3"
-    //};
-
-    //public override void OnInspectorGUI()
-    //{
-    //    DrawDefaultInspector();
-
-    //    if (GUILayout.Button("Create New Stage"))
-    //    {
-
-    //    }
-
-
-    //    GUILayout.Label("Current Selected Stage:");
-    //    selected = EditorGUILayout.Popup(selected, options);
-    //    //if (GUILayout.Button("Create Wave"))
-    //    //{
-
-    //    //}
-    //}
-
-    //void OnSceneGUI()
-    //{
-    //    Event guiEvent = Event.current;
-
-    //    // Get Point where Y-Axis is = 0.0f
-    //    // origin + dir * length = P
-    //    // origin.y + dir.y * length = planeHeight;
-    //    // .'. length = (planeHeight - origin.y) / dir.y;
-
-    //    // find point where y axis is zero
-    //    Ray mouseRay = HandleUtility.GUIPointToWorldRay(guiEvent.mousePosition);
-    //    float height = 0.0f;
-    //    float length = (height - mouseRay.origin.y) / mouseRay.direction.y;
-    //    Vector3 target = mouseRay.origin + mouseRay.direction * length;
-
-    //    // check if left mouse pressed
-    //    if (guiEvent.type == EventType.mouseDown && guiEvent.button == 0)
-    //    {
-    //        Undo.RecordObject(enemyManager, "Add Point");
-    //        enemyManager.m_editor_spawnpoints.Add(target);
-    //        Debug.Log("add :: { " + target.x + ", " + target.y + ", " + target.z + " }");
-    //    }
-
-    //    // draw points on screen
-    //    for (int i = 0; i < enemyManager.m_editor_spawnpoints.Count; i++)
-    //    {
-    //        Vector3 linePoint = enemyManager.m_editor_spawnpoints[(i + 1) % enemyManager.m_editor_spawnpoints.Count];
-    //        Handles.color = Color.black;
-    //        Handles.DrawDottedLine(enemyManager.m_editor_spawnpoints[i], linePoint, 4);
-    //        Handles.color = Color.magenta;
-    //        Handles.DrawSolidDisc(enemyManager.m_editor_spawnpoints[i], Vector3.up, 0.5f);
-    //    }
-
-    //    // prevent unity from deselecting object
-    //    if (guiEvent.type == EventType.layout)
-    //    {
-    //        HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
-    //    }
-    //}
 }
