@@ -27,7 +27,7 @@ public class PickUp : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         GameObject player = GameObject.Find("Player");
-        GameObject playersWeaponHolder = GameObject.Find("Weapon Holder");
+        CombinedScript playersWeaponHolder = GameObject.FindObjectOfType<CombinedScript>();
         Health playersHealth = player.GetComponent<Health>();
         CombinedScript weapons = playersWeaponHolder.GetComponent<CombinedScript>(); 
         
