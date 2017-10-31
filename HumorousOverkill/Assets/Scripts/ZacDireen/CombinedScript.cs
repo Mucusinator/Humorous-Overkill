@@ -225,6 +225,7 @@ public class CombinedScript : EventHandle {
 
             if (isReloading)
             {
+                
                 return;
             }
 
@@ -263,7 +264,7 @@ public class CombinedScript : EventHandle {
         {
             shotTrail.enabled = true;
         }
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire1") || isReloading)
         {
             shotTrail.enabled = false;
         }
@@ -346,6 +347,7 @@ public class CombinedScript : EventHandle {
     {
         if (gunType == GunType.RIFLE)
         {
+            shotTrail.enabled = false;
             isReloading = true;
             animator.SetBool("Reloading", true);
             yield return new WaitForSeconds(reloadRifleTime - 0.25f);
