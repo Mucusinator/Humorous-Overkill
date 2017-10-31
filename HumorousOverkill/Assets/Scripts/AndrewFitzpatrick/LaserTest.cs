@@ -12,7 +12,8 @@ public class LaserTest : MonoBehaviour
     public GameObject unicorn;
     public GameObject shootPoint;
     public GameObject laser_hit;
-    public int colorOffset = 0;
+    private float colorOffset = 0;
+    public float laserSpeed = 1;
 
     void Start()
     {
@@ -21,6 +22,8 @@ public class LaserTest : MonoBehaviour
 
     void Update ()
     {
+        colorOffset += laserSpeed * Time.deltaTime;
+
         Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         Debug.DrawRay(ray.origin, ray.direction * 1000.0f, Color.yellow);
         // mouse click
@@ -49,17 +52,12 @@ public class LaserTest : MonoBehaviour
                     for(int i = 0; i < dist * 5; i++)
                     {
                         GameObject currentPart = Instantiate(laser, Vector3.Lerp(hit.point, shootPoint.transform.position, (1.0f / (dist * 5)) * i), rotation) as GameObject;
-                        currentPart.GetComponent<Renderer>().material.SetColor("_Color1", laserColors[colorOffset]);
-                        currentPart.GetComponent<Renderer>().material.SetColor("_Color2", laserColors[laserColors.Count - 1 - colorOffset]);
+                        currentPart.GetComponent<Renderer>().material.SetColor("_Color1", laserColors[(i + (int)colorOffset) % laserColors.Count]);
+                        currentPart.GetComponent<Renderer>().material.SetColor("_Color2", laserColors[laserColors.Count - 1 - (i + (int)colorOffset) % laserColors.Count]);
                         laserParts.Add(currentPart);
                     }
                     // Instantiate(laser_hit, hit.point, Quaternion.identity);
                 }
-            }
-            colorOffset ++;
-            if(colorOffset >= laserColors.Count)
-            {
-                colorOffset = 0;
             }
         }
         else
