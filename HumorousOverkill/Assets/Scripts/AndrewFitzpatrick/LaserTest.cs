@@ -52,11 +52,11 @@ public class LaserTest : MonoBehaviour
                     for(int i = 0; i < dist * 5; i++)
                     {
                         GameObject currentPart = Instantiate(laser, Vector3.Lerp(hit.point, shootPoint.transform.position, (1.0f / (dist * 5)) * i), rotation) as GameObject;
-                        currentPart.GetComponent<Renderer>().material.SetColor("_Color1", laserColors[(i + (int)colorOffset) % laserColors.Count]);
-                        currentPart.GetComponent<Renderer>().material.SetColor("_Color2", laserColors[laserColors.Count - 1 - (i + (int)colorOffset) % laserColors.Count]);
+                        currentPart.GetComponent<Renderer>().material.SetColor("_TintColor", laserColors[(i + (int)colorOffset) % laserColors.Count]);
+                        //currentPart.GetComponent<Renderer>().material.SetColor("_Color2", laserColors[laserColors.Count - 1 - (i + (int)colorOffset) % laserColors.Count]);
                         laserParts.Add(currentPart);
                     }
-                    // Instantiate(laser_hit, hit.point, Quaternion.identity);
+                    //Instantiate(laser_hit, hit.point, Quaternion.identity);
                 }
             }
         }

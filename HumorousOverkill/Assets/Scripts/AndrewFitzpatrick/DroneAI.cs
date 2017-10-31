@@ -20,9 +20,15 @@ public class DroneAI : EventHandler.EventHandle
     public bool freeze = false;
     public bool dead = false;
 
-    void Start()
+    private float startHealth;
+
+    public override void Awake()
     {
+        base.Awake();
+
         myInfo = GetEventListener("enemyManager").gameObject.GetComponent<EnemyManager>().defaultDroneInfo;
+
+        startHealth = myInfo.health;
 
         pickTarget();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -128,6 +134,8 @@ public class DroneAI : EventHandler.EventHandle
     // disable all AI and explode into pieces
     void die()
     {
+        changeColor(Color.black);
+
         // debug
         Debug.Log("I have died.");
 
@@ -191,13 +199,27 @@ public class DroneAI : EventHandler.EventHandle
             // subtract health
             myInfo.health -= value;
 
+            changeColor(Color.Lerp(Color.red, Color.white, 1.0f / startHealth * myInfo.health));
+
             // if the health is now 0 we die
-            if(myInfo.health <= 0)
+            if (myInfo.health <= 0)
             {
                 die();
             }
         }
 
         return true; // TODO
+    }
+
+    void changeColor(Color newColor)
+    {
+        Transform[] childTransforms = GetComponentsInChildren<Transform>();
+        foreach (Transform child in childTransforms)
+        {
+            if(child.gameObject.GetComponent<Renderer>() != null)
+            {
+                child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", newColor);
+            }
+        }
     }
 }
