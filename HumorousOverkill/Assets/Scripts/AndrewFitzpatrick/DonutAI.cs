@@ -15,14 +15,14 @@ public class DonutAI : EventHandler.EventHandle
     private bool deployed;
     private float donutCircumference;
     private Transform modelTransform;
-    private float deployTimer = 0;
     private GameObject target;
     private Animator myAnimator;
     private RaycastHit hitInfo;
 
-    void Awake()
+    public override void Awake()
     {
-        //base.Awake();
+        base.Awake();
+
         // use player as target
         target = GameObject.FindGameObjectWithTag("Player");
 
@@ -158,7 +158,7 @@ public class DonutAI : EventHandler.EventHandle
     void die()
     {
         // tell enemy manager that an enemy has died
-        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED, 0);
+        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
 
         // destroy this gameobject
         Destroy(this.gameObject);
