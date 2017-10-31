@@ -7,7 +7,6 @@
 		_MainTex2 ("Second Texture", 2D) = "black" {}
 		_TextureBlendFac("Texture Blend Factor", Range(0, 1)) = 0.5
 		_Threshold("Threshold", Range(1, 20)) = 5
-		_Cutoff("Alpha Cutoff", Range(0, 1)) = 0.5
 		_Ambient("Ambient Lighting", Range(0, 1)) = 0
 	}
 		SubShader
@@ -27,7 +26,6 @@
 		float _TextureBlendFac;
 		fixed4 _Color;
 		float _Threshold;
-		float _Cutoff;
 		float _Ambient;
 
 #pragma lighting CelShading exclude_path:prepass
@@ -73,7 +71,7 @@
 			fixed4 c = (t1 + (t2 * _TextureBlendFac)) * _Color;
 
 			o.Albedo = c.rgb;
-			o.Alpha = 0;
+			o.Alpha = c.a;
 		}
 		ENDCG
 	}

@@ -3,6 +3,8 @@ using EventHandler;
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(BoxCollider))]
 [BindListener("EnemyManager", typeof(EnemyManager))]
 public class EnemySpawner : EventHandle
 {
