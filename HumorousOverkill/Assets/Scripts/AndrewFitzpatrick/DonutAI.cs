@@ -57,13 +57,13 @@ public class DonutAI : EventHandler.EventHandle
         direction.y = 0;
 
         // rotate parent to look at target
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), myInfo.turnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(Vector3.up * 90) * Quaternion.LookRotation(direction), myInfo.turnSpeed * Time.deltaTime);
 
         // A wheel moves forward a distance equal to its circumference with each rotation.
-        //modelTransform.Rotate(new Vector3(0, myInfo.rollSpeed * 360 / donutCircumference, 0) * Time.deltaTime, Space.Self);
+        //myAnimator.GetCurrentAnimatorStateInfo(0).speedMultiplier = 
 
         // roll forward
-        //transform.Translate(transform.right * myInfo.rollSpeed * Time.deltaTime, Space.World);
+        transform.Translate(-transform.right * myInfo.rollSpeed * Time.deltaTime, Space.World);
 
         // look for player
         // deploy if within attackRange
@@ -81,9 +81,6 @@ public class DonutAI : EventHandler.EventHandle
 
         // get the "x" size of the collider (actually y)
         float size = donutCollider.size.x;
-
-        // debug the diameter of the mesh
-        Debug.Log("the diameter of the donut is " + size);
 
         // circumference is 2PIr aka PI * diameter
         // also takes into account scaling
@@ -123,5 +120,30 @@ public class DonutAI : EventHandler.EventHandle
                     break;
             }
         }
+    }
+
+    // TODO: make fancy
+    void die()
+    {
+        // tell enemy manager that an enemy has died
+        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED, 0);
+
+        // destroy this gameobject
+        Destroy(this.gameObject);
+    }
+
+    public override bool HandleEvent(GameEvent e, float value)
+    {
+        switch (e)
+        {
+            case GameEvent.ENEMY_DAMAGED:
+                myInfo.health -= value;
+                if(myInfo.health <= 0)
+                {
+                    die();
+                }
+                break;
+        }
+        return true;
     }
 }

@@ -14,13 +14,13 @@ namespace EventHandler {
         public BindListenerAttribute (
             String key,             // Key to identify the listener
             System.Type type        // The type of listener
-            ) { this.key = key; listener = GameObject.FindObjectOfType(type) as EventListener; }
+            ) { this.key = key; listener = GameObject.FindObjectsOfType(type) as EventListener[]; }
         #endregion
 
         #region ATTRIBUTES
         // Holds the EventListener
-        protected EventListener listener;
-        public EventListener Listener { get { return this.listener; } }
+        protected EventListener[] listener;
+        public EventListener[] Listener { get { return this.listener; } }
 
         // Holds the Key
         protected String key;
@@ -183,8 +183,8 @@ namespace EventHandler {
         #region PRIVATE VARABLES
         private BindListenerAttribute listeningToAttr;
         public BindListenerAttribute ListeningToAttr { get { return listeningToAttr; } }
-        private Dictionary<String, EventListener> listeners = new Dictionary<String, EventListener>();
-        public Dictionary<String, EventListener> Listeners { get { return listeners; } }
+        private Dictionary<String, EventListener[]> listeners = new Dictionary<String, EventListener[]>();
+        public Dictionary<String, EventListener[]> Listeners { get { return listeners; } }
         #endregion
 
         #region FUNCTIONS
@@ -209,11 +209,59 @@ namespace EventHandler {
         /// <summary>
         /// Returns a listener from the key
         /// </summary>
-        /// <param name="Key">Key to identify the listener</param>
+        /// <param name="Key">Key to identify the listener</param
+        /// <param name="index">Index to identify the position</param>
         public EventListener GetEventListener (
-            String Key              // Key to identify the listener
+            String Key,                 // Key to identify the listener
+            int index                   // Index
             )
-            { return listeners[Key]; }
+            { return listeners[Key][index]; }
+
+        /// <summary>
+        /// Returns a listener from the key
+        /// </summary>
+        /// <param name="Key">Key to identify the listener</param
+        public EventListener GetEventListener (
+            String Key                  // Key to identify the listener
+            )
+            { return listeners[Key][0]; }
+
+        /// <summary>
+        /// Returns a listener from the key
+        /// </summary>
+        /// <param name="Key">Key to identify the listener</param
+        public EventListener GetEventListener (
+            String Key,                 // Key to identify the listener
+            UnityEngine.GameObject obj
+            )
+            {
+            foreach (EventListener e in listeners[Key]) {
+                if (e.gameObject == obj) return listeners[Key][0];
+            } return null;
+        }
+
+        /// <summary>
+        /// Returns a listener from the object
+        /// </summary>
+        /// <param name="obj">Object to get the listener from</param
+        public EventListener GetEventListener (
+            UnityEngine.GameObject obj  //Object to get the listener from
+            )
+            { return obj.GetComponent<EventListener>(); }
+
+        /// <summary>
+        /// Updates a type for the dictionary
+        /// </summary>
+        /// <param name="Key">Key to identify the listener</param>
+        /// <param name="type">Type to update</param>
+        /// <returns></returns>
+        public bool UpdateBindedList(
+            string Key,                 // Key to identify the listener
+            System.Type type            // Type to update
+            )
+            { listeners[Key] =  GameObject.FindObjectsOfType(type) as EventListener[]; return true; }
+        
+
         #endregion
     }
 
@@ -234,8 +282,10 @@ namespace EventHandler {
                 EventHandle m_eventHandle = (EventHandle)target;
                 UnityEditor.EditorGUILayout.LabelField("Listeners:", UnityEditor.EditorStyles.boldLabel);
 
-                foreach (KeyValuePair<string, EventListener> l in m_eventHandle.Listeners)
-                    UnityEditor.EditorGUILayout.ObjectField(l.Key, l.Value, typeof(EventHandle), true);
+                foreach (KeyValuePair<string, EventListener[]> l in m_eventHandle.Listeners)
+                    for (int i = 0; i < l.Value.Length; i++) {
+                        UnityEditor.EditorGUILayout.ObjectField(l.Key, l.Value[i], typeof(EventHandle), true);
+                    }
 
                 UnityEditor.EditorGUILayout.Space();
             }
