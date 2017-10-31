@@ -20,22 +20,27 @@ public class DonutAI : EventHandler.EventHandle
     private Animator myAnimator;
     private RaycastHit hitInfo;
 
-    void Start()
+    void Awake()
     {
-        // get default values from enemyManager
-        myInfo = GetEventListener("enemyManager").gameObject.GetComponent<EnemyManager>().defaultDonutInfo;
+        //base.Awake();
+        // use player as target
+        target = GameObject.FindGameObjectWithTag("Player");
 
         // calculate circumference (needed for rolling)
         findCircumference();
+
+        Vector3 position = transform.position;
+        position.y = 1.5f;
+        transform.position = position;
+
+        // get default values from enemyManager
+        myInfo = GetEventListener("enemyManager").gameObject.GetComponent<EnemyManager>().defaultDonutInfo;
 
         // find modelTransform
         modelTransform = GetComponentsInChildren<Transform>()[1];
 
         // store animator
         myAnimator = GetComponent<Animator>();
-
-        // use player as target
-        target = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
@@ -67,9 +72,8 @@ public class DonutAI : EventHandler.EventHandle
         // roll forward
         transform.Translate(-transform.right * myInfo.rollSpeed * Time.deltaTime, Space.World);
 
-        // look for player
-        // deploy if within attackRange
-        if((transform.position - target.transform.position).magnitude < Mathf.Pow(myInfo.attackRange, 2))
+        // deploy if within deployRange
+        if(nearPlayer())
         {
             deployed = true;
         }
@@ -92,20 +96,39 @@ public class DonutAI : EventHandler.EventHandle
     // fall over and attack player
     void deploySequence()
     {
+        ANIMATIONSTATE currentAnimationState = (ANIMATIONSTATE)myAnimator.GetInteger("animationState");
+
         // if the current animation is finished
-        switch (myAnimator.GetInteger("animationState"))
+        switch (currentAnimationState)
         {
-            case (int)ANIMATIONSTATE.SHOOT:
-                Debug.Log("Donut is shooting");
-                Debug.DrawRay(transform.position, -transform.right * 1000, Color.red);
-                if (Physics.Raycast(transform.position, -transform.right, out hitInfo))
+            case ANIMATIONSTATE.SHOOT:
+                Vector3 aimPoint = -transform.right * myInfo.hitRange;
+                Vector2 randomOffset = Random.insideUnitCircle * myInfo.accuracy;
+                aimPoint.x += randomOffset.x;
+                aimPoint.y += randomOffset.y;
+
+                Debug.DrawRay(transform.position, aimPoint, Color.red);
+                if (Physics.Raycast(transform.position, aimPoint, out hitInfo))
                 {
                     if (hitInfo.collider.gameObject.tag == "Player")
                     {
+                        GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.5f);
                         hitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
-                        GameObject.Find("hurt").GetComponent<Image>().color = Color.red;
-                        Debug.Log("Donut has hit the player");
                     }
+                    else
+                    {
+                        GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.0f);
+                    }
+                }
+
+                // keep shooting the player until they are out of range
+                if (!nearPlayer())
+                {
+                    myAnimator.SetInteger("animationState", myAnimator.GetInteger("animationState") + 1);
+                }
+                else
+                {
+                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.SHOOT);
                 }
                 break;
         }
@@ -113,17 +136,20 @@ public class DonutAI : EventHandler.EventHandle
         // switch to the next animation
         if (myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && !myAnimator.IsInTransition(0))
         {
-            GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 1, 1, 0);
-            // next animation
-            if (myAnimator.GetInteger("animationState") != (int)ANIMATIONSTATE.GETUP)
+            GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.0f);
+
+            // run next animation (if the player is withing range
+            switch (myAnimator.GetInteger("animationState"))
             {
-                myAnimator.SetInteger("animationState", myAnimator.GetInteger("animationState") + 1);
-            }
-            else
-            {
-                // back to roll
-                myAnimator.SetInteger("animationState", 0);
-                deployed = false;
+                case (int)ANIMATIONSTATE.GETUP:
+                    // transition back to rolling
+                    myAnimator.SetInteger("animationState", 0);
+                    deployed = false;
+                    break;
+                default:
+                    // transition into the next animation
+                    myAnimator.SetInteger("animationState", myAnimator.GetInteger("animationState") + 1);
+                    break;
             }
         }
     }
@@ -136,6 +162,12 @@ public class DonutAI : EventHandler.EventHandle
 
         // destroy this gameobject
         Destroy(this.gameObject);
+    }
+
+    // returns wheather we are within the deploy range
+    bool nearPlayer()
+    {
+        return (transform.position - target.transform.position).magnitude < Mathf.Pow(myInfo.deployRange, 2);
     }
 
     public override bool HandleEvent(GameEvent e, float value)
@@ -151,5 +183,16 @@ public class DonutAI : EventHandler.EventHandle
                 break;
         }
         return true;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // display accuracy / range
+        UnityEditor.Handles.color = Color.red;
+        UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange + Vector3.up * myInfo.accuracy);
+        UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - Vector3.up * myInfo.accuracy);
+        UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange + transform.forward * myInfo.accuracy);
+        UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - transform.forward * myInfo.accuracy);
+        UnityEditor.Handles.DrawWireDisc(transform.position -transform.right * myInfo.hitRange, transform.right, myInfo.accuracy);
     }
 }
