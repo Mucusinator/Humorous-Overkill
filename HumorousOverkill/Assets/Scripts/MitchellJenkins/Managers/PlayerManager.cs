@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Struct holding all the player info
 [System.Serializable] public struct PlayerInfo {
-    public int m_playerHealth; // 100
+    public float m_playerHealth; // 100
     public float m_playerSpeed; //10
     public float m_playerJumpHeight; // 2
     public int m_pickupHealthAmount; // 20

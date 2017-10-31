@@ -8,6 +8,7 @@ public struct DroneEnemyInfo
 {
     public float targetRadius;
     public float errorMargin;
+    public float damage;
     public float wanderSpeed;
     public float turnSpeed;
     public float avoidRadius;

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using EventHandler;
+using UnityEngine.SceneManagement;
 
 [BindListener("PlayerManager", typeof(PlayerManager))]
+[BindListener("EnemyManager", typeof(EnemyManager))]
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerMovement))]
@@ -52,9 +54,25 @@ public class Player : EventHandle {
     void CheckHealth () {
         if (m_ply.m_playerHealth > 100) m_ply.m_playerHealth = 100;
         else if (m_ply.m_playerHealth < 0) m_ply.m_playerHealth = 0;
+
+        if (m_ply.m_playerHealth <= 0) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    void OnTriggerEnter(Collider c) {
+        if (c.tag == "Projectile") {
+            m_ply.m_playerHealth -= GetEventListener("EnemyManager").gameObject.GetComponent<EnemyManager>().defaultDroneInfo.damage;
+            CheckHealth();
+        }
     }
 
     public override bool HandleEvent (GameEvent e) {
+        switch (e) {
+        case GameEvent.PLAYER_DAMAGE:
+            CheckHealth();
+            break;
+        }
         return true;
     }
 }

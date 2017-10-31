@@ -191,7 +191,7 @@ namespace EventHandler {
         /// <summary>
         /// Call the __BindEventListeners on start
         /// </summary>
-        void Awake () { __BindEventListeners(); }
+        public void Awake () { __BindEventListeners(); }
 
         /// <summary>
         /// Binds all the Listeners to this object
