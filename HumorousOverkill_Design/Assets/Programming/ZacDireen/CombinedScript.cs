@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using EventHandler;
 
 [BindListener("Enemy", typeof(EnemyManager))]
-[BindListener("Player",typeof(PlayerManager))] 
+[BindListener("UIManager", typeof(UIManager))] 
 public class CombinedScript : EventHandle {
 
     // Rifle/Laser Variables.
@@ -79,7 +79,7 @@ public class CombinedScript : EventHandle {
     // Weapon Raycast.
     public GameObject WeaponRaycast;
     // This is the UI text element for the UI.
-    public Text Ammo;
+    //public Text Ammo;
 
     public GameObject EndOfGun;
 
@@ -124,6 +124,20 @@ public class CombinedScript : EventHandle {
 	
 	// Update is called once per frame
 	void Update () {
+
+        //GameObject.FindGameObjectWithTag("UI").GetComponent<UIManager>().HandleEvent(GameEvent.UI_AMMO_CUR);
+        if (gunType == GunType.RIFLE)
+        {
+            GetEventListener("UIManager").HandleEvent(GameEvent.UI_AMMO_CUR, currentRifleAmmo);
+            GetEventListener("UIManager").HandleEvent(GameEvent.UI_AMMO_MAX, maxRifleAmmo);
+        }
+        else if (gunType == GunType.SHOTGUN)
+        {
+           
+                //GetEventListener("UIManager").HandleEvent(GameEvent.UI_AMMO_CUR, currentShotgunAmmo);
+                //GetEventListener("UIManager").HandleEvent(GameEvent.UI_AMMO_MAX, maxShotgunAmmo);
+            
+        }
 
         int previousSelectedWeapon = SelectedWeapon;
 
@@ -172,13 +186,15 @@ public class CombinedScript : EventHandle {
             gunType = GunType.SHOTGUN;
         }
 
+
+
         if (gunType == GunType.RIFLE)
         {
-            Ammo.text = currentRifleAmmo + " / " + maxRifleAmmo;
+           
         }
         if (gunType == GunType.SHOTGUN)
         {
-            Ammo.text = currentShotgunAmmo + " / " + maxShotgunAmmo;
+            
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && gunType == GunType.RIFLE)

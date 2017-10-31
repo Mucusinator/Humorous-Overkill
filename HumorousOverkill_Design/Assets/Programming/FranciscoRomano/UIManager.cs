@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : GameEventListener
+public class UIManager : EventHandler.EventHandle
 {
     [Range(0,  1)] public float m_healthTEST = 1.0f;
     [Range(0, 99)] public float m_ammoCurTEST = 99.0f;
@@ -28,7 +28,7 @@ public class UIManager : GameEventListener
     //    HandleEvent(GameEvent.UI_AMMO_MAX, m_ammoMaxTEST);
     //}
 
-    public override void HandleEvent(GameEvent e)
+    public override bool HandleEvent(GameEvent e)
     {
         switch (e)
         {
@@ -48,9 +48,10 @@ public class UIManager : GameEventListener
                 base.HandleEvent(e);
                 break;
         }
+        return true;
     }
 
-    public override void HandleEvent(GameEvent e, float amount)
+    public override bool HandleEvent(GameEvent e, float amount)
     {
         switch (e)
         {
@@ -69,6 +70,7 @@ public class UIManager : GameEventListener
                 base.HandleEvent(e);
                 break;
         }
+        return true;
     }
 
     [System.Serializable]

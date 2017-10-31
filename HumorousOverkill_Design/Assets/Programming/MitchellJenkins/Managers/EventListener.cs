@@ -14,7 +14,8 @@ namespace EventHandler {
         public BindListenerAttribute (
             String key,             // Key to identify the listener
             System.Type type        // The type of listener
-            ) { this.key = key; listener = GameObject.FindObjectsOfType(type) as EventListener[]; }
+            )
+            { this.key = key; listener = GameObject.FindObjectsOfType(type) as EventListener[]; }
         #endregion
 
         #region ATTRIBUTES
