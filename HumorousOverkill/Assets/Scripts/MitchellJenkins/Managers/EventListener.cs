@@ -212,8 +212,8 @@ namespace EventHandler {
         /// <param name="Key">Key to identify the listener</param
         /// <param name="index">Index to identify the position</param>
         public EventListener GetEventListener (
-            String Key,         // Key to identify the listener
-            int index           // Index
+            String Key,                 // Key to identify the listener
+            int index                   // Index
             )
             { return listeners[Key][index]; }
 
@@ -222,13 +222,46 @@ namespace EventHandler {
         /// </summary>
         /// <param name="Key">Key to identify the listener</param
         public EventListener GetEventListener (
-            String Key         // Key to identify the listener
-            ) { return listeners[Key][0]; }
+            String Key                  // Key to identify the listener
+            )
+            { return listeners[Key][0]; }
 
-        public bool UpdateBindedList(string Key, System.Type type) {
-            listeners[Key] =  GameObject.FindObjectsOfType(type) as EventListener[];
-            return true;
+        /// <summary>
+        /// Returns a listener from the key
+        /// </summary>
+        /// <param name="Key">Key to identify the listener</param
+        public EventListener GetEventListener (
+            String Key,                 // Key to identify the listener
+            UnityEngine.GameObject obj
+            )
+            {
+            foreach (EventListener e in listeners[Key]) {
+                if (e.gameObject == obj) return listeners[Key][0];
+            } return null;
         }
+
+        /// <summary>
+        /// Returns a listener from the object
+        /// </summary>
+        /// <param name="obj">Object to get the listener from</param
+        public EventListener GetEventListener (
+            UnityEngine.GameObject obj  //Object to get the listener from
+            )
+            { return obj.GetComponent<EventListener>(); }
+
+        /// <summary>
+        /// Updates a type for the dictionary
+        /// </summary>
+        /// <param name="Key">Key to identify the listener</param>
+        /// <param name="type">Type to update</param>
+        /// <returns></returns>
+        public bool UpdateBindedList(
+            string Key,                 // Key to identify the listener
+            System.Type type            // Type to update
+            )
+            { listeners[Key] =  GameObject.FindObjectsOfType(type) as EventListener[]; return true; }
+        
+
         #endregion
     }
 
