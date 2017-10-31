@@ -82,9 +82,6 @@ public class DonutAI : EventHandler.EventHandle
         // get the "x" size of the collider (actually y)
         float size = donutCollider.size.x;
 
-        // debug the diameter of the mesh
-        Debug.Log("the diameter of the donut is " + size);
-
         // circumference is 2PIr aka PI * diameter
         // also takes into account scaling
         donutCircumference = (size * Mathf.PI * transform.localScale.y);
@@ -123,5 +120,30 @@ public class DonutAI : EventHandler.EventHandle
                     break;
             }
         }
+    }
+
+    // TODO: make fancy
+    void die()
+    {
+        // tell enemy manager that an enemy has died
+        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED, 0);
+
+        // destroy this gameobject
+        Destroy(this.gameObject);
+    }
+
+    public override bool HandleEvent(GameEvent e, float value)
+    {
+        switch (e)
+        {
+            case GameEvent.ENEMY_DAMAGED:
+                myInfo.health -= value;
+                if(myInfo.health <= 0)
+                {
+                    die();
+                }
+                break;
+        }
+        return true;
     }
 }
