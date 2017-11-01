@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class UIManager : GameEventListener
 {
@@ -8,25 +8,49 @@ public class UIManager : GameEventListener
     [Range(0, 99)] public float m_ammoCurTEST = 99.0f;
     [Range(0, 99)] public float m_ammoMaxTEST = 99.0f;
 
-    public UIImage m_playerStatsHealth = new UIImage();
-    public UIText m_playerStatsMaxAmmo = new UIText();
-    public UIText m_playerStatsCurAmmo = new UIText();
+    private UIImage m_playerStatsHealth = new UIImage();
+    private UIText m_playerStatsMaxAmmo = new UIText();
+    private UIText m_playerStatsCurAmmo = new UIText();
 
-    //public void OnValidate()
-    //{
-    //    if (m_playerStatsHealth == null) return;
-    //    if (m_playerStatsCurAmmo == null) return;
-    //    if (m_playerStatsMaxAmmo == null) return;
-    //    if (m_playerStatsHealth.m_width == 0)   
-    //    {
-    //        m_playerStatsHealth.m_width = m_playerStatsHealth.m_image.rectTransform.rect.width;
-    //        m_playerStatsHealth.m_height = m_playerStatsHealth.m_image.rectTransform.rect.height;
-    //    }
+    void Start()
+    {
+        // A bit complex at this stage...
+        // Will be comented properly and improved
+        UIProperty[] properties = GetComponentsInChildren<UIProperty>();
+        foreach(UIProperty property in properties)
+        {
+            switch(property.type)
+            {
+                case UIProperty.UIPropertyType.TEXT:
+                    if (property.gameEvent == GameEvent.UI_AMMO_CUR) m_playerStatsCurAmmo.m_text = property.GetComponent<UnityEngine.UI.Text>();
+                    else if (property.gameEvent == GameEvent.UI_AMMO_MAX) m_playerStatsMaxAmmo.m_text = property.GetComponent<UnityEngine.UI.Text>();
+                    break;
+                case UIProperty.UIPropertyType.IMAGE:
+                    if (property.gameEvent == GameEvent.UI_HEALTH)
+                    {
+                        m_playerStatsHealth.m_image = property.GetComponent<UnityEngine.UI.Image>();
+                        m_playerStatsHealth.m_width = m_playerStatsHealth.m_image.rectTransform.rect.width;
+                        m_playerStatsHealth.m_height = m_playerStatsHealth.m_image.rectTransform.rect.height;
+                    }
+                    break;
+                case UIProperty.UIPropertyType.BUTTON:
+                    break;
+            }
+        }
+    }
 
-    //    HandleEvent(GameEvent.UI_HEALTH, m_healthTEST);
-    //    HandleEvent(GameEvent.UI_AMMO_CUR, m_ammoCurTEST);
-    //    HandleEvent(GameEvent.UI_AMMO_MAX, m_ammoMaxTEST);
-    //}
+    // ############################################ //
+    // ## FOR TESTING ONLY ######################## //
+    // ############################################ //
+    void Update()
+    {
+        HandleEvent(GameEvent.UI_HEALTH, m_healthTEST);
+        HandleEvent(GameEvent.UI_AMMO_CUR, m_ammoCurTEST);
+        HandleEvent(GameEvent.UI_AMMO_MAX, m_ammoMaxTEST);
+    }
+    // ############################################ //
+    // ############################################ //
+    // ############################################ //
 
     public override void HandleEvent(GameEvent e)
     {
@@ -42,10 +66,6 @@ public class UIManager : GameEventListener
             case GameEvent.GAME_STATE_RESTART:
                 break;
             case GameEvent.GAME_STATE_CONTINUE:
-                break;
-            // default handle
-            default:
-                base.HandleEvent(e);
                 break;
         }
     }
@@ -63,10 +83,6 @@ public class UIManager : GameEventListener
                 break;
             case GameEvent.UI_AMMO_MAX:
                 m_playerStatsMaxAmmo.Update((int)amount);
-                break;
-            // default handle
-            default:
-                base.HandleEvent(e);
                 break;
         }
     }
