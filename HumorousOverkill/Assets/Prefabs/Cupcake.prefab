@@ -2573,12 +2573,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1377578828845052}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1fb1b9eb32474f4396fc671306e7247, type: 3}
+  m_Script: {fileID: 11500000, guid: 5127d1e694f43994094c86fedec9e8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myInfo:
     targetRadius: 0
     errorMargin: 0
+    damage: 0
     wanderSpeed: 0
     turnSpeed: 0
     avoidRadius: 0

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class UIManager : GameEventListener
+public class UIManager : EventHandler.EventHandle
 {
     [Range(0,  1)] public float m_healthTEST = 1.0f;
     [Range(0, 99)] public float m_ammoCurTEST = 99.0f;
@@ -52,7 +52,7 @@ public class UIManager : GameEventListener
     // ############################################ //
     // ############################################ //
 
-    public override void HandleEvent(GameEvent e)
+    public override bool HandleEvent(GameEvent e)
     {
         switch (e)
         {
@@ -68,9 +68,10 @@ public class UIManager : GameEventListener
             case GameEvent.GAME_STATE_CONTINUE:
                 break;
         }
+        return true;
     }
 
-    public override void HandleEvent(GameEvent e, float amount)
+    public override bool HandleEvent(GameEvent e, float amount)
     {
         switch (e)
         {
@@ -85,6 +86,7 @@ public class UIManager : GameEventListener
                 m_playerStatsMaxAmmo.Update((int)amount);
                 break;
         }
+        return true;
     }
 
     [System.Serializable]

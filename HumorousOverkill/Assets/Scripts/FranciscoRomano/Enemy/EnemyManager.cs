@@ -95,6 +95,14 @@ public class EnemyManager : EventHandler.EventHandle
                 }
             }
         }
+        else
+        {
+            // ## [TEMP] ## update all colliders
+            foreach (GameObject obj in spawner.temp_Colliders)
+            {
+                obj.SetActive(false);
+            }
+        }
     }
     // class functions [EventHandle]
     public override bool HandleEvent(GameEvent e)

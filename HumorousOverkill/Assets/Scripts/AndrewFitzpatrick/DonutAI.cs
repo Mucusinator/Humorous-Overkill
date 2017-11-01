@@ -112,12 +112,13 @@ public class DonutAI : EventHandler.EventHandle
                 {
                     if (hitInfo.collider.gameObject.tag == "Player")
                     {
-                        GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.5f);
+                        //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.5f);
                         hitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
+                        Debug.Log("I have hit the player");
                     }
                     else
                     {
-                        GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.0f);
+                        //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.0f);
                     }
                 }
 
@@ -136,7 +137,7 @@ public class DonutAI : EventHandler.EventHandle
         // switch to the next animation
         if (myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && !myAnimator.IsInTransition(0))
         {
-            GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.0f);
+            //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.0f);
 
             // run next animation (if the player is withing range
             switch (myAnimator.GetInteger("animationState"))

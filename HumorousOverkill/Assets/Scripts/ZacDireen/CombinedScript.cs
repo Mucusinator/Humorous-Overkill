@@ -20,11 +20,11 @@ public class CombinedScript : EventHandle {
     // This is the force applied to an object when it gets hit with rifle ammo.
     public float impactForce = 30.0f;
     // This is the amount maximum amount of ammo the rifle has.
-    public float maxRifleAmmo = 15.0f;
+    public int maxRifleAmmo = 15;
     // This is the amount of ammo the rifle currently has.
-    private float currentRifleAmmo;
+    public int currentRifleAmmo;
     // THis is the magazine size.
-    public float rifleMagSize;
+    public int rifleMagSize;
     // This is the reload time of the rifle.
     public float reloadRifleTime = 2.5f;
     // private field showing the shots per second.
@@ -55,7 +55,7 @@ public class CombinedScript : EventHandle {
     // This is the amount maximum amount of ammo the shotgun has.
     public int maxShotgunAmmo = 8;
     // This is the amount of ammo the shotgun currently has.
-    private int currentShotgunAmmo;
+    public int currentShotgunAmmo;
     // This is the reload time of the shotgun.
     public float reloadShotgunTime = 2.5f;
     // This is the shotgun delay so it is not spammable.
@@ -455,9 +455,17 @@ public class CombinedScript : EventHandle {
 
 
 
-                    if (hit.transform.tag == "Target")
+                    if (hit.collider.gameObject.tag == "Avoid")
                     {
-                        hit.transform.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
+                        if(hit.collider.gameObject.GetComponent<DroneAI>() != null)
+                        {
+                            hit.collider.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                        }
+                        if (hit.collider.gameObject.GetComponent<DonutAI>() != null)
+                        {
+                            hit.collider.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                        }
+                        Debug.Log("I have shot " + hit.collider.gameObject.name);
                         //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
                         //target.TakeDamage(RifleDamage);
 

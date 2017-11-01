@@ -26,23 +26,24 @@ public class PlayerManager : EventHandler.EventHandle {
     public Player m_ply;
 
     // Weapon Script.
-    //public Weapon m_weapon;
+    public CombinedScript m_weapon;
 
     // Player info
     public PlayerInfo m_playerInfo;
     public PlayerInfo GetPlayerInfo { get { return m_playerInfo; } }
 
     // Override for the handle event system
-    public override bool HandleEvent (GameEvent e) {
+    public override bool HandleEvent (GameEvent e, float value) {
         switch (e) {
         case GameEvent.PICKUP_HEALTH:
             // calls a function add health to the player
-            m_ply.AddHealth(m_playerInfo.m_pickupHealthAmount);
+            m_ply.AddHealth((int)value);
             break;
         case GameEvent.PICKUP_AMMO:
-            // Calls the add ammo function from the ammo script using the enum.
-            //m_weapon.AddAmmo(m_playerInfo.m_pickupAmmoAmount);
-            break;
+                // Calls the add ammo function from the ammo script using the enum.
+                m_weapon.currentRifleAmmo += (int)value;
+                m_weapon.currentShotgunAmmo += (int)value;
+                break;
         default:
             break;
         } return true;

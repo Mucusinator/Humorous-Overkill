@@ -30,11 +30,11 @@ public class PlayerMovement : EventHandle {
         //m_animator  = this.GetComponent<Player>()._Animator;
         m_transform = this.transform;
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     void Update () {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         transform.Rotate(0f, Input.GetAxis("Mouse X") * 200 * m_camera.m_sensitivity * Time.deltaTime, 0f);
 
         m_moveDirection.x = Input.GetAxis("Horizontal") * m_moveSpeed;
