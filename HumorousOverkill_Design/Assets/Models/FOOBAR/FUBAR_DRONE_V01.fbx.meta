@@ -1,0 +1,188 @@
+fileFormatVersion: 2
+guid: 85d822dbfa3a6fe42b3da5deac0e0ed9
+timeCreated: 1509490386
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0010:Pivot3_CupcakeDrone_Mesh_v0010:Thruster
+    100002: CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0011:polySurface6
+    100004: CupcakeDrone_Mesh_v0010:pCube3
+    100006: CupcakeDrone_Mesh_v0010:pCylinder2
+    100008: CupcakeDrone_Mesh_v0010:pCylinder5
+    100010: //RootNode
+    100012: pCube3
+    100014: pCube4
+    100016: pCube6
+    100018: pCylinder2
+    100020: pCylinder2 1
+    100022: pCylinder5
+    100024: pCylinder5 1
+    100026: pCylinder6
+    100028: polySurface10
+    100030: polySurface11
+    100032: polySurface6
+    100034: polySurface6 1
+    100036: polySurface9
+    100038: Thruster
+    100040: Thruster 1
+    400000: CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0010:Pivot3_CupcakeDrone_Mesh_v0010:Thruster
+    400002: CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0011:polySurface6
+    400004: CupcakeDrone_Mesh_v0010:pCube3
+    400006: CupcakeDrone_Mesh_v0010:pCylinder2
+    400008: CupcakeDrone_Mesh_v0010:pCylinder5
+    400010: //RootNode
+    400012: pCube3
+    400014: pCube4
+    400016: pCube6
+    400018: pCylinder2
+    400020: pCylinder2 1
+    400022: pCylinder5
+    400024: pCylinder5 1
+    400026: pCylinder6
+    400028: polySurface10
+    400030: polySurface11
+    400032: polySurface6
+    400034: polySurface6 1
+    400036: polySurface9
+    400038: Thruster
+    400040: Thruster 1
+    2300000: CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0010:Pivot3_CupcakeDrone_Mesh_v0010:Thruster
+    2300002: CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0011:polySurface6
+    2300004: CupcakeDrone_Mesh_v0010:pCube3
+    2300006: CupcakeDrone_Mesh_v0010:pCylinder2
+    2300008: CupcakeDrone_Mesh_v0010:pCylinder5
+    2300010: //RootNode
+    2300012: pCube3
+    2300014: pCube4
+    2300016: pCube6
+    2300018: pCylinder2
+    2300020: pCylinder2 1
+    2300022: pCylinder5
+    2300024: pCylinder5 1
+    2300026: pCylinder6
+    2300028: polySurface10
+    2300030: polySurface11
+    2300032: polySurface6
+    2300034: polySurface6 1
+    2300036: polySurface9
+    2300038: Thruster
+    2300040: Thruster 1
+    3300000: CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0010:Pivot3_CupcakeDrone_Mesh_v0010:Thruster
+    3300002: CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0011:polySurface6
+    3300004: CupcakeDrone_Mesh_v0010:pCube3
+    3300006: CupcakeDrone_Mesh_v0010:pCylinder2
+    3300008: CupcakeDrone_Mesh_v0010:pCylinder5
+    3300010: //RootNode
+    3300012: pCube3
+    3300014: pCube4
+    3300016: pCube6
+    3300018: pCylinder2
+    3300020: pCylinder2 1
+    3300022: pCylinder5
+    3300024: pCylinder5 1
+    3300026: pCylinder6
+    3300028: polySurface10
+    3300030: polySurface11
+    3300032: polySurface6
+    3300034: polySurface6 1
+    3300036: polySurface9
+    3300038: Thruster
+    3300040: Thruster 1
+    4300000: pCylinder9
+    4300002: pCube3
+    4300004: pCylinder5
+    4300006: polySurface6
+    4300008: pCylinder2
+    4300010: Thruster
+    4300012: pCube4
+    4300014: pCylinder5
+    4300016: polySurface6
+    4300018: pCylinder2
+    4300020: Thruster
+    4300022: polySurface10
+    4300024: polySurface9
+    4300026: polySurface11
+    4300028: CupcakeDrone_Mesh_v0010:pCube3
+    4300030: CupcakeDrone_Mesh_v0010:pCylinder5
+    4300032: CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0011:polySurface6
+    4300034: CupcakeDrone_Mesh_v0010:pCylinder2
+    4300036: CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0010:Pivot3_CupcakeDrone_Mesh_v0010:Thruster
+    4300038: pCylinder6
+    4300040: pCube6
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
