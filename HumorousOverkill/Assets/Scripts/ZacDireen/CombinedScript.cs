@@ -191,11 +191,11 @@ public class CombinedScript : EventHandle {
 
         if (gunType == GunType.RIFLE)
         {
-            Ammo.text = currentRifleAmmo + " / " + maxRifleAmmo;
+            //Ammo.text = currentRifleAmmo + " / " + maxRifleAmmo;
         }
         if (gunType == GunType.SHOTGUN)
         {
-            Ammo.text = currentShotgunAmmo + " / " + maxShotgunAmmo;
+            //Ammo.text = currentShotgunAmmo + " / " + maxShotgunAmmo;
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && gunType == GunType.RIFLE)
