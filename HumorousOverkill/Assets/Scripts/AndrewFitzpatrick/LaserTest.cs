@@ -11,7 +11,6 @@ public class LaserTest : MonoBehaviour
     public List<Color> laserColors = new List<Color>();
     public GameObject unicorn;
     public GameObject shootPoint;
-    public GameObject laser_hit;
     private float colorOffset = 0;
     public float laserSpeed = 1;
 
@@ -42,21 +41,18 @@ public class LaserTest : MonoBehaviour
 
             if (Physics.Raycast(ray.origin, ray.direction * 1000.0f, out hit))
             {
-                if (hit.collider.gameObject.tag == "Avoid")
+                // find distance and rotation towards hit point
+                float dist = hit.distance;
+                Vector3 relativePos = hit.point - shootPoint.transform.position;
+                Quaternion rotation = Quaternion.LookRotation(relativePos);
+
+                // instantiate laser parts
+                for (int i = 0; i < dist * 5; i++)
                 {
-                    float dist = hit.distance;
-
-                    Vector3 relativePos = hit.point - shootPoint.transform.position;
-                    Quaternion rotation = Quaternion.LookRotation(relativePos);
-
-                    for(int i = 0; i < dist * 5; i++)
-                    {
-                        GameObject currentPart = Instantiate(laser, Vector3.Lerp(hit.point, shootPoint.transform.position, (1.0f / (dist * 5)) * i), rotation) as GameObject;
-                        currentPart.GetComponent<Renderer>().material.SetColor("_TintColor", laserColors[(i + (int)colorOffset) % laserColors.Count]);
-                        //currentPart.GetComponent<Renderer>().material.SetColor("_Color2", laserColors[laserColors.Count - 1 - (i + (int)colorOffset) % laserColors.Count]);
-                        laserParts.Add(currentPart);
-                    }
-                    //Instantiate(laser_hit, hit.point, Quaternion.identity);
+                    GameObject currentPart = Instantiate(laser, Vector3.Lerp(hit.point, shootPoint.transform.position, (1.0f / (dist * 5)) * i), rotation) as GameObject;
+                    currentPart.GetComponent<Renderer>().material.SetColor("_Color", laserColors[(i + (int)colorOffset) % laserColors.Count]);
+                    //currentPart.GetComponent<Renderer>().material.SetColor("_Color2", laserColors[laserColors.Count - 1 - (i + (int)colorOffset) % laserColors.Count]);
+                    laserParts.Add(currentPart);
                 }
             }
         }
