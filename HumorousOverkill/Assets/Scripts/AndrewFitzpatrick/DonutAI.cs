@@ -15,14 +15,14 @@ public class DonutAI : EventHandler.EventHandle
     private bool deployed;
     private float donutCircumference;
     private Transform modelTransform;
-    private float deployTimer = 0;
     private GameObject target;
     private Animator myAnimator;
     private RaycastHit hitInfo;
 
-    void Awake()
+    public override void Awake()
     {
-        //base.Awake();
+        base.Awake();
+
         // use player as target
         target = GameObject.FindGameObjectWithTag("Player");
 
@@ -112,12 +112,13 @@ public class DonutAI : EventHandler.EventHandle
                 {
                     if (hitInfo.collider.gameObject.tag == "Player")
                     {
-                        GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.5f);
+                        //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.5f);
                         hitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
+                        Debug.Log("I have hit the player");
                     }
                     else
                     {
-                        GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.0f);
+                        //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.0f);
                     }
                 }
 
@@ -136,7 +137,7 @@ public class DonutAI : EventHandler.EventHandle
         // switch to the next animation
         if (myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && !myAnimator.IsInTransition(0))
         {
-            GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.0f);
+            //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.0f);
 
             // run next animation (if the player is withing range
             switch (myAnimator.GetInteger("animationState"))
@@ -158,7 +159,7 @@ public class DonutAI : EventHandler.EventHandle
     void die()
     {
         // tell enemy manager that an enemy has died
-        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED, 0);
+        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
 
         // destroy this gameobject
         Destroy(this.gameObject);

@@ -21,7 +21,7 @@ public class Pickup : MonoBehaviour
         if (collider.tag == "Player" && !collider.GetComponent<Player>().isHealthFull)
         {
             // send event to player
-            GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>().HandleEvent(type);
+            GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(type, amount);
             // destroy current game object
             Destroy(gameObject);
         }

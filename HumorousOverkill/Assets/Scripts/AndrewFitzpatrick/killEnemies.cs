@@ -11,7 +11,7 @@ public class killEnemies : MonoBehaviour
         RaycastHit hitInfo;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         Debug.DrawRay(ray.origin, ray.direction * 1000, Color.yellow);
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButton(0))
         {
             if (Physics.Raycast(ray, out hitInfo))
             {

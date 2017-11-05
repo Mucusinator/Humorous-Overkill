@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using EventHandler;
 
 [BindListener("Enemy", typeof(EnemyManager))]
-[BindListener("Player",typeof(PlayerManager))] 
+[BindListener("Player",typeof(PlayerManager))]
+[BindListener("UI",typeof(UIManager))] 
 public class CombinedScript : EventHandle {
 
     // Rifle/Laser Variables.
@@ -19,11 +20,11 @@ public class CombinedScript : EventHandle {
     // This is the force applied to an object when it gets hit with rifle ammo.
     public float impactForce = 30.0f;
     // This is the amount maximum amount of ammo the rifle has.
-    public float maxRifleAmmo = 15.0f;
+    public int maxRifleAmmo = 15;
     // This is the amount of ammo the rifle currently has.
-    private float currentRifleAmmo;
+    public int currentRifleAmmo;
     // THis is the magazine size.
-    public float rifleMagSize;
+    public int rifleMagSize;
     // This is the reload time of the rifle.
     public float reloadRifleTime = 2.5f;
     // private field showing the shots per second.
@@ -54,7 +55,7 @@ public class CombinedScript : EventHandle {
     // This is the amount maximum amount of ammo the shotgun has.
     public int maxShotgunAmmo = 8;
     // This is the amount of ammo the shotgun currently has.
-    private int currentShotgunAmmo;
+    public int currentShotgunAmmo;
     // This is the reload time of the shotgun.
     public float reloadShotgunTime = 2.5f;
     // This is the shotgun delay so it is not spammable.
@@ -79,7 +80,7 @@ public class CombinedScript : EventHandle {
     // Weapon Raycast.
     public GameObject WeaponRaycast;
     // This is the UI text element for the UI.
-    public Text Ammo;
+    //public Text Ammo;
 
     public GameObject EndOfGun;
 
@@ -124,6 +125,20 @@ public class CombinedScript : EventHandle {
 	
 	// Update is called once per frame
 	void Update () {
+
+        //GameObject.FindGameObjectWithTag("UI").GetComponent<UIManager>().HandleEvent(GameEvent.UI_AMMO_CUR);
+        if (gunType == GunType.RIFLE)
+        {
+            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_CUR, currentRifleAmmo);
+            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_MAX, maxRifleAmmo);
+        }
+        else if (gunType == GunType.SHOTGUN)
+        {
+           
+                GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_CUR, currentShotgunAmmo);
+                GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_MAX, maxShotgunAmmo);
+            
+        }
 
         int previousSelectedWeapon = SelectedWeapon;
 
@@ -172,13 +187,15 @@ public class CombinedScript : EventHandle {
             gunType = GunType.SHOTGUN;
         }
 
+
+
         if (gunType == GunType.RIFLE)
         {
-            Ammo.text = currentRifleAmmo + " / " + maxRifleAmmo;
+            //Ammo.text = currentRifleAmmo + " / " + maxRifleAmmo;
         }
         if (gunType == GunType.SHOTGUN)
         {
-            Ammo.text = currentShotgunAmmo + " / " + maxShotgunAmmo;
+            //Ammo.text = currentShotgunAmmo + " / " + maxShotgunAmmo;
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && gunType == GunType.RIFLE)
@@ -438,9 +455,17 @@ public class CombinedScript : EventHandle {
 
 
 
-                    if (hit.transform.tag == "Target")
+                    if (hit.collider.gameObject.tag == "Avoid")
                     {
-                        hit.transform.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
+                        if(hit.collider.gameObject.GetComponent<DroneAI>() != null)
+                        {
+                            hit.collider.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                        }
+                        if (hit.collider.gameObject.GetComponent<DonutAI>() != null)
+                        {
+                            hit.collider.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                        }
+                        Debug.Log("I have shot " + hit.collider.gameObject.name);
                         //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
                         //target.TakeDamage(RifleDamage);
 

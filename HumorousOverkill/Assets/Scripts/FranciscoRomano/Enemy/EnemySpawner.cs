@@ -11,6 +11,7 @@ public class EnemySpawner : EventHandle
     //[HideInInspector]
     public bool activated = false;
     public EnemyStage enemyStage = new EnemyStage();
+    public List<GameObject> temp_Colliders = new List<GameObject>();
     
     void OnTriggerEnter(Collider collider)
     {
@@ -19,6 +20,11 @@ public class EnemySpawner : EventHandle
         {
             // notify manager
             GetEventListener("EnemyManager").HandleEvent(GameEvent.CLASS_TYPE_ENEMY_SPAWNER, this);
+            // ## [TEMP] ## update all colliders
+            foreach (GameObject obj in temp_Colliders)
+            {
+                obj.SetActive(true);
+            }
         }
     }
 
@@ -80,6 +86,7 @@ public class EnemySpawner : EventHandle
             // continue to next wave
             case GameEvent.ENEMY_WAVE_NEXT:
                 enemyStage.nextWave();
+                
                 break;
         }
         return true;
