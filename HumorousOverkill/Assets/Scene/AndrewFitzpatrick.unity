@@ -2476,9 +2476,7 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 0, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 0, g: 0, b: 1, a: 1}
-  - {r: 1, g: 0, b: 1, a: 1}
   - {r: 0.5019608, g: 0, b: 1, a: 1}
-  unicorn: {fileID: 1565671132}
   shootPoint: {fileID: 1565671132}
   laserSpeed: 20
 --- !u!136 &1548300182
