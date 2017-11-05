@@ -387,8 +387,6 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpSelection: 2
-  playerHealth: {fileID: 0}
 --- !u!23 &252557668
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -464,8 +462,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f2401fe4913414e94ef5a5b12c4d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpSelection: 2
-  playerHealth: {fileID: 0}
 --- !u!1 &377663454
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,8 +575,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7f7490fda7ba249a97fed3236871a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpSelection: 0
-  playerHealth: {fileID: 0}
 --- !u!23 &399674804
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -656,8 +650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f2401fe4913414e94ef5a5b12c4d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpSelection: 0
-  playerHealth: {fileID: 0}
 --- !u!1 &432448118
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,18 +779,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acba949896f71a48a22557ea03962b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunDamage: 10
-  range: 100
-  fpsCam: {fileID: 78217746}
-  flash: {fileID: 1528455196}
-  impactForce: 250
-  ShootBeamFrom: {fileID: 700239886}
-  animator: {fileID: 700239888}
-  ShotsPerMinute: 600
-  maxAmmo: 10
-  reloadTime: 2.5
-  FireRateSelection: 1
-  ShotsPerSecond: 0
 --- !u!23 &556693149
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -966,7 +946,7 @@ Animator:
   m_GameObject: {fileID: 700239886}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bd284003a964360459a8c9c4de2eb5b0, type: 2}
+  m_Controller: {fileID: 9100000, guid: c2308c404f43cb94cba07419719d9442, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -982,7 +962,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 700239886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abbfdf0c90fff2f4fb08e568b2a5090e, type: 3}
+  m_Script: {fileID: 11500000, guid: a3efa8794e2cf464eb21b37a06bf6d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   RifleDamage: 10
@@ -990,7 +970,8 @@ MonoBehaviour:
   RifleMuzzleEffect: {fileID: 1528455196}
   impactForce: 30
   maxRifleAmmo: 15
-  rifleMagSize: 5
+  currentRifleAmmo: 0
+  rifleMagSize: 0
   reloadRifleTime: 2.5
   ShotsPerSecond: 0
   RoundsPerMinute: 600
@@ -1002,15 +983,15 @@ MonoBehaviour:
   spreadWidth: 2
   Range: 10
   maxShotgunAmmo: 8
+  currentShotgunAmmo: 0
   reloadShotgunTime: 2.5
   FireDelay: 0.4
   animator: {fileID: 700239888}
   SelectedWeapon: 0
-  fireRate: 1
-  gunType: 1
-  StartOfPlayerRaycast: {fileID: 700239886}
+  fireRate: 0
+  gunType: 0
+  StartOfPlayerRaycast: {fileID: 1346937693}
   WeaponRaycast: {fileID: 700239886}
-  Ammo: {fileID: 1381820060}
   EndOfGun: {fileID: 1096648804}
   fpsCam: {fileID: 78217746}
   shotTrail: {fileID: 700239891}
@@ -1026,7 +1007,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c1a8c2223373d49ace8b6e85862bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectedWeapon: 0
 --- !u!120 &700239891
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1315,7 +1295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &927720118
 Transform:
   m_ObjectHideFlags: 0
@@ -1342,17 +1322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ad6ce695924a149ad4b7783b3b65aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pelletCount: 8
-  fpsCam: {fileID: 78217746}
-  pelletDamage: 4
-  impactForce: 30
-  animator: {fileID: 700239888}
-  spreadWidth: 2
-  range: 200
-  maxAmmo: 8
-  currentAmmo: 0
-  reloadTime: 2.5
-  shotgunBlast: {fileID: 0}
 --- !u!23 &927720120
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1504,7 +1473,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
 --- !u!1 &1096648804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1998,7 +1966,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
 --- !u!1 &1457630905
 GameObject:
   m_ObjectHideFlags: 0
@@ -2101,7 +2068,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7863f268d98f2845ba597279e55ddb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
 --- !u!1 &1528455193
 GameObject:
   m_ObjectHideFlags: 0
@@ -5561,7 +5527,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
 --- !u!1 &1750060979
 GameObject:
   m_ObjectHideFlags: 0
@@ -5740,7 +5705,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
 --- !u!1 &1848243393
 GameObject:
   m_ObjectHideFlags: 0
@@ -5785,7 +5749,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecbc7371b834f7a4c808f5436d949af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
 --- !u!1 &2012496998
 GameObject:
   m_ObjectHideFlags: 0
@@ -5817,8 +5780,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7f7490fda7ba249a97fed3236871a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpSelection: 1
-  playerHealth: {fileID: 0}
 --- !u!23 &2012497000
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5894,5 +5855,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f2401fe4913414e94ef5a5b12c4d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpSelection: 1
-  playerHealth: {fileID: 0}
