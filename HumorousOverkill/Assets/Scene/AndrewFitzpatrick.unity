@@ -1486,7 +1486,7 @@ MonoBehaviour:
       spawnRate: 0
       units:
       - amount: 4
-        prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
+        prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2d,
           type: 2}
   temp_Colliders:
   - {fileID: 252947524}
