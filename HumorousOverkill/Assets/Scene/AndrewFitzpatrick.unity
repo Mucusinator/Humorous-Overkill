@@ -43,7 +43,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -86,7 +86,8 @@ LightmapSettings:
     m_PVRFilteringAtrousColorSigma: 1
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: e31c1a3c58c8aec469aa4987cc556fc4,
+    type: 2}
   m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
@@ -2471,12 +2472,15 @@ MonoBehaviour:
   laser: {fileID: 1474681541269588, guid: 3dd32fb9b8a8bd84c8e6115ecbf3d82c, type: 2}
   laserColors:
   - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.5019608, b: 0, a: 1}
+  - {r: 1, g: 1, b: 0, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 1, a: 1}
+  - {r: 0.5019608, g: 0, b: 1, a: 1}
   unicorn: {fileID: 1565671132}
   shootPoint: {fileID: 1565671132}
-  laser_hit: {fileID: 0}
-  laserSpeed: 1
+  laserSpeed: 20
 --- !u!136 &1548300182
 CapsuleCollider:
   m_ObjectHideFlags: 0
