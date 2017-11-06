@@ -186,6 +186,7 @@ public class DonutAI : EventHandler.EventHandle
         return true;
     }
 
+#if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
         // display accuracy / range
@@ -196,4 +197,5 @@ public class DonutAI : EventHandler.EventHandle
         UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - transform.forward * myInfo.accuracy);
         UnityEditor.Handles.DrawWireDisc(transform.position -transform.right * myInfo.hitRange, transform.right, myInfo.accuracy);
     }
+#endif
 }

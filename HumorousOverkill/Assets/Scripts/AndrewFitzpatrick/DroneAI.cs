@@ -170,6 +170,7 @@ public class DroneAI : EventHandler.EventHandle
         Destroy(this.gameObject, 5);
 }
 
+#if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
         if(showGizmos)
@@ -191,6 +192,7 @@ public class DroneAI : EventHandler.EventHandle
             Gizmos.DrawWireSphere(currentTarget, 0.5f);
         }
     }
+#endif
 
     public override bool HandleEvent(GameEvent e, float value)
     {
