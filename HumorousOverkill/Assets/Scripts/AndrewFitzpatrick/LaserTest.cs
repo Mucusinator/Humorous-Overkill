@@ -12,11 +12,14 @@ public class LaserTest : MonoBehaviour
     public GameObject shootPoint; // point that laser shoots from
     private float colorOffset = 0; // current color index
     public float laserSpeed = 1; // speed that laser changes colors
+    private LineRenderer myLineRenderer;
+    private List<Vector3> linePositions = new List<Vector3>();
 
     void Awake()
     {
-        // assign cam
+        // assign cam and myLineRenderer
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        myLineRenderer = GetComponent<LineRenderer>();
     }
 
     void Update ()
@@ -36,8 +39,12 @@ public class LaserTest : MonoBehaviour
             // cleanup old laser parts
             cleanup();
 
+            // draw new parts if the raycast hit anything solid
             if (Physics.Raycast(ray.origin, ray.direction * 1000.0f, out hit))
             {
+                // enable line renderer
+                myLineRenderer.enabled = true;
+
                 // find distance and rotation towards hit point
                 float dist = hit.distance;
                 Vector3 relativePos = hit.point - shootPoint.transform.position;
@@ -46,12 +53,24 @@ public class LaserTest : MonoBehaviour
                 // instantiate laser parts
                 for (int i = 0; i < dist * 5; i++)
                 {
-                    GameObject currentPart = Instantiate(laser, Vector3.Lerp(hit.point, shootPoint.transform.position, (1.0f / (dist * 5)) * i), rotation) as GameObject;
-                    currentPart.GetComponent<Renderer>().material.SetColor("_Color", laserColors[(i + (int)colorOffset) % laserColors.Count]);
+                    // lerp from shoot point to hit point
+                    Vector3 lerpPos = Vector3.Lerp(shootPoint.transform.position, hit.point, 1.0f - (1.0f / (dist * 5) * i));
+
+                    // instantiate the current laser part
+                    GameObject currentPart = Instantiate(laser, lerpPos, rotation) as GameObject;
+
+                    // set the current laser parts color
+                    int currentColor = (laserColors.Count - 1 - (i + (int)colorOffset) % laserColors.Count);
+                    currentPart.GetComponent<Renderer>().material.SetColor("_Color", laserColors[currentColor]);
+
+                    // parent the laser part and add it to the list
                     currentPart.transform.parent = transform;
-                    //currentPart.GetComponent<Renderer>().material.SetColor("_Color2", laserColors[laserColors.Count - 1 - (i + (int)colorOffset) % laserColors.Count]);
                     laserParts.Add(currentPart);
                 }
+
+                myLineRenderer.positionCount = linePositions.Count;
+                myLineRenderer.SetPositions(linePositions.ToArray());
+                linePositions.Clear();
             }
         }
 
@@ -59,16 +78,19 @@ public class LaserTest : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             cleanup();
+            myLineRenderer.enabled = false;
         }
     }
 
+    // removes all laser parts
     void cleanup()
     {
-        // destroy all the laser parts
+        // destroy each part
         foreach (GameObject laserPart in laserParts)
         {
             Destroy(laserPart);
         }
+        // clear list
         laserParts.Clear();
     }
 }
