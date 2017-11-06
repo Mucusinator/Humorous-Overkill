@@ -37,11 +37,11 @@ public class DonutAI : EventHandler.EventHandle
         // store animator
         myAnimator = GetComponent<Animator>();
 
-        // calculate circumference (needed for nice rolling)
-        findCircumference();
-
         // get default info from enemyManager
         myInfo = GetEventListener("enemyManager").gameObject.GetComponent<EnemyManager>().defaultDonutInfo;
+
+        // calculate circumference (needed for nice rolling)
+        findCircumference();
 
         // find modelTransform
         modelTransform = GetComponentsInChildren<Transform>()[1];
@@ -124,8 +124,8 @@ public class DonutAI : EventHandler.EventHandle
         position.y = size / 2;
         transform.position = position;
 
-        // adjust roll animation speed
-        myAnimator.SetFloat("rollSpeed", Mathf.PI / donutCircumference);
+        // set roll animation speed
+        myAnimator.SetFloat("rollSpeed", (1.0f / donutCircumference) * myInfo.rollSpeed);
     }
 
     // fall over and attack player

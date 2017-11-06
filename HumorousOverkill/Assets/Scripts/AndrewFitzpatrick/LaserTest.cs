@@ -45,17 +45,17 @@ public class LaserTest : MonoBehaviour
                 Quaternion rotation = Quaternion.LookRotation(relativePos);
 
                 // instantiate laser parts
-                for (int i = 0; i < dist * 5; i++)
+                for (int i = 0; i < dist * 2; i++)
                 {
                     // lerp from shoot point to hit point
-                    Vector3 lerpPos = Vector3.Lerp(shootPoint.transform.position, hit.point, 1.0f - (1.0f / (dist * 5) * i));
+                    Vector3 lerpPos = Vector3.Lerp(shootPoint.transform.position, hit.point, 1.0f - (1.0f / (dist * 2)) * i);
 
                     // instantiate the current laser part
                     GameObject currentPart = Instantiate(laser, lerpPos, rotation) as GameObject;
 
                     // set the current laser parts color
                     int currentColor = (laserColors.Count - 1 - (i + (int)colorOffset) % laserColors.Count);
-                    currentPart.GetComponent<Renderer>().material.SetColor("_Color", laserColors[currentColor]);
+                    currentPart.GetComponentInChildren<Renderer>().material.SetColor("_Color", laserColors[currentColor]);
 
                     // parent the laser part and add it to the list
                     currentPart.transform.parent = transform;
