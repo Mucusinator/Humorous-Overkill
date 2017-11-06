@@ -17,7 +17,10 @@ public class DroneAI : EventHandler.EventHandle
     private GameObject player; // reference to the player
     public GameObject projectile; // projectile prefab
     private float shotTimer = 0;
+
+    // freeze for when the game is paused
     public bool freeze = false;
+    // dead for the explosion
     public bool dead = false;
 
     private float startHealth;

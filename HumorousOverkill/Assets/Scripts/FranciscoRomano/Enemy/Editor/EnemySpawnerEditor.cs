@@ -51,34 +51,34 @@ public class EnemySpawnerEditor : Editor
 
         if (isEditingRegion)
         {
-            // component region layout
-            GUILayout.Label("Editing Region:", EditorStyles.boldLabel);
-            new_regionEditor.maximumX = Mathf.Max(EditorGUILayout.FloatField("height", new_regionEditor.maximumX), 1);
-            if (GUILayout.Button("Go Back")) { ResetDefaults(); };
-            if (GUILayout.Button("Confirm")) { new_regionEditor.setdata(); };
+            //// component region layout
+            //GUILayout.Label("Editing Region:", EditorStyles.boldLabel);
+            //new_regionEditor.maximumX = Mathf.Max(EditorGUILayout.FloatField("height", new_regionEditor.maximumX), 1);
+            //if (GUILayout.Button("Go Back")) { ResetDefaults(); };
+            //if (GUILayout.Button("Confirm")) { new_regionEditor.setdata(); };
         }
         else if (isEditingPoints)
         {
-            // component points tools
-            GUILayout.Label("Editing Points:", EditorStyles.boldLabel);
-            for (int i = 0; i < pointsEditor.points.Count; i++)
-            {
-                EditorGUILayout.BeginHorizontal();
-                pointsEditor.points[i] = EditorGUILayout.Vector3Field("", pointsEditor.points[i]);
-                if (GUILayout.Button("remove")) pointsEditor.points.RemoveAt(i);
-                EditorGUILayout.EndHorizontal();
-            }
-            if (GUILayout.Button("Go Back")) { ResetDefaults(); };
-            if (GUILayout.Button("Confirm")) { ConfirmPoints(); };
+            //// component points tools
+            //GUILayout.Label("Editing Points:", EditorStyles.boldLabel);
+            //for (int i = 0; i < pointsEditor.points.Count; i++)
+            //{
+            //    EditorGUILayout.BeginHorizontal();
+            //    pointsEditor.points[i] = EditorGUILayout.Vector3Field("", pointsEditor.points[i]);
+            //    if (GUILayout.Button("remove")) pointsEditor.points.RemoveAt(i);
+            //    EditorGUILayout.EndHorizontal();
+            //}
+            //if (GUILayout.Button("Go Back")) { ResetDefaults(); };
+            //if (GUILayout.Button("Confirm")) { ConfirmPoints(); };
         }
         else
         {
-            // default editor tools
-            GUILayout.Label("Enemy Spawner Editor:", EditorStyles.boldLabel);
-            if (GUILayout.Button("Edit Region")) { DisplayEditRegion(); }
-            if (GUILayout.Button("Edit Points")) { DisplayEditPoints(); }
-            RegionEditor.color = EditorGUILayout.ColorField("color_01", RegionEditor.color);
-            PointsEditor.color = EditorGUILayout.ColorField("color_01", PointsEditor.color);
+            //// default editor tools
+            //GUILayout.Label("Enemy Spawner Editor:", EditorStyles.boldLabel);
+            //if (GUILayout.Button("Edit Region")) { DisplayEditRegion(); }
+            //if (GUILayout.Button("Edit Points")) { DisplayEditPoints(); }
+            //RegionEditor.color = EditorGUILayout.ColorField("color_01", RegionEditor.color);
+            //PointsEditor.color = EditorGUILayout.ColorField("color_01", PointsEditor.color);
         }
     }
 
@@ -107,12 +107,12 @@ public class EnemySpawnerEditor : Editor
         }
     }
 
-    void ConfirmPoints()
-    {
-        // clear component list
-        component.enemyStage.points.Clear();
-        foreach (Vector3 position in pointsEditor.points) component.enemyStage.points.Add(position - transform.position);
-    }
+    //void ConfirmPoints()
+    //{
+    //    // clear component list
+    //    component.enemyStage.points.Clear();
+    //    foreach (Vector3 position in pointsEditor.points) component.enemyStage.points.Add(position - transform.position);
+    //}
 
     void DisplayEditRegion()
     {
@@ -121,13 +121,13 @@ public class EnemySpawnerEditor : Editor
         new_regionEditor.prepair();
     }
 
-    void DisplayEditPoints()
-    {
-        // prepair editor
-        isEditingPoints = true;
-        pointsEditor.points.Clear();
-        foreach (Vector3 position in component.enemyStage.points) pointsEditor.points.Add(position + transform.position);
-    }
+    //void DisplayEditPoints()
+    //{
+    //    // prepair editor
+    //    isEditingPoints = true;
+    //    pointsEditor.points.Clear();
+    //    foreach (Vector3 position in component.enemyStage.points) pointsEditor.points.Add(position + transform.position);
+    //}
 
     class PointsEditor
     {
