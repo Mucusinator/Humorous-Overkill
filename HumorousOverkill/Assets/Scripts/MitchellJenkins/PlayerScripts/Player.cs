@@ -21,6 +21,7 @@ public class Player : EventHandle {
     override public void Awake () {
         base.Awake();
         m_ply = GetEventListener("PlayerManager").gameObject.GetComponent<PlayerManager>().GetPlayerInfo;
+        GetComponentInChildren<PlayerCamera>().m_ply = m_ply;
         m_cc = this.GetComponent<CharacterController>() as CharacterController;
 
         // m_animator.runtimeAnimatorController = m_animatorController;

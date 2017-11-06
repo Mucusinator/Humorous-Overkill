@@ -113,14 +113,15 @@ public class CombinedScript : EventHandle {
     void Start () {
 
         SelectWeapon();
-        currentRifleAmmo = rifleMagSize;
+        //currentRifleAmmo = rifleMagSize;
         currentShotgunAmmo = magTubeSize;
-        currentShotgunAmmo = 0;
+        //currentShotgunAmmo = 0;
         shotTrail = GetComponent<LineRenderer>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
         //GameObject.FindGameObjectWithTag("UI").GetComponent<UIManager>().HandleEvent(GameEvent.UI_AMMO_CUR);
         if (gunType == GunType.RIFLE)
@@ -130,10 +131,10 @@ public class CombinedScript : EventHandle {
         }
         else if (gunType == GunType.SHOTGUN)
         {
-           
-                GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_CUR, currentShotgunAmmo);
-                GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_MAX, maxShotgunAmmo);
-            
+
+            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_CUR, currentShotgunAmmo);
+            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_MAX, maxShotgunAmmo);
+
         }
 
         int previousSelectedWeapon = SelectedWeapon;
@@ -173,7 +174,7 @@ public class CombinedScript : EventHandle {
         //    SelectWeapon();
         //}
 
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (isRifleSelected)
             {
@@ -184,36 +185,29 @@ public class CombinedScript : EventHandle {
             }
             else
             {
-                if(!isRifleSelected && (maxRifleAmmo > 0 || currentRifleAmmo > 0 ))
-                gunType = GunType.RIFLE;
-                SelectedWeapon = 1;
-                SelectWeapon();
+                if (!isRifleSelected)
+                {
+                    if (currentRifleAmmo > 0 || maxRifleAmmo > 0)
+                    {
+                        gunType = GunType.RIFLE;
+                        SelectedWeapon = 1;
+                        SelectWeapon();
+                        isRifleSelected = true;
+                    }
+                }
             }
+
         }
 
-        
-
-
-        //if (SelectedWeapon == 0)
-        //{
-        //    gunType = GunType.SHOTGUN;
-        //    SelectWeapon();
-
-        //}
-        //if (SelectedWeapon == 1)
-        //{
-
-        //    gunType = GunType.RIFLE;
-        //    SelectWeapon();
-        //}
 
 
 
 
-  
 
 
-  
+
+
+
 
 
         if (SelectedWeapon == 0)
@@ -227,13 +221,13 @@ public class CombinedScript : EventHandle {
             {
                 gunType = GunType.SHOTGUN;
                 StartCoroutine(Reload());
-              
+
                 return;
             }
         }
-        
+
         //if (gunType == GunType.SHOTGUN)
-        if(SelectedWeapon == 1)
+        if (SelectedWeapon == 1)
         {
             if (maxRifleAmmo == 0 && currentRifleAmmo == 0)
             {
@@ -244,7 +238,7 @@ public class CombinedScript : EventHandle {
 
             if (isReloading)
             {
-                
+
                 return;
             }
 
@@ -252,10 +246,10 @@ public class CombinedScript : EventHandle {
             {
                 gunType = GunType.RIFLE;
                 StartCoroutine(Reload());
-                
+
                 return;
             }
-           
+
         }
 
 
@@ -314,19 +308,20 @@ public class CombinedScript : EventHandle {
                 {
                     //StartCoroutine(Shot());
                     ShootRay();
-                    
+
                 }
-                
+
 
             }
         }
 
+    }
+        
 
 
 
-
-
-        }
+        
+    
 
     private IEnumerator Shot()
     {
