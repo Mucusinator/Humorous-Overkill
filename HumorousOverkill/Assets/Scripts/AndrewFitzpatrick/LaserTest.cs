@@ -12,14 +12,11 @@ public class LaserTest : MonoBehaviour
     public GameObject shootPoint; // point that laser shoots from
     private float colorOffset = 0; // current color index
     public float laserSpeed = 1; // speed that laser changes colors
-    private LineRenderer myLineRenderer;
-    private List<Vector3> linePositions = new List<Vector3>();
 
     void Awake()
     {
-        // assign cam and myLineRenderer
+        // assign cam
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        myLineRenderer = GetComponent<LineRenderer>();
     }
 
     void Update ()
@@ -42,9 +39,6 @@ public class LaserTest : MonoBehaviour
             // draw new parts if the raycast hit anything solid
             if (Physics.Raycast(ray.origin, ray.direction * 1000.0f, out hit))
             {
-                // enable line renderer
-                myLineRenderer.enabled = true;
-
                 // find distance and rotation towards hit point
                 float dist = hit.distance;
                 Vector3 relativePos = hit.point - shootPoint.transform.position;
@@ -67,10 +61,6 @@ public class LaserTest : MonoBehaviour
                     currentPart.transform.parent = transform;
                     laserParts.Add(currentPart);
                 }
-
-                myLineRenderer.positionCount = linePositions.Count;
-                myLineRenderer.SetPositions(linePositions.ToArray());
-                linePositions.Clear();
             }
         }
 
@@ -78,7 +68,6 @@ public class LaserTest : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             cleanup();
-            myLineRenderer.enabled = false;
         }
     }
 
