@@ -9,8 +9,8 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(PlayerMovement))]
 public class Player : EventHandle {
 
-    private Animator m_animator;
     private PlayerInfo m_ply;
+    private Animator m_animator;
     private CharacterController m_cc;
     private RuntimeAnimatorController m_animatorController;
     private Rigidbody m_rb;
@@ -18,9 +18,9 @@ public class Player : EventHandle {
     [SerializeField] private bool m_cameraEnabled = true;
     [SerializeField] private bool m_movementEnabled = true;
 
-    void Start () {
+    override public void Awake () {
+        base.Awake();
         m_ply = GetEventListener("PlayerManager").gameObject.GetComponent<PlayerManager>().GetPlayerInfo;
-        GetComponentInChildren<PlayerCamera>().m_ply = m_ply;
         m_cc = this.GetComponent<CharacterController>() as CharacterController;
 
         // m_animator.runtimeAnimatorController = m_animatorController;
@@ -67,9 +67,10 @@ public class Player : EventHandle {
         }
     }
 
-    public override bool HandleEvent (GameEvent e) {
+    public override bool HandleEvent (GameEvent e, float value) {
         switch (e) {
         case GameEvent.PLAYER_DAMAGE:
+            m_ply.m_playerHealth -= value;
             CheckHealth();
             break;
         }
