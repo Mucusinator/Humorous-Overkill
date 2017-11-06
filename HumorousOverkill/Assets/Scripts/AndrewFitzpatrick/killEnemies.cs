@@ -19,9 +19,9 @@ public class killEnemies : MonoBehaviour
                 {
                     hitInfo.collider.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, 1);
                 }
-                if (hitInfo.collider.gameObject.GetComponent<DonutAI>() != null)
+                if (hitInfo.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                 {
-                    hitInfo.collider.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, 1);
+                    hitInfo.collider.gameObject.GetComponentInParent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, 1);
                 }
             }
         }

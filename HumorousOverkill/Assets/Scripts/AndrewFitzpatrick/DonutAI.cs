@@ -23,24 +23,20 @@ public class DonutAI : EventHandler.EventHandle
     {
         base.Awake();
 
-        // use player as target
+        // find the player
         target = GameObject.FindGameObjectWithTag("Player");
 
-        // calculate circumference (needed for rolling)
+        // store animator
+        myAnimator = GetComponent<Animator>();
+
+        // calculate circumference (needed for nice rolling)
         findCircumference();
 
-        Vector3 position = transform.position;
-        position.y = 1.5f;
-        transform.position = position;
-
-        // get default values from enemyManager
+        // get default info from enemyManager
         myInfo = GetEventListener("enemyManager").gameObject.GetComponent<EnemyManager>().defaultDonutInfo;
 
         // find modelTransform
         modelTransform = GetComponentsInChildren<Transform>()[1];
-
-        // store animator
-        myAnimator = GetComponent<Animator>();
     }
 
     void Update()
@@ -82,15 +78,27 @@ public class DonutAI : EventHandler.EventHandle
     // sets donutCircumference
     void findCircumference()
     {
-        // access the boxCollider of the mesh
+        // get the boxCollider of the mesh
         BoxCollider donutCollider = GetComponentInChildren<BoxCollider>();
 
+        // move the boxcollider onto the main object
+        //BoxCollider colliderCopy = gameObject.AddComponent<BoxCollider>();
+        //colliderCopy = donutCollider;
+
         // get the "x" size of the collider (actually y)
-        float size = donutCollider.size.x;
+        // also takes into account scaling
+        float size = donutCollider.size.x * transform.localScale.y;
 
         // circumference is 2PIr aka PI * diameter
-        // also takes into account scaling
-        donutCircumference = (size * Mathf.PI * transform.localScale.y);
+        donutCircumference = (size * Mathf.PI);
+
+        // set height properly
+        Vector3 position = transform.position;
+        position.y = size / 2;
+        transform.position = position;
+
+        // adjust roll animation speed
+        myAnimator.SetFloat("rollSpeed", Mathf.PI / donutCircumference);
     }
 
     // fall over and attack player

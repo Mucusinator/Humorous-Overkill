@@ -1773,7 +1773,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65216792360551566, guid: 625bbad958d2319458f6839684b8fa07, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 625bbad958d2319458f6839684b8fa07, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1046224771
@@ -2016,6 +2017,17 @@ MonoBehaviour:
   m_sensitivity: 1
   m_minimumAngle: -60
   m_maximumAngle: 40
+  m_ply:
+    m_playerHealth: 0
+    m_playerWalkSpeed: 0
+    m_playerRunSpeed: 0
+    m_playerCrouchSpeed: 0
+    m_playerJumpHeight: 0
+    m_pickupHealthAmount: 0
+    m_pickupAmmoAmount: 0
+    m_cameraSensitivity: 0
+    m_cameraMinimumAngle: 0
+    m_cameraMaximumAngle: 0
 --- !u!20 &1288003248
 Camera:
   m_ObjectHideFlags: 0
@@ -2372,11 +2384,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1548300180}
   - component: {fileID: 1548300176}
-  - component: {fileID: 1548300181}
-  - component: {fileID: 1548300175}
+  - component: {fileID: 1548300182}
   - component: {fileID: 1548300179}
   - component: {fileID: 1548300178}
   - component: {fileID: 1548300177}
+  - component: {fileID: 1548300181}
+  - component: {fileID: 1548300175}
   m_Layer: 8
   m_Name: FPSPlayer
   m_TagString: Player
@@ -2500,6 +2513,19 @@ MonoBehaviour:
   - {r: 0.5019608, g: 0, b: 1, a: 1}
   shootPoint: {fileID: 1565671132}
   laserSpeed: 20
+--- !u!136 &1548300182
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1548300174}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1565671132
 GameObject:
   m_ObjectHideFlags: 0
@@ -2610,6 +2636,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1638679560}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1718212133 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1739940540950698, guid: 625bbad958d2319458f6839684b8fa07,
+    type: 2}
+  m_PrefabInternal: {fileID: 961265529}
+--- !u!65 &1718212135
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1718212133}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1081802, y: 0.34168956, z: 1.1081805}
+  m_Center: {x: 0, y: -0.00093480945, z: 0.000000029918738}
 --- !u!1 &1739277414
 GameObject:
   m_ObjectHideFlags: 0
