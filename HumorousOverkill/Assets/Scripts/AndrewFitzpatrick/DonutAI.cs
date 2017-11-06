@@ -19,6 +19,11 @@ public class DonutAI : EventHandler.EventHandle
     private Animator myAnimator;
     private RaycastHit hitInfo;
 
+    // freeze for when the game is paused
+    public bool freeze = false;
+    // dead for the explosion
+    public bool dead = false;
+
     public override void Awake()
     {
         base.Awake();
@@ -72,6 +77,7 @@ public class DonutAI : EventHandler.EventHandle
         if(nearPlayer())
         {
             deployed = true;
+            myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.DEPLOY);
         }
     }
 
@@ -169,14 +175,14 @@ public class DonutAI : EventHandler.EventHandle
         // tell enemy manager that an enemy has died
         GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
 
-        // destroy this gameobject
-        Destroy(this.gameObject);
+        // destroy this gameobject after 5 seconds
+        Destroy(this.gameObject, 5);
     }
 
     // returns wheather we are within the deploy range
     bool nearPlayer()
     {
-        return (transform.position - target.transform.position).magnitude < Mathf.Pow(myInfo.deployRange, 2);
+        return (transform.position - target.transform.position).sqrMagnitude < Mathf.Pow(myInfo.deployRange, 2);
     }
 
     public override bool HandleEvent(GameEvent e, float value)
