@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using EventHandler;
 
 public class PlayerCamera : MonoBehaviour{
 

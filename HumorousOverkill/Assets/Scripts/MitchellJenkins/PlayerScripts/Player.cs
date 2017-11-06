@@ -18,7 +18,8 @@ public class Player : EventHandle {
     [SerializeField] private bool m_cameraEnabled = true;
     [SerializeField] private bool m_movementEnabled = true;
 
-    void Start () {
+    override public void Awake () {
+        base.Awake();
         m_ply = GetEventListener("PlayerManager").gameObject.GetComponent<PlayerManager>().GetPlayerInfo;
         m_cc = this.GetComponent<CharacterController>() as CharacterController;
 
