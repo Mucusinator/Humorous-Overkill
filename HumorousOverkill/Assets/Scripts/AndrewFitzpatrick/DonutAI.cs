@@ -11,13 +11,16 @@ public class DonutAI : EventHandler.EventHandle
 
     // stores stats
     public DonutEnemyInfo myInfo;
+    public bool showGizmos = false;
 
     private bool deployed;
     private float donutCircumference;
     private Transform modelTransform;
-    private GameObject target;
+    private GameObject player;
     private Animator myAnimator;
-    private RaycastHit hitInfo;
+    private RaycastHit shootHitInfo;
+    private Vector3 currentTarget;
+    private RaycastHit rollHitInfo;
 
     // freeze for when the game is paused
     public bool freeze = false;
@@ -29,7 +32,7 @@ public class DonutAI : EventHandler.EventHandle
         base.Awake();
 
         // find the player
-        target = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
 
         // store animator
         myAnimator = GetComponent<Animator>();
@@ -42,12 +45,14 @@ public class DonutAI : EventHandler.EventHandle
 
         // find modelTransform
         modelTransform = GetComponentsInChildren<Transform>()[1];
+
+        pickTarget();
     }
 
     void Update()
     {
         // either deploy or roll
-        if(deployed)
+        if (deployed)
         {
             deploySequence();
         }
@@ -61,7 +66,7 @@ public class DonutAI : EventHandler.EventHandle
     void roll()
     {
         // find direction to target
-        Vector3 direction = (target.transform.position - transform.position).normalized;
+        Vector3 direction = (currentTarget - transform.position).normalized;
         direction.y = 0;
 
         // rotate parent to look at target
@@ -73,8 +78,26 @@ public class DonutAI : EventHandler.EventHandle
         // roll forward
         transform.Translate(-transform.right * myInfo.rollSpeed * Time.deltaTime, Space.World);
 
+        Debug.DrawRay(transform.position, transform.position + transform.forward, Color.cyan);
+        // avoid walls and otgher enemies
+        if (Physics.Raycast(transform.position, transform.forward, out rollHitInfo, 5)) // TODO: put in myInfo as avoidRadius
+        {
+            if (rollHitInfo.collider.gameObject.tag == "Avoid" || rollHitInfo.collider.gameObject.tag == "Enemy")
+            {
+                Debug.Log("Hit at " + rollHitInfo.point);
+                Debug.DrawLine(rollHitInfo.point, rollHitInfo.point + rollHitInfo.normal, Color.blue);
+                //Debug.Break();
+                currentTarget += rollHitInfo.normal * 5; // TODO: put in myInfo as avoidRadius
+            }
+        }
+
+        if (nearTarget())
+        {
+            currentTarget = player.transform.position;
+        }
+
         // deploy if within deployRange
-        if(nearPlayer())
+        if (nearPlayer())
         {
             deployed = true;
             myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.DEPLOY);
@@ -122,12 +145,12 @@ public class DonutAI : EventHandler.EventHandle
                 aimPoint.y += randomOffset.y;
 
                 Debug.DrawRay(transform.position, aimPoint, Color.red);
-                if (Physics.Raycast(transform.position, aimPoint, out hitInfo))
+                if (Physics.Raycast(transform.position, aimPoint, out shootHitInfo))
                 {
-                    if (hitInfo.collider.gameObject.tag == "Player")
+                    if (shootHitInfo.collider.gameObject.tag == "Player")
                     {
                         //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.5f);
-                        hitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
+                        shootHitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
                         Debug.Log("I have hit the player");
                     }
                     else
@@ -179,10 +202,31 @@ public class DonutAI : EventHandler.EventHandle
         Destroy(this.gameObject, 5);
     }
 
-    // returns wheather we are within the deploy range
+    void pickTarget()
+    {
+        currentTarget = transform.position + getRandomVector(5); // TODO: put this in myInfo
+    }
+
+    Vector3 getRandomVector(float radius)
+    {
+        Vector2 vec2D = Random.insideUnitCircle.normalized * radius;
+        return new Vector3(vec2D.x, 0, vec2D.y);
+    }
+
+    // returns true if we are near the player
     bool nearPlayer()
     {
-        return (transform.position - target.transform.position).sqrMagnitude < Mathf.Pow(myInfo.deployRange, 2);
+        Vector3 position = transform.position;
+        position.y = 0;
+        Vector3 playerPosition = player.transform.position;
+        playerPosition.y = 0;
+        return (position - playerPosition).sqrMagnitude < Mathf.Pow(myInfo.deployRange, 2);
+    }
+
+    // returns true if we are near the target
+    bool nearTarget()
+    {
+        return (currentTarget - transform.position).sqrMagnitude < 1; // TODO: make this editable
     }
 
     public override bool HandleEvent(GameEvent e, float value)
@@ -203,13 +247,32 @@ public class DonutAI : EventHandler.EventHandle
 #if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
-        // display accuracy / range
-        UnityEditor.Handles.color = Color.red;
-        UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange + Vector3.up * myInfo.accuracy);
-        UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - Vector3.up * myInfo.accuracy);
-        UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange + transform.forward * myInfo.accuracy);
-        UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - transform.forward * myInfo.accuracy);
-        UnityEditor.Handles.DrawWireDisc(transform.position -transform.right * myInfo.hitRange, transform.right, myInfo.accuracy);
+        if(showGizmos)
+        {
+            // display accuracy / range
+            UnityEditor.Handles.color = Color.red;
+            UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange + Vector3.up * myInfo.accuracy);
+            UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - Vector3.up * myInfo.accuracy);
+            UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange + transform.forward * myInfo.accuracy);
+            UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - transform.forward * myInfo.accuracy);
+            UnityEditor.Handles.DrawWireDisc(transform.position - transform.right * myInfo.hitRange, transform.right, myInfo.accuracy);
+
+            // display targetRadius
+            UnityEditor.Handles.color = Color.red;
+            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, 5);
+
+            // display margin of error
+            UnityEditor.Handles.color = Color.yellow;
+            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, 3);
+
+            // show currentVelocity
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, transform.position + transform.forward * myInfo.rollSpeed);
+
+            // display current target
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(currentTarget, 0.5f);
+        }
     }
 #endif
 }
