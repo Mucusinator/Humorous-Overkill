@@ -31,7 +31,7 @@ public class EnemyStage
         // check status
         if (waveUnits > 0)
         {
-            // remove enemy unit
+            // remove unit
             waveUnits--;
         }
     }
@@ -59,6 +59,7 @@ public class EnemyStage
     {
         // check status
         if (isWaveEmpty()) return null;
+        waveUnits++;
         // create enemy unit
         return stage.CreateUnit(Quaternion.identity, parent);
     }
