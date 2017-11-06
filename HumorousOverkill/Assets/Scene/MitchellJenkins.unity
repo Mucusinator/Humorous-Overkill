@@ -11072,15 +11072,15 @@ MonoBehaviour:
   m_weapon: {fileID: 0}
   m_playerInfo:
     m_playerHealth: 100
-    m_playerWalkSpeed: 0
-    m_playerRunSpeed: 0
-    m_playerCrouchSpeed: 0
+    m_playerWalkSpeed: 10
+    m_playerRunSpeed: 15
+    m_playerCrouchSpeed: 5
     m_playerJumpHeight: 2
     m_pickupHealthAmount: 10
     m_pickupAmmoAmount: 10
-    m_cameraSensitivity: 0
-    m_cameraMinimumAngle: 0
-    m_cameraMaximumAngle: 0
+    m_cameraSensitivity: 1
+    m_cameraMinimumAngle: -60
+    m_cameraMaximumAngle: 40
 --- !u!114 &1555225541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11772,6 +11772,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46559579e4442a8439087f57717462b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_sensitivity: 1
-  m_minimumAngle: -60
-  m_maximumAngle: 40
+  m_sensitivity: 0
+  m_minimumAngle: 0
+  m_maximumAngle: 0
