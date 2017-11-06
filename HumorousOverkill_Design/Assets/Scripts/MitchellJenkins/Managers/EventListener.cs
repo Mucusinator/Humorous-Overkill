@@ -264,16 +264,16 @@ namespace EventHandler {
 
         #endregion
     }
-
+#if UNITY_EDITOR
     [UnityEditor.CanEditMultipleObjects]
     [UnityEditor.CustomEditor(typeof(EventHandle), true)]
     public class EventHandleEditor : UnityEditor.Editor {
-        #region PRIVATE VARIABLES
+#region PRIVATE VARIABLES
         // Checks if we should show the listeners
         public bool Showboundlisteners;
-        #endregion
+#endregion
 
-        #region PUBLIC FUNCTIONS
+#region PUBLIC FUNCTIONS
         /// <summary>
         /// Override OnInspectorGUI
         /// </summary>
@@ -291,6 +291,7 @@ namespace EventHandler {
             }
             base.OnInspectorGUI();
         }
-        #endregion
+#endregion
     }
+#endif
 }

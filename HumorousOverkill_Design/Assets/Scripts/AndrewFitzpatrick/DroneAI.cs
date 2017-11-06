@@ -168,6 +168,7 @@ public class DroneAI : EventHandler.EventHandle
         // fully delete this gameObject after a set number of seconds
         Destroy(this.gameObject, 5);
 }
+#if UNITY_EDITOR
 
     void OnDrawGizmosSelected()
     {
@@ -190,7 +191,7 @@ public class DroneAI : EventHandler.EventHandle
             Gizmos.DrawWireSphere(currentTarget, 0.5f);
         }
     }
-
+#endif
     public override bool HandleEvent(GameEvent e, float value)
     {
         // Health is depleted
