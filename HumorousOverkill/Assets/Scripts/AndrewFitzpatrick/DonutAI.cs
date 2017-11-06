@@ -148,7 +148,7 @@ public class DonutAI : EventHandler.EventHandle
         switch (currentAnimationState)
         {
             case ANIMATIONSTATE.SHOOT:
-                
+                shootPlayer();
                 break;
         }
 
