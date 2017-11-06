@@ -71,8 +71,6 @@ public class CombinedScript : EventHandle {
     public Animator animator;
     // This is a public int of the currently selected weapon.
     public int SelectedWeapon = 0;
-    // This is the Fire Rate of the rifle.
-    public FireRate fireRate;
     // This is the two different weapon types.
     public GunType gunType;
     // This is where the player raycast of the camera will begin from.
@@ -88,14 +86,12 @@ public class CombinedScript : EventHandle {
 
     public LineRenderer shotTrail;
 
+    // This boolean is for the rifle, to show if it is active or not.
+    public bool isRifleSelected;
 
-    // This is the Fire Rate of the rifle.
-    public enum FireRate
-    {
-        SEMIAUTO,
-        FULLAUTO
+    // This boolean is for if the user has access to the rifle.
 
-    }
+
     // This is the two different weapon types.
     public enum GunType
     {
@@ -142,73 +138,61 @@ public class CombinedScript : EventHandle {
 
         int previousSelectedWeapon = SelectedWeapon;
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-        {
-            if (SelectedWeapon >= transform.childCount - 1)
-            {
-                SelectedWeapon = 0;
+        //if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        //{
+        //    if (SelectedWeapon >= transform.childCount - 1)
+        //    {
+        //        SelectedWeapon = 0;
 
-            }
-            else
-            {
-                SelectedWeapon++;
+        //    }
+        //    else
+        //    {
+        //        SelectedWeapon++;
 
-                //gunType++;    
+        //        //gunType++;    
 
-            }
-        }
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-        {
-            if (SelectedWeapon <= 0)
-            {
-                SelectedWeapon = transform.childCount - 1;
-
-
-            }
-            else
-            {
-                SelectedWeapon--;
+        //    }
+        //}
+        //if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        //{
+        //    if (SelectedWeapon <= 0)
+        //    {
+        //        SelectedWeapon = transform.childCount - 1;
 
 
-            }
-        }
-        if (previousSelectedWeapon != SelectedWeapon)
-        {
-            SelectWeapon();
-        }
+        //    }
+        //    else
+        //    {
+        //        SelectedWeapon--;
+
+
+        //    }
+        //}
+        //if (previousSelectedWeapon != SelectedWeapon)
+        //{
+        //    SelectWeapon();
+        //}
+
+        
+
+
         if (SelectedWeapon == 0)
         {
-            gunType = GunType.RIFLE;
+            gunType = GunType.SHOTGUN;
+            SelectWeapon();
 
         }
         if (SelectedWeapon == 1)
         {
 
-            gunType = GunType.SHOTGUN;
+            gunType = GunType.RIFLE;
+            SelectWeapon();
         }
 
 
 
-        if (gunType == GunType.RIFLE)
-        {
-            //Ammo.text = currentRifleAmmo + " / " + maxRifleAmmo;
-        }
-        if (gunType == GunType.SHOTGUN)
-        {
-            //Ammo.text = currentShotgunAmmo + " / " + maxShotgunAmmo;
-        }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && gunType == GunType.RIFLE)
-        {
-            if (fireRate == FireRate.FULLAUTO)
-            {
-                fireRate = FireRate.SEMIAUTO;
-            }
-            else
-            {
-                fireRate = FireRate.FULLAUTO;
-            }
-        }
+  
 
 
   
@@ -221,9 +205,9 @@ public class CombinedScript : EventHandle {
                 return;
             }
 
-            if (currentRifleAmmo <= 0 && maxRifleAmmo > 0)
+            if (currentShotgunAmmo <= 0 && maxShotgunAmmo > 0)
             {
-                gunType = GunType.RIFLE;
+                gunType = GunType.SHOTGUN;
                 StartCoroutine(Reload());
               
                 return;
@@ -233,10 +217,10 @@ public class CombinedScript : EventHandle {
         //if (gunType == GunType.SHOTGUN)
         if(SelectedWeapon == 1)
         {
-            if (maxShotgunAmmo == 0 && currentShotgunAmmo == 0)
+            if (maxRifleAmmo == 0 && currentRifleAmmo == 0)
             {
                 SelectedWeapon = 0;
-                gunType = GunType.RIFLE;
+                gunType = GunType.SHOTGUN;
                 SelectWeapon();
             }
 
@@ -246,9 +230,9 @@ public class CombinedScript : EventHandle {
                 return;
             }
 
-            if (currentShotgunAmmo <= 0 && maxShotgunAmmo > 0)
+            if (currentRifleAmmo <= 0 && maxRifleAmmo > 0)
             {
-                gunType = GunType.SHOTGUN;
+                gunType = GunType.RIFLE;
                 StartCoroutine(Reload());
                 
                 return;
@@ -286,7 +270,7 @@ public class CombinedScript : EventHandle {
             shotTrail.enabled = false;
         }
 
-        if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.SEMIAUTO && Time.time >= nextTimeToFire)
+        if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE)
         {
 
             if (currentRifleAmmo > 0)
@@ -301,20 +285,6 @@ public class CombinedScript : EventHandle {
             //shotTrail.enabled = false;
         }
 
-        if (Input.GetButton("Fire1") && gunType == GunType.RIFLE && fireRate == FireRate.FULLAUTO && Time.time >= nextTimeToFire)
-        {
-            if (currentRifleAmmo > 0)
-            {
-                nextTimeToFire = Time.time + 60f / RoundsPerMinute;
-                //StartCoroutine(Shot());
-                Shoot();
-                //shotTrail.enabled = true;
-            }
-        }
-        else
-        {
-            //shotTrail.enabled = false;
-        }
 
         if (Input.GetButtonDown("Fire1") && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
         {
