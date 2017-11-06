@@ -144,7 +144,7 @@ public class DroneAI : EventHandler.EventHandle
         Debug.Log("I have died.");
 
         // tell enemy manager that an enemy has died
-        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
+        //GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
 
         // disable animation
         GetComponent<Animator>().enabled = false;

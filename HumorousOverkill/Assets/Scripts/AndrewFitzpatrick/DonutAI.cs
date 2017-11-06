@@ -183,10 +183,10 @@ public class DonutAI : EventHandler.EventHandle
     void die()
     {
         // tell enemy manager that an enemy has died
-        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
+        //GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
 
         // destroy this gameobject after 5 seconds
-        Destroy(this.gameObject, 5);
+        Destroy(this.gameObject);
     }
 
     void pickTarget()
