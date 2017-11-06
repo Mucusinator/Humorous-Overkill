@@ -173,21 +173,39 @@ public class CombinedScript : EventHandle {
         //    SelectWeapon();
         //}
 
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            if (isRifleSelected)
+            {
+                gunType = GunType.SHOTGUN;
+                SelectedWeapon = 0;
+                SelectWeapon();
+                isRifleSelected = false;
+            }
+            else
+            {
+                if(!isRifleSelected && (maxRifleAmmo > 0 || currentRifleAmmo > 0 ))
+                gunType = GunType.RIFLE;
+                SelectedWeapon = 1;
+                SelectWeapon();
+            }
+        }
+
         
 
 
-        if (SelectedWeapon == 0)
-        {
-            gunType = GunType.SHOTGUN;
-            SelectWeapon();
+        //if (SelectedWeapon == 0)
+        //{
+        //    gunType = GunType.SHOTGUN;
+        //    SelectWeapon();
 
-        }
-        if (SelectedWeapon == 1)
-        {
+        //}
+        //if (SelectedWeapon == 1)
+        //{
 
-            gunType = GunType.RIFLE;
-            SelectWeapon();
-        }
+        //    gunType = GunType.RIFLE;
+        //    SelectWeapon();
+        //}
 
 
 
@@ -270,7 +288,7 @@ public class CombinedScript : EventHandle {
             shotTrail.enabled = false;
         }
 
-        if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE)
+        if (Input.GetButton("Fire1") && gunType == GunType.RIFLE)
         {
 
             if (currentRifleAmmo > 0)
