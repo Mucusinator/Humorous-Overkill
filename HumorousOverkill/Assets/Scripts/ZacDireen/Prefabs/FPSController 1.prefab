@@ -564,8 +564,8 @@ MonoBehaviour:
   RifleMuzzleEffect: {fileID: 198071530562262456}
   impactForce: 30
   maxRifleAmmo: 12000
-  currentRifleAmmo: 6000
-  rifleMagSize: 6000
+  currentRifleAmmo: 400
+  rifleMagSize: 400
   reloadRifleTime: 2.5
   ShotsPerSecond: 0
   RoundsPerMinute: 600
