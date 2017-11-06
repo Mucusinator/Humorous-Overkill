@@ -78,9 +78,9 @@ public class DonutAI : EventHandler.EventHandle
         // roll forward
         transform.Translate(-transform.right * myInfo.rollSpeed * Time.deltaTime, Space.World);
 
-        Debug.DrawRay(transform.position, transform.position + transform.forward, Color.cyan);
+        Debug.DrawRay(transform.position, -transform.right, Color.cyan);
         // avoid walls and otgher enemies
-        if (Physics.Raycast(transform.position, transform.forward, out rollHitInfo, 5)) // TODO: put in myInfo as avoidRadius
+        if (Physics.Raycast(transform.position, -transform.right, out rollHitInfo, 5)) // TODO: put in myInfo as avoidRadius
         {
             if (rollHitInfo.collider.gameObject.tag == "Avoid" || rollHitInfo.collider.gameObject.tag == "Enemy")
             {
@@ -94,6 +94,7 @@ public class DonutAI : EventHandler.EventHandle
         if (nearTarget())
         {
             currentTarget = player.transform.position;
+            currentTarget.y = 0;
         }
 
         // deploy if within deployRange
@@ -110,13 +111,10 @@ public class DonutAI : EventHandler.EventHandle
         // get the boxCollider of the mesh
         BoxCollider donutCollider = GetComponentInChildren<BoxCollider>();
 
-        // move the boxcollider onto the main object
-        //BoxCollider colliderCopy = gameObject.AddComponent<BoxCollider>();
-        //colliderCopy = donutCollider;
-
         // get the "x" size of the collider (actually y)
         // also takes into account scaling
         float size = donutCollider.size.x * transform.localScale.y;
+        Debug.Log(size);
 
         // circumference is 2PIr aka PI * diameter
         donutCircumference = (size * Mathf.PI);
@@ -204,7 +202,7 @@ public class DonutAI : EventHandler.EventHandle
 
     void pickTarget()
     {
-        currentTarget = transform.position + getRandomVector(5); // TODO: put this in myInfo
+        currentTarget = transform.position + getRandomVector(5); // TODO: put this in myInfo as targetRadius
     }
 
     Vector3 getRandomVector(float radius)
@@ -226,7 +224,7 @@ public class DonutAI : EventHandler.EventHandle
     // returns true if we are near the target
     bool nearTarget()
     {
-        return (currentTarget - transform.position).sqrMagnitude < 1; // TODO: make this editable
+        return (currentTarget - transform.position).sqrMagnitude < 3; // TODO: put in myInfo as marginOfError
     }
 
     public override bool HandleEvent(GameEvent e, float value)
