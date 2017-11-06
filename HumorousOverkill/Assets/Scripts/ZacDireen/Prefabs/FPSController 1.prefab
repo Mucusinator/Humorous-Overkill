@@ -564,8 +564,8 @@ MonoBehaviour:
   RifleMuzzleEffect: {fileID: 198071530562262456}
   impactForce: 30
   maxRifleAmmo: 12000
-  currentRifleAmmo: 6000
-  rifleMagSize: 6000
+  currentRifleAmmo: 400
+  rifleMagSize: 400
   reloadRifleTime: 2.5
   ShotsPerSecond: 0
   RoundsPerMinute: 600
@@ -630,7 +630,7 @@ LineRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1437486389983296}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_MotionVectors: 0
@@ -705,7 +705,7 @@ LineRenderer:
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
-    alignment: 0
+    alignment: 1
     textureMode: 1
     generateLightingData: 1
   m_UseWorldSpace: 1
