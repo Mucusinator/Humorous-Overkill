@@ -605,6 +605,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4306886731855626, guid: a555eae4ddf017547b4a243bb749397a,
     type: 2}
   m_PrefabInternal: {fileID: 23439284}
+--- !u!114 &24429587 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114774697212504992, guid: c81d5948427251e43bf6f57ba6aeec46,
+    type: 2}
+  m_PrefabInternal: {fileID: 1795567726}
+  m_Script: {fileID: 11500000, guid: c857095a4ed41ff4e8eab48d1682aff9, type: 3}
 --- !u!1001 &24444536
 Prefab:
   m_ObjectHideFlags: 0
@@ -25094,8 +25100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ae7d421bc325f439687b2d090c9bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ply: {fileID: 0}
-  m_weapon: {fileID: 0}
+  m_ply: {fileID: 24429587}
+  m_weapon: {fileID: 1328508947}
   m_playerInfo:
     m_playerHealth: 100
     m_playerWalkSpeed: 10
@@ -29905,7 +29911,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -63, y: 46}
+  m_AnchoredPosition: {x: -130, y: 46}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1066872564
@@ -37575,6 +37581,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4306886731855626, guid: a555eae4ddf017547b4a243bb749397a,
     type: 2}
   m_PrefabInternal: {fileID: 1325639638}
+--- !u!114 &1328508947 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114666141990051190, guid: c81d5948427251e43bf6f57ba6aeec46,
+    type: 2}
+  m_PrefabInternal: {fileID: 1795567726}
+  m_Script: {fileID: 11500000, guid: a3efa8794e2cf464eb21b37a06bf6d93, type: 3}
 --- !u!1001 &1329112579
 Prefab:
   m_ObjectHideFlags: 0
@@ -49763,7 +49775,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -133, y: 46}
+  m_AnchoredPosition: {x: -50, y: 46}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1751325670
