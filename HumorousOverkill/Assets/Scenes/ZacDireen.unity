@@ -277,6 +277,17 @@ MonoBehaviour:
   m_sensitivity: 1
   m_minimumAngle: -60
   m_maximumAngle: 40
+  m_ply:
+    m_playerHealth: 0
+    m_playerWalkSpeed: 0
+    m_playerRunSpeed: 0
+    m_playerCrouchSpeed: 0
+    m_playerJumpHeight: 0
+    m_pickupHealthAmount: 0
+    m_pickupAmmoAmount: 0
+    m_cameraSensitivity: 0
+    m_cameraMinimumAngle: 0
+    m_cameraMaximumAngle: 0
 --- !u!124 &78217748
 Behaviour:
   m_ObjectHideFlags: 0
@@ -954,9 +965,9 @@ MonoBehaviour:
   RifleRange: 100
   RifleMuzzleEffect: {fileID: 1528455196}
   impactForce: 30
-  maxRifleAmmo: 120
+  maxRifleAmmo: 0
   currentRifleAmmo: 0
-  rifleMagSize: 15
+  rifleMagSize: 5
   reloadRifleTime: 2.5
   ShotsPerSecond: 0
   RoundsPerMinute: 600
@@ -1522,18 +1533,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ply:
     m_playerHealth: 0
-    m_playerSpeed: 0
+    m_playerWalkSpeed: 0
+    m_playerRunSpeed: 0
+    m_playerCrouchSpeed: 0
     m_playerJumpHeight: 0
     m_pickupHealthAmount: 0
     m_pickupAmmoAmount: 0
-    m_gunFireRate_type1: 0
-    m_gunFireRate_type2: 0
-    m_gunDamage_type1: 0
-    m_gunDamage_type2: 0
-    m_gunMaxAmmo_type1: 0
-    m_gunMaxAmmo_type2: 0
-    m_gunReloadSpeed_type1: 0
-    m_gunReloadSpeed_type2: 0
+    m_cameraSensitivity: 0
+    m_cameraMinimumAngle: 0
+    m_cameraMaximumAngle: 0
   m_moveDirection: {x: 0, y: 0, z: 0}
   m_moveSpeed: 10
   m_groundMask:
@@ -1552,20 +1560,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c857095a4ed41ff4e8eab48d1682aff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ply:
-    m_playerHealth: 0
-    m_playerSpeed: 0
-    m_playerJumpHeight: 0
-    m_pickupHealthAmount: 0
-    m_pickupAmmoAmount: 0
-    m_gunFireRate_type1: 0
-    m_gunFireRate_type2: 0
-    m_gunDamage_type1: 0
-    m_gunDamage_type2: 0
-    m_gunMaxAmmo_type1: 0
-    m_gunMaxAmmo_type2: 0
-    m_gunReloadSpeed_type1: 0
-    m_gunReloadSpeed_type2: 0
   m_cameraEnabled: 1
   m_movementEnabled: 1
 --- !u!143 &1346937697
@@ -5712,18 +5706,15 @@ MonoBehaviour:
   m_weapon: {fileID: 700239889}
   m_playerInfo:
     m_playerHealth: 0
-    m_playerSpeed: 0
+    m_playerWalkSpeed: 0
+    m_playerRunSpeed: 0
+    m_playerCrouchSpeed: 0
     m_playerJumpHeight: 0
     m_pickupHealthAmount: 0
     m_pickupAmmoAmount: 0
-    m_gunFireRate_type1: 0
-    m_gunFireRate_type2: 0
-    m_gunDamage_type1: 0
-    m_gunDamage_type2: 0
-    m_gunMaxAmmo_type1: 0
-    m_gunMaxAmmo_type2: 0
-    m_gunReloadSpeed_type1: 0
-    m_gunReloadSpeed_type2: 0
+    m_cameraSensitivity: 0
+    m_cameraMinimumAngle: 0
+    m_cameraMaximumAngle: 0
 --- !u!114 &1971633554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5834,7 +5825,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0940b5306a1b5584f83b1048b21052de, type: 2}
+  - {fileID: 2100000, guid: 944705f23d8e811449374b45d14fdc1b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5893,9 +5884,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2012496998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31f2401fe4913414e94ef5a5b12c4d47, type: 3}
+  m_Script: {fileID: 11500000, guid: f22d6cc65d1b7e446a7c59dc6de5ad19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSelection: 1
+  playerHealth: {fileID: 0}
 --- !u!1 &2043844954
 GameObject:
   m_ObjectHideFlags: 0
