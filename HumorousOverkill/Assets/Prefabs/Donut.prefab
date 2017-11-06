@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65352213131133710}
   m_Layer: 0
   m_Name: Donut
-  m_TagString: Avoid
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -54,9 +54,10 @@ public class DroneAI : EventHandler.EventHandle
             pickTarget();
         }
 
+        // avoid walls and otgher enemies
         if (Physics.Raycast(transform.position, transform.forward, out wanderHitInfo, myInfo.avoidRadius))
         {
-            if (wanderHitInfo.collider.gameObject.tag == "Avoid")
+            if (wanderHitInfo.collider.gameObject.tag == "Avoid" || wanderHitInfo.collider.gameObject.tag == "Enemy")
             {
                 //Debug.Log("Hit at " + hitInfo.point);
                 //Debug.DrawLine(hitInfo.point, hitInfo.point + hitInfo.normal, Color.blue);
@@ -169,6 +170,7 @@ public class DroneAI : EventHandler.EventHandle
         Destroy(this.gameObject, 5);
 }
 
+#if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
         if(showGizmos)
@@ -190,6 +192,7 @@ public class DroneAI : EventHandler.EventHandle
             Gizmos.DrawWireSphere(currentTarget, 0.5f);
         }
     }
+#endif
 
     public override bool HandleEvent(GameEvent e, float value)
     {
