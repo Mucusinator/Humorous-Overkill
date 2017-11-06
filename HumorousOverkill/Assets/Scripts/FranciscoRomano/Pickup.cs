@@ -12,7 +12,7 @@ public class Pickup : MonoBehaviour
 	void Start ()
     {
         // set collider as trigger
-        GetComponent<BoxCollider>().isTrigger = true;
+        GetComponent<SphereCollider>().isTrigger = true;
 	}
 
     void OnTriggerEnter(Collider collider)

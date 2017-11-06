@@ -24,8 +24,7 @@ public class PlayerMovement : EventHandle {
     void Start () {
         m_camera    = this.GetComponentInChildren<PlayerCamera>();
         m_cc        = this.GetComponent<CharacterController>() as CharacterController;
-        m_ply       = this.GetComponent<Player>()._PlayerInfo;
-        //m_animator  = this.GetComponent<Player>()._Animator;
+        m_ply       = this.GetEventListener("PlayerManager").gameObject.GetComponent<PlayerManager>().GetPlayerInfo;
         m_transform = this.transform;
     }
 
