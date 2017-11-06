@@ -9,8 +9,9 @@ using System.Collections.Generic;
 public class EnemySpawner : EventHandle
 {
     //[HideInInspector]
+    public int units = 0;
     public bool activated = false;
-    public EnemyStage enemyStage = new EnemyStage();
+    public EnemyStage stage = new EnemyStage();
     public List<GameObject> temp_Colliders = new List<GameObject>();
     
     void OnTriggerEnter(Collider collider)
@@ -62,7 +63,7 @@ public class EnemySpawner : EventHandle
     public float GetWaveSpawnRate()
     {
         // return spawn rate
-        return enemyStage.wave.spawnRate;
+        return enemyStage.wave.rate;
     }
     public int GetWaveActiveUnits()
     {
@@ -86,7 +87,6 @@ public class EnemySpawner : EventHandle
             // continue to next wave
             case GameEvent.ENEMY_WAVE_NEXT:
                 enemyStage.nextWave();
-                
                 break;
         }
         return true;

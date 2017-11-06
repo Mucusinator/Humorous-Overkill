@@ -47,23 +47,23 @@ public class EnemyStage
     public bool isComplete()
     {
         // check status
-        return wave.isComplete() && (waveIndex + 1) == waves.Count;
+        return wave.IsComplete() && (waveIndex + 1) == waves.Count;
     }
     public bool isWaveEmpty()
     {
         // check if wave empty
-        return wave.isEmpty();
+        return wave.IsEmpty();
     }
     public bool isWaveComplete()
     {
         // check if wave complete
-        return wave.isComplete();
+        return wave.IsComplete();
     }
     public GameObject createUnit(Transform parent)
     {
         // check status
-        if (wave.isEmpty()) return null;
+        if (wave.IsEmpty()) return null;
         // create enemy unit
-        return wave.createUnit(points[Random.Range(0, points.Count)], Quaternion.identity, parent);
+        return wave.CreateUnit(points[Random.Range(0, points.Count)], Quaternion.identity, parent);
     }
 }
