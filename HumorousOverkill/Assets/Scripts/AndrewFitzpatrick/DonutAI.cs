@@ -21,11 +21,12 @@ public class DonutAI : EventHandler.EventHandle
     private RaycastHit shootHitInfo;
     private Vector3 currentTarget;
     private RaycastHit rollHitInfo;
+    private float shotTimer = 0;
 
-    // freeze for when the game is paused
-    public bool freeze = false;
     // dead for the explosion
     public bool dead = false;
+
+    private LineRenderer myLineRenderer;
 
     public override void Awake()
     {
@@ -47,6 +48,8 @@ public class DonutAI : EventHandler.EventHandle
         modelTransform = GetComponentsInChildren<Transform>()[1];
 
         pickTarget();
+
+        myLineRenderer = GetComponent<LineRenderer>();
     }
 
     void Update()
@@ -69,7 +72,7 @@ public class DonutAI : EventHandler.EventHandle
         Vector3 direction = (currentTarget - transform.position).normalized;
         direction.y = 0;
 
-        // rotate parent to look at target
+        // rotate to look at target
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(Vector3.up * 90) * Quaternion.LookRotation(direction), myInfo.turnSpeed * Time.deltaTime);
 
         // A wheel moves forward a distance equal to its circumference with each rotation.
@@ -79,6 +82,7 @@ public class DonutAI : EventHandler.EventHandle
         transform.Translate(-transform.right * myInfo.rollSpeed * Time.deltaTime, Space.World);
 
         Debug.DrawRay(transform.position, -transform.right, Color.cyan);
+
         // avoid walls and otgher enemies
         if (Physics.Raycast(transform.position, -transform.right, out rollHitInfo, 5)) // TODO: put in myInfo as avoidRadius
         {
@@ -131,56 +135,41 @@ public class DonutAI : EventHandler.EventHandle
     // fall over and attack player
     void deploySequence()
     {
+        // find direction to player
+        Vector3 direction = (player.transform.position - transform.position).normalized;
+        direction.y = 0;
+
+        // snap to look at player
+        transform.rotation = Quaternion.Euler(Vector3.up * 90) * Quaternion.LookRotation(direction);
+
         ANIMATIONSTATE currentAnimationState = (ANIMATIONSTATE)myAnimator.GetInteger("animationState");
 
         // if the current animation is finished
         switch (currentAnimationState)
         {
             case ANIMATIONSTATE.SHOOT:
-                Vector3 aimPoint = -transform.right * myInfo.hitRange;
-                Vector2 randomOffset = Random.insideUnitCircle * myInfo.accuracy;
-                aimPoint.x += randomOffset.x;
-                aimPoint.y += randomOffset.y;
-
-                Debug.DrawRay(transform.position, aimPoint, Color.red);
-                if (Physics.Raycast(transform.position, aimPoint, out shootHitInfo))
-                {
-                    if (shootHitInfo.collider.gameObject.tag == "Player")
-                    {
-                        //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.5f);
-                        shootHitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
-                        Debug.Log("I have hit the player");
-                    }
-                    else
-                    {
-                        //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.0f);
-                    }
-                }
-
-                // keep shooting the player until they are out of range
-                if (!nearPlayer())
-                {
-                    myAnimator.SetInteger("animationState", myAnimator.GetInteger("animationState") + 1);
-                }
-                else
-                {
-                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.SHOOT);
-                }
+                shootPlayer();
                 break;
         }
 
         // switch to the next animation
         if (myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && !myAnimator.IsInTransition(0))
         {
-            //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.0f);
-
-            // run next animation (if the player is withing range
+            // run next animation (if the player is within range
             switch (myAnimator.GetInteger("animationState"))
             {
                 case (int)ANIMATIONSTATE.GETUP:
                     // transition back to rolling
                     myAnimator.SetInteger("animationState", 0);
                     deployed = false;
+                    break;
+                case (int)ANIMATIONSTATE.SHOOT:
+                    // keep shooting the player until they are out of range
+                    if (!nearPlayer())
+                    {
+                        myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.LOWERGUN);
+                        myLineRenderer.enabled = false;
+                    }
                     break;
                 default:
                     // transition into the next animation
@@ -273,4 +262,43 @@ public class DonutAI : EventHandler.EventHandle
         }
     }
 #endif
+
+    // shoots at the player
+    void shootPlayer()
+    {
+        // increase shot timer
+        shotTimer += Time.deltaTime;
+
+        // when shot timer reaches 1 / fire rate
+        if (shotTimer > (1 / myInfo.fireRate))
+        {
+            // reset shot timer
+            shotTimer = 0;
+
+            Vector3 aimPoint = -transform.right * myInfo.hitRange;
+            Vector2 randomOffset = Random.insideUnitCircle * myInfo.accuracy;
+            aimPoint.x += randomOffset.x;
+            aimPoint.y += randomOffset.y;
+
+            Debug.DrawRay(transform.position, aimPoint, Color.red);
+
+            myLineRenderer.enabled = true;
+            myLineRenderer.positionCount = 2;
+            myLineRenderer.SetPosition(0, transform.position);
+            myLineRenderer.SetPosition(1, transform.position + aimPoint);
+            //myLineRenderer.SetColors(Color.red, Color.red);
+            myLineRenderer.startWidth = 0.5f;
+            myLineRenderer.endWidth = 0.5f;
+
+            if (Physics.Raycast(transform.position, aimPoint, out shootHitInfo))
+            {
+                if (shootHitInfo.collider.gameObject.tag == "Player")
+                {
+                    //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.5f);
+                    shootHitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
+                    Debug.Log("I have hit the player");
+                }
+            }
+        }
+    }
 }

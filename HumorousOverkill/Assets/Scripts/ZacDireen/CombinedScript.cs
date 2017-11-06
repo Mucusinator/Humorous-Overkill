@@ -445,9 +445,9 @@ public class CombinedScript : EventHandle {
                         {
                             hit.collider.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
                         }
-                        if (hit.collider.gameObject.GetComponent<DonutAI>() != null)
+                        if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                         {
-                            hit.collider.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                            hit.collider.gameObject.GetComponentInParent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
                         }
                         Debug.Log("I have shot " + hit.collider.gameObject.name);
                         //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
@@ -464,7 +464,7 @@ public class CombinedScript : EventHandle {
             shotTrail.SetPosition(1, centreCam + (fpsCam.transform.forward * Range));
             //shotTrail.SetPosition(1, fpsCam.transform.position + (EndOfGun.transform.forward * Range));
         }
-        shotTrail.enabled = false;
+        //shotTrail.enabled = false;
     }
         
         
@@ -512,7 +512,7 @@ public class CombinedScript : EventHandle {
             //{
             //    shotgunTarget.TakeDamage(PelletDamage);
             //}
-            if (hit.transform.tag == "Target")
+            if (hit.transform.tag == "Enemy")
             {
                 GetEventListener("Enemy").HandleEvent(GameEvent.ENEMY_DAMAGED, hit.transform.gameObject);
 
