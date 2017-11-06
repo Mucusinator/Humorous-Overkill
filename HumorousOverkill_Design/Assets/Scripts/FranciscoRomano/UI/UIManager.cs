@@ -44,9 +44,9 @@ public class UIManager : EventHandler.EventHandle
     // ############################################ //
     void Update()
     {
-        HandleEvent(GameEvent.UI_HEALTH, m_healthTEST);
-        HandleEvent(GameEvent.UI_AMMO_CUR, m_ammoCurTEST);
-        HandleEvent(GameEvent.UI_AMMO_MAX, m_ammoMaxTEST);
+        //HandleEvent(GameEvent.UI_HEALTH, m_healthTEST);
+        //HandleEvent(GameEvent.UI_AMMO_CUR, m_ammoCurTEST);
+        //HandleEvent(GameEvent.UI_AMMO_MAX, m_ammoMaxTEST);
     }
     // ############################################ //
     // ############################################ //
