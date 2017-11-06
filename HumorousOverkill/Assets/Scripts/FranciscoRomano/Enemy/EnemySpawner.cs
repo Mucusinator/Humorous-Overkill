@@ -11,7 +11,7 @@ public class EnemySpawner : EventHandle
     //[HideInInspector]
     public int units = 0;
     public bool activated = false;
-    public EnemyStage stage = new EnemyStage();
+    public EnemyStage enemyStage = new EnemyStage();
     public List<GameObject> temp_Colliders = new List<GameObject>();
     
     void OnTriggerEnter(Collider collider)
@@ -63,12 +63,12 @@ public class EnemySpawner : EventHandle
     public float GetWaveSpawnRate()
     {
         // return spawn rate
-        return enemyStage.wave.rate;
+        return enemyStage.stage.wave.rate;
     }
     public int GetWaveActiveUnits()
     {
         // return active units
-        return enemyStage.wave.activeUnits;
+        return enemyStage.waveUnits;
     }
 
     public override bool HandleEvent(GameEvent e)
