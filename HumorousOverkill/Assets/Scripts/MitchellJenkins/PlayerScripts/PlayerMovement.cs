@@ -6,7 +6,7 @@ public class PlayerMovement : EventHandle {
 
     private CharacterController m_cc;
     private PlayerCamera m_camera;
-    [SerializeField]public PlayerInfo m_ply;
+    [SerializeField] private PlayerInfo m_ply;
     private Transform m_transform;
     private Animator m_animator;
     
@@ -22,20 +22,17 @@ public class PlayerMovement : EventHandle {
     public bool m_isUnderObject = false;
 
     void Start () {
-        
         m_camera    = this.GetComponentInChildren<PlayerCamera>();
         m_cc        = this.GetComponent<CharacterController>() as CharacterController;
-        //m_ply       = this.GetEventListener("PlayerManager").gameObject.GetComponent<PlayerManager>().GetPlayerInfo;
-        //m_ply       = GameObject.FindObjectOfType(typeof(PlayerManager)).GetInstanceID().
+        m_ply       = this.GetComponent<Player>()._PlayerInfo;
         //m_animator  = this.GetComponent<Player>()._Animator;
         m_transform = this.transform;
-
     }
 
     void Update () {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        transform.Rotate(0f, Input.GetAxis("Mouse X") * 200 * m_camera.m_sensitivity * Time.deltaTime, 0f);
+        transform.Rotate(0f, Input.GetAxis("Mouse X") * 200 * m_ply.m_cameraSensitivity * Time.deltaTime, 0f);
 
         m_moveDirection.x = Input.GetAxis("Horizontal") * m_moveSpeed;
         m_moveDirection.z = Input.GetAxis("Vertical") * m_moveSpeed;
@@ -48,10 +45,10 @@ public class PlayerMovement : EventHandle {
             if (Physics.Raycast(this.transform.position, Vector3.up, 2f, m_groundMask)) { m_isUnderObject = true; }
             else { m_isUnderObject = false; }
             if (m_cc.height > 1.1) { m_cc.height = Mathf.Lerp(m_cc.height, 1f, Time.deltaTime * 10f); } else { m_cc.height = 1f; }
-            m_moveSpeed = 5f;
+            m_moveSpeed = m_ply.m_playerCrouchSpeed;
         } else {
             if (m_cc.height < 1.9) { m_cc.height = Mathf.Lerp(m_cc.height, 2f, Time.deltaTime * 10f); } else { m_cc.height = 2f; }
-            if (Input.GetKey(KeyCode.LeftShift)) { m_moveSpeed = 15f; } else { m_moveSpeed = 10f; }
+            if (Input.GetKey(KeyCode.LeftShift)) { m_moveSpeed = m_ply.m_playerRunSpeed; } else { m_moveSpeed = m_ply.m_playerWalkSpeed; }
         }
 
         Debug.DrawLine(this.transform.position + Vector3.down, this.transform.position + Vector3.down * 1.3f, Color.cyan);

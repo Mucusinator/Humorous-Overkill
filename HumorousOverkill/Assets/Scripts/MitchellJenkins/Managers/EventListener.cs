@@ -265,6 +265,7 @@ namespace EventHandler {
         #endregion
     }
 
+#if UNITY_EDITOR
     [UnityEditor.CanEditMultipleObjects]
     [UnityEditor.CustomEditor(typeof(EventHandle), true)]
     public class EventHandleEditor : UnityEditor.Editor {
@@ -293,4 +294,5 @@ namespace EventHandler {
         }
         #endregion
     }
+#endif
 }
