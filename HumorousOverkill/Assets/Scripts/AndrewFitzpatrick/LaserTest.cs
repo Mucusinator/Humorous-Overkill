@@ -55,7 +55,7 @@ public class LaserTest : MonoBehaviour
 
                     // set the current laser parts color
                     int currentColor = (laserColors.Count - 1 - (i + (int)colorOffset) % laserColors.Count);
-                    currentPart.GetComponentInChildren<Renderer>().material.SetColor("_Color", laserColors[currentColor]);
+                    currentPart.GetComponentInChildren<Renderer>().material.SetColor("_TintColor", laserColors[currentColor]);
 
                     // parent the laser part and add it to the list
                     currentPart.transform.parent = transform;
