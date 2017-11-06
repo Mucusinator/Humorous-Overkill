@@ -126,14 +126,14 @@ public class CombinedScript : EventHandle {
         //GameObject.FindGameObjectWithTag("UI").GetComponent<UIManager>().HandleEvent(GameEvent.UI_AMMO_CUR);
         if (gunType == GunType.RIFLE)
         {
-            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_CUR, currentRifleAmmo);
-            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_MAX, maxRifleAmmo);
+            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_CUR, (float)currentRifleAmmo);
+            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_MAX, (float)maxRifleAmmo);
         }
         else if (gunType == GunType.SHOTGUN)
         {
 
-            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_CUR, currentShotgunAmmo);
-            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_MAX, maxShotgunAmmo);
+            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_CUR, (float)currentShotgunAmmo);
+            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_MAX, (float)maxShotgunAmmo);
 
         }
 
@@ -408,6 +408,7 @@ public class CombinedScript : EventHandle {
     }
     void Shoot()
     {
+        shotTrail.enabled = true;
         currentRifleAmmo--;
         RifleMuzzleEffect.Play();
         // A variable that will store the imformation gathered from the raycast.
@@ -463,6 +464,7 @@ public class CombinedScript : EventHandle {
             shotTrail.SetPosition(1, centreCam + (fpsCam.transform.forward * Range));
             //shotTrail.SetPosition(1, fpsCam.transform.position + (EndOfGun.transform.forward * Range));
         }
+        shotTrail.enabled = false;
     }
         
         
