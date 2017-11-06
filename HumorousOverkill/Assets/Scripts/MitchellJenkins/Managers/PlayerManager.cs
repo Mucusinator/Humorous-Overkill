@@ -38,6 +38,7 @@ public class PlayerManager : EventHandler.EventHandle {
 
     // Override for the handle event system
     public override bool HandleEvent (GameEvent e, float value) {
+        Debug.Log(e.ToString() + " :: " + value);
         switch (e) {
         case GameEvent.PICKUP_HEALTH:
             // calls a function add health to the player

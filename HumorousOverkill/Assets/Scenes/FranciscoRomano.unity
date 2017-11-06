@@ -150,7 +150,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -177,15 +177,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3453c96b8f88e6e45bce87b2a744c76b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  units: 0
   activated: 0
   enemyStage:
-    waveIndex: 0
-    wave:
-      activeUnits: 0
-      spawnRate: 1
-      units: []
-    points: []
-    waves: []
+    waveUnits: 0
+    stage:
+      index: 0
+      wave:
+        rate: 0
+        points: []
+      waves:
+      - rate: 0
+        points:
+        - position: {x: 0, y: 1, z: 0}
+          units:
+          - amount: 10
+            prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
+              type: 2}
+          - amount: 10
+            prefab: {fileID: 1779994788910928, guid: 088fc0619a576d947b645fe77de9ef82,
+              type: 2}
   temp_Colliders: []
 --- !u!1 &76509479
 GameObject:
@@ -985,6 +996,7 @@ MonoBehaviour:
   m_healthTEST: 1
   m_ammoCurTEST: 99
   m_ammoMaxTEST: 99
+  DEBUG: 0
 --- !u!114 &2059719503
 MonoBehaviour:
   m_ObjectHideFlags: 0

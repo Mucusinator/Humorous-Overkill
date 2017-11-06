@@ -43,6 +43,7 @@ public class EnemySpawner : EventHandle
             // reset stage
             activated = true;
             enemyStage.reset();
+            enemyStage.nextWave();
         }
     }
     public bool IsWaveEmpty()

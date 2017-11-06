@@ -439,7 +439,7 @@ public class CombinedScript : EventHandle {
 
 
 
-                    if (hit.collider.gameObject.tag == "Avoid")
+                    if (hit.collider.gameObject.tag == "Enemy")
                     {
                         if(hit.collider.gameObject.GetComponent<DroneAI>() != null)
                         {

@@ -54,8 +54,8 @@ public class EnemyManager : EventHandler.EventHandle
     {
         // check spawner status
         if (spawner == null) return;
-        if (!spawner.IsStageComplete())
-        {
+        //if (!spawner.IsStageComplete())
+        //{
             // draw box
             GUI.Box(new Rect(0, 0, 220, 180), "");
             // draw stage status
@@ -68,7 +68,7 @@ public class EnemyManager : EventHandler.EventHandle
             GUI.Label(new Rect(10, 120, 200, 20), "spawn rate = " + spawner.GetWaveSpawnRate());
             GUI.Label(new Rect(10, 140, 200, 20), "active units = " + spawner.GetWaveActiveUnits());
             GUI.Label(new Rect(10, 160, 200, 20), "----------------------------------------------");
-        }
+        //}
     }
     void Update()
     {

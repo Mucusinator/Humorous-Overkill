@@ -18,7 +18,7 @@ public class Pickup : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         // check if player
-        if (collider.tag == "Player" && !collider.GetComponent<Player>().isHealthFull)
+        if (collider.tag == "Player")
         {
             // send event to player
             GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(type, amount);
