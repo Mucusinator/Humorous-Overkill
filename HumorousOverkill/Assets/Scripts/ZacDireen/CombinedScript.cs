@@ -273,10 +273,10 @@ public class CombinedScript : EventHandle {
             }
         }
 
-        if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE)
-        {
-            shotTrail.enabled = true;
-        }
+        //if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE)
+        //{
+        //    shotTrail.enabled = true;
+        //}
         if (Input.GetButtonUp("Fire1") || isReloading && gunType == GunType.RIFLE)
         {
             shotTrail.enabled = false;
