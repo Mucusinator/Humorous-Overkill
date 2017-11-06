@@ -20,12 +20,12 @@ namespace FR
             this.prefab = prefab;
         }
         // :: class functions
-        public bool isEmpty()
+        public bool IsEmpty()
         {
             // check if depleted
-            return amount == 0;
+            return !(amount > 0);
         }
-        public GameObject create(Vector3 position, Quaternion rotation, Transform parent)
+        public GameObject Create(Vector3 position, Quaternion rotation, Transform parent)
         {
             amount--;
             // instantiate prefab

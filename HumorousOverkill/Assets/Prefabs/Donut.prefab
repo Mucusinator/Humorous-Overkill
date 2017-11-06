@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4289617803979862}
   - component: {fileID: 95015958360597322}
   - component: {fileID: 114689897827245990}
-  - component: {fileID: 65352213131133710}
   m_Layer: 0
   m_Name: Donut
   m_TagString: Enemy
@@ -201,9 +200,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4340884899887522}
+  - component: {fileID: 65305633869846470}
   m_Layer: 0
   m_Name: Model
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -928,18 +928,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1447156329734570}
   m_Mesh: {fileID: 4300008, guid: 4d198a7fdfbc0f848b0ac416b12b2491, type: 3}
---- !u!65 &65352213131133710
+--- !u!65 &65305633869846470
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1031186524167282}
+  m_GameObject: {fileID: 1739940540950698}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.1081802, y: 0.34168956, z: 1.1081805}
-  m_Center: {x: 0, y: -0.00093477964, z: 0.000000029802322}
+  m_Center: {x: 0, y: -0.00093480945, z: 0.000000029918738}
 --- !u!95 &95015958360597322
 Animator:
   serializedVersion: 3

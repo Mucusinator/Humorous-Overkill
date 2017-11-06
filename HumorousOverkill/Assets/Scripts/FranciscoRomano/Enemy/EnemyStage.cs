@@ -6,64 +6,60 @@ using System.Collections.Generic;
 public class EnemyStage
 {
     // :: variables
-    [HideInInspector]
-    public int waveIndex;
-    [HideInInspector]
-    public FR.SpawnWave wave;
-    public List<Vector3> points;
-    public List<FR.SpawnWave> waves;
+    public int waveUnits;
+    public FR.SpawnStage stage;
     // :: initializers
     public EnemyStage()
     {
         // initialize
-        waves = new List<FR.SpawnWave>();
-        points = new List<Vector3>();
-        wave = null;
-        waveIndex = 0;
+        waveUnits = 0;
+        stage = new FR.SpawnStage();
     }
     // :: class functions
     public void reset()
     {
         // reset values
-        wave = new FR.SpawnWave(waves[0]);
-        waveIndex = 0;
+        stage.Reset();
     }
     public void nextWave()
     {
-        // check status
-        if (waveIndex + 1 == waves.Count) return;
-        // change current wave
-        int activeUnits = wave.activeUnits;
-        wave = new FR.SpawnWave(waves[++waveIndex]);
-        wave.activeUnits = activeUnits;
+        // change wave
+        stage.NextWave();
     }
     public void removeUnit()
     {
         // check status
-        if (wave.activeUnits == 0) return;
-        // remove enemy unit
-        wave.removeUnit();
+        if (waveUnits > 0)
+        {
+            // remove enemy unit
+            waveUnits--;
+        }
+    }
+    public bool isEmpty()
+    {
+        // check status
+        return stage.IsStageEmpty();
     }
     public bool isComplete()
     {
         // check status
-        return wave.isComplete() && (waveIndex + 1) == waves.Count;
+        return isEmpty() && !(waveUnits > 0);
     }
     public bool isWaveEmpty()
     {
         // check if wave empty
-        return wave.isEmpty();
+        return stage.IsWaveEmpty();
     }
     public bool isWaveComplete()
     {
         // check if wave complete
-        return wave.isComplete();
+        return isWaveEmpty() && !(waveUnits > 0);
     }
     public GameObject createUnit(Transform parent)
     {
         // check status
-        if (wave.isEmpty()) return null;
+        if (isWaveEmpty()) return null;
         // create enemy unit
-        return wave.createUnit(points[Random.Range(0, points.Count)], Quaternion.identity, parent);
+        return stage.CreateUnit(Quaternion.identity, parent);
     }
 }
