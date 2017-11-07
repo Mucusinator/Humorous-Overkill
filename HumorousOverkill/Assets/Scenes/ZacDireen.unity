@@ -108,6 +108,48 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &124839025
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4168790869724516, guid: 6a16e25d499b71e41ab14dcfa42ce974, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168790869724516, guid: 6a16e25d499b71e41ab14dcfa42ce974, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168790869724516, guid: 6a16e25d499b71e41ab14dcfa42ce974, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168790869724516, guid: 6a16e25d499b71e41ab14dcfa42ce974, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168790869724516, guid: 6a16e25d499b71e41ab14dcfa42ce974, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168790869724516, guid: 6a16e25d499b71e41ab14dcfa42ce974, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168790869724516, guid: 6a16e25d499b71e41ab14dcfa42ce974, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168790869724516, guid: 6a16e25d499b71e41ab14dcfa42ce974, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6a16e25d499b71e41ab14dcfa42ce974, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &221898631
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,14 +669,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+<<<<<<< HEAD
 --- !u!114 &700239889 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114629167022791072, guid: 6a16e25d499b71e41ab14dcfa42ce974,
     type: 2}
   m_PrefabInternal: {fileID: 2078086421}
   m_Script: {fileID: 11500000, guid: a3efa8794e2cf464eb21b37a06bf6d93, type: 3}
+=======
+>>>>>>> 6a631df75b06d082a6f75dd05ca8a46f8224b39b
 --- !u!1 &754524842
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,12 +992,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0bfce3c319ca7408a02a5223652b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
 --- !u!114 &1346937696 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114701516145576802, guid: 6a16e25d499b71e41ab14dcfa42ce974,
     type: 2}
   m_PrefabInternal: {fileID: 2078086421}
   m_Script: {fileID: 11500000, guid: c857095a4ed41ff4e8eab48d1682aff9, type: 3}
+=======
+>>>>>>> 6a631df75b06d082a6f75dd05ca8a46f8224b39b
 --- !u!1 &1381820058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,8 +1752,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ae7d421bc325f439687b2d090c9bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ply: {fileID: 1346937696}
-  m_weapon: {fileID: 700239889}
+  m_ply: {fileID: 0}
+  m_weapon: {fileID: 0}
   m_playerInfo:
     m_playerHealth: 100
     m_playerWalkSpeed: 10
@@ -1781,7 +1829,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2012496998
 GameObject:
@@ -1979,6 +2027,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2043844954}
+<<<<<<< HEAD
 --- !u!1001 &2078086421
 Prefab:
   m_ObjectHideFlags: 0
@@ -2025,3 +2074,5 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a16e25d499b71e41ab14dcfa42ce974, type: 2}
   m_IsPrefabParent: 0
+=======
+>>>>>>> 6a631df75b06d082a6f75dd05ca8a46f8224b39b

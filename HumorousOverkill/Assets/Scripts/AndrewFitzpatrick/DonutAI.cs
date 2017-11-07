@@ -291,7 +291,7 @@ public class DonutAI : EventHandler.EventHandle
 
             if (Physics.Raycast(transform.position, aimPoint, out shootHitInfo))
             {
-                if (shootHitInfo.collider.gameObject.tag == "Player")
+                if (shootHitInfo.collider.gameObject.tag == "Player" && shootHitInfo.collider.gameObject.GetComponent<Player>() != null)
                 {
                     //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.5f);
                     shootHitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
