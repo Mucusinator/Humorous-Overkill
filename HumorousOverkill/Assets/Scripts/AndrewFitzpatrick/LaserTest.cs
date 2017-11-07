@@ -6,6 +6,7 @@ public class LaserTest : MonoBehaviour
 {
     RaycastHit hit = new RaycastHit();
     public GameObject laser;
+  
     private Camera cam;
     private List<GameObject> laserParts = new List<GameObject>(); // list to prevent scene clutter
     public List<Color> laserColors = new List<Color>(); // list of colors for the laser to cycle through
@@ -23,6 +24,7 @@ public class LaserTest : MonoBehaviour
     {
         // update colorOffset
         colorOffset += laserSpeed * Time.deltaTime;
+     
 
         // update ray
         Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
@@ -45,23 +47,27 @@ public class LaserTest : MonoBehaviour
                 Quaternion rotation = Quaternion.LookRotation(relativePos);
 
                 // instantiate laser parts
-                for (int i = 0; i < dist * 2; i++)
+                for (int i = 0; i < dist * 9; i++)
                 {
                     // lerp from shoot point to hit point
-                    Vector3 lerpPos = Vector3.Lerp(shootPoint.transform.position, hit.point, 1.0f - (1.0f / (dist * 2)) * i);
+                    Vector3 lerpPos = Vector3.Lerp(hit.point, shootPoint.transform.position, 1.0f - (1.0f / (dist * 9)) * i);
 
                     // instantiate the current laser part
                     GameObject currentPart = Instantiate(laser, lerpPos, rotation) as GameObject;
 
                     // set the current laser parts color
-                    int currentColor = (laserColors.Count - 1 - (i + (int)colorOffset) % laserColors.Count);
-                    currentPart.GetComponentInChildren<Renderer>().material.SetColor("_TintColor", laserColors[currentColor]);
+                    //int currentColor = (laserColors.Count - 1 - (i + (int)colorOffset) % laserColors.Count);
+                    //currentPart.GetComponentInChildren<Renderer>().material.SetColor("_TintColor", laserColors[currentColor]);
+                    currentPart.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(Time.time, 0);
+
+
 
                     // parent the laser part and add it to the list
                     currentPart.transform.parent = transform;
                     laserParts.Add(currentPart);
                 }
             }
+
         }
 
         // when the left mouse button is released clean up laser parts
