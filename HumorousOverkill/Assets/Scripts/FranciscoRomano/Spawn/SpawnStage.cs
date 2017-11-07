@@ -25,20 +25,21 @@ namespace FR
         public void Reset()
         {
             // reset stage
+            wave = null;
             index = 0;
-            wave = new SpawnWave(waves[0]);
         }
         public void NextWave()
         {
             // check if depleted
             if (IsStageEmpty()) return;
+            if (waves.Count > 0) return;
             // change current wave
             wave = new SpawnWave(waves[index++]);
         }
         public bool IsWaveEmpty()
         {
             // check if depleted
-            return wave.IsEmpty();
+            return wave == null || wave.IsEmpty();
         }
         public bool IsStageEmpty()
         {
@@ -48,7 +49,7 @@ namespace FR
         public GameObject CreateUnit(Quaternion rotation, Transform parent)
         {
             // create unit
-            return CreateUnit(wave, rotation, parent);
+            return wave != null ? CreateUnit(wave, rotation, parent) : null;
         }
         public GameObject CreateUnit(SpawnWave wave, Quaternion rotation, Transform parent)
         {
