@@ -262,7 +262,9 @@ public class CombinedScript : EventHandle {
         {
             if (currentShotgunAmmo > 0)
             {
+
                 ShotgunMuzzleEffect.Play();
+
                 currentShotgunAmmo--;
                 for (int i = 0; i < pelletCount; ++i)
                 {
@@ -479,12 +481,19 @@ public class CombinedScript : EventHandle {
             //{
             //    shotgunTarget.TakeDamage(PelletDamage);
             //}
-            if (hit.transform.tag == "Enemy")
+            if (hit.collider.gameObject.tag == "Enemy")
             {
                 GetEventListener("Enemy").HandleEvent(GameEvent.ENEMY_DAMAGED, hit.transform.gameObject);
 
-                hit.transform.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
-                //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
+                if (hit.collider.gameObject.GetComponent<DroneAI>() != null)
+                {
+                    hit.collider.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                }
+                if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
+                {
+                    hit.collider.gameObject.GetComponentInParent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                }
+                Debug.Log("I have shot " + hit.collider.gameObject.name);
             }
 
         }
