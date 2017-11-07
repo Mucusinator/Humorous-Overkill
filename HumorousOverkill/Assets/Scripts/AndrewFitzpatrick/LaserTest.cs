@@ -69,6 +69,7 @@ public class LaserTest : MonoBehaviour
                         // parent the laser part and add it to the list
                         currentPart.transform.parent = transform;
                         laserParts.Add(currentPart);
+                        rotation.z += 15;
                     }
                 }
             }

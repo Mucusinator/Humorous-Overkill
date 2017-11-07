@@ -262,7 +262,9 @@ public class CombinedScript : EventHandle {
         {
             if (currentShotgunAmmo > 0)
             {
+
                 ShotgunMuzzleEffect.Play();
+
                 currentShotgunAmmo--;
                 for (int i = 0; i < pelletCount; ++i)
                 {
@@ -409,14 +411,12 @@ public class CombinedScript : EventHandle {
                             if (hit.collider.gameObject.GetComponent<DroneAI>() != null)
                             {
                                 hit.collider.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
-                                Debug.Log("I have shot DroneAI " + hit.collider.gameObject.name);
                             }
                             if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                             {
                                 hit.collider.gameObject.GetComponentInParent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
-                                Debug.Log("I have shot DonutAI " + hit.collider.gameObject.name);
                             }
-                            
+                            Debug.Log("I have shot " + hit.collider.gameObject.name);
                             //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
                             //target.TakeDamage(RifleDamage);
 
@@ -473,7 +473,7 @@ public class CombinedScript : EventHandle {
         if (Physics.Raycast(r, out hit))
         {
 
-            Debug.DrawLine(WeaponRaycast.transform.position, hit.point, Color.black, 3.0f);
+            Debug.DrawLine(StartOfPlayerRaycast.transform.position, hit.point, Color.black, 3.0f);
 
 
             //Target shotgunTarget = hit.transform.GetComponent<Target>();
@@ -483,22 +483,17 @@ public class CombinedScript : EventHandle {
             //}
             if (hit.collider.gameObject.tag == "Enemy")
             {
+                GetEventListener("Enemy").HandleEvent(GameEvent.ENEMY_DAMAGED, hit.transform.gameObject);
 
                 if (hit.collider.gameObject.GetComponent<DroneAI>() != null)
                 {
                     hit.collider.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
-                    Debug.Log("I have shot DroneAI " + hit.collider.gameObject.name);
                 }
                 if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                 {
                     hit.collider.gameObject.GetComponentInParent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
-                    Debug.Log("I have shot DonutAI " + hit.collider.gameObject.name);
                 }
-
-                //GetEventListener("Enemy").HandleEvent(GameEvent.ENEMY_DAMAGED, hit.transform.gameObject);
-
-                //hit.transform.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
-                //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
+                Debug.Log("I have shot " + hit.collider.gameObject.name);
             }
 
         }
