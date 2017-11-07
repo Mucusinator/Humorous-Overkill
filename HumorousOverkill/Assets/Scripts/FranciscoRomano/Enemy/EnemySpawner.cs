@@ -8,7 +8,6 @@ using System.Collections.Generic;
 [BindListener("EnemyManager", typeof(EnemyManager))]
 public class EnemySpawner : EventHandle
 {
-    //[HideInInspector]
     public int units = 0;
     public bool activated = false;
     public EnemyStage enemyStage = new EnemyStage();

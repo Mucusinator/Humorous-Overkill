@@ -1,4 +1,5 @@
 ﻿using System;
+using FR.Util;
 using UnityEngine;
 using UnityEditor;
 using EventHandler;
@@ -8,18 +9,111 @@ using System.Collections.Generic;
 [CustomEditor(typeof(EnemySpawner))]
 public class EnemySpawnerEditor : Editor
 {
+    //// :: classes
+    //class UnitData
+    //{
+    //    public GameObject prefab = null;
+    //    public List<SpotData> spots = new List<SpotData>();
+    //}
+    //class SpotData
+    //{
+    //    public int amount = 0;
+    //    public Vector3 position = new Vector3();
+    //}
+    //// :: variables
+    //bool isEditingUnit;
+    //bool isEditingWave;
+    //EnemySpawner component;
+    //static int currentUnit = 0;
+    //static List<UnitData> units = new List<UnitData>();
+    //// :: functions
+    //void OnEnable()
+    //{
+    //    // initialize
+    //    isEditingUnit = false;
+    //    isEditingWave = false;
+    //    component = target as EnemySpawner;
+    //}
+
+    //public override void OnInspectorGUI()
+    //{
+    //    //DrawDefaultInspector();
+
+    //    // check if editing units
+    //    if (isEditingUnit)
+    //    {
+    //        GUILayout.Label("Spawn Units", EditorStyles.boldLabel);
+    //        GUILayout.Label("Prefab");
+
+    //        EditorGUILayout.BeginHorizontal();
+    //        GUI.enabled = false;
+    //        EditorGUILayout.ObjectField("", units[currentUnit].prefab, typeof(GameObject), true);
+    //        GUI.enabled = true;
+    //        if (GUILayout.Button("Remove")) { if (units.Count > 0) units.RemoveAt(currentUnit); isEditingUnit = false; }
+    //        EditorGUILayout.EndHorizontal();
+
+    //        if (isEditingUnit)
+    //        {
+    //            GUILayout.Label("Positions");
+    //            for (int i = 0; i < units[currentUnit].spots.Count; i++)
+    //            {
+    //                EditorGUILayout.BeginHorizontal();
+    //                GUILayout.Label("spot " + i);
+
+    //                EditorGUILayout.BeginVertical();
+    //                    units[currentUnit].spots[i].amount = EditorGUILayout.IntField("amount", units[currentUnit].spots[i].amount);
+    //                    units[currentUnit].spots[i].position = EditorGUILayout.Vector3Field("position", units[currentUnit].spots[i].position);
+    //                    if (GUILayout.Button("remove")) units[currentUnit].spots.RemoveAt(i);
+    //                EditorGUILayout.EndVertical();
+
+    //                EditorGUILayout.EndHorizontal();
+    //            }
+    //            if (GUILayout.Button("Add Spot")) { units[currentUnit].spots.Add(new SpotData()); }
+    //            if (GUILayout.Button("Back")) { isEditingUnit = false; }
+    //        }
+    //    }
+    //    // check if editing waves
+    //    else if (isEditingWave)
+    //    {
+    //        GUILayout.Label("Spawn Wave " + component.enemyStage.waves.Count, EditorStyles.boldLabel);
+    //        //for (int i = 0; i < INFO.prefabs.Count; i++)
+    //        for (int i = 0; i < units.Count; i++)
+    //        {
+    //            EditorGUILayout.BeginHorizontal();
+    //            units[i].prefab = (GameObject)EditorGUILayout.ObjectField(units[i].prefab, typeof(GameObject), true);
+    //            if (GUILayout.Button("edit"))
+    //            {
+    //                currentUnit = i;
+    //                isEditingUnit = true;
+    //            };
+    //            EditorGUILayout.EndHorizontal();
+    //        }
+    //        if (GUILayout.Button("Add Unit"))
+    //        {
+    //            units.Add(new UnitData());
+    //        }
+    //        if (GUILayout.Button("Cancel New")) { isEditingWave = false; }
+    //        if (GUILayout.Button("Create Wave")) { isEditingWave = false; }
+    //    }
+    //    // default editor layout
+    //    else
+    //    {
+    //        GUILayout.Label("Spawn Information", EditorStyles.boldLabel);
+    //        if (GUILayout.Button("Add Wave")) { isEditingWave = true; }
+    //    }
+    //}
+
     bool isEditingUnits;
     bool isEditingRegion;
     bool isEditingPoints;
-
     Transform transform;
     EnemySpawner component;
     Spawner.RegionEditor regionEditor;
 
     // ### REMOVE LATER ### /
-    PointsEditor pointsEditor = new PointsEditor();
-    RegionEditor regionEditor01 = new RegionEditor();
-    EnemySpawnerRegionEditor new_regionEditor02;
+    // PointsEditor pointsEditor = new PointsEditor();
+    // RegionEditor regionEditor01 = new RegionEditor();
+    // EnemySpawnerRegionEditor new_regionEditor02;
     // ### REMOVE LATER ### /
 
     //EnemySpawnerRegionEditor region
@@ -35,12 +129,11 @@ public class EnemySpawnerEditor : Editor
         isEditingPoints = false;
 
 
-        new_regionEditor02 = new EnemySpawnerRegionEditor(component);
+        //new_regionEditor02 = new EnemySpawnerRegionEditor(component);
     }
 
     void OnSceneGUI()
     {
-
         if (isEditingRegion)
         {
             Spawner.RegionEditor.OnSceneGUI(regionEditor, Event.current);
@@ -53,16 +146,16 @@ public class EnemySpawnerEditor : Editor
         }
         else if (isEditingPoints)
         {
-            pointsEditor.render(Event.current);
-            pointsEditor.update(Event.current);
+            //pointsEditor.render(Event.current);
+            //pointsEditor.update(Event.current);
         }
     }
 
     public override void OnInspectorGUI()
     {
         // draw defaults
-        //DrawDefaultInspector();
-        
+        DrawDefaultInspector();
+
         if (isEditingUnits)
         {
             // component units layout
@@ -166,7 +259,7 @@ public class EnemySpawnerEditor : Editor
         public float height = 0;
         public List<Vector3> points = new List<Vector3>();
         public static Color color = new Color(1.0f, 0.0f, 1.0f, 0.5f);
-        
+
         public void render(Event e)
         {
             // draw points
