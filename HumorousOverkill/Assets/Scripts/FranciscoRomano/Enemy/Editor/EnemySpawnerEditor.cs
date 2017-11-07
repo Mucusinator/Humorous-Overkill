@@ -9,100 +9,55 @@ using System.Collections.Generic;
 [CustomEditor(typeof(EnemySpawner))]
 public class EnemySpawnerEditor : Editor
 {
-    //// :: classes
-    //class UnitData
-    //{
-    //    public GameObject prefab = null;
-    //    public List<SpotData> spots = new List<SpotData>();
-    //}
-    //class SpotData
-    //{
-    //    public int amount = 0;
-    //    public Vector3 position = new Vector3();
-    //}
-    //// :: variables
-    //bool isEditingUnit;
-    //bool isEditingWave;
-    //EnemySpawner component;
-    //static int currentUnit = 0;
-    //static List<UnitData> units = new List<UnitData>();
-    //// :: functions
-    //void OnEnable()
-    //{
-    //    // initialize
-    //    isEditingUnit = false;
-    //    isEditingWave = false;
-    //    component = target as EnemySpawner;
-    //}
+    // :: variables
+    EnemySpawner component = null;
+    // :: functions
+    void OnEnable()
+    {
+        component = target as EnemySpawner;
+        SpawnInfo.isEditingWave = false;
+        SpawnInfo.isEditingUnit = false;
+        SpawnInfo.isEditingSpot = false;
+    }
 
-    //public override void OnInspectorGUI()
-    //{
-    //    //DrawDefaultInspector();
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
 
-    //    // check if editing units
-    //    if (isEditingUnit)
-    //    {
-    //        GUILayout.Label("Spawn Units", EditorStyles.boldLabel);
-    //        GUILayout.Label("Prefab");
+        SpawnInfo.OnInspectorGUI();
+        if (SpawnInfo.isEditingWave && !SpawnInfo.isEditingUnit && !SpawnInfo.isEditingSpot)
+        {
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Create"))
+            {
+                //component.waves.Add(SpawnInfo.currentWave);
+                SpawnInfo.isEditingWave = false;
+                int index = component.temp_stage.waves.Count;
 
-    //        EditorGUILayout.BeginHorizontal();
-    //        GUI.enabled = false;
-    //        EditorGUILayout.ObjectField("", units[currentUnit].prefab, typeof(GameObject), true);
-    //        GUI.enabled = true;
-    //        if (GUILayout.Button("Remove")) { if (units.Count > 0) units.RemoveAt(currentUnit); isEditingUnit = false; }
-    //        EditorGUILayout.EndHorizontal();
+                component.temp_stage.waves.Add(new FR.SpawnWave());
+                component.temp_stage.waves[0].rate = SpawnInfo.currentWave.rate;
 
-    //        if (isEditingUnit)
-    //        {
-    //            GUILayout.Label("Positions");
-    //            for (int i = 0; i < units[currentUnit].spots.Count; i++)
-    //            {
-    //                EditorGUILayout.BeginHorizontal();
-    //                GUILayout.Label("spot " + i);
+                foreach (SpawnInfo.Unit unit in SpawnInfo.currentWave.units)
+                {
+                    foreach (SpawnInfo.Spot spot in unit.spots)
+                    {
+                        FR.SpawnUnit temp_unit = new FR.SpawnUnit(unit.prefab, spot.amount);
+                        FR.SpawnPoint temp_point = new FR.SpawnPoint(spot.position);
+                        temp_point.units.Add(temp_unit);
+                        component.temp_stage.waves[0].points.Add(temp_point);
+                    }
+                }
+            }
+            if (GUILayout.Button("Back")) SpawnInfo.isEditingWave = false;
+            EditorGUILayout.EndHorizontal();
+        }
+    }
 
-    //                EditorGUILayout.BeginVertical();
-    //                    units[currentUnit].spots[i].amount = EditorGUILayout.IntField("amount", units[currentUnit].spots[i].amount);
-    //                    units[currentUnit].spots[i].position = EditorGUILayout.Vector3Field("position", units[currentUnit].spots[i].position);
-    //                    if (GUILayout.Button("remove")) units[currentUnit].spots.RemoveAt(i);
-    //                EditorGUILayout.EndVertical();
+    // ############################################################################# //
+    // ## WORKING VERSION ########################################################## //
+    // ############################################################################# //
 
-    //                EditorGUILayout.EndHorizontal();
-    //            }
-    //            if (GUILayout.Button("Add Spot")) { units[currentUnit].spots.Add(new SpotData()); }
-    //            if (GUILayout.Button("Back")) { isEditingUnit = false; }
-    //        }
-    //    }
-    //    // check if editing waves
-    //    else if (isEditingWave)
-    //    {
-    //        GUILayout.Label("Spawn Wave " + component.enemyStage.waves.Count, EditorStyles.boldLabel);
-    //        //for (int i = 0; i < INFO.prefabs.Count; i++)
-    //        for (int i = 0; i < units.Count; i++)
-    //        {
-    //            EditorGUILayout.BeginHorizontal();
-    //            units[i].prefab = (GameObject)EditorGUILayout.ObjectField(units[i].prefab, typeof(GameObject), true);
-    //            if (GUILayout.Button("edit"))
-    //            {
-    //                currentUnit = i;
-    //                isEditingUnit = true;
-    //            };
-    //            EditorGUILayout.EndHorizontal();
-    //        }
-    //        if (GUILayout.Button("Add Unit"))
-    //        {
-    //            units.Add(new UnitData());
-    //        }
-    //        if (GUILayout.Button("Cancel New")) { isEditingWave = false; }
-    //        if (GUILayout.Button("Create Wave")) { isEditingWave = false; }
-    //    }
-    //    // default editor layout
-    //    else
-    //    {
-    //        GUILayout.Label("Spawn Information", EditorStyles.boldLabel);
-    //        if (GUILayout.Button("Add Wave")) { isEditingWave = true; }
-    //    }
-    //}
-
+    /*
     bool isEditingUnits;
     bool isEditingRegion;
     bool isEditingPoints;
@@ -357,4 +312,5 @@ public class EnemySpawnerEditor : Editor
             return ray.origin + ray.direction * length;
         }
     }
+    */
 }

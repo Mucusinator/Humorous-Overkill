@@ -30,9 +30,12 @@ namespace FR
         }
         public void NextWave()
         {
+            Debug.Log(0);
             // check if depleted
             if (IsStageEmpty()) return;
-            if (waves.Count > 0) return;
+            Debug.Log(1);
+            if (waves.Count == 0) return;
+            Debug.Log(2);
             // change current wave
             wave = new SpawnWave(waves[index++]);
         }
@@ -44,7 +47,7 @@ namespace FR
         public bool IsStageEmpty()
         {
             // check if depleted
-            return IsWaveEmpty() && (index + 1) >= waves.Count;
+            return IsWaveEmpty() && index != 0 && (index + 1) >= waves.Count;
         }
         public GameObject CreateUnit(Quaternion rotation, Transform parent)
         {
