@@ -194,8 +194,8 @@ namespace FR.Util
                 EditorGUILayout.BeginHorizontal();
                 GUILayout.Label("- Point " + i++);
                 EditorGUILayout.BeginVertical();
-                spot.amount = EditorGUILayout.IntField("amount", spot.amount);
                 spot.position = EditorGUILayout.Vector3Field("position", spot.position);
+                spot.amount = EditorGUILayout.IntField("amount", spot.amount);
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.EndHorizontal();
                 //EditorGUILayout.BeginHorizontal();
