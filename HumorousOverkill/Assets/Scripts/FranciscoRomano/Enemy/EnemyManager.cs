@@ -37,6 +37,9 @@ public struct DonutEnemyInfo
     public float hitRange;
     public float accuracy;
     public float ammoDropRate;
+    public float targetRadius;
+    public float avoidRadius;
+    public float errorMargin;
 }
 
 public class EnemyManager : EventHandler.EventHandle
