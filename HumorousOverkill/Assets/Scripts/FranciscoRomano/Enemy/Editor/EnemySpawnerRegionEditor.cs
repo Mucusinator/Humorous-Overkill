@@ -31,6 +31,24 @@ namespace Spawner
             points[3] = new Vector3(-boxCollider.size.x,-position.y, boxCollider.size.z) / 2.0f + position;
         }
         // :: class functions
+        public static void SetRegion(RegionEditor editor, GameObject obj)
+        {
+            // get object components
+            Transform transform = obj.GetComponent<Transform>();
+            BoxCollider boxCollider = obj.GetComponent<BoxCollider>();
+            // update object components
+            Vector3 size = new Vector3();
+            size.y = Mathf.Abs(editor.height);
+            size.x = Mathf.Abs(editor.points[2].x - editor.points[0].x);
+            size.z = Mathf.Abs(editor.points[2].z - editor.points[0].z);
+            float offsetX = Mathf.Lerp(editor.points[0].x, editor.points[2].x, 0.5f) + transform.position.x;
+            float offsetZ = Mathf.Lerp(editor.points[0].z, editor.points[2].z, 0.5f) + transform.position.z;
+            // update collider
+            boxCollider.size = size;
+            boxCollider.center = new Vector3(0, 0, 0);
+            transform.position = new Vector3(offsetX, size.y / 2, offsetZ);
+
+        }
         public static void OnSceneGUI(RegionEditor editor, Event e)
         {
             // display gui
