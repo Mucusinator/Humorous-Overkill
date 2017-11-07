@@ -1,4 +1,5 @@
 ﻿using System;
+using FR.Util;
 using UnityEngine;
 using UnityEditor;
 using EventHandler;
@@ -8,18 +9,71 @@ using System.Collections.Generic;
 [CustomEditor(typeof(EnemySpawner))]
 public class EnemySpawnerEditor : Editor
 {
+    // :: variables
+    EnemySpawner component = null;
+    // :: functions
+    void OnEnable()
+    {
+        component = target as EnemySpawner;
+        SpawnInfo.isEditingWave = false;
+        SpawnInfo.isEditingUnit = false;
+    }
+
+    public void OnSceneGUI()
+    {
+        //Debug.Log("hello");
+        SpawnInfo.OnSceneGUI(component.transform);
+    }
+
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        SpawnInfo.OnInspectorGUI();
+        if (SpawnInfo.isEditingWave && !SpawnInfo.isEditingUnit)
+        {
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Create"))
+            {
+                //component.waves.Add(SpawnInfo.currentWave);
+                SpawnInfo.isEditingWave = false;
+                int index = component.temp_stage.waves.Count;
+
+                component.temp_stage.waves.Add(new FR.SpawnWave());
+                component.temp_stage.waves[0].rate = SpawnInfo.currentWave.rate;
+
+                foreach (SpawnInfo.Unit unit in SpawnInfo.currentWave.units)
+                {
+                    foreach (SpawnInfo.Spot spot in unit.spots)
+                    {
+                        FR.SpawnUnit temp_unit = new FR.SpawnUnit(unit.prefab, spot.amount);
+                        FR.SpawnPoint temp_point = new FR.SpawnPoint(spot.position);
+                        temp_point.units.Add(temp_unit);
+                        component.temp_stage.waves[0].points.Add(temp_point);
+                    }
+                }
+            }
+            if (GUILayout.Button("Back")) SpawnInfo.isEditingWave = false;
+            EditorGUILayout.EndHorizontal();
+        }
+    }
+
+    // ############################################################################# //
+    // ## WORKING VERSION ########################################################## //
+    // ############################################################################# //
+
+    /*
     bool isEditingUnits;
     bool isEditingRegion;
     bool isEditingPoints;
-
     Transform transform;
     EnemySpawner component;
     Spawner.RegionEditor regionEditor;
 
     // ### REMOVE LATER ### /
-    PointsEditor pointsEditor = new PointsEditor();
-    RegionEditor regionEditor01 = new RegionEditor();
-    EnemySpawnerRegionEditor new_regionEditor02;
+    // PointsEditor pointsEditor = new PointsEditor();
+    // RegionEditor regionEditor01 = new RegionEditor();
+    // EnemySpawnerRegionEditor new_regionEditor02;
     // ### REMOVE LATER ### /
 
     //EnemySpawnerRegionEditor region
@@ -35,12 +89,11 @@ public class EnemySpawnerEditor : Editor
         isEditingPoints = false;
 
 
-        new_regionEditor02 = new EnemySpawnerRegionEditor(component);
+        //new_regionEditor02 = new EnemySpawnerRegionEditor(component);
     }
 
     void OnSceneGUI()
     {
-
         if (isEditingRegion)
         {
             Spawner.RegionEditor.OnSceneGUI(regionEditor, Event.current);
@@ -53,16 +106,16 @@ public class EnemySpawnerEditor : Editor
         }
         else if (isEditingPoints)
         {
-            pointsEditor.render(Event.current);
-            pointsEditor.update(Event.current);
+            //pointsEditor.render(Event.current);
+            //pointsEditor.update(Event.current);
         }
     }
 
     public override void OnInspectorGUI()
     {
         // draw defaults
-        //DrawDefaultInspector();
-        
+        DrawDefaultInspector();
+
         if (isEditingUnits)
         {
             // component units layout
@@ -166,7 +219,7 @@ public class EnemySpawnerEditor : Editor
         public float height = 0;
         public List<Vector3> points = new List<Vector3>();
         public static Color color = new Color(1.0f, 0.0f, 1.0f, 0.5f);
-        
+
         public void render(Event e)
         {
             // draw points
@@ -264,4 +317,5 @@ public class EnemySpawnerEditor : Editor
             return ray.origin + ray.direction * length;
         }
     }
+    */
 }

@@ -37,6 +37,9 @@ public struct DonutEnemyInfo
     public float hitRange;
     public float accuracy;
     public float ammoDropRate;
+    public float targetRadius;
+    public float avoidRadius;
+    public float errorMargin;
 }
 
 public class EnemyManager : EventHandler.EventHandle
@@ -98,7 +101,7 @@ public class EnemyManager : EventHandler.EventHandle
         else
         {
             // ## [TEMP] ## update all colliders
-            foreach (GameObject obj in spawner.temp_Colliders)
+            foreach (GameObject obj in spawner.doors)
             {
                 obj.SetActive(false);
             }

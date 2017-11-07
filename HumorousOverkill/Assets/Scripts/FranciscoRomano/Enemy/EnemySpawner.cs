@@ -8,11 +8,13 @@ using System.Collections.Generic;
 [BindListener("EnemyManager", typeof(EnemyManager))]
 public class EnemySpawner : EventHandle
 {
-    //[HideInInspector]
     public int units = 0;
     public bool activated = false;
-    public EnemyStage enemyStage = new EnemyStage();
-    public List<GameObject> temp_Colliders = new List<GameObject>();
+    //public FR.Util.SpawnInfo.Wave wave = null;
+    public List<GameObject> doors = new List<GameObject>();
+    //public List<FR.Util.SpawnInfo.Wave> waves = new List<FR.Util.SpawnInfo.Wave>();
+
+    public EnemyStage temp_stage = new EnemyStage();
     
     void OnTriggerEnter(Collider collider)
     {
@@ -21,11 +23,8 @@ public class EnemySpawner : EventHandle
         {
             // notify manager
             GetEventListener("EnemyManager").HandleEvent(GameEvent.CLASS_TYPE_ENEMY_SPAWNER, this);
-            // ## [TEMP] ## update all colliders
-            foreach (GameObject obj in temp_Colliders)
-            {
-                obj.SetActive(true);
-            }
+            // update door objects
+            foreach (GameObject door in doors) door.SetActive(true);
         }
     }
 
@@ -33,7 +32,7 @@ public class EnemySpawner : EventHandle
     {
         // reset spawner
         activated = false;
-        enemyStage.Reset();
+        temp_stage.Reset();
     }
     public void Begin()
     {
@@ -42,34 +41,34 @@ public class EnemySpawner : EventHandle
         {
             // reset stage
             activated = true;
-            enemyStage.Reset();
-            enemyStage.NextWave();
+            temp_stage.Reset();
+            temp_stage.NextWave();
         }
     }
     public bool IsWaveEmpty()
     {
         // check status
-        return enemyStage.IsWaveEmpty();
+        return temp_stage.IsWaveEmpty();
     }
     public bool IsWaveComplete()
     {
         // check status
-        return enemyStage.IsWaveComplete();
+        return temp_stage.IsWaveComplete();
     }
     public bool IsStageComplete()
     {
         // check status
-        return activated && enemyStage.IsStageComplete();
+        return activated && temp_stage.IsStageComplete();
     }
     public float GetWaveSpawnRate()
     {
         // return spawn rate
-        return enemyStage.wave == null ? 0 : enemyStage.wave.rate;
+        return temp_stage.wave == null ? 0 : temp_stage.wave.rate;
     }
     public int GetWaveActiveUnits()
     {
         // return active units
-        return enemyStage.activeUnits;
+        return temp_stage.activeUnits;
     }
 
     public override bool HandleEvent(GameEvent e)
@@ -79,15 +78,15 @@ public class EnemySpawner : EventHandle
         {
             // remove enemy unit
             case GameEvent.ENEMY_DIED:
-                enemyStage.RemoveUnit();
+                temp_stage.RemoveUnit();
                 break;
             // create enemy unit
             case GameEvent.ENEMY_SPAWN:
-                enemyStage.CreateUnit(transform);
+                temp_stage.CreateUnit(transform);
                 break;
             // continue to next wave
             case GameEvent.ENEMY_WAVE_NEXT:
-                enemyStage.NextWave();
+                temp_stage.NextWave();
                 break;
         }
         return true;
