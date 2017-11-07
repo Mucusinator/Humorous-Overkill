@@ -17,7 +17,12 @@ public class EnemySpawnerEditor : Editor
         component = target as EnemySpawner;
         SpawnInfo.isEditingWave = false;
         SpawnInfo.isEditingUnit = false;
-        SpawnInfo.isEditingSpot = false;
+    }
+
+    public void OnSceneGUI()
+    {
+        //Debug.Log("hello");
+        SpawnInfo.OnSceneGUI(component.transform);
     }
 
     public override void OnInspectorGUI()
@@ -25,7 +30,7 @@ public class EnemySpawnerEditor : Editor
         DrawDefaultInspector();
 
         SpawnInfo.OnInspectorGUI();
-        if (SpawnInfo.isEditingWave && !SpawnInfo.isEditingUnit && !SpawnInfo.isEditingSpot)
+        if (SpawnInfo.isEditingWave && !SpawnInfo.isEditingUnit)
         {
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("Create"))
