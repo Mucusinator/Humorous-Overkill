@@ -513,7 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1330c886aecf08468792961c1d77168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laser: {fileID: 0}
+  laser: {fileID: 1426574552836422, guid: 7c8190cb4b470484cb2bbb45f5095e25, type: 2}
   laserColors:
   - {r: 0.84148824, g: 0.015030292, b: 1, a: 0}
   - {r: 0.15862082, g: 0, b: 1, a: 0}
@@ -524,7 +524,7 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 0}
   shootPoint: {fileID: 1866156374817980}
   laserSpeed: 5
-  WeaponScript: {fileID: 0}
+  WeaponScript: {fileID: 114629167022791072}
 --- !u!114 &114628469533474824
 MonoBehaviour:
   m_ObjectHideFlags: 1
