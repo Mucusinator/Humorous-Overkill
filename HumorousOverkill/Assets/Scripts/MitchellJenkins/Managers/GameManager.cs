@@ -23,7 +23,10 @@ public class GameManager : EventHandler.EventHandle {
             this.GetComponent<UIManager>().HandleEvent(e);
             break;
         // Player
-        case GameEvent.PICKUP_AMMO:
+        case GameEvent.PICKUP_RIFLEAMMO:
+
+        case GameEvent.PICKUP_SHOTGUNAMMO:
+
         case GameEvent.PICKUP_HEALTH:
             this.GetComponent<PlayerManager>().HandleEvent(e);
             break;
