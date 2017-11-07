@@ -3,64 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class EnemyStage
+public class EnemyStage : FR.SpawnStage
 {
     // :: variables
-    public int waveUnits;
-    public FR.SpawnStage stage;
+    public int activeUnits;
     // :: initializers
-    public EnemyStage()
+    public EnemyStage() : base()
     {
         // initialize
-        waveUnits = 0;
-        stage = new FR.SpawnStage();
+        activeUnits = 0;
     }
     // :: class functions
-    public void reset()
+    public new void Reset()
     {
-        // reset values
-        stage.Reset();
+        // reset stage
+        base.Reset();
+        activeUnits = 0;
     }
-    public void nextWave()
+    public void RemoveUnit()
     {
-        // change wave
-        stage.NextWave();
+        // remove unit
+        if (activeUnits > 0) activeUnits--;
     }
-    public void removeUnit()
-    {
-        // check status
-        if (waveUnits > 0)
-        {
-            // remove unit
-            waveUnits--;
-        }
-    }
-    public bool isEmpty()
-    {
-        // check status
-        return stage.IsStageEmpty();
-    }
-    public bool isComplete()
-    {
-        // check status
-        return isEmpty() && !(waveUnits > 0);
-    }
-    public bool isWaveEmpty()
-    {
-        // check if wave empty
-        return stage.IsWaveEmpty();
-    }
-    public bool isWaveComplete()
+    public bool IsWaveComplete()
     {
         // check if wave complete
-        return isWaveEmpty() && !(waveUnits > 0);
+        return IsWaveEmpty() && !(activeUnits > 0);
     }
-    public GameObject createUnit(Transform parent)
+    public bool IsStageComplete()
     {
         // check status
-        if (isWaveEmpty()) return null;
-        waveUnits++;
+        return IsStageEmpty() && !(activeUnits > 0);
+    }
+    public GameObject CreateUnit(Transform parent)
+    {
+        // check status
+        if (IsWaveEmpty()) return null;
         // create enemy unit
-        return stage.CreateUnit(Quaternion.identity, parent);
+        activeUnits++;
+        return CreateUnit(Quaternion.identity, parent);
     }
 }

@@ -33,7 +33,7 @@ public class EnemySpawner : EventHandle
     {
         // reset spawner
         activated = false;
-        enemyStage.reset();
+        enemyStage.Reset();
     }
     public void Begin()
     {
@@ -42,34 +42,34 @@ public class EnemySpawner : EventHandle
         {
             // reset stage
             activated = true;
-            enemyStage.reset();
-            enemyStage.nextWave();
+            enemyStage.Reset();
+            enemyStage.NextWave();
         }
     }
     public bool IsWaveEmpty()
     {
         // check status
-        return enemyStage.isWaveEmpty();
+        return enemyStage.IsWaveEmpty();
     }
     public bool IsWaveComplete()
     {
         // check status
-        return enemyStage.isWaveComplete();
+        return enemyStage.IsWaveComplete();
     }
     public bool IsStageComplete()
     {
         // check status
-        return activated && enemyStage.isComplete();
+        return activated && enemyStage.IsStageComplete();
     }
     public float GetWaveSpawnRate()
     {
         // return spawn rate
-        return enemyStage.stage.wave.rate;
+        return enemyStage.wave == null ? 0 : enemyStage.wave.rate;
     }
     public int GetWaveActiveUnits()
     {
         // return active units
-        return enemyStage.waveUnits;
+        return enemyStage.activeUnits;
     }
 
     public override bool HandleEvent(GameEvent e)
@@ -79,15 +79,15 @@ public class EnemySpawner : EventHandle
         {
             // remove enemy unit
             case GameEvent.ENEMY_DIED:
-                enemyStage.removeUnit();
+                enemyStage.RemoveUnit();
                 break;
             // create enemy unit
             case GameEvent.ENEMY_SPAWN:
-                enemyStage.createUnit(transform);
+                enemyStage.CreateUnit(transform);
                 break;
             // continue to next wave
             case GameEvent.ENEMY_WAVE_NEXT:
-                enemyStage.nextWave();
+                enemyStage.NextWave();
                 break;
         }
         return true;
