@@ -2708,22 +2708,9 @@ MonoBehaviour:
   - {fileID: 2800000, guid: d065df8a055623c4e9856ac28350799d, type: 3}
   - {fileID: 2800000, guid: bd2046917b9aa8a4b930d7f30429d065, type: 3}
   - {fileID: 2800000, guid: 0c25c9b809192314c9f2b6ba32374d72, type: 3}
-  decalPrefab: {fileID: 1672634216169356, guid: dbb98aa10c1ff7242910343d153d2d21,
+  decalPrefab: {fileID: 1350416893915034, guid: 07298b54ec4f7e2499f6d163ff76b6c7,
     type: 2}
   decalSize: {x: 3, y: 3, z: 3}
-  decalInfo:
-  - position: {x: -44.4, y: 4.608055, z: -2.4623942}
-    rotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-    textureIndex: 3
-  - position: {x: -7.675633, y: 4.179843, z: -19.4}
-    rotation: {x: 1, y: 0, z: -0, w: 0}
-    textureIndex: 2
-  - position: {x: -7.600134, y: 2.4704022, z: -19.4}
-    rotation: {x: 1, y: 0, z: -0, w: 0}
-    textureIndex: 5
-  - position: {x: -6.2614074, y: 0.91854525, z: -19.4}
-    rotation: {x: 1, y: 0, z: -0, w: 0}
-    textureIndex: 2
 --- !u!4 &1236775016
 Transform:
   m_ObjectHideFlags: 0
