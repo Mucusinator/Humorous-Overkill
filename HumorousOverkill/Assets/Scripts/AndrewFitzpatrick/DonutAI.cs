@@ -26,7 +26,7 @@ public class DonutAI : EventHandler.EventHandle
     // dead for the explosion
     public bool dead = false;
 
-    private LineRenderer myLineRenderer;
+    //private LineRenderer myLineRenderer;
 
     public override void Awake()
     {
@@ -49,7 +49,7 @@ public class DonutAI : EventHandler.EventHandle
 
         pickTarget();
 
-        myLineRenderer = GetComponent<LineRenderer>();
+        //myLineRenderer = GetComponent<LineRenderer>();
     }
 
     void Update()
@@ -168,7 +168,7 @@ public class DonutAI : EventHandler.EventHandle
                     if (!nearPlayer())
                     {
                         myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.LOWERGUN);
-                        myLineRenderer.enabled = false;
+                        //myLineRenderer.enabled = false;
                     }
                     break;
                 default:
@@ -185,8 +185,8 @@ public class DonutAI : EventHandler.EventHandle
         // tell enemy manager that an enemy has died
         GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
 
-        // destroy this gameobject after 5 seconds
-        Destroy(this.gameObject, 5);
+        // destroy this gameobject
+        Destroy(this.gameObject);
     }
 
     void pickTarget()
@@ -282,17 +282,17 @@ public class DonutAI : EventHandler.EventHandle
 
             Debug.DrawRay(transform.position, aimPoint, Color.red);
 
-            myLineRenderer.enabled = true;
-            myLineRenderer.positionCount = 2;
-            myLineRenderer.SetPosition(0, transform.position);
-            myLineRenderer.SetPosition(1, transform.position + aimPoint);
+            //myLineRenderer.enabled = true;
+            //myLineRenderer.positionCount = 2;
+            //myLineRenderer.SetPosition(0, transform.position);
+            //myLineRenderer.SetPosition(1, transform.position + aimPoint);
             //myLineRenderer.SetColors(Color.red, Color.red);
-            myLineRenderer.startWidth = 0.5f;
-            myLineRenderer.endWidth = 0.5f;
+            //myLineRenderer.startWidth = 0.5f;
+            //myLineRenderer.endWidth = 0.5f;
 
             if (Physics.Raycast(transform.position, aimPoint, out shootHitInfo))
             {
-                if (shootHitInfo.collider.gameObject.tag == "Player")
+                if (shootHitInfo.collider.gameObject.tag == "Player" && shootHitInfo.collider.gameObject.GetComponent<Player>() != null)
                 {
                     //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.5f);
                     shootHitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);

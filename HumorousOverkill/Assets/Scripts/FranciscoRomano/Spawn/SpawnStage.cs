@@ -17,9 +17,9 @@ namespace FR
         public SpawnStage(int index, List<SpawnWave> waves)
         {
             // initialize
+            this.wave = null;
             this.index = index;
             this.waves = waves;
-            wave = new SpawnWave(waves[index]);
         }
         // :: class functions
         public void Reset()
@@ -33,7 +33,7 @@ namespace FR
             // check if depleted
             if (IsStageEmpty()) return;
             // change current wave
-            wave = new SpawnWave(waves[++index]);
+            wave = new SpawnWave(waves[index++]);
         }
         public bool IsWaveEmpty()
         {
@@ -43,7 +43,7 @@ namespace FR
         public bool IsStageEmpty()
         {
             // check if depleted
-            return IsWaveEmpty() && (index + 1) == waves.Count;
+            return IsWaveEmpty() && (index + 1) >= waves.Count;
         }
         public GameObject CreateUnit(Quaternion rotation, Transform parent)
         {

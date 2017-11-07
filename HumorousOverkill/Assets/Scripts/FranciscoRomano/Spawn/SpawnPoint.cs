@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace FR
 {
+    [System.Serializable]
     public class SpawnPoint
     {
         // :: variables
@@ -11,13 +12,17 @@ namespace FR
         public List<SpawnUnit> units;
         // :: initializers
         public SpawnPoint() : this(new Vector3(), new List<SpawnUnit>()) {}
+        public SpawnPoint(SpawnPoint other) : this(other.position, other.units){}
         public SpawnPoint(Vector3 position) : this(position, new List<SpawnUnit>()) {}
-        public SpawnPoint(SpawnPoint other) : this(other.position, new List<SpawnUnit>(other.units)){}
         public SpawnPoint(Vector3 position, List<SpawnUnit> units)
         {
             // initialize
-            this.units = units;
+            this.units = new List<SpawnUnit>();
             this.position = position;
+            foreach (SpawnUnit unit in units)
+            {
+                this.units.Add(new SpawnUnit(unit));
+            }
         }
         // :: class functions
         public bool IsEmpty()
