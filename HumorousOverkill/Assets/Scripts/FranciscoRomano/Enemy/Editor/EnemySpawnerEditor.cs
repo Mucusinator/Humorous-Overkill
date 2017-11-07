@@ -87,7 +87,7 @@ public class EnemySpawnerEditor : Editor
             GUILayout.Label("Editing Region:", EditorStyles.boldLabel);
             //new_regionEditor02.maximumX = Mathf.Max(EditorGUILayout.FloatField("height", new_regionEditor02.maximumX), 1);
             if (GUILayout.Button("Go Back")) { ResetDefaults(); };
-            if (GUILayout.Button("Confirm")) { new_regionEditor02.setdata(); };
+            if (GUILayout.Button("Confirm")) { Spawner.RegionEditor.SetRegion(regionEditor, component.gameObject); };
         }
         else
         {
@@ -115,26 +115,27 @@ public class EnemySpawnerEditor : Editor
     void ResetDefaults()
     {
         // reset values
-        regionEditor01.reset();
+        //regionEditor01.reset();
+        regionEditor = null;
         isEditingPoints = false;
         isEditingRegion = false;
     }
 
     void ConfirmRegion()
     {
-        // check if complete
-        if (regionEditor01.isComplete)
-        {
-            // calculate values
-            float sizeX = Mathf.Abs(regionEditor01.points[2].x - regionEditor01.points[0].x);
-            float sizeZ = Mathf.Abs(regionEditor01.points[2].z - regionEditor01.points[0].z);
-            float offsetX = Mathf.Lerp(regionEditor01.points[0].x, regionEditor01.points[2].x, 0.5f);
-            float offsetZ = Mathf.Lerp(regionEditor01.points[0].z, regionEditor01.points[2].z, 0.5f);
-            // update current collider
-            component.transform.position = new Vector3(offsetX, 0.5f, offsetZ);
-            component.GetComponent<BoxCollider>().center = new Vector3();
-            component.GetComponent<BoxCollider>().size = new Vector3(sizeX, 1.0f, sizeZ);
-        }
+        //// check if complete
+        //if (regionEditor01.isComplete)
+        //{
+        //    // calculate values
+        //    float sizeX = Mathf.Abs(regionEditor01.points[2].x - regionEditor01.points[0].x);
+        //    float sizeZ = Mathf.Abs(regionEditor01.points[2].z - regionEditor01.points[0].z);
+        //    float offsetX = Mathf.Lerp(regionEditor01.points[0].x, regionEditor01.points[2].x, 0.5f);
+        //    float offsetZ = Mathf.Lerp(regionEditor01.points[0].z, regionEditor01.points[2].z, 0.5f);
+        //    // update current collider
+        //    component.transform.position = new Vector3(offsetX, 0.5f, offsetZ);
+        //    component.GetComponent<BoxCollider>().center = new Vector3();
+        //    component.GetComponent<BoxCollider>().size = new Vector3(sizeX, 1.0f, sizeZ);
+        //}
     }
 
     //void ConfirmPoints()
@@ -147,8 +148,9 @@ public class EnemySpawnerEditor : Editor
     void DisplayEditRegion()
     {
         // prepair editor
-        isEditingRegion = true;
-        new_regionEditor02.prepair();
+        //regionEditor = new
+        //isEditingRegion = true;
+        //new_regionEditor02.prepair();
     }
 
     //void DisplayEditPoints()
