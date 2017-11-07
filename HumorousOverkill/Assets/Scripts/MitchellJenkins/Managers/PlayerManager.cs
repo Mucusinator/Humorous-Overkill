@@ -44,9 +44,11 @@ public class PlayerManager : EventHandler.EventHandle {
             // calls a function add health to the player
             m_ply.AddHealth((int)value);
             break;
-        case GameEvent.PICKUP_AMMO:
+        case GameEvent.PICKUP_RIFLEAMMO:
                 // Calls the add ammo function from the ammo script using the enum.
                 m_weapon.currentRifleAmmo += (int)value;
+                break;
+            case GameEvent.PICKUP_SHOTGUNAMMO:
                 m_weapon.currentShotgunAmmo += (int)value;
                 break;
         default:

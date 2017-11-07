@@ -606,7 +606,7 @@ Prefab:
     - target: {fileID: 198327260840523486, guid: 673fb61783aaa04459f3a61188a5db72,
         type: 2}
       propertyPath: lengthInSec
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1065315539927964, guid: 673fb61783aaa04459f3a61188a5db72, type: 2}
       propertyPath: m_IsActive
@@ -5930,8 +5930,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ae7d421bc325f439687b2d090c9bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ply: {fileID: 0}
-  m_weapon: {fileID: 0}
+  m_ply: {fileID: 1659887742}
+  m_weapon: {fileID: 1362202721}
   m_playerInfo:
     m_playerHealth: 100
     m_playerWalkSpeed: 10
@@ -5981,6 +5981,9 @@ MonoBehaviour:
     hitRange: 0
     accuracy: 0
     ammoDropRate: 0
+    targetRadius: 0
+    avoidRadius: 0
+    errorMargin: 0
 --- !u!114 &1971633555
 MonoBehaviour:
   m_ObjectHideFlags: 0

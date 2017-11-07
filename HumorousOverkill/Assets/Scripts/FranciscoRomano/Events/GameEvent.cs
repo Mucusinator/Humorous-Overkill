@@ -33,7 +33,8 @@
 
     // Player Enum
     PICKUP_HEALTH,
-    PICKUP_AMMO,
+    PICKUP_RIFLEAMMO,
+    PICKUP_SHOTGUNAMMO,
     PLAYER_DAMAGE
     /**************************************************************************************************/
 }
