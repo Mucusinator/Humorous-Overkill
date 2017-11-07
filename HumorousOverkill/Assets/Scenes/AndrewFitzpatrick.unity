@@ -2702,28 +2702,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   decalTextures:
+  - {fileID: 2800000, guid: 98276d93a0775c047bd4b0d973e9fbe7, type: 3}
+  - {fileID: 2800000, guid: 03afd1417d5b823428145bfc753f0fef, type: 3}
+  - {fileID: 2800000, guid: 9f2ac427eccb276448f2e3d901b6dfc7, type: 3}
+  - {fileID: 2800000, guid: e7916a41bb1a33b4f9edf8d8309194a4, type: 3}
+  - {fileID: 2800000, guid: 538f75f4ab0f36c4f9e84187e6015bab, type: 3}
+  - {fileID: 2800000, guid: a7d76b14a83446449a24e893dd19c9eb, type: 3}
+  - {fileID: 2800000, guid: 4bb58985bd97268489db0003c1676281, type: 3}
   - {fileID: 2800000, guid: 972f24ac2ae807748ae5d3df434a9585, type: 3}
   - {fileID: 2800000, guid: 9689053ffe7f5594a94ff9f4080c9079, type: 3}
   - {fileID: 2800000, guid: 78e5cb056c71c5245bf41239ac54c377, type: 3}
   - {fileID: 2800000, guid: d065df8a055623c4e9856ac28350799d, type: 3}
   - {fileID: 2800000, guid: bd2046917b9aa8a4b930d7f30429d065, type: 3}
   - {fileID: 2800000, guid: 0c25c9b809192314c9f2b6ba32374d72, type: 3}
-  decalPrefab: {fileID: 1672634216169356, guid: dbb98aa10c1ff7242910343d153d2d21,
+  decalPrefab: {fileID: 1350416893915034, guid: 07298b54ec4f7e2499f6d163ff76b6c7,
     type: 2}
   decalSize: {x: 3, y: 3, z: 3}
-  decalInfo:
-  - position: {x: -44.4, y: 4.608055, z: -2.4623942}
-    rotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-    textureIndex: 3
-  - position: {x: -7.675633, y: 4.179843, z: -19.4}
-    rotation: {x: 1, y: 0, z: -0, w: 0}
-    textureIndex: 2
-  - position: {x: -7.600134, y: 2.4704022, z: -19.4}
-    rotation: {x: 1, y: 0, z: -0, w: 0}
-    textureIndex: 5
-  - position: {x: -6.2614074, y: 0.91854525, z: -19.4}
-    rotation: {x: 1, y: 0, z: -0, w: 0}
-    textureIndex: 2
 --- !u!4 &1236775016
 Transform:
   m_ObjectHideFlags: 0
@@ -3058,7 +3052,27 @@ MonoBehaviour:
         points:
         - position: {x: -5, y: 0, z: 0}
           units:
-          - amount: 5
+          - amount: 1
+            prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
+              type: 2}
+        - position: {x: -8, y: 0, z: 0}
+          units:
+          - amount: 1
+            prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
+              type: 2}
+        - position: {x: -11, y: 0, z: 0}
+          units:
+          - amount: 1
+            prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
+              type: 2}
+        - position: {x: -14, y: 0, z: 0}
+          units:
+          - amount: 1
+            prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
+              type: 2}
+        - position: {x: -17, y: 0, z: 0}
+          units:
+          - amount: 1
             prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
               type: 2}
   temp_Colliders:
