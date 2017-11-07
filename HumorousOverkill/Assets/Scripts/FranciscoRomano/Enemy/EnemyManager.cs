@@ -101,7 +101,7 @@ public class EnemyManager : EventHandler.EventHandle
         else
         {
             // ## [TEMP] ## update all colliders
-            foreach (GameObject obj in spawner.temp_Colliders)
+            foreach (GameObject obj in spawner.doors)
             {
                 obj.SetActive(false);
             }
