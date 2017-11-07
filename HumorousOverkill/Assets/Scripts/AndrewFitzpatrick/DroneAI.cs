@@ -6,6 +6,8 @@ using UnityEngine;
 [EventHandler.BindListener("enemyManager", typeof(EnemyManager))]
 public class DroneAI : EventHandler.EventHandle
 {
+    #region variables
+
     public DroneEnemyInfo myInfo;
     public bool showGizmos = false;
 
@@ -20,12 +22,15 @@ public class DroneAI : EventHandler.EventHandle
 
     // whether to change colors based on health
     public bool enableColorChanges = false;
+
     // freeze for when the game is paused
     public bool freeze = false;
     // dead for the explosion
     public bool dead = false;
 
     private float startHealth;
+
+    #endregion
 
     public override void Awake()
     {
@@ -39,7 +44,7 @@ public class DroneAI : EventHandler.EventHandle
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-	void Update ()
+    void Update ()
     {
         if(!freeze && !dead)
         {
@@ -85,6 +90,8 @@ public class DroneAI : EventHandler.EventHandle
             shotTimer = 0;
         }
     }
+
+    #region functions
 
     void pickTarget()
     {
@@ -140,13 +147,16 @@ public class DroneAI : EventHandler.EventHandle
     // disable all AI and explode into pieces
     void die()
     {
-        // changeColor(Color.black);
-
-        // debug
-        // Debug.Log("I have died.");
+        if(enableColorChanges)
+        {
+            changeColor(Color.black);
+        }
 
         // tell enemy manager that an enemy has died
-        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
+        if(GetEventListener("enemyManager") != null)
+        {
+            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
+        }
 
         // disable animation
         GetComponent<Animator>().enabled = false;
@@ -175,10 +185,51 @@ public class DroneAI : EventHandler.EventHandle
         Destroy(this.gameObject, 5);
 }
 
+    void changeColor(Color newColor)
+    {
+        if (enableColorChanges)
+        {
+            Transform[] childTransforms = GetComponentsInChildren<Transform>();
+            foreach (Transform child in childTransforms)
+            {
+                if (child.gameObject.GetComponent<Renderer>() != null)
+                {
+                    child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", newColor);
+                }
+            }
+        }
+    }
+
+    public override bool HandleEvent(GameEvent e, float value)
+    {
+        // Health is depleted
+        if (e == GameEvent.ENEMY_DAMAGED)
+        {
+            // subtract health
+            myInfo.health -= value;
+
+            // change color if enabled
+            if(enableColorChanges)
+            {
+                changeColor(Color.Lerp(Color.red, Color.white, 1.0f / startHealth * myInfo.health));
+            }
+
+            // if the health is now 0 die
+            if (myInfo.health <= 0)
+            {
+                die();
+            }
+        }
+
+        return true; // TODO
+    }
+
+    #endregion
+
 #if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
-        if(showGizmos)
+        if (showGizmos)
         {
             // display targetRadius
             UnityEditor.Handles.color = Color.red;
@@ -198,39 +249,4 @@ public class DroneAI : EventHandler.EventHandle
         }
     }
 #endif
-
-    public override bool HandleEvent(GameEvent e, float value)
-    {
-        // Health is depleted
-        if (e == GameEvent.ENEMY_DAMAGED)
-        {
-            // subtract health
-            myInfo.health -= value;
-
-            // changeColor(Color.Lerp(Color.red, Color.white, 1.0f / startHealth * myInfo.health));
-
-            // if the health is now 0 we die
-            if (myInfo.health <= 0)
-            {
-                die();
-            }
-        }
-
-        return true; // TODO
-    }
-
-    void changeColor(Color newColor)
-    {
-        if(enableColorChanges)
-        {
-            Transform[] childTransforms = GetComponentsInChildren<Transform>();
-            foreach (Transform child in childTransforms)
-            {
-                if (child.gameObject.GetComponent<Renderer>() != null)
-                {
-                    child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", newColor);
-                }
-            }
-        }
-    }
 }

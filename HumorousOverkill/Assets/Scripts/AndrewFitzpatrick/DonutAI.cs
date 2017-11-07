@@ -9,6 +9,8 @@ public class DonutAI : EventHandler.EventHandle
 {
     enum ANIMATIONSTATE { ROLL, DEPLOY, RAISEGUN, SHOOT, LOWERGUN, GETUP };
 
+    #region variables
+
     // stores stats
     public DonutEnemyInfo myInfo;
 
@@ -27,6 +29,8 @@ public class DonutAI : EventHandler.EventHandle
 
     // dead for the explosion
     public bool dead = false;
+
+    #endregion
 
     public override void Awake()
     {
@@ -62,6 +66,8 @@ public class DonutAI : EventHandler.EventHandle
             roll();
         }
     }
+
+    #region functions
 
     // attempts to approach the target by rolling
     void roll()
@@ -173,7 +179,10 @@ public class DonutAI : EventHandler.EventHandle
     void die()
     {
         // tell enemy manager that an enemy has died
-        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
+        if (GetEventListener("enemyManager") != null)
+        {
+            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
+        }
         // destroy this gameobject
         Destroy(this.gameObject);
     }
@@ -203,6 +212,41 @@ public class DonutAI : EventHandler.EventHandle
     bool nearTarget()
     {
         return (currentTarget - transform.position).sqrMagnitude < Mathf.Pow(myInfo.errorMargin, 2);
+    }
+
+    // shoots at the player
+    void shootPlayer()
+    {
+        // increase shot timer
+        shotTimer += Time.deltaTime;
+
+        // when shot timer reaches 1 / fire rate
+        if (shotTimer > (1 / myInfo.fireRate))
+        {
+            // reset shot timer
+            shotTimer = 0;
+
+            Vector3 aimPoint = -transform.right * myInfo.hitRange;
+            Vector2 randomOffset = Random.insideUnitCircle * myInfo.accuracy;
+            aimPoint.x += randomOffset.x;
+            aimPoint.y += randomOffset.y;
+
+            if (showAttackGizmos)
+            {
+                Debug.DrawRay(transform.position, aimPoint, Color.red);
+            }
+
+            if (Physics.Raycast(transform.position, aimPoint, out shootHitInfo))
+            {
+                // if the player was hit by the shot
+                if (shootHitInfo.collider.gameObject.tag == "Player" && shootHitInfo.collider.gameObject.GetComponent<Player>() != null)
+                {
+                    // send the player a PLAYER_DAMAGE event
+                    shootHitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
+                    Debug.Log("I have hit " + shootHitInfo.collider.gameObject.name);
+                }
+            }
+        }
     }
 
     public override bool HandleEvent(GameEvent e, float value)
@@ -254,38 +298,5 @@ public class DonutAI : EventHandler.EventHandle
     }
 #endif
 
-    // shoots at the player
-    void shootPlayer()
-    {
-        // increase shot timer
-        shotTimer += Time.deltaTime;
-
-        // when shot timer reaches 1 / fire rate
-        if (shotTimer > (1 / myInfo.fireRate))
-        {
-            // reset shot timer
-            shotTimer = 0;
-
-            Vector3 aimPoint = -transform.right * myInfo.hitRange;
-            Vector2 randomOffset = Random.insideUnitCircle * myInfo.accuracy;
-            aimPoint.x += randomOffset.x;
-            aimPoint.y += randomOffset.y;
-
-            if(showAttackGizmos)
-            {
-                Debug.DrawRay(transform.position, aimPoint, Color.red);
-            }
-
-            if (Physics.Raycast(transform.position, aimPoint, out shootHitInfo))
-            {
-                // if the player was hit by the shot
-                if (shootHitInfo.collider.gameObject.tag == "Player" && shootHitInfo.collider.gameObject.GetComponent<Player>() != null)
-                {
-                    // send the player a PLAYER_DAMAGE event
-                    shootHitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
-                    Debug.Log("I have hit " + shootHitInfo.collider.gameObject.name);
-                }
-            }
-        }
-    }
+    #endregion
 }
