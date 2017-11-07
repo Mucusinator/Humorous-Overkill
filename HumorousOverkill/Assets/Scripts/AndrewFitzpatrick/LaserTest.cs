@@ -17,7 +17,7 @@ public class LaserTest : MonoBehaviour
     void Awake()
     {
         // assign cam
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        cam = Camera.main;
     }
 
     void Update ()

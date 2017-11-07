@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 114968567639600514}
   - component: {fileID: 114351537365400314}
   m_Layer: 8
-  m_Name: FPSController v 2.0
+  m_Name: FPSController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
