@@ -2702,6 +2702,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   decalTextures:
+  - {fileID: 2800000, guid: 98276d93a0775c047bd4b0d973e9fbe7, type: 3}
+  - {fileID: 2800000, guid: 03afd1417d5b823428145bfc753f0fef, type: 3}
+  - {fileID: 2800000, guid: 9f2ac427eccb276448f2e3d901b6dfc7, type: 3}
+  - {fileID: 2800000, guid: e7916a41bb1a33b4f9edf8d8309194a4, type: 3}
+  - {fileID: 2800000, guid: 538f75f4ab0f36c4f9e84187e6015bab, type: 3}
+  - {fileID: 2800000, guid: a7d76b14a83446449a24e893dd19c9eb, type: 3}
+  - {fileID: 2800000, guid: 4bb58985bd97268489db0003c1676281, type: 3}
   - {fileID: 2800000, guid: 972f24ac2ae807748ae5d3df434a9585, type: 3}
   - {fileID: 2800000, guid: 9689053ffe7f5594a94ff9f4080c9079, type: 3}
   - {fileID: 2800000, guid: 78e5cb056c71c5245bf41239ac54c377, type: 3}
@@ -3045,7 +3052,27 @@ MonoBehaviour:
         points:
         - position: {x: -5, y: 0, z: 0}
           units:
-          - amount: 5
+          - amount: 1
+            prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
+              type: 2}
+        - position: {x: -8, y: 0, z: 0}
+          units:
+          - amount: 1
+            prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
+              type: 2}
+        - position: {x: -11, y: 0, z: 0}
+          units:
+          - amount: 1
+            prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
+              type: 2}
+        - position: {x: -14, y: 0, z: 0}
+          units:
+          - amount: 1
+            prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
+              type: 2}
+        - position: {x: -17, y: 0, z: 0}
+          units:
+          - amount: 1
             prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
               type: 2}
   temp_Colliders:

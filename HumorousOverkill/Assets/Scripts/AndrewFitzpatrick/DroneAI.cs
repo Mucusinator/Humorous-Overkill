@@ -18,6 +18,8 @@ public class DroneAI : EventHandler.EventHandle
     public GameObject projectile; // projectile prefab
     private float shotTimer = 0;
 
+    // whether to change colors based on health
+    public bool enableColorChanges = false;
     // freeze for when the game is paused
     public bool freeze = false;
     // dead for the explosion
@@ -138,10 +140,10 @@ public class DroneAI : EventHandler.EventHandle
     // disable all AI and explode into pieces
     void die()
     {
-        changeColor(Color.black);
+        // changeColor(Color.black);
 
         // debug
-        Debug.Log("I have died.");
+        // Debug.Log("I have died.");
 
         // tell enemy manager that an enemy has died
         GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
@@ -205,7 +207,7 @@ public class DroneAI : EventHandler.EventHandle
             // subtract health
             myInfo.health -= value;
 
-            changeColor(Color.Lerp(Color.red, Color.white, 1.0f / startHealth * myInfo.health));
+            // changeColor(Color.Lerp(Color.red, Color.white, 1.0f / startHealth * myInfo.health));
 
             // if the health is now 0 we die
             if (myInfo.health <= 0)
@@ -219,12 +221,15 @@ public class DroneAI : EventHandler.EventHandle
 
     void changeColor(Color newColor)
     {
-        Transform[] childTransforms = GetComponentsInChildren<Transform>();
-        foreach (Transform child in childTransforms)
+        if(enableColorChanges)
         {
-            if(child.gameObject.GetComponent<Renderer>() != null)
+            Transform[] childTransforms = GetComponentsInChildren<Transform>();
+            foreach (Transform child in childTransforms)
             {
-                child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", newColor);
+                if (child.gameObject.GetComponent<Renderer>() != null)
+                {
+                    child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", newColor);
+                }
             }
         }
     }

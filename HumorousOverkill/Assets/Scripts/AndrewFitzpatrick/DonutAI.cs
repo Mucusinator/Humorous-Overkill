@@ -295,7 +295,7 @@ public class DonutAI : EventHandler.EventHandle
                 {
                     //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.5f);
                     shootHitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
-                    Debug.Log("I have hit the player");
+                    Debug.Log("I have hit " + shootHitInfo.collider.gameObject.name);
                 }
             }
         }

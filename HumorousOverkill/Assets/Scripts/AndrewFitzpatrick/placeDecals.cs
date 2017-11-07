@@ -34,8 +34,9 @@ public class placeDecals : MonoBehaviour
                 // child the decal to this object
                 currentDecal.transform.parent = gameObject.transform;
 
+                int textureID = Random.Range(0, decalTextures.Count);
                 // randomly change the decals material to use one of the decal textures
-                currentDecal.GetComponent<Renderer>().material.SetTexture("_MainTex", decalTextures[Random.Range(0, decalTextures.Count)]);
+                currentDecal.GetComponent<Renderer>().material.SetTexture("_MainTex", decalTextures[textureID]);
             }
         }
 	}
