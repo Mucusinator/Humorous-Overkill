@@ -11,7 +11,9 @@ public class DonutAI : EventHandler.EventHandle
 
     // stores stats
     public DonutEnemyInfo myInfo;
-    public bool showGizmos = false;
+
+    public bool showMovementGizmos = false;
+    public bool showAttackGizmos = false;
 
     private bool deployed;
     private float donutCircumference;
@@ -25,8 +27,6 @@ public class DonutAI : EventHandler.EventHandle
 
     // dead for the explosion
     public bool dead = false;
-
-    //private LineRenderer myLineRenderer;
 
     public override void Awake()
     {
@@ -48,8 +48,6 @@ public class DonutAI : EventHandler.EventHandle
         modelTransform = GetComponentsInChildren<Transform>()[1];
 
         pickTarget();
-
-        //myLineRenderer = GetComponent<LineRenderer>();
     }
 
     void Update()
@@ -65,33 +63,25 @@ public class DonutAI : EventHandler.EventHandle
         }
     }
 
-    // attempts to approach the player by rolling
+    // attempts to approach the target by rolling
     void roll()
     {
         // find direction to target
         Vector3 direction = (currentTarget - transform.position).normalized;
         direction.y = 0;
 
-        // rotate to look at target
+        // rotate to look at target using lerping and turnSpeed
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(Vector3.up * 90) * Quaternion.LookRotation(direction), myInfo.turnSpeed * Time.deltaTime);
-
-        // A wheel moves forward a distance equal to its circumference with each rotation.
-        //myAnimator.GetCurrentAnimatorStateInfo(0).speedMultiplier = 
 
         // roll forward
         transform.Translate(-transform.right * myInfo.rollSpeed * Time.deltaTime, Space.World);
 
-        Debug.DrawRay(transform.position, -transform.right, Color.cyan);
-
         // avoid walls and otgher enemies
-        if (Physics.Raycast(transform.position, -transform.right, out rollHitInfo, 5)) // TODO: put in myInfo as avoidRadius
+        if (Physics.Raycast(transform.position, -transform.right, out rollHitInfo, myInfo.avoidRadius))
         {
             if (rollHitInfo.collider.gameObject.tag == "Avoid" || rollHitInfo.collider.gameObject.tag == "Enemy")
             {
-                Debug.Log("Hit at " + rollHitInfo.point);
-                Debug.DrawLine(rollHitInfo.point, rollHitInfo.point + rollHitInfo.normal, Color.blue);
-                //Debug.Break();
-                currentTarget += rollHitInfo.normal * 5; // TODO: put in myInfo as avoidRadius
+                currentTarget += rollHitInfo.normal * myInfo.avoidRadius;
             }
         }
 
@@ -190,7 +180,7 @@ public class DonutAI : EventHandler.EventHandle
 
     void pickTarget()
     {
-        currentTarget = transform.position + getRandomVector(5); // TODO: put this in myInfo as targetRadius
+        currentTarget = transform.position + getRandomVector(myInfo.targetRadius);
     }
 
     Vector3 getRandomVector(float radius)
@@ -212,7 +202,7 @@ public class DonutAI : EventHandler.EventHandle
     // returns true if we are near the target
     bool nearTarget()
     {
-        return (currentTarget - transform.position).sqrMagnitude < 3; // TODO: put in myInfo as marginOfError
+        return (currentTarget - transform.position).sqrMagnitude < Mathf.Pow(myInfo.errorMargin, 2);
     }
 
     public override bool HandleEvent(GameEvent e, float value)
@@ -233,29 +223,31 @@ public class DonutAI : EventHandler.EventHandle
 #if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
-        if(showGizmos)
+        if (showAttackGizmos)
         {
-            // display accuracy / range
+            // draw cone representing hitRange / accuracy
             UnityEditor.Handles.color = Color.red;
             UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange + Vector3.up * myInfo.accuracy);
             UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - Vector3.up * myInfo.accuracy);
             UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange + transform.forward * myInfo.accuracy);
             UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - transform.forward * myInfo.accuracy);
             UnityEditor.Handles.DrawWireDisc(transform.position - transform.right * myInfo.hitRange, transform.right, myInfo.accuracy);
-
-            // display targetRadius
+        }
+        if (showMovementGizmos)
+        {
+            // display targetRadius in red
             UnityEditor.Handles.color = Color.red;
             UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, 5);
 
-            // display margin of error
+            // display margin of error in yellow
             UnityEditor.Handles.color = Color.yellow;
             UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, 3);
 
-            // show currentVelocity
+            // show current movement direction
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, transform.position + transform.forward * myInfo.rollSpeed);
+            Gizmos.DrawLine(transform.position, transform.position - transform.right * myInfo.rollSpeed);
 
-            // display current target
+            // display current target as a green wire sphere
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(currentTarget, 0.5f);
         }
@@ -279,21 +271,17 @@ public class DonutAI : EventHandler.EventHandle
             aimPoint.x += randomOffset.x;
             aimPoint.y += randomOffset.y;
 
-            Debug.DrawRay(transform.position, aimPoint, Color.red);
-
-            //myLineRenderer.enabled = true;
-            //myLineRenderer.positionCount = 2;
-            //myLineRenderer.SetPosition(0, transform.position);
-            //myLineRenderer.SetPosition(1, transform.position + aimPoint);
-            //myLineRenderer.SetColors(Color.red, Color.red);
-            //myLineRenderer.startWidth = 0.5f;
-            //myLineRenderer.endWidth = 0.5f;
+            if(showAttackGizmos)
+            {
+                Debug.DrawRay(transform.position, aimPoint, Color.red);
+            }
 
             if (Physics.Raycast(transform.position, aimPoint, out shootHitInfo))
             {
+                // if the player was hit by the shot
                 if (shootHitInfo.collider.gameObject.tag == "Player" && shootHitInfo.collider.gameObject.GetComponent<Player>() != null)
                 {
-                    //GameObject.Find("hurt").GetComponent<Image>().color = new Color(1, 0, 0, 0.5f);
+                    // send the player a PLAYER_DAMAGE event
                     shootHitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
                     Debug.Log("I have hit " + shootHitInfo.collider.gameObject.name);
                 }
