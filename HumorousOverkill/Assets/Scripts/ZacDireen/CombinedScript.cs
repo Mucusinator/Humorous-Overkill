@@ -237,12 +237,12 @@ public class CombinedScript : EventHandle {
         //{
         //    shotTrail.enabled = true;
         //}
-        if (Input.GetButtonUp("Fire1") || isReloading && gunType == GunType.RIFLE)
+        if (Input.GetKeyUp(KeyCode.Mouse0) || isReloading && gunType == GunType.RIFLE)
         {
             //shotTrail.enabled = false;
         }
 
-        if (Input.GetButton("Fire1") && gunType == GunType.RIFLE)
+        if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE)
         {
 
             if (currentRifleAmmo > 0)
@@ -258,7 +258,7 @@ public class CombinedScript : EventHandle {
         }
 
 
-        if (Input.GetButtonDown("Fire1") && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
         {
             if (currentShotgunAmmo > 0)
             {

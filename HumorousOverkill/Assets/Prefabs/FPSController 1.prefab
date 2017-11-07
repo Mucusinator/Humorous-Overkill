@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 136550756892445624}
   m_Layer: 8
   m_Name: FPSController 1
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,7 +243,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1827536260938578}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4258429749848236}
@@ -258,7 +258,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1417199249353178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.27, y: 2.31, z: 17.222}
+  m_LocalPosition: {x: 0, y: 2.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4945521227030208}
@@ -581,7 +581,6 @@ MonoBehaviour:
   WeaponRaycast: {fileID: 1363613971003272}
   EndOfGun: {fileID: 1767487738168564}
   fpsCam: {fileID: 20412591833860530}
-  shotTrail: {fileID: 120538066844663360}
   isRifleSelected: 0
 --- !u!114 &114774697212504992
 MonoBehaviour:
@@ -720,7 +719,7 @@ Behaviour:
   m_Enabled: 1
 --- !u!136 &136550756892445624
 CapsuleCollider:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1417199249353178}
