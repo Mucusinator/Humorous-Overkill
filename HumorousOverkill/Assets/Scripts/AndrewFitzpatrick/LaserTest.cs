@@ -13,6 +13,7 @@ public class LaserTest : MonoBehaviour
     public GameObject shootPoint; // point that laser shoots from
     private float colorOffset = 0; // current color index
     public float laserSpeed = 1; // speed that laser changes colors
+    public CombinedScript WeaponScript;
 
     void Awake()
     {
@@ -35,45 +36,49 @@ public class LaserTest : MonoBehaviour
         // if the mouse is clicked
         if (Input.GetMouseButton(0))
         {
-            // cleanup old laser parts
-            cleanup();
-
-            // draw new parts if the raycast hit anything solid
-            if (Physics.Raycast(ray.origin, ray.direction * 1000.0f, out hit))
+            
+            if (WeaponScript.isRifleSelected == true)
             {
-                // find distance and rotation towards hit point
-                float dist = hit.distance;
-                Vector3 relativePos = hit.point - shootPoint.transform.position;
-                Quaternion rotation = Quaternion.LookRotation(relativePos);
-
-                // instantiate laser parts
-                for (int i = 0; i < dist * 9; i++)
+                // cleanup old laser parts
+                cleanup();
+                laser.SetActive(true);
+                // draw new parts if the raycast hit anything solid
+                if (Physics.Raycast(ray.origin, ray.direction * 1000.0f, out hit))
                 {
-                    // lerp from shoot point to hit point
-                    Vector3 lerpPos = Vector3.Lerp(hit.point, shootPoint.transform.position, 1.0f - (1.0f / (dist * 9)) * i);
+                    // find distance and rotation towards hit point
+                    float dist = hit.distance;
+                    Vector3 relativePos = hit.point - shootPoint.transform.position;
+                    Quaternion rotation = Quaternion.LookRotation(relativePos);
 
-                    // instantiate the current laser part
-                    GameObject currentPart = Instantiate(laser, lerpPos, rotation) as GameObject;
+                    // instantiate laser parts
+                    for (int i = 0; i < dist * 9; i++)
+                    {
+                        // lerp from shoot point to hit point
+                        Vector3 lerpPos = Vector3.Lerp(hit.point, shootPoint.transform.position, 1.0f - (1.0f / (dist * 9)) * i);
 
-                    // set the current laser parts color
-                    //int currentColor = (laserColors.Count - 1 - (i + (int)colorOffset) % laserColors.Count);
-                    //currentPart.GetComponentInChildren<Renderer>().material.SetColor("_TintColor", laserColors[currentColor]);
-                    currentPart.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(Time.time, 0);
+                        // instantiate the current laser part
+                        GameObject currentPart = Instantiate(laser, lerpPos, rotation) as GameObject;
+
+                        // set the current laser parts color
+                        //int currentColor = (laserColors.Count - 1 - (i + (int)colorOffset) % laserColors.Count);
+                        //currentPart.GetComponentInChildren<Renderer>().material.SetColor("_TintColor", laserColors[currentColor]);
+                        currentPart.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(Time.time, 0);
 
 
 
-                    // parent the laser part and add it to the list
-                    currentPart.transform.parent = transform;
-                    laserParts.Add(currentPart);
+                        // parent the laser part and add it to the list
+                        currentPart.transform.parent = transform;
+                        laserParts.Add(currentPart);
+                    }
                 }
             }
-
         }
 
         // when the left mouse button is released clean up laser parts
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) || WeaponScript.currentRifleAmmo <= 0)
         {
             cleanup();
+            laser.SetActive(false);
         }
     }
 
