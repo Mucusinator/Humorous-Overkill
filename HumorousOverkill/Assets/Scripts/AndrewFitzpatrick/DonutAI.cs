@@ -183,6 +183,8 @@ public class DonutAI : EventHandler.EventHandle
         {
             GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
         }
+        GetComponentInChildren<BoxCollider>().enabled = false;
+        Debug.Log("sending die event");
         // destroy this gameobject
         Destroy(this.gameObject);
     }
@@ -255,7 +257,7 @@ public class DonutAI : EventHandler.EventHandle
         {
             case GameEvent.ENEMY_DAMAGED:
                 myInfo.health -= value;
-                if(myInfo.health <= 0)
+                if (myInfo.health <= 0)
                 {
                     die();
                 }

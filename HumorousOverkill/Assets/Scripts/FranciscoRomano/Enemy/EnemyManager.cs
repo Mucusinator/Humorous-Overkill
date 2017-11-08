@@ -114,6 +114,7 @@ public class EnemyManager : EventHandler.EventHandle
         {
             // enemy unit dies
             case GameEvent.ENEMY_DIED:
+                if (spawner == null) return false;
                 spawner.HandleEvent(e);
                 break;
         }

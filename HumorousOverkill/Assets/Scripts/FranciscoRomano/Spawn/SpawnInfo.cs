@@ -24,7 +24,7 @@ namespace FR.Util
                 this.amount = amount;
                 this.position = new Vector3(position.x, position.y, position.z);
             }
-            // :: class functions
+            // :: functions
             public bool IsEmpty()
             {
                 return amount == 0;
@@ -50,7 +50,7 @@ namespace FR.Util
                 this.spots = new List<Spot>();
                 foreach (Spot spot in spots) this.spots.Add(new Spot(spot));
             }
-            // :: class functions
+            // :: functions
             public bool IsEmpty()
             {
                 return spots.Count == 0;
@@ -82,7 +82,7 @@ namespace FR.Util
                 this.units = new List<Unit>();
                 foreach (Unit unit in units) this.units.Add(new Unit(unit));
             }
-            // :: class functions
+            // :: functions
             public bool IsEmpty() { return units.Count == 0; }
             public GameObject Create(Vector3 position, Quaternion rotation, Transform parent)
             {
@@ -96,37 +96,8 @@ namespace FR.Util
                 return instance;
             }
         }
-        [System.Serializable]
-        public class Stage
-        {
-            // :: variables
-            public List<Wave> waves;
-            // :: constructors
-            public Stage() : this(new List<Wave>()) { }
-            public Stage(Stage other) : this(other.waves) { }
-            public Stage(List<Wave> waves)
-            {
-                this.waves = new List<Wave>();
-                foreach (Wave wave in waves) this.waves.Add(new Wave(wave));
-            }
-            // :: class functions
-            public bool IsEmpty()
-            {
-                return waves.Count == 0;
-            }
-            public GameObject Create(Vector3 position, Quaternion rotation, Transform parent)
-            {
-                int index = Random.Range(0, waves.Count);
-                return Create(waves[index], position, rotation, parent);
-            }
-            public GameObject Create(Wave wave, Vector3 position, Quaternion rotation, Transform parent)
-            {
-                GameObject instance = wave.Create(position, rotation, parent);
-                if (wave.IsEmpty()) waves.Remove(wave);
-                return instance;
-            }
-        }
         // :: functions
+        
         //public static Spot currentSpot = null;
         public static Unit currentUnit = null;
         public static Wave currentWave = null;
@@ -194,8 +165,8 @@ namespace FR.Util
                 EditorGUILayout.BeginHorizontal();
                 GUILayout.Label("- Point " + i++);
                 EditorGUILayout.BeginVertical();
-                spot.amount = EditorGUILayout.IntField("amount", spot.amount);
                 spot.position = EditorGUILayout.Vector3Field("position", spot.position);
+                spot.amount = EditorGUILayout.IntField("amount", spot.amount);
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.EndHorizontal();
                 //EditorGUILayout.BeginHorizontal();
