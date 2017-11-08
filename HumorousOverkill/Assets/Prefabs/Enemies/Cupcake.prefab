@@ -2687,6 +2687,7 @@ MonoBehaviour:
     explosionRadius: 0
   showGizmos: 0
   projectile: {fileID: 1439759218794244, guid: 04783e23afccaa449bd0702e42bc2f2f, type: 2}
+  enableColorChanges: 0
   freeze: 0
   dead: 0
 --- !u!198 &198736896902927982
