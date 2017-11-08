@@ -46,10 +46,10 @@ public class PlayerManager : EventHandler.EventHandle {
             break;
         case GameEvent.PICKUP_RIFLEAMMO:
                 // Calls the add ammo function from the ammo script using the enum.
-                m_weapon.currentRifleAmmo += (int)value;
+                m_weapon.maxRifleAmmo += (int)value;
                 break;
             case GameEvent.PICKUP_SHOTGUNAMMO:
-                m_weapon.currentShotgunAmmo += (int)value;
+                m_weapon.maxShotgunAmmo += (int)value;
                 break;
         default:
             break;
