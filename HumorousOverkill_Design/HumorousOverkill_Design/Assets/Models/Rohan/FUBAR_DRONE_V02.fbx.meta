@@ -1,0 +1,183 @@
+fileFormatVersion: 2
+guid: 13ec611c1caa299418051e2ce9856996
+timeCreated: 1510099203
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0010:Pivot3_CupcakeDrone_Mesh_v0010:Thruster
+    100004: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0011:polySurface6
+    100006: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCube3
+    100008: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCylinder2
+    100010: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCylinder5
+    100012: FUBAR_Drone_V03:pCube3
+    100014: FUBAR_Drone_V03:pCube4
+    100016: FUBAR_Drone_V03:pCube6
+    100018: FUBAR_Drone_V03:pCylinder10
+    100020: FUBAR_Drone_V03:pCylinder11
+    100022: FUBAR_Drone_V03:pCylinder12
+    100024: FUBAR_Drone_V03:pCylinder13
+    100026: FUBAR_Drone_V03:pCylinder14
+    100028: FUBAR_Drone_V03:pCylinder5
+    100030: FUBAR_Drone_V03:pCylinder6
+    100032: FUBAR_Drone_V03:polySurface10
+    100034: FUBAR_Drone_V03:polySurface11
+    100036: FUBAR_Drone_V03:polySurface12
+    100038: FUBAR_Drone_V03:polySurface6
+    100040: FUBAR_Drone_V03:polySurface9
+    400000: //RootNode
+    400002: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0010:Pivot3_CupcakeDrone_Mesh_v0010:Thruster
+    400004: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0011:polySurface6
+    400006: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCube3
+    400008: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCylinder2
+    400010: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCylinder5
+    400012: FUBAR_Drone_V03:pCube3
+    400014: FUBAR_Drone_V03:pCube4
+    400016: FUBAR_Drone_V03:pCube6
+    400018: FUBAR_Drone_V03:pCylinder10
+    400020: FUBAR_Drone_V03:pCylinder11
+    400022: FUBAR_Drone_V03:pCylinder12
+    400024: FUBAR_Drone_V03:pCylinder13
+    400026: FUBAR_Drone_V03:pCylinder14
+    400028: FUBAR_Drone_V03:pCylinder5
+    400030: FUBAR_Drone_V03:pCylinder6
+    400032: FUBAR_Drone_V03:polySurface10
+    400034: FUBAR_Drone_V03:polySurface11
+    400036: FUBAR_Drone_V03:polySurface12
+    400038: FUBAR_Drone_V03:polySurface6
+    400040: FUBAR_Drone_V03:polySurface9
+    2300000: //RootNode
+    2300002: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0010:Pivot3_CupcakeDrone_Mesh_v0010:Thruster
+    2300004: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0011:polySurface6
+    2300006: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCube3
+    2300008: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCylinder2
+    2300010: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCylinder5
+    2300012: FUBAR_Drone_V03:pCube3
+    2300014: FUBAR_Drone_V03:pCube4
+    2300016: FUBAR_Drone_V03:pCube6
+    2300018: FUBAR_Drone_V03:pCylinder11
+    2300020: FUBAR_Drone_V03:pCylinder13
+    2300022: FUBAR_Drone_V03:pCylinder14
+    2300024: FUBAR_Drone_V03:pCylinder5
+    2300026: FUBAR_Drone_V03:pCylinder6
+    2300028: FUBAR_Drone_V03:polySurface10
+    2300030: FUBAR_Drone_V03:polySurface11
+    2300032: FUBAR_Drone_V03:polySurface12
+    2300034: FUBAR_Drone_V03:polySurface6
+    2300036: FUBAR_Drone_V03:polySurface9
+    3300000: //RootNode
+    3300002: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0010:Pivot3_CupcakeDrone_Mesh_v0010:Thruster
+    3300004: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0011:polySurface6
+    3300006: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCube3
+    3300008: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCylinder2
+    3300010: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCylinder5
+    3300012: FUBAR_Drone_V03:pCube3
+    3300014: FUBAR_Drone_V03:pCube4
+    3300016: FUBAR_Drone_V03:pCube6
+    3300018: FUBAR_Drone_V03:pCylinder11
+    3300020: FUBAR_Drone_V03:pCylinder13
+    3300022: FUBAR_Drone_V03:pCylinder14
+    3300024: FUBAR_Drone_V03:pCylinder5
+    3300026: FUBAR_Drone_V03:pCylinder6
+    3300028: FUBAR_Drone_V03:polySurface10
+    3300030: FUBAR_Drone_V03:polySurface11
+    3300032: FUBAR_Drone_V03:polySurface12
+    3300034: FUBAR_Drone_V03:polySurface6
+    3300036: FUBAR_Drone_V03:polySurface9
+    4300000: FUBAR_Drone_V03:pCylinder9
+    4300002: FUBAR_Drone_V03:polySurface10
+    4300004: FUBAR_Drone_V03:polySurface11
+    4300006: FUBAR_Drone_V03:polySurface9
+    4300008: FUBAR_Drone_V03:pCylinder6
+    4300010: FUBAR_Drone_V03:pCube6
+    4300012: FUBAR_Drone_V03:pCube4
+    4300014: FUBAR_Drone_V03:pCylinder5
+    4300016: FUBAR_Drone_V03:polySurface12
+    4300018: FUBAR_Drone_V03:pCylinder13
+    4300020: FUBAR_Drone_V03:pCube3
+    4300022: FUBAR_Drone_V03:pCylinder11
+    4300024: FUBAR_Drone_V03:polySurface6
+    4300026: FUBAR_Drone_V03:pCylinder14
+    4300028: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCube3
+    4300030: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCylinder5
+    4300032: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0011:polySurface6
+    4300034: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:pCylinder2
+    4300036: FUBAR_Drone_V03:CupcakeDrone_Mesh_v0010:Legs_CupcakeDrone_Mesh_v0010:Leg1_CupcakeDrone_Mesh_v0010:Pivot1_CupcakeDrone_Mesh_v0010:Pivot2_CupcakeDrone_Mesh_v0010:Pivot3_CupcakeDrone_Mesh_v0010:Thruster
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 2
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
