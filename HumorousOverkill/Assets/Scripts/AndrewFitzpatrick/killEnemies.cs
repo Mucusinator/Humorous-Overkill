@@ -15,9 +15,9 @@ public class killEnemies : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hitInfo))
             {
-                if(hitInfo.collider.gameObject.GetComponent<DroneAI>() != null)
+                if(hitInfo.collider.gameObject.GetComponent<CupcakeAI>() != null)
                 {
-                    hitInfo.collider.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, 1);
+                    hitInfo.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, 1);
                 }
                 if (hitInfo.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                 {
