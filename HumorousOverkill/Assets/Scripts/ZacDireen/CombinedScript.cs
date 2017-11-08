@@ -408,9 +408,9 @@ public class CombinedScript : EventHandle {
 
                         if (hit.collider.gameObject.tag == "Enemy")
                         {
-                            if (hit.collider.gameObject.GetComponent<DroneAI>() != null)
+                            if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
                             {
-                                hit.collider.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                                hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
                             }
                             if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                             {
@@ -485,9 +485,9 @@ public class CombinedScript : EventHandle {
             {
                 GetEventListener("Enemy").HandleEvent(GameEvent.ENEMY_DAMAGED, hit.transform.gameObject);
 
-                if (hit.collider.gameObject.GetComponent<DroneAI>() != null)
+                if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
                 {
-                    hit.collider.gameObject.GetComponent<DroneAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                    hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
                 }
                 if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                 {
