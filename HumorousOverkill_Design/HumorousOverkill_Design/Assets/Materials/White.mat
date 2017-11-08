@@ -74,7 +74,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TextureBlendFac: 0.5
+    - _TextureBlendFac: 0.475
     - _Threshold: 5
     - _UVSec: 0
     - _ZWrite: 1
