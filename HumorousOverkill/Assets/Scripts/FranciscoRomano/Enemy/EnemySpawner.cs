@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using FR.Util;
+using UnityEngine;
 using EventHandler;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ public class EnemySpawner : EventHandle
 {
     public int units = 0;
     public bool activated = false;
-    //public FR.Util.SpawnInfo.Wave wave = null;
+    public SpawnInfo.Wave wave = null;
     public List<GameObject> doors = new List<GameObject>();
-    //public List<FR.Util.SpawnInfo.Wave> waves = new List<FR.Util.SpawnInfo.Wave>();
+    public List<SpawnInfo.Wave> waves = new List<SpawnInfo.Wave>();
 
     public EnemyStage temp_stage = new EnemyStage();
     
