@@ -4,7 +4,7 @@ using UnityEngine;
 
 [EventHandler.BindListener("playerManager", typeof(PlayerManager))]
 [EventHandler.BindListener("enemyManager", typeof(EnemyManager))]
-public class DroneAI : EventHandler.EventHandle
+public class CupcakeAI : EventHandler.EventHandle
 {
     #region variables
 
