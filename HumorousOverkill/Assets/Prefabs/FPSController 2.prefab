@@ -192,14 +192,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1253218823698532}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35, y: 1, z: -40}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -14.37, y: 1.21, z: 12.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4346235254054612}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &4332067808155376
 Transform:
   m_ObjectHideFlags: 1
@@ -600,17 +600,16 @@ MonoBehaviour:
   RifleRange: 100
   RifleMuzzleEffect: {fileID: 198399963169543078}
   impactForce: 30
-  maxRifleAmmo: 0
+  maxRifleAmmo: 1000
   currentRifleAmmo: 0
-  rifleMagSize: 15
+  rifleMagSize: 100
   reloadRifleTime: 2.5
   ShotsPerSecond: 0
   RoundsPerMinute: 600
   PelletDamage: 3
   pelletCount: 8
   magTubeSize: 6
-  ShotgunMuzzleEffect: {fileID: 198620621844954884, guid: cb856e25a5f95ba4d89147e5fce41cf5,
-    type: 2}
+  ShotgunMuzzleEffect: {fileID: 198895193130637914}
   pelletForce: 30
   spreadWidth: 2
   Range: 10
@@ -4140,8 +4139,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 15.410954
-      minScalar: 3
+      scalar: 40
+      minScalar: 25
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4489,7 +4488,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     maxNumParticles: 1000
-    size3D: 1
+    size3D: 0
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2

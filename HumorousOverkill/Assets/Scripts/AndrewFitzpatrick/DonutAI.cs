@@ -188,7 +188,7 @@ public class DonutAI : EventHandler.EventHandle
         // tell enemy manager that an enemy has died
         if (GetEventListener("enemyManager") != null)
         {
-            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
+            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
         }
         GetComponentInChildren<BoxCollider>().enabled = false;
         Debug.Log("sending die event");
