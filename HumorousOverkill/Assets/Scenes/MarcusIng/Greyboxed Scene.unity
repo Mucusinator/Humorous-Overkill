@@ -14056,12 +14056,23 @@ MonoBehaviour:
       - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
           type: 2}
         points:
-        - amount: 5
+        - amount: 3
           position: {x: 10, y: 0, z: 0}
-        - amount: 5
+        - amount: 3
           position: {x: -5, y: 0, z: 10}
-        - amount: 5
+        - amount: 2
           position: {x: 2, y: 0, z: -10}
+    - rate: 2
+      units:
+      - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
+          type: 2}
+        points:
+        - amount: 3
+          position: {x: 10, y: 0, z: 0}
+        - amount: 3
+          position: {x: 10, y: 0, z: 12}
+        - amount: 4
+          position: {x: -10, y: 0, z: 10}
   doors: []
 --- !u!1001 &497419974
 Prefab:
@@ -17047,7 +17058,7 @@ Prefab:
     - target: {fileID: 114889605338311258, guid: 303f41ea608987c48901c8dbecc7fb81,
         type: 2}
       propertyPath: amount
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1369233593804570, guid: 303f41ea608987c48901c8dbecc7fb81, type: 2}
       propertyPath: m_Name
@@ -25291,6 +25302,7 @@ MonoBehaviour:
     turnSpeed: 5
     deployRange: 3
     hitRange: 20
+    maximumTargetHeight: 0
     accuracy: 5
     ammoDropRate: 0.5
     targetRadius: 5
@@ -36234,7 +36246,7 @@ Prefab:
     - target: {fileID: 114889605338311258, guid: 303f41ea608987c48901c8dbecc7fb81,
         type: 2}
       propertyPath: amount
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 303f41ea608987c48901c8dbecc7fb81, type: 2}
