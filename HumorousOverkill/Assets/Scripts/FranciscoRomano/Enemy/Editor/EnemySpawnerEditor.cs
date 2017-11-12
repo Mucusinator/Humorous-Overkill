@@ -4,58 +4,90 @@ using UnityEngine;
 using UnityEditor;
 using EventHandler;
 using System.Collections;
+using FranciscoRomano.Spawn;
 using System.Collections.Generic;
 
 [CustomEditor(typeof(EnemySpawner))]
 public class EnemySpawnerEditor : Editor
 {
+    // :: classes
+    //class SpawnEditor
+    //{
+    //    public static void GUI(Unit unit, string label)
+    //    {
+    //        EditorGUILayout.Space();
+    //        EditorGUILayout.LabelField(label, EditorStyles.largeLabel, GUILayout.Height(20));
+            
+    //        EditorGUILayout.BeginVertical("Button");
+
+    //        EditorGUILayout.Space();
+    //        EditorGUILayout.LabelField("Prefab", EditorStyles.largeLabel, GUILayout.Height(20));
+    //        unit.prefab = (GameObject) EditorGUILayout.ObjectField(unit.prefab, typeof(GameObject), true);
+
+    //        GUI(unit.points, "Points");
+
+    //        EditorGUILayout.EndVertical();
+    //    }
+    //    public static void GUI(Group group, string label)
+    //    {
+
+    //    }
+    //    public static void GUI(List<Point> points, string label)
+    //    {
+    //        EditorGUILayout.Space();
+    //        EditorGUILayout.BeginVertical();
+
+    //        EditorGUILayout.BeginHorizontal();
+    //        EditorGUILayout.LabelField(label, EditorStyles.largeLabel, GUILayout.Height(20));
+    //        if (GUILayout.Button("+", GUILayout.Width(20))) points.Add(new Point());
+    //        EditorGUILayout.EndHorizontal();
+
+    //        bool delete = false;
+    //        for (int i = 0; i < points.Count; i++)
+    //        {
+    //            EditorGUILayout.BeginVertical("Button");
+
+    //            EditorGUILayout.BeginHorizontal();
+    //            EditorGUILayout.LabelField("Point " + (i + 1), EditorStyles.largeLabel);
+    //            if (GUILayout.Button("delete", GUILayout.Width(50))) delete = true;
+    //            EditorGUILayout.EndHorizontal();
+
+    //            EditorGUILayout.Space();
+    //            EditorGUILayout.LabelField("position");
+    //            points[i].position = EditorGUILayout.Vector3Field("", points[i].position);
+    //            points[i].amount = EditorGUILayout.IntSlider("amount", points[i].amount, 0, 50);
+    //            EditorGUILayout.EndVertical();
+    //            if (delete)
+    //            {
+    //                delete = false;
+    //                points.RemoveAt(i);
+    //            }
+    //        }
+    //        EditorGUILayout.EndVertical();
+    //    }
+    //}
     // :: variables
-    EnemySpawner component = null;
+    EnemySpawner component;
     // :: functions
     void OnEnable()
     {
         component = target as EnemySpawner;
         SpawnInfo.isEditingWave = false;
         SpawnInfo.isEditingUnit = false;
+
+        SpawnEditor.currentStage = component.stage;
+        //PointEditor.style = new GUIStyle("button");
+        //PointEditor.style.padding = new RectOffset(4, 4, 4, 4);
     }
 
     public void OnSceneGUI()
     {
-        //Debug.Log("hello");
-        SpawnInfo.OnSceneGUI(component.transform);
+        SpawnEditor.OnSceneGUI(component.transform);
     }
 
     public override void OnInspectorGUI()
     {
-        DrawDefaultInspector();
-
-        SpawnInfo.OnInspectorGUI();
-        if (SpawnInfo.isEditingWave && !SpawnInfo.isEditingUnit)
-        {
-            EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("Create"))
-            {
-                //component.waves.Add(SpawnInfo.currentWave);
-                SpawnInfo.isEditingWave = false;
-                int index = component.temp_stage.waves.Count;
-
-                component.temp_stage.waves.Add(new FR.SpawnWave());
-                component.temp_stage.waves[0].rate = SpawnInfo.currentWave.rate;
-
-                foreach (SpawnInfo.Unit unit in SpawnInfo.currentWave.units)
-                {
-                    foreach (SpawnInfo.Spot spot in unit.spots)
-                    {
-                        FR.SpawnUnit temp_unit = new FR.SpawnUnit(unit.prefab, spot.amount);
-                        FR.SpawnPoint temp_point = new FR.SpawnPoint(spot.position);
-                        temp_point.units.Add(temp_unit);
-                        component.temp_stage.waves[0].points.Add(temp_point);
-                    }
-                }
-            }
-            if (GUILayout.Button("Back")) SpawnInfo.isEditingWave = false;
-            EditorGUILayout.EndHorizontal();
-        }
+        SpawnEditor.OnInspectorGUI();
     }
 
     // ############################################################################# //

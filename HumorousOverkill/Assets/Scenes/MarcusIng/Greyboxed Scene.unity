@@ -14030,48 +14030,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   units: 0
-  activated: 0
-  wave:
-    rate: 0
-    units: []
-  doors: []
-  waves: []
-  temp_stage:
+  active: 0
+  stage:
     index: 0
-    wave:
-      rate: 1
-      points: []
-    waves:
-    - rate: 2
-      points:
-      - position: {x: 0, y: 0, z: 0}
-        units:
-        - amount: 4
-          prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
-            type: 2}
-      - position: {x: -4, y: 0, z: 10}
-        units:
-        - amount: 4
-          prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
-            type: 2}
-      - position: {x: 3.5, y: 0, z: -10}
-        units:
-        - amount: 5
-          prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
-            type: 2}
-      - position: {x: 0, y: 0, z: 0}
-        units:
-        - amount: 5
-          prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
-            type: 2}
-      - position: {x: 0, y: 0, z: 0}
-        units:
-        - amount: 0
-          prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
-            type: 2}
-    - rate: 1
-      points: []
-    activeUnits: 0
+    current:
+      rate: 0
+      units: []
+    groups: []
+  doors: []
 --- !u!1001 &497419974
 Prefab:
   m_ObjectHideFlags: 0
@@ -18799,7 +18765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  gameEvent: 8
+  gameEvent: 14
 --- !u!222 &664715317
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30224,7 +30190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  gameEvent: 10
+  gameEvent: 16
 --- !u!222 &1066872565
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -49461,19 +49427,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   units: 0
-  activated: 0
-  wave:
-    rate: 0
-    units: []
-  doors: []
-  waves: []
-  temp_stage:
+  active: 0
+  stage:
     index: 0
-    wave:
-      rate: 1
-      points: []
-    waves: []
-    activeUnits: 0
+    current:
+      rate: 0
+      units: []
+    groups: []
+  doors: []
 --- !u!54 &1724611379
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -50422,7 +50383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  gameEvent: 9
+  gameEvent: 15
 --- !u!222 &1751325671
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -51293,53 +51254,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   units: 0
-  activated: 0
-  wave:
-    rate: 0
-    units: []
-  doors: []
-  waves: []
-  temp_stage:
+  active: 0
+  stage:
     index: 0
-    wave:
-      rate: 1
-      points: []
-    waves:
-    - rate: 2
-      points:
-      - position: {x: 15, y: 0, z: 0}
-        units:
-        - amount: 3
-          prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
-            type: 2}
-      - position: {x: 0, y: 0, z: -5}
-        units:
-        - amount: 3
-          prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
-            type: 2}
-      - position: {x: 10, y: 0, z: 5}
-        units:
-        - amount: 2
-          prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
-            type: 2}
-      - position: {x: -10, y: 0, z: 10}
-        units:
-        - amount: 2
-          prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
-            type: 2}
-      - position: {x: -8, y: 0, z: -10}
-        units:
-        - amount: 2
-          prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
-            type: 2}
-      - position: {x: 0, y: 0, z: 0}
-        units:
-        - amount: 4
-          prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
-            type: 2}
-    - rate: 1
-      points: []
-    activeUnits: 0
+    current:
+      rate: 0
+      units: []
+    groups: []
+  doors: []
 --- !u!54 &1780194063
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -58588,7 +58510,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -972620466
+  randomSeed: -1486171939
   InitialModule:
     serializedVersion: 3
     enabled: 1
