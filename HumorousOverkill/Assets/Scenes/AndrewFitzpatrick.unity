@@ -12137,7 +12137,7 @@ MonoBehaviour:
       - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
           type: 2}
         points:
-        - amount: 1
+        - amount: 5
           position: {x: 20, y: 0, z: -25}
   doors: []
 --- !u!4 &2099988678 stripped
