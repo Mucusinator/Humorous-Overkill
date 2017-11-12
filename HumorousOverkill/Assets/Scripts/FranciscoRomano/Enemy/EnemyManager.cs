@@ -44,76 +44,66 @@ public struct DonutEnemyInfo
 
 public class EnemyManager : EventHandler.EventHandle
 {
-    // variables
+    // :: variables
     private float elapsedTime = 0.0f;
     [HideInInspector]
     public EnemySpawner spawner = null;
-
     public DroneEnemyInfo defaultDroneInfo;
     public DonutEnemyInfo defaultDonutInfo;
 
-    // class functions [UnityEngine.MonoBehaviour]
+    // :: functions
     void OnGUI()
     {
         // check spawner status
         if (spawner == null) return;
-        //if (!spawner.IsStageComplete())
-        //{
-            // draw box
-            GUI.Box(new Rect(0, 0, 220, 180), "");
-            // draw stage status
-            GUI.Label(new Rect(10, 20, 200, 20), "-------------------- Stage --------------------");
-            GUI.Label(new Rect(10, 40, 200, 20), "is complete? = " + spawner.IsStageComplete().ToString());
-            // draw stage wave status
-            GUI.Label(new Rect(10,  60, 200, 20), "---------------- Current  Wave ----------------");
-            GUI.Label(new Rect(10,  80, 200, 20), "is empty? = " + spawner.IsWaveEmpty().ToString());
-            GUI.Label(new Rect(10, 100, 200, 20), "is complete? = " + spawner.IsWaveComplete().ToString());
-            GUI.Label(new Rect(10, 120, 200, 20), "spawn rate = " + spawner.GetWaveSpawnRate());
-            GUI.Label(new Rect(10, 140, 200, 20), "active units = " + spawner.GetWaveActiveUnits());
-            GUI.Label(new Rect(10, 160, 200, 20), "----------------------------------------------");
-        //}
+        // draw box
+        GUI.Box(new Rect(0, 0, 220, 180), "");
+        // draw stage status
+        GUI.Label(new Rect(10, 20, 200, 20), "-------------------- Stage --------------------");
+        GUI.Label(new Rect(10, 40, 200, 20), "is complete? = " + spawner.IsStageComplete());
+        // draw stage wave status
+        GUI.Label(new Rect(10,  60, 200, 20), "--------------- Current Group ----------------");
+        GUI.Label(new Rect(10,  80, 200, 20), "spawn rate = " + spawner.stage.current.rate);
+        GUI.Label(new Rect(10, 100, 200, 20), "is complete? = " + spawner.IsGroupComplete());
+        GUI.Label(new Rect(10, 120, 200, 20), "active units = " + spawner.units);
+        GUI.Label(new Rect(10, 140, 200, 20), "----------------------------------------------");
     }
     void Update()
     {
         // check spawner status
         if (spawner == null) return;
+        // check spawner stage status
         if (!spawner.IsStageComplete())
         {
-            // check wave status
-            if (spawner.IsWaveComplete())
+            // check spawner group status
+            if (spawner.IsGroupComplete())
             {
-                // next wave
+                // next group
                 elapsedTime = Time.time;
-                spawner.HandleEvent(GameEvent.ENEMY_WAVE_NEXT);
+                spawner.HandleEvent(GameEvent.ENEMY_SPAWNER_NEXT);
             }
-            else
+            // check spawner elapsed time
+            else if (Time.time - elapsedTime > spawner.stage.current.rate)
             {
-                // check elapsed time
-                if (Time.time - elapsedTime > spawner.GetWaveSpawnRate())
-                {
-                    // next unit
-                    elapsedTime = Time.time;
-                    //spawner.HandleEvent(GameEvent.ENEMY_DIED);
-                    spawner.HandleEvent(GameEvent.ENEMY_SPAWN);
-                }
+                // create unit
+                elapsedTime = Time.time;
+                spawner.HandleEvent(GameEvent.ENEMY_SPAWNER_CREATE);
             }
         }
         else
         {
-            // ## [TEMP] ## update all colliders
-            foreach (GameObject obj in spawner.doors)
-            {
-                obj.SetActive(false);
-            }
+            // finish spawner
+            spawner.HandleEvent(GameEvent.ENEMY_SPAWNER_FINISH);
+            spawner = null;
         }
     }
-    // class functions [EventHandle]
+    // :: functions [events]
     public override bool HandleEvent(GameEvent e)
     {
         switch(e)
         {
-            // enemy unit dies
-            case GameEvent.ENEMY_DIED:
+            case GameEvent.ENEMY_SPAWNER_CREATE:
+            case GameEvent.ENEMY_SPAWNER_REMOVE:
                 if (spawner == null) return false;
                 spawner.HandleEvent(e);
                 break;
@@ -124,10 +114,12 @@ public class EnemyManager : EventHandler.EventHandle
     {
         switch(e)
         {
-            // called on trigger enter
             case GameEvent.CLASS_TYPE_ENEMY_SPAWNER:
                 spawner = (EnemySpawner)value;
-                spawner.Begin();
+                if (!spawner.IsStageComplete())
+                {
+                    spawner.HandleEvent(GameEvent.ENEMY_SPAWNER_BEGIN);
+                }
                 break;
         }
         return true;

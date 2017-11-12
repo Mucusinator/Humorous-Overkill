@@ -15,11 +15,11 @@ public class GameManager : EventHandler.EventHandle {
     public override bool HandleEvent (GameEvent e) {
         switch (e) {
         // UI
-        case GameEvent.GAME_STATE_CONTINUE:
-        case GameEvent.GAME_STATE_MENU:
-        case GameEvent.GAME_STATE_PAUSE:
-        case GameEvent.GAME_STATE_RESTART:
-        case GameEvent.GAME_STATE_START:
+        case GameEvent.STATE_CONTINUE:
+        case GameEvent.STATE_MENU:
+        case GameEvent.STATE_PAUSE:
+        case GameEvent.STATE_RESTART:
+        case GameEvent.STATE_START:
             this.GetComponent<UIManager>().HandleEvent(e);
             break;
         // Player

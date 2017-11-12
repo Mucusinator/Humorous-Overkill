@@ -1,7 +1,7 @@
-﻿using FR.Util;
-using UnityEngine;
+﻿using UnityEngine;
 using EventHandler;
 using System.Collections;
+using FranciscoRomano.Spawn;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -9,85 +9,87 @@ using System.Collections.Generic;
 [BindListener("EnemyManager", typeof(EnemyManager))]
 public class EnemySpawner : EventHandle
 {
+    // :: variables
     public int units = 0;
-    public bool activated = false;
-    public SpawnInfo.Wave wave = null;
+    public bool active = false;
+    public Stage stage = new Stage();
     public List<GameObject> doors = new List<GameObject>();
-    public List<SpawnInfo.Wave> waves = new List<SpawnInfo.Wave>();
-
-    public EnemyStage temp_stage = new EnemyStage();
-    
+    // :: functions
+    public void Restart()
+    {
+        units = 0;
+        active = false;
+        stage.Reset();
+        foreach (GameObject door in doors) door.SetActive(false);
+    }
+    public void SpawnerNext()
+    {
+        stage.Next();
+    }
+    public void SpawnerBegin()
+    {
+        if (!active)
+        {
+            active = true;
+            stage.Next();
+            foreach (GameObject door in doors) door.SetActive(true);
+        }
+    }
+    public void SpawnerCreate()
+    {
+        if (!stage.IsGroupEmpty())
+        {
+            units++;
+            stage.Create(new Vector3(), new Quaternion(), transform);
+        }
+    }
+    public void SpawnerFinish()
+    {
+        foreach (GameObject door in doors) door.SetActive(false);
+    }
+    public void SpawnerRemove()
+    {
+        if (units > 0) units--;
+    }
+    public bool IsStageComplete()
+    {
+        return stage.IsEmpty() && units == 0;
+    }
+    public bool IsGroupComplete()
+    {
+        return stage.IsGroupEmpty() && units == 0;
+    }
+    // :: functions [events]
     void OnTriggerEnter(Collider collider)
     {
-        // check if player
+        // check if player and not complete
         if (collider.tag == "Player")
         {
             // notify manager
             GetEventListener("EnemyManager").HandleEvent(GameEvent.CLASS_TYPE_ENEMY_SPAWNER, this);
-            // update door objects
-            foreach (GameObject door in doors) door.SetActive(true);
         }
     }
-
-    public void Reset()
-    {
-        // reset spawner
-        activated = false;
-        temp_stage.Reset();
-    }
-    public void Begin()
-    {
-        // check if activated
-        if (!activated)
-        {
-            // reset stage
-            activated = true;
-            temp_stage.Reset();
-            temp_stage.NextWave();
-        }
-    }
-    public bool IsWaveEmpty()
-    {
-        // check status
-        return temp_stage.IsWaveEmpty();
-    }
-    public bool IsWaveComplete()
-    {
-        // check status
-        return temp_stage.IsWaveComplete();
-    }
-    public bool IsStageComplete()
-    {
-        // check status
-        return activated && temp_stage.IsStageComplete();
-    }
-    public float GetWaveSpawnRate()
-    {
-        // return spawn rate
-        return temp_stage.wave == null ? 0 : temp_stage.wave.rate;
-    }
-    public int GetWaveActiveUnits()
-    {
-        // return active units
-        return temp_stage.activeUnits;
-    }
-
     public override bool HandleEvent(GameEvent e)
     {
-        // check game event
         switch (e)
         {
-            // remove enemy unit
-            case GameEvent.ENEMY_DIED:
-                temp_stage.RemoveUnit();
+            case GameEvent.STATE_RESTART:
+                Restart();
                 break;
-            // create enemy unit
-            case GameEvent.ENEMY_SPAWN:
-                temp_stage.CreateUnit(transform);
+            case GameEvent.ENEMY_SPAWNER_NEXT:
+                SpawnerNext();
                 break;
-            // continue to next wave
-            case GameEvent.ENEMY_WAVE_NEXT:
-                temp_stage.NextWave();
+            case GameEvent.ENEMY_SPAWNER_BEGIN:
+                SpawnerBegin();
+                break;
+            case GameEvent.ENEMY_SPAWNER_CREATE:
+                SpawnerCreate();
+                break;
+            case GameEvent.ENEMY_SPAWNER_FINISH:
+                SpawnerFinish();
+                break;
+            case GameEvent.ENEMY_SPAWNER_REMOVE:
+                SpawnerRemove();
                 break;
         }
         return true;

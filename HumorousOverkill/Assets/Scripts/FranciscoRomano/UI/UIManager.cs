@@ -64,15 +64,15 @@ public class UIManager : EventHandler.EventHandle
         switch (e)
         {
             // handle Game states
-            case GameEvent.GAME_STATE_MENU:
+            case GameEvent.STATE_MENU:
                 break;
-            case GameEvent.GAME_STATE_START:
+            case GameEvent.STATE_START:
                 break;
-            case GameEvent.GAME_STATE_PAUSE:
+            case GameEvent.STATE_PAUSE:
                 break;
-            case GameEvent.GAME_STATE_RESTART:
+            case GameEvent.STATE_RESTART:
                 break;
-            case GameEvent.GAME_STATE_CONTINUE:
+            case GameEvent.STATE_CONTINUE:
                 break;
         }
         return true;

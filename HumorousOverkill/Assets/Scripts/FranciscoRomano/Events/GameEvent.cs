@@ -7,30 +7,34 @@
         CLASS_TYPE_ENEMY_SPAWNER,
 
     /**************************************************************************************************/
-    /** ENEMY MANAGER STATES **************************************************************************/
-
-        ENEMY_DIED,
-        ENEMY_SPAWN,
-        ENEMY_WAVE_NEXT,
-        ENEMY_WAVE_EMPTY,
-        ENEMY_WAVE_COMPLETE,
-        ENEMY_DAMAGED,
+    /** STATES ****************************************************************************************/
+    
+        STATE_MENU,
+        STATE_PAUSE,
+        STATE_START,
+        STATE_RESTART,
+        STATE_CONTINUE,
 
     /**************************************************************************************************/
+    /** ENEMY SPAWNER STATES **************************************************************************/
 
+        ENEMY_DIED,
+        //ENEMY_SPAWN,
+        ENEMY_DAMAGED,
+
+
+        ENEMY_SPAWNER_NEXT,
+        ENEMY_SPAWNER_BEGIN,
+        ENEMY_SPAWNER_CREATE,
+        ENEMY_SPAWNER_FINISH,
+        ENEMY_SPAWNER_REMOVE,
+
+    /**************************************************************************************************/
     // UI Enum
     UI_HEALTH,
     UI_AMMO_MAX,
     UI_AMMO_CUR,
     /**************************************************************************************************/
-    // Game Enum
-    GAME_STATE_MENU,
-    GAME_STATE_START,
-    GAME_STATE_PAUSE,
-    GAME_STATE_RESTART,
-    GAME_STATE_CONTINUE,
-    /**************************************************************************************************/
-
     // Player Enum
     PICKUP_HEALTH,
     PICKUP_RIFLEAMMO,
