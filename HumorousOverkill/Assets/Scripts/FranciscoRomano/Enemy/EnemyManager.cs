@@ -35,6 +35,7 @@ public struct DonutEnemyInfo
     public float turnSpeed;
     public float deployRange;
     public float hitRange;
+    public float maximumTargetHeight;
     public float accuracy;
     public float ammoDropRate;
     public float targetRadius;
