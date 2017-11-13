@@ -19,7 +19,6 @@ public class DonutAI : EventHandler.EventHandle
 
     private bool deployed;
     private float donutCircumference;
-    private Transform modelTransform;
     private GameObject player;
     private Animator myAnimator;
     private RaycastHit shootHitInfo;
@@ -47,9 +46,6 @@ public class DonutAI : EventHandler.EventHandle
 
         // calculate circumference (needed for nice rolling)
         findCircumference();
-
-        // find modelTransform
-        modelTransform = GetComponentsInChildren<Transform>()[1];
 
         pickTarget();
     }
