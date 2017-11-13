@@ -69,6 +69,7 @@ public class createLevel : MonoBehaviour
         GameObject wall = Instantiate(new GameObject(), transform.position, Quaternion.identity, transform);
         wall.name = "walls";
         
+        // create walls 1
         for(int x = 0; x < floorData.gridSize.x * wallData.spacing.x; x++)
         {
             for (int i = 0; i < wallData.height; i++)
@@ -81,7 +82,43 @@ public class createLevel : MonoBehaviour
             }
         }
 
-        // offset entire wall
-        wall.transform.position = new Vector3(-floorData.gridSize.x * wallData.spacing.x, 0, 0);
+        // create walls 2
+        for (int x = 0; x < floorData.gridSize.x * wallData.spacing.x; x++)
+        {
+            for (int i = 0; i < wallData.height; i++)
+            {
+                // find spawn position on grid
+                Vector3 spawnPos = new Vector3(x * floorData.spacing.x / wallData.spacing.x, i * wallData.spacing.y, floorData.gridSize.x * floorData.spacing.x / wallData.spacing.x);
+
+                GameObject currentWallTile = Instantiate(wallData.wallPrefabs[Random.Range(0, wallData.wallPrefabs.Count)], spawnPos, Quaternion.Euler(0, 180, 0), wall.transform);
+                wallData.spawnedTiles.Add(currentWallTile);
+            }
+        }
+
+        // create walls 3
+        for (int x = 0; x < floorData.gridSize.x * wallData.spacing.x; x++)
+        {
+            for (int i = 0; i < wallData.height; i++)
+            {
+                // find spawn position on grid
+                Vector3 spawnPos = new Vector3(floorData.gridSize.x * floorData.spacing.x / wallData.spacing.x, i * wallData.spacing.y, x * floorData.spacing.x / wallData.spacing.x);
+
+                GameObject currentWallTile = Instantiate(wallData.wallPrefabs[Random.Range(0, wallData.wallPrefabs.Count)], spawnPos, Quaternion.Euler(0, -90, 0), wall.transform);
+                wallData.spawnedTiles.Add(currentWallTile);
+            }
+        }
+
+        // create walls 4
+        for (int x = 0; x < floorData.gridSize.x * wallData.spacing.x; x++)
+        {
+            for (int i = 0; i < wallData.height; i++)
+            {
+                // find spawn position on grid
+                Vector3 spawnPos = new Vector3(-floorData.gridSize.x * floorData.spacing.x / wallData.spacing.x, i * wallData.spacing.y, x * floorData.spacing.x / wallData.spacing.x);
+
+                GameObject currentWallTile = Instantiate(wallData.wallPrefabs[Random.Range(0, wallData.wallPrefabs.Count)], spawnPos, Quaternion.Euler(0, 90, 0), wall.transform);
+                wallData.spawnedTiles.Add(currentWallTile);
+            }
+        }
     }
 }
