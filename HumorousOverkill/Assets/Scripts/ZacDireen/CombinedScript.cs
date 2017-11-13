@@ -354,19 +354,19 @@ public class CombinedScript : EventHandle {
 
     void SelectWeapon()
     {
-        int i = 0;
-        foreach (Transform weapon in transform)
-        {
-            if (i == SelectedWeapon)
-            {
-                weapon.gameObject.SetActive(true);
-            }
-            else
-            {
-                weapon.gameObject.SetActive(false);
-            }
-            i++;
-        }
+    //    int i = 0;
+    //    foreach (Transform weapon in transform)
+    //    {
+    //        if (i == SelectedWeapon)
+    //        {
+    //            weapon.gameObject.SetActive(true);
+    //        }
+    //        else
+    //        {
+    //            weapon.gameObject.SetActive(false);
+    //        }
+    //        i++;
+    //    }
     }
     void Shoot()
     {

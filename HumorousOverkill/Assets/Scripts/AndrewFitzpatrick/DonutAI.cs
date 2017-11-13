@@ -182,18 +182,38 @@ public class DonutAI : EventHandler.EventHandle
         }
     }
 
-    // TODO: make fancy
+    // break apart and destroy
+    // do manager stuff
     void die()
     {
         // tell enemy manager that an enemy has died
         if (GetEventListener("enemyManager") != null)
         {
-            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
+            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
         }
+
+        // disable collider preventing more deaths
         GetComponentInChildren<BoxCollider>().enabled = false;
-        Debug.Log("sending die event");
-        // destroy this gameobject
-        Destroy(this.gameObject);
+        // Debug.Log("sending die event");
+
+        // destroy the regular model and enable the broken one (with physics)
+        foreach (Transform child in GetComponentInChildren<Transform>())
+        {
+            if(child.gameObject.name == "Model")
+            {
+                Destroy(child.gameObject);
+            }
+            else if(child.gameObject.name == "Model_Broken")
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+
+        // disable this script
+        this.enabled = false;
+
+        // destroy this gameobject after 5 seconds
+        Destroy(this.gameObject, 5.0f);
     }
 
     void pickTarget()
