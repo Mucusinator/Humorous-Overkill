@@ -192,18 +192,15 @@ public class DonutAI : EventHandler.EventHandle
         GetComponentInChildren<BoxCollider>().enabled = false;
         // Debug.Log("sending die event");
 
+        GameObject model = GetComponentsInChildren<Transform>(true)[1].gameObject;
+        GameObject brokenModel = GetComponentsInChildren<Transform>(true)[2].gameObject;
+
+        brokenModel.transform.parent = transform;
+
+        model.SetActive(false);
+        brokenModel.SetActive(true);
+
         // destroy the regular model and enable the broken one (with physics)
-        foreach (Transform child in GetComponentInChildren<Transform>())
-        {
-            if(child.gameObject.name == "Model")
-            {
-                Destroy(child.gameObject);
-            }
-            else if(child.gameObject.name == "Model_Broken")
-            {
-                child.gameObject.SetActive(true);
-            }
-        }
 
         // disable this script
         this.enabled = false;
