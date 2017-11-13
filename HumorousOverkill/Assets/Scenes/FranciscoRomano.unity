@@ -1095,6 +1095,8 @@ MonoBehaviour:
   m_healthTEST: 1
   m_ammoCurTEST: 99
   m_ammoMaxTEST: 99
+  gif:
+  - {fileID: 2800000, guid: bae486add0618b34291bc7232fcd012d, type: 3}
   DEBUG: 0
 --- !u!114 &2059719503
 MonoBehaviour:
