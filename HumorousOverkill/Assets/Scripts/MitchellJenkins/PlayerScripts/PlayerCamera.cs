@@ -14,7 +14,7 @@ public class PlayerCamera : EventHandle {
     }
 
     private void RotateCamera () {
-        m_rotation -= Input.GetAxis("Mouse Y") * m_ply.m_cameraSensitivity;
+        m_rotation -= Input.GetAxis("Mouse Y") * m_ply.m_cameraSensitivity * 2;
         m_rotation = Mathf.Clamp(m_rotation, m_ply.m_cameraMinimumAngle, m_ply.m_cameraMaximumAngle);
 
         this.transform.localEulerAngles = new Vector3(m_rotation, this.transform.localEulerAngles.y, 0);
