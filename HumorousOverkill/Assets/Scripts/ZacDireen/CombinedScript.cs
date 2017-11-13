@@ -245,7 +245,7 @@ public class CombinedScript : EventHandle {
         if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE)
         {
 
-            if (currentRifleAmmo > 0)
+            if (currentRifleAmmo > 0 && Time.time >= nextTimeToFire)
             {
                 nextTimeToFire = Time.time + 60f / RoundsPerMinute;
                 //StartCoroutine(Shot());
