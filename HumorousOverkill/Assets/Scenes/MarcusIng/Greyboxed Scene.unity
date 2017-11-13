@@ -13999,7 +13999,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 494416520}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.822645, y: 6.22, z: 16.55}
+  m_LocalPosition: {x: -1.8226, y: 6.22, z: 16.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 889218441}
@@ -14030,7 +14030,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 24.38882, y: 12.44, z: 28.620634}
+  m_Size: {x: 51.7, y: 12.44, z: 38.4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &494416524
 MonoBehaviour:
@@ -14073,6 +14073,11 @@ MonoBehaviour:
           position: {x: 10, y: 0, z: 12}
         - amount: 4
           position: {x: -10, y: 0, z: 10}
+      - prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
+          type: 2}
+        points:
+        - amount: 4
+          position: {x: 0, y: 0, z: 0}
   doors: []
 --- !u!1001 &497419974
 Prefab:
@@ -37324,7 +37329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1303333908
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53619,7 +53624,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1875800487
 BoxCollider:
   m_ObjectHideFlags: 0
