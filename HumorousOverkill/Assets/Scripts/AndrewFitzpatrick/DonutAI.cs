@@ -27,7 +27,7 @@ public class DonutAI : EventHandler.EventHandle
     private RaycastHit rollHitInfo;
     private float shotTimer = 0;
 
-    // dead for the explosion
+    // checking this will kill the donut instantly
     public bool dead = false;
 
     #endregion
@@ -56,14 +56,21 @@ public class DonutAI : EventHandler.EventHandle
 
     void Update()
     {
-        // either deploy or roll
-        if (deployed)
+        if(!dead)
         {
-            deploySequence();
+            // either deploy or roll
+            if (deployed)
+            {
+                deploySequence();
+            }
+            else
+            {
+                roll();
+            }
         }
         else
         {
-            roll();
+            die();
         }
     }
 
@@ -175,18 +182,38 @@ public class DonutAI : EventHandler.EventHandle
         }
     }
 
-    // TODO: make fancy
+    // break apart and destroy
+    // do manager stuff
     void die()
     {
         // tell enemy manager that an enemy has died
         if (GetEventListener("enemyManager") != null)
         {
-            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_DIED);
+            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
         }
+
+        // disable collider preventing more deaths
         GetComponentInChildren<BoxCollider>().enabled = false;
-        Debug.Log("sending die event");
-        // destroy this gameobject
-        Destroy(this.gameObject);
+        // Debug.Log("sending die event");
+
+        // destroy the regular model and enable the broken one (with physics)
+        foreach (Transform child in GetComponentInChildren<Transform>())
+        {
+            if(child.gameObject.name == "Model")
+            {
+                Destroy(child.gameObject);
+            }
+            else if(child.gameObject.name == "Model_Broken")
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+
+        // disable this script
+        this.enabled = false;
+
+        // destroy this gameobject after 5 seconds
+        Destroy(this.gameObject, 5.0f);
     }
 
     void pickTarget()
@@ -228,14 +255,32 @@ public class DonutAI : EventHandler.EventHandle
             // reset shot timer
             shotTimer = 0;
 
+            // start off aiming straight ahead
             Vector3 aimPoint = -transform.right * myInfo.hitRange;
+
+            // if the the player height offset is lower than maximumTargetAngle add that height
+            float playerHeightOffset = player.transform.position.y - transform.position.y;
+            if(playerHeightOffset < myInfo.maximumTargetHeight)
+            {
+                aimPoint.y += playerHeightOffset;
+            }
+            // if higher add maximum
+            else
+            {
+                aimPoint.y += myInfo.maximumTargetHeight;
+            }
+
+            // create a random offset using accuracy
             Vector2 randomOffset = Random.insideUnitCircle * myInfo.accuracy;
+
+            // add the random offset to the aim point
             aimPoint.x += randomOffset.x;
             aimPoint.y += randomOffset.y;
 
+            // show this shot as a red line if showAttackGizmos is enabled
             if (showAttackGizmos)
             {
-                Debug.DrawRay(transform.position, aimPoint, Color.red);
+                Debug.DrawRay(transform.position, aimPoint, Color.red, 0.5f);
             }
 
             if (Physics.Raycast(transform.position, aimPoint, out shootHitInfo))
@@ -273,11 +318,11 @@ public class DonutAI : EventHandler.EventHandle
         {
             // draw cone representing hitRange / accuracy
             UnityEditor.Handles.color = Color.red;
-            UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange + Vector3.up * myInfo.accuracy);
-            UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - Vector3.up * myInfo.accuracy);
-            UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange + transform.forward * myInfo.accuracy);
-            UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - transform.forward * myInfo.accuracy);
-            UnityEditor.Handles.DrawWireDisc(transform.position - transform.right * myInfo.hitRange, transform.right, myInfo.accuracy);
+            UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange + Vector3.up * myInfo.accuracy + Vector3.up * myInfo.maximumTargetHeight);
+            UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - Vector3.up * myInfo.accuracy + Vector3.up * myInfo.maximumTargetHeight);
+            UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange + transform.forward * myInfo.accuracy + Vector3.up * myInfo.maximumTargetHeight);
+            UnityEditor.Handles.DrawLine(transform.position, transform.position - transform.right * myInfo.hitRange - transform.forward * myInfo.accuracy + Vector3.up * myInfo.maximumTargetHeight);
+            UnityEditor.Handles.DrawWireDisc(transform.position - transform.right * myInfo.hitRange + Vector3.up * myInfo.maximumTargetHeight, transform.right, myInfo.accuracy);
         }
         if (showMovementGizmos)
         {
