@@ -1,0 +1,588 @@
+fileFormatVersion: 2
+guid: 87b5f3a9e9774554f91afee7a1c3ea1c
+timeCreated: 1510532474
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: ARMatige_Group12396
+    100002: ARMatige_Group12396_MeshPart0
+    100004: ARMatige_Group12396_MeshPart1
+    100006: ARMatige_Group12396_MeshPart2
+    100008: ARMatige_Group12396_MeshPart3
+    100010: ARMatige_Group25823
+    100012: ARMatige_Group25823_MeshPart0
+    100014: ARMatige_Group25823_MeshPart1
+    100016: ARMatige_Group33164
+    100018: ARMatige_Group33164_MeshPart0
+    100020: ARMatige_Group33164_MeshPart1
+    100022: ARMatige_Group36807
+    100024: ARMatige_Group36807_MeshPart0
+    100026: ARMatige_Group36807_MeshPart1
+    100028: ARMatige_Group4183
+    100030: ARMatige_Group4183_MeshPart0
+    100032: ARMatige_Group4183_MeshPart1
+    100034: ARMatige_Group4183_MeshPart2
+    100036: ARMatige_Group4183_MeshPart3
+    100038: ARMatige_Group4183_MeshPart4
+    100040: ARMatige_Group4183_MeshPart5
+    100042: ARMatige_Group4183_MeshPart6
+    100044: ARMatige_Group57524
+    100046: ARMatige_Group57525
+    100048: ARMatige_Group9680
+    100050: ARMatige_Group9680_MeshPart0
+    100052: ARMatige_Group9680_MeshPart1
+    100054: ARMatige_Group9680_MeshPart2
+    100056: ARMatige_polySurface1
+    100058: ARMatige_polySurface15
+    100060: ARMatige_polySurface16
+    100062: ARMatige_polySurface187
+    100064: ARMatige_polySurface27
+    100066: ARMatige_polySurface28
+    100068: ARMatige_polySurface44
+    100070: ARMatige_polySurface9
+    100072: ARMatige_pSphere12
+    100074: ARMatige_pSphere5
+    100076: ARMatige_pSphere6
+    100078: ARMatige_pSphere7
+    100080: ARMatige_pSphere8
+    100082: ARMatige_pSphere9
+    100084: Elbow
+    100086: Elbow 1
+    100088: Group12396
+    100090: Group12396_MeshPart0
+    100092: Group12396_MeshPart1
+    100094: Group12396_MeshPart2
+    100096: Group12396_MeshPart3
+    100098: Group25823
+    100100: Group25823_MeshPart0
+    100102: Group25823_MeshPart1
+    100104: Group33164
+    100106: Group33164_MeshPart0
+    100108: Group33164_MeshPart1
+    100110: Group36807
+    100112: Group36807_MeshPart0
+    100114: Group36807_MeshPart1
+    100116: Group4183
+    100118: Group4183_MeshPart0
+    100120: Group4183_MeshPart1
+    100122: Group4183_MeshPart2
+    100124: Group4183_MeshPart3
+    100126: Group4183_MeshPart4
+    100128: Group4183_MeshPart5
+    100130: Group4183_MeshPart6
+    100132: Group57524
+    100134: Group57525
+    100136: Group9680
+    100138: Group9680_MeshPart0
+    100140: Group9680_MeshPart1
+    100142: Group9680_MeshPart2
+    100144: head
+    100146: hip
+    100148: l_clavicle
+    100150: l_pelvis
+    100152: l_ribcage
+    100154: MiddleBase
+    100156: MiddleBase 1
+    100158: MiddleJoint1
+    100160: MiddleJoint1 1
+    100162: MiddleJoint2
+    100164: MiddleJoint2 1
+    100166: MiddleNub
+    100168: MiddleNub 1
+    100170: neck
+    100172: Palm
+    100174: Palm 1
+    100176: PinkieBase
+    100178: PinkieBase 1
+    100180: PinkieJoint1
+    100182: PinkieJoint1 1
+    100184: PinkieJoint2
+    100186: PinkieJoint2 1
+    100188: PinkieNub
+    100190: PinkieNub 1
+    100192: PointerBase
+    100194: PointerBase 1
+    100196: PointerJoint1
+    100198: PointerJoint1 1
+    100200: PointerJoint2
+    100202: PointerJoint2 1
+    100204: PointerNub
+    100206: PointerNub 1
+    100208: polySurface1
+    100210: polySurface15
+    100212: polySurface16
+    100214: polySurface187
+    100216: polySurface27
+    100218: polySurface28
+    100220: polySurface41
+    100222: polySurface44
+    100224: polySurface52
+    100226: polySurface52 1
+    100228: polySurface53
+    100230: polySurface53 1
+    100232: polySurface9
+    100234: pSphere12
+    100236: pSphere5
+    100238: pSphere6
+    100240: pSphere7
+    100242: pSphere8
+    100244: pSphere9
+    100246: r_clavicle
+    100248: r_pelvis
+    100250: r_ribcage
+    100252: RingBase
+    100254: RingBase 1
+    100256: RingJoint1
+    100258: RingJoint1 1
+    100260: RingJoint2
+    100262: RingJoint2 1
+    100264: RingNub
+    100266: RingNub 1
+    100268: Root
+    100270: Shoulder
+    100272: Shoulder 1
+    100274: spine01
+    100276: tail
+    100278: tail_01
+    100280: tail_02
+    100282: tail_03
+    100284: tail_tip
+    100286: ThumbBase
+    100288: ThumbBase 1
+    100290: ThumbJoint1
+    100292: ThumbJoint1 1
+    100294: ThumbJoint2
+    100296: ThumbJoint2 1
+    100298: ThumbNub
+    100300: ThumbNub 1
+    100302: tongue1
+    100304: tongue2
+    100306: tongue3
+    100308: tonguetip
+    100310: transform202
+    100312: transform202 1
+    100314: transform203
+    100316: transform203 1
+    100318: transform208
+    100320: transform208 1
+    100322: transform209
+    100324: transform209 1
+    100326: transform216
+    100328: transform216 1
+    100330: transform217
+    100332: transform217 1
+    100334: transform223
+    100336: transform223 1
+    100338: transform224
+    100340: transform224 1
+    100342: transform225
+    100344: transform225 1
+    100346: transform226
+    100348: transform226 1
+    100350: transform227
+    100352: transform227 1
+    100354: transform228
+    100356: transform231
+    100358: //RootNode
+    100360: uppermouth
+    100362: Wrist
+    100364: Wrist 1
+    400000: ARMatige_Group12396
+    400002: ARMatige_Group12396_MeshPart0
+    400004: ARMatige_Group12396_MeshPart1
+    400006: ARMatige_Group12396_MeshPart2
+    400008: ARMatige_Group12396_MeshPart3
+    400010: ARMatige_Group25823
+    400012: ARMatige_Group25823_MeshPart0
+    400014: ARMatige_Group25823_MeshPart1
+    400016: ARMatige_Group33164
+    400018: ARMatige_Group33164_MeshPart0
+    400020: ARMatige_Group33164_MeshPart1
+    400022: ARMatige_Group36807
+    400024: ARMatige_Group36807_MeshPart0
+    400026: ARMatige_Group36807_MeshPart1
+    400028: ARMatige_Group4183
+    400030: ARMatige_Group4183_MeshPart0
+    400032: ARMatige_Group4183_MeshPart1
+    400034: ARMatige_Group4183_MeshPart2
+    400036: ARMatige_Group4183_MeshPart3
+    400038: ARMatige_Group4183_MeshPart4
+    400040: ARMatige_Group4183_MeshPart5
+    400042: ARMatige_Group4183_MeshPart6
+    400044: ARMatige_Group57524
+    400046: ARMatige_Group57525
+    400048: ARMatige_Group9680
+    400050: ARMatige_Group9680_MeshPart0
+    400052: ARMatige_Group9680_MeshPart1
+    400054: ARMatige_Group9680_MeshPart2
+    400056: ARMatige_polySurface1
+    400058: ARMatige_polySurface15
+    400060: ARMatige_polySurface16
+    400062: ARMatige_polySurface187
+    400064: ARMatige_polySurface27
+    400066: ARMatige_polySurface28
+    400068: ARMatige_polySurface44
+    400070: ARMatige_polySurface9
+    400072: ARMatige_pSphere12
+    400074: ARMatige_pSphere5
+    400076: ARMatige_pSphere6
+    400078: ARMatige_pSphere7
+    400080: ARMatige_pSphere8
+    400082: ARMatige_pSphere9
+    400084: Elbow
+    400086: Elbow 1
+    400088: Group12396
+    400090: Group12396_MeshPart0
+    400092: Group12396_MeshPart1
+    400094: Group12396_MeshPart2
+    400096: Group12396_MeshPart3
+    400098: Group25823
+    400100: Group25823_MeshPart0
+    400102: Group25823_MeshPart1
+    400104: Group33164
+    400106: Group33164_MeshPart0
+    400108: Group33164_MeshPart1
+    400110: Group36807
+    400112: Group36807_MeshPart0
+    400114: Group36807_MeshPart1
+    400116: Group4183
+    400118: Group4183_MeshPart0
+    400120: Group4183_MeshPart1
+    400122: Group4183_MeshPart2
+    400124: Group4183_MeshPart3
+    400126: Group4183_MeshPart4
+    400128: Group4183_MeshPart5
+    400130: Group4183_MeshPart6
+    400132: Group57524
+    400134: Group57525
+    400136: Group9680
+    400138: Group9680_MeshPart0
+    400140: Group9680_MeshPart1
+    400142: Group9680_MeshPart2
+    400144: head
+    400146: hip
+    400148: l_clavicle
+    400150: l_pelvis
+    400152: l_ribcage
+    400154: MiddleBase
+    400156: MiddleBase 1
+    400158: MiddleJoint1
+    400160: MiddleJoint1 1
+    400162: MiddleJoint2
+    400164: MiddleJoint2 1
+    400166: MiddleNub
+    400168: MiddleNub 1
+    400170: neck
+    400172: Palm
+    400174: Palm 1
+    400176: PinkieBase
+    400178: PinkieBase 1
+    400180: PinkieJoint1
+    400182: PinkieJoint1 1
+    400184: PinkieJoint2
+    400186: PinkieJoint2 1
+    400188: PinkieNub
+    400190: PinkieNub 1
+    400192: PointerBase
+    400194: PointerBase 1
+    400196: PointerJoint1
+    400198: PointerJoint1 1
+    400200: PointerJoint2
+    400202: PointerJoint2 1
+    400204: PointerNub
+    400206: PointerNub 1
+    400208: polySurface1
+    400210: polySurface15
+    400212: polySurface16
+    400214: polySurface187
+    400216: polySurface27
+    400218: polySurface28
+    400220: polySurface41
+    400222: polySurface44
+    400224: polySurface52
+    400226: polySurface52 1
+    400228: polySurface53
+    400230: polySurface53 1
+    400232: polySurface9
+    400234: pSphere12
+    400236: pSphere5
+    400238: pSphere6
+    400240: pSphere7
+    400242: pSphere8
+    400244: pSphere9
+    400246: r_clavicle
+    400248: r_pelvis
+    400250: r_ribcage
+    400252: RingBase
+    400254: RingBase 1
+    400256: RingJoint1
+    400258: RingJoint1 1
+    400260: RingJoint2
+    400262: RingJoint2 1
+    400264: RingNub
+    400266: RingNub 1
+    400268: Root
+    400270: Shoulder
+    400272: Shoulder 1
+    400274: spine01
+    400276: tail
+    400278: tail_01
+    400280: tail_02
+    400282: tail_03
+    400284: tail_tip
+    400286: ThumbBase
+    400288: ThumbBase 1
+    400290: ThumbJoint1
+    400292: ThumbJoint1 1
+    400294: ThumbJoint2
+    400296: ThumbJoint2 1
+    400298: ThumbNub
+    400300: ThumbNub 1
+    400302: tongue1
+    400304: tongue2
+    400306: tongue3
+    400308: tonguetip
+    400310: transform202
+    400312: transform202 1
+    400314: transform203
+    400316: transform203 1
+    400318: transform208
+    400320: transform208 1
+    400322: transform209
+    400324: transform209 1
+    400326: transform216
+    400328: transform216 1
+    400330: transform217
+    400332: transform217 1
+    400334: transform223
+    400336: transform223 1
+    400338: transform224
+    400340: transform224 1
+    400342: transform225
+    400344: transform225 1
+    400346: transform226
+    400348: transform226 1
+    400350: transform227
+    400352: transform227 1
+    400354: transform228
+    400356: transform231
+    400358: //RootNode
+    400360: uppermouth
+    400362: Wrist
+    400364: Wrist 1
+    2300000: ARMatige_Group12396_MeshPart0
+    2300002: ARMatige_Group12396_MeshPart1
+    2300004: ARMatige_Group12396_MeshPart2
+    2300006: ARMatige_Group12396_MeshPart3
+    2300008: ARMatige_Group25823_MeshPart0
+    2300010: ARMatige_Group25823_MeshPart1
+    2300012: ARMatige_Group33164_MeshPart0
+    2300014: ARMatige_Group33164_MeshPart1
+    2300016: ARMatige_Group36807_MeshPart0
+    2300018: ARMatige_Group36807_MeshPart1
+    2300020: ARMatige_Group4183_MeshPart0
+    2300022: ARMatige_Group4183_MeshPart1
+    2300024: ARMatige_Group4183_MeshPart2
+    2300026: ARMatige_Group4183_MeshPart3
+    2300028: ARMatige_Group4183_MeshPart4
+    2300030: ARMatige_Group4183_MeshPart5
+    2300032: ARMatige_Group4183_MeshPart6
+    2300034: ARMatige_Group57524
+    2300036: ARMatige_Group57525
+    2300038: ARMatige_Group9680_MeshPart0
+    2300040: ARMatige_Group9680_MeshPart1
+    2300042: ARMatige_Group9680_MeshPart2
+    2300044: Group12396_MeshPart0
+    2300046: Group12396_MeshPart1
+    2300048: Group12396_MeshPart2
+    2300050: Group12396_MeshPart3
+    2300052: Group25823_MeshPart0
+    2300054: Group25823_MeshPart1
+    2300056: Group33164_MeshPart0
+    2300058: Group33164_MeshPart1
+    2300060: Group36807_MeshPart0
+    2300062: Group36807_MeshPart1
+    2300064: Group4183_MeshPart0
+    2300066: Group4183_MeshPart1
+    2300068: Group4183_MeshPart2
+    2300070: Group4183_MeshPart3
+    2300072: Group4183_MeshPart4
+    2300074: Group4183_MeshPart5
+    2300076: Group4183_MeshPart6
+    2300078: Group57524
+    2300080: Group57525
+    2300082: Group9680_MeshPart0
+    2300084: Group9680_MeshPart1
+    2300086: Group9680_MeshPart2
+    3300000: ARMatige_Group12396_MeshPart0
+    3300002: ARMatige_Group12396_MeshPart1
+    3300004: ARMatige_Group12396_MeshPart2
+    3300006: ARMatige_Group12396_MeshPart3
+    3300008: ARMatige_Group25823_MeshPart0
+    3300010: ARMatige_Group25823_MeshPart1
+    3300012: ARMatige_Group33164_MeshPart0
+    3300014: ARMatige_Group33164_MeshPart1
+    3300016: ARMatige_Group36807_MeshPart0
+    3300018: ARMatige_Group36807_MeshPart1
+    3300020: ARMatige_Group4183_MeshPart0
+    3300022: ARMatige_Group4183_MeshPart1
+    3300024: ARMatige_Group4183_MeshPart2
+    3300026: ARMatige_Group4183_MeshPart3
+    3300028: ARMatige_Group4183_MeshPart4
+    3300030: ARMatige_Group4183_MeshPart5
+    3300032: ARMatige_Group4183_MeshPart6
+    3300034: ARMatige_Group57524
+    3300036: ARMatige_Group57525
+    3300038: ARMatige_Group9680_MeshPart0
+    3300040: ARMatige_Group9680_MeshPart1
+    3300042: ARMatige_Group9680_MeshPart2
+    3300044: Group12396_MeshPart0
+    3300046: Group12396_MeshPart1
+    3300048: Group12396_MeshPart2
+    3300050: Group12396_MeshPart3
+    3300052: Group25823_MeshPart0
+    3300054: Group25823_MeshPart1
+    3300056: Group33164_MeshPart0
+    3300058: Group33164_MeshPart1
+    3300060: Group36807_MeshPart0
+    3300062: Group36807_MeshPart1
+    3300064: Group4183_MeshPart0
+    3300066: Group4183_MeshPart1
+    3300068: Group4183_MeshPart2
+    3300070: Group4183_MeshPart3
+    3300072: Group4183_MeshPart4
+    3300074: Group4183_MeshPart5
+    3300076: Group4183_MeshPart6
+    3300078: Group57524
+    3300080: Group57525
+    3300082: Group9680_MeshPart0
+    3300084: Group9680_MeshPart1
+    3300086: Group9680_MeshPart2
+    4300000: Group4183_MeshPart0
+    4300002: Group4183_MeshPart1
+    4300004: Group4183_MeshPart2
+    4300006: Group4183_MeshPart3
+    4300008: Group4183_MeshPart4
+    4300010: Group4183_MeshPart5
+    4300012: Group4183_MeshPart6
+    4300014: Group36807_MeshPart0
+    4300016: Group36807_MeshPart1
+    4300018: Group25823_MeshPart0
+    4300020: Group25823_MeshPart1
+    4300022: Group12396_MeshPart0
+    4300024: Group12396_MeshPart1
+    4300026: Group12396_MeshPart2
+    4300028: Group12396_MeshPart3
+    4300030: Group9680_MeshPart0
+    4300032: Group9680_MeshPart1
+    4300034: Group9680_MeshPart2
+    4300036: Group33164_MeshPart0
+    4300038: Group33164_MeshPart1
+    4300040: Group57524
+    4300042: Group57525
+    4300044: polySurface187
+    4300046: ARMatige_Group4183_MeshPart0
+    4300048: ARMatige_Group4183_MeshPart1
+    4300050: ARMatige_Group4183_MeshPart2
+    4300052: ARMatige_Group4183_MeshPart3
+    4300054: ARMatige_Group4183_MeshPart4
+    4300056: ARMatige_Group4183_MeshPart5
+    4300058: ARMatige_Group4183_MeshPart6
+    4300060: ARMatige_Group36807_MeshPart0
+    4300062: ARMatige_Group36807_MeshPart1
+    4300064: ARMatige_Group25823_MeshPart0
+    4300066: ARMatige_Group25823_MeshPart1
+    4300068: ARMatige_Group12396_MeshPart0
+    4300070: ARMatige_Group12396_MeshPart1
+    4300072: ARMatige_Group12396_MeshPart2
+    4300074: ARMatige_Group12396_MeshPart3
+    4300076: ARMatige_Group9680_MeshPart0
+    4300078: ARMatige_Group9680_MeshPart1
+    4300080: ARMatige_Group9680_MeshPart2
+    4300082: ARMatige_Group33164_MeshPart0
+    4300084: ARMatige_Group33164_MeshPart1
+    4300086: ARMatige_Group57524
+    4300088: ARMatige_Group57525
+    4300090: ARMatige_polySurface187
+    4300092: polySurface41
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: ARMatige_polySurface187
+    13700002: polySurface187
+    13700004: polySurface41
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
