@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scene/AndrewFitzpatrick.unity
+  - enabled: 0
+    path: Assets/Scenes/AndrewFitzpatrick.unity
     guid: 54ea3af75250e794984ca82b9ae948aa
+  - enabled: 1
+    path: Assets/Scenes/MarcusIng/Greyboxed Scene.unity
+    guid: f90a1ac53cc2fed4fb2203f797bfc575
