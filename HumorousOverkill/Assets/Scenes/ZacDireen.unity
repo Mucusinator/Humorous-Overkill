@@ -4347,6 +4347,7 @@ RectTransform:
   - {fileID: 1381820059}
   - {fileID: 2043844955}
   - {fileID: 1750060980}
+  - {fileID: 1477021064}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5170,6 +5171,74 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1461543843}
+--- !u!1 &1477021063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1477021064}
+  - component: {fileID: 1477021066}
+  - component: {fileID: 1477021065}
+  m_Layer: 5
+  m_Name: Image (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1477021064
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1477021063}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 754524847}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -87.56, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 1, y: 0}
+--- !u!114 &1477021065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1477021063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: a161a93e873e2014dbdf0ab729e00688, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1477021066
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1477021063}
 --- !u!1 &1628018624
 GameObject:
   m_ObjectHideFlags: 0
@@ -5293,6 +5362,7 @@ GameObject:
   - component: {fileID: 1659887742}
   - component: {fileID: 1659887741}
   - component: {fileID: 1659887740}
+  - component: {fileID: 1659887745}
   m_Layer: 8
   m_Name: FPSController 2
   m_TagString: Untagged
@@ -5354,6 +5424,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c857095a4ed41ff4e8eab48d1682aff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ply:
+    m_playerHealth: 0
+    m_playerWalkSpeed: 0
+    m_playerRunSpeed: 0
+    m_playerCrouchSpeed: 0
+    m_playerJumpHeight: 0
+    m_pickupHealthAmount: 0
+    m_pickupAmmoAmount: 0
+    m_cameraSensitivity: 0
+    m_cameraMinimumAngle: 0
+    m_cameraMaximumAngle: 0
   m_cameraEnabled: 1
   m_movementEnabled: 1
 --- !u!143 &1659887743
@@ -5389,6 +5470,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1659887745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1659887739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f99943e6f7ec4459f8823c2213d8d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confettiImage: {fileID: 21300000, guid: a161a93e873e2014dbdf0ab729e00688, type: 3}
+  LaserImage: {fileID: 21300000, guid: bd517c54d0bb7b541b6e42d1b20ddeeb, type: 3}
+  baseImage: {fileID: 1477021065}
+  weaponScript: {fileID: 1362202721}
 --- !u!1 &1750060979
 GameObject:
   m_ObjectHideFlags: 0
@@ -5872,6 +5968,7 @@ MonoBehaviour:
     turnSpeed: 0
     deployRange: 0
     hitRange: 0
+    maximumTargetHeight: 0
     accuracy: 0
     ammoDropRate: 0
     targetRadius: 0
