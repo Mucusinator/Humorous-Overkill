@@ -1,40 +1,74 @@
 fileFormatVersion: 2
-guid: 1a45b6458bbdbec489ff349513984e78
-timeCreated: 1510102342
+guid: 4adaf858ce302394c88729b5cf852cff
+timeCreated: 1510531815
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: polySurface65
-    100002: polySurface69
-    100004: polySurface70
-    100006: polySurface73
-    100008: polySurface74
-    100010: //RootNode
-    400000: polySurface65
-    400002: polySurface69
-    400004: polySurface70
-    400006: polySurface73
-    400008: polySurface74
-    400010: //RootNode
-    2300000: polySurface65
-    2300002: polySurface69
-    2300004: polySurface70
-    2300006: polySurface73
-    2300008: polySurface74
-    2300010: //RootNode
-    3300000: polySurface65
-    3300002: polySurface69
-    3300004: polySurface70
-    3300006: polySurface73
-    3300008: polySurface74
-    3300010: //RootNode
+    100000: polySurface101
+    100002: polySurface102
+    100004: polySurface103
+    100006: polySurface104
+    100008: polySurface105
+    100010: polySurface106
+    100012: polySurface107
+    100014: polySurface65
+    100016: polySurface69
+    100018: polySurface70
+    100020: polySurface73
+    100022: polySurface74
+    100024: //RootNode
+    100026: transform5
+    400000: polySurface101
+    400002: polySurface102
+    400004: polySurface103
+    400006: polySurface104
+    400008: polySurface105
+    400010: polySurface106
+    400012: polySurface107
+    400014: polySurface65
+    400016: polySurface69
+    400018: polySurface70
+    400020: polySurface73
+    400022: polySurface74
+    400024: //RootNode
+    400026: transform5
+    2300000: polySurface101
+    2300002: polySurface102
+    2300004: polySurface103
+    2300006: polySurface104
+    2300008: polySurface105
+    2300010: polySurface106
+    2300012: polySurface107
+    2300014: polySurface65
+    2300016: polySurface69
+    2300018: polySurface70
+    2300020: polySurface73
+    2300022: //RootNode
+    3300000: polySurface101
+    3300002: polySurface102
+    3300004: polySurface103
+    3300006: polySurface104
+    3300008: polySurface105
+    3300010: polySurface106
+    3300012: polySurface107
+    3300014: polySurface65
+    3300016: polySurface69
+    3300018: polySurface70
+    3300020: polySurface73
+    3300022: //RootNode
     4300000: polySurface75
     4300002: polySurface73
     4300004: polySurface70
     4300006: polySurface69
     4300008: polySurface65
-    4300010: polySurface74
+    4300010: polySurface106
+    4300012: polySurface104
+    4300014: polySurface103
+    4300016: polySurface101
+    4300018: polySurface105
+    4300020: polySurface102
+    4300022: polySurface107
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -63,7 +97,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 10
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
