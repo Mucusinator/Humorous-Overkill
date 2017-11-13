@@ -26494,7 +26494,7 @@ MonoBehaviour:
     deployRange: 3
     hitRange: 20
     maximumTargetHeight: 0
-    accuracy: 3
+    accuracy: 2
     ammoDropRate: 0.5
     targetRadius: 5
     avoidRadius: 5
