@@ -75,7 +75,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TextureBlendFac: 0
-    - _Threshold: 5
+    - _Threshold: 3
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
