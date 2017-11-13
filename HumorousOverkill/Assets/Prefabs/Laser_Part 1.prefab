@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33892443285924726}
   - component: {fileID: 23600977268139432}
   m_Layer: 0
-  m_Name: Laser_Part
+  m_Name: laserPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +54,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b566aabbc1a577a409bcfc0192fb3ef4, type: 2}
+  - {fileID: 2100000, guid: 891f7b4154a72f742a74f782cefb9bdd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
