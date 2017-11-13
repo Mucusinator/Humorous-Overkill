@@ -3,13 +3,14 @@ using EventHandler;
 using UnityEngine.SceneManagement;
 
 [BindListener("PlayerManager", typeof(PlayerManager))]
+[BindListener("UI", typeof(UIManager))]
 [BindListener("EnemyManager", typeof(EnemyManager))]
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerMovement))]
 public class Player : EventHandle {
 
-    private PlayerInfo m_ply;
+    public PlayerInfo m_ply;
     private Animator m_animator;
     private CharacterController m_cc;
     private RuntimeAnimatorController m_animatorController;
@@ -65,6 +66,10 @@ public class Player : EventHandle {
             m_ply.m_playerHealth -= GetEventListener("EnemyManager").gameObject.GetComponent<EnemyManager>().defaultDroneInfo.damage;
             CheckHealth();
         }
+    }
+
+    void Update () {
+        GetEventListener("UI").HandleEvent(GameEvent.UI_HEALTH, m_ply.m_playerHealth / 100);
     }
 
     public override bool HandleEvent (GameEvent e, float value) {
