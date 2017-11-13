@@ -87,7 +87,6 @@ public class SpawnEditor
         {
             if (OnInspectorGUI(currentGroup, "Group", backMsg, true) == Status.RETURN)
             {
-                Debug.Log("group back..");
                 currentGroup = null;
             }
         }
@@ -103,7 +102,6 @@ public class SpawnEditor
         // check if button pressed
         if (GUILayout.Button(text, GUILayout.Width(width)))
         {
-            Debug.Log("sending message :: " + message.type.ToString());
             return message.type;
         }
         // return default inspector status
@@ -277,7 +275,6 @@ public class SpawnEditor
                 Status listStatus = OnInspectorGUI(list[i], "Group " + (i + 1), listMsg, false);
                 if (listStatus == Status.CHANGE)
                 {
-                    Debug.Log("supposed to change...");
                     currentGroup = list[i];
                 }
                 else if (listStatus == Status.REMOVE)
