@@ -69,9 +69,6 @@ public class CupcakeAI : EventHandler.EventHandle
         {
             if (wanderHitInfo.collider.gameObject.tag == "Avoid" || wanderHitInfo.collider.gameObject.tag == "Enemy")
             {
-                //Debug.Log("Hit at " + hitInfo.point);
-                //Debug.DrawLine(hitInfo.point, hitInfo.point + hitInfo.normal, Color.blue);
-                //Debug.Break();
                 currentTarget += wanderHitInfo.normal * myInfo.avoidRadius;
             }
         }
@@ -128,9 +125,6 @@ public class CupcakeAI : EventHandler.EventHandle
             accuracyOffset.y = 0;
 
             Vector3 shotPoint = player.transform.position + accuracyOffset;
-
-            // shoot at the point
-            Debug.DrawLine(transform.position + transform.forward, shotPoint, Color.yellow);
 
             // create the projectile
             GameObject currentProjectile = Instantiate(projectile, transform.position + transform.forward, Quaternion.identity) as GameObject;

@@ -117,7 +117,6 @@ public class DonutAI : EventHandler.EventHandle
         // get the "x" size of the collider (actually y)
         // also takes into account scaling
         float size = donutCollider.size.x * transform.localScale.y;
-        Debug.Log(size);
 
         // circumference is 2PIr aka PI * diameter
         donutCircumference = (size * Mathf.PI);
@@ -190,17 +189,17 @@ public class DonutAI : EventHandler.EventHandle
 
         // disable collider preventing more deaths
         GetComponentInChildren<BoxCollider>().enabled = false;
-        // Debug.Log("sending die event");
 
+        // find the regular model and the broken one
         GameObject model = GetComponentsInChildren<Transform>(true)[1].gameObject;
         GameObject brokenModel = GetComponentsInChildren<Transform>(true)[2].gameObject;
 
+        // parent the broken model to the root object (keep the same rotation)
         brokenModel.transform.parent = transform;
 
+        // swap the models
         model.SetActive(false);
         brokenModel.SetActive(true);
-
-        // destroy the regular model and enable the broken one (with physics)
 
         // disable this script
         this.enabled = false;
@@ -283,7 +282,6 @@ public class DonutAI : EventHandler.EventHandle
                 {
                     // send the player a PLAYER_DAMAGE event
                     shootHitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
-                    Debug.Log("I have hit " + shootHitInfo.collider.gameObject.name);
                 }
             }
         }
