@@ -11,6 +11,7 @@ public class createLevel : MonoBehaviour
         public Vector2 gridSize;
         public Vector2 spacing;
 
+        [HideInInspector]
         public List<GameObject> spawnedTiles = new List<GameObject>();
     }
 
@@ -56,11 +57,8 @@ public class createLevel : MonoBehaviour
         Vector3 totalSize = new Vector3(floorData.gridSize.x * floorData.spacing.x, 0.1f, floorData.gridSize.y * floorData.spacing.y);
 
         BoxCollider floorCollider = floor.AddComponent<BoxCollider>();
-        floorCollider.center = totalSize / 2;
+        //floorCollider.center = totalSize / 2;
         floorCollider.size = totalSize;
-
-        // offset entire floor
-        floor.transform.position = -totalSize / 2;
     }
 
     void createWalls()
