@@ -87,6 +87,7 @@ public class EnemySpawnerEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        base.OnInspectorGUI();
         SpawnEditor.OnInspectorGUI();
     }
 
