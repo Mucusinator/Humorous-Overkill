@@ -463,7 +463,7 @@ MonoBehaviour:
     m_playerCrouchSpeed: 5
     m_playerJumpHeight: 5
     m_pickupHealthAmount: 5
-    m_pickupAmmoAmount: 5
+    m_pickupAmmoAmount: 0
     m_cameraSensitivity: 1
     m_cameraMinimumAngle: -60
     m_cameraMaximumAngle: 40
@@ -4162,6 +4162,50 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0093c3e35370a1e49a5a17207350087f, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &626727999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 626728001}
+  - component: {fileID: 626728000}
+  m_Layer: 0
+  m_Name: laser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &626728000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 626727999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f67ee1b3a77e84d956700a9275979c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 1426574552836422, guid: 7c8190cb4b470484cb2bbb45f5095e25,
+    type: 2}
+  laserSpeed: 0
+  shootPoint: {fileID: 2121546070}
+--- !u!4 &626728001
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 626727999}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &630418476
 GameObject:
   m_ObjectHideFlags: 0
@@ -5144,6 +5188,20 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 0.58661085
       objectReference: {fileID: 0}
+    - target: {fileID: 114399163867662204, guid: 6a16e25d499b71e41ab14dcfa42ce974,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114629167022791072, guid: 6a16e25d499b71e41ab14dcfa42ce974,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645015362092706, guid: 6a16e25d499b71e41ab14dcfa42ce974, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.344
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a16e25d499b71e41ab14dcfa42ce974, type: 2}
   m_IsPrefabParent: 0
@@ -5264,6 +5322,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f265e36d39fec84da1f38d7aacf4c14, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &850131959 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4814692437338418, guid: 6a16e25d499b71e41ab14dcfa42ce974,
+    type: 2}
+  m_PrefabInternal: {fileID: 829082776}
 --- !u!4 &850240041 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4452348310388864, guid: 0093c3e35370a1e49a5a17207350087f,
@@ -12335,6 +12398,34 @@ Transform:
   m_PrefabParentObject: {fileID: 4934672272606656, guid: 7f265e36d39fec84da1f38d7aacf4c14,
     type: 2}
   m_PrefabInternal: {fileID: 1315960399}
+--- !u!1 &2121546070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2121546071}
+  m_Layer: 0
+  m_Name: horn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2121546071
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2121546070}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.04, y: 0.05, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 850131959}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2125617088 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4934672272606656, guid: 7f265e36d39fec84da1f38d7aacf4c14,
