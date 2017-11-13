@@ -10,8 +10,10 @@ using System.Collections.Generic;
 public class EnemySpawner : EventHandle
 {
     // :: variables
+    [HideInInspector]
     public int units = 0;
     public bool active = false;
+    [HideInInspector]
     public Stage stage = new Stage();
     public List<GameObject> doors = new List<GameObject>();
     // :: functions
