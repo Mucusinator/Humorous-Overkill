@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using EventHandler;
 
 [BindListener("Enemy", typeof(EnemyManager))]
-[BindListener("Player",typeof(PlayerManager))]
-[BindListener("UI",typeof(UIManager))] 
+[BindListener("Player", typeof(PlayerManager))]
+[BindListener("UI", typeof(UIManager))]
 public class CombinedScript : EventHandle {
 
     // Rifle/Laser Variables.
@@ -64,7 +64,7 @@ public class CombinedScript : EventHandle {
 
 
     // Shared/Unique variables. variables
-    
+
     // This boolean tests if you are already reloading or not.
     private bool isReloading;
     // This animatior is resonsible for the reloading mechanic of the weapons.
@@ -91,6 +91,20 @@ public class CombinedScript : EventHandle {
 
     // This boolean is for if the user has access to the rifle.
 
+    public bool glitchRifleEffect;
+
+
+    // THIS IS BACHELOR STUFF 
+
+    [System.Serializable]
+    public struct BachelorStuff
+    {
+        public bool ReflectiveShots;
+
+    }
+
+    [SerializeField] public BachelorStuff stuff;
+
 
     // This is the two different weapon types.
     public enum GunType
@@ -102,7 +116,7 @@ public class CombinedScript : EventHandle {
 
 
 
-    
+
 
 
 
@@ -110,14 +124,14 @@ public class CombinedScript : EventHandle {
 
 
     // Use this for initialization
-    void Start () {
+    void Start() {
 
         SelectWeapon();
         //currentRifleAmmo = rifleMagSize;
         currentShotgunAmmo = magTubeSize;
         //currentShotgunAmmo = 0;
         //shotTrail = GetComponent<LineRenderer>();
-        
+
     }
 
     // Update is called once per frame
@@ -239,7 +253,7 @@ public class CombinedScript : EventHandle {
         //}
         if (Input.GetKeyUp(KeyCode.Mouse0) || isReloading && gunType == GunType.RIFLE)
         {
-            //shotTrail.enabled = false;
+            glitchRifleEffect = false;
         }
 
         if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE)
@@ -247,14 +261,43 @@ public class CombinedScript : EventHandle {
 
             if (currentRifleAmmo > 0 && Time.time >= nextTimeToFire)
             {
+
                 nextTimeToFire = Time.time + 60f / RoundsPerMinute;
                 //StartCoroutine(Shot());
                 Shoot();
             }
+
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.RIFLE)
+        {
+            glitchRifleEffect = true;
+
+        }
+
+        if (glitchRifleEffect == true)
+        {
+            
+            fpsCam.GetComponent<GlitchPostRender>().offset += 0.01f * Time.deltaTime;
+            if (fpsCam.GetComponent<GlitchPostRender>().offset > 0.01f)
+            {
+                fpsCam.GetComponent<GlitchPostRender>().offset = 0.01f;
+            }
         }
         else
         {
-            //shotTrail.enabled = false;
+
+            fpsCam.GetComponent<GlitchPostRender>().offset -= 0.01f * Time.deltaTime;
+            if (fpsCam.GetComponent<GlitchPostRender>().offset < 0)
+            {
+                fpsCam.GetComponent<GlitchPostRender>().offset = 0;
+            }
+        }
+    
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            fpsCam.GetComponent<GlitchPostRender>().offset -= 0.01f * Time.deltaTime;
         }
 
 
@@ -278,12 +321,12 @@ public class CombinedScript : EventHandle {
         }
 
     }
-        
 
 
 
-        
-    
+
+
+
 
     private IEnumerator Shot()
     {
@@ -314,10 +357,10 @@ public class CombinedScript : EventHandle {
             animator.SetBool("Reloading", true);
             yield return new WaitForSeconds(reloadRifleTime - 0.25f);
             animator.SetBool("Reloading", false);
-          
-                yield return new WaitForSeconds(0.25f);
-            
-                //currentRifleAmmo = maxRifleAmmo;
+
+            yield return new WaitForSeconds(0.25f);
+
+            //currentRifleAmmo = maxRifleAmmo;
             if (maxRifleAmmo < rifleMagSize)
             {
                 currentRifleAmmo = maxRifleAmmo;
@@ -354,19 +397,19 @@ public class CombinedScript : EventHandle {
 
     void SelectWeapon()
     {
-    //    int i = 0;
-    //    foreach (Transform weapon in transform)
-    //    {
-    //        if (i == SelectedWeapon)
-    //        {
-    //            weapon.gameObject.SetActive(true);
-    //        }
-    //        else
-    //        {
-    //            weapon.gameObject.SetActive(false);
-    //        }
-    //        i++;
-    //    }
+        //    int i = 0;
+        //    foreach (Transform weapon in transform)
+        //    {
+        //        if (i == SelectedWeapon)
+        //        {
+        //            weapon.gameObject.SetActive(true);
+        //        }
+        //        else
+        //        {
+        //            weapon.gameObject.SetActive(false);
+        //        }
+        //        i++;
+        //    }
     }
     void Shoot()
     {
@@ -384,67 +427,68 @@ public class CombinedScript : EventHandle {
         //shotTrail.material.mainTextureOffset = new Vector2(Time.time, 0);
 
         //shotTrail.SetPosition(0, EndOfGun.transform.position);
-            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward * Range, out hit, RifleRange))
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward * Range, out hit, RifleRange))
+        {
+
+            // If we hit something with our shot raycast.
+            //if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) ;
+            Debug.DrawRay(EndOfGun.transform.position, hit.point - transform.position, Color.blue, 3.0f);
+            if (Physics.Raycast(EndOfGun.transform.position, hit.point - transform.position, out hit2, RifleRange))
             {
 
-                // If we hit something with our shot raycast.
-                //if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) ;
-                Debug.DrawRay(EndOfGun.transform.position, hit.point - transform.position, Color.blue, 3.0f);
-                if (Physics.Raycast(EndOfGun.transform.position, hit.point - transform.position, out hit2, RifleRange))
+
+                if (hit.transform != null)
                 {
+                    //shotTrail.SetPosition(1, hit2.point);
+
+                    // Put in place the takeDamage event handler for the game manager here.
+                    //GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(GameEvent.)
+
+                    //Debug.Log(hit.transform.name);
+                    //Target target = hit.transform.GetComponent<Target>();
 
 
-                    if (hit.transform != null)
+
+                    if (hit.collider.gameObject.tag == "Enemy")
                     {
-                        //shotTrail.SetPosition(1, hit2.point);
-
-                        // Put in place the takeDamage event handler for the game manager here.
-                        //GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(GameEvent.)
-
-                        //Debug.Log(hit.transform.name);
-                        //Target target = hit.transform.GetComponent<Target>();
-
-
-
-                        if (hit.collider.gameObject.tag == "Enemy")
+                        if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
                         {
-                            if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
-                            {
-                                hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
-                            }
-                            if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
-                            {
-                                hit.collider.gameObject.GetComponentInParent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
-                            }
-                            Debug.Log("I have shot " + hit.collider.gameObject.name);
-                            //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
-                            //target.TakeDamage(RifleDamage);
-
+                            hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
                         }
+                        if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
+                        {
+                            hit.collider.gameObject.GetComponentInParent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                        }
+                        Debug.Log("I have shot " + hit.collider.gameObject.name);
+                        //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
+                        //target.TakeDamage(RifleDamage);
+
                     }
                 }
             }
+        }
         else
-            {
-                Vector3 centreCam = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+        {
+            Vector3 centreCam = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
 
-                //shotTrail.SetPosition(1, centreCam + (fpsCam.transform.forward * Range));
-                //shotTrail.SetPosition(1, fpsCam.transform.position + (EndOfGun.transform.forward * Range));
-            }
-            //shotTrail.enabled = false;
+            //shotTrail.SetPosition(1, centreCam + (fpsCam.transform.forward * Range));
+            //shotTrail.SetPosition(1, fpsCam.transform.position + (EndOfGun.transform.forward * Range));
+        }
+        //shotTrail.enabled = false;
         //}
-        
+
     }
-        
-        
-        
-       
-        
-    
+
+
+
+
+
+
 
 
     void ShootRay()
     {
+        Vector3 inDirection;
         //  Try this one first, before using the second one
         //  The Ray-hits will form a ring
         float randomRadius = spreadWidth;
@@ -456,15 +500,15 @@ public class CombinedScript : EventHandle {
         //Calculating the raycast direction
         Vector3 direction = new Vector3(
             randomRadius * Mathf.Cos(randomAngle),
-            randomRadius * Mathf.Sin(randomAngle),Range
-            
+            randomRadius * Mathf.Sin(randomAngle), Range
+
         );
 
         //Make the direction match the transform
         //It is like converting the Vector3.forward to transform.forward
         direction = fpsCam.transform.TransformDirection(direction.normalized);
 
-        
+
         //Raycast and debug
         Ray r = new Ray(WeaponRaycast.transform.position, direction);
 
@@ -472,9 +516,10 @@ public class CombinedScript : EventHandle {
         RaycastHit hit;
         if (Physics.Raycast(r, out hit))
         {
-
+            
             Debug.DrawLine(StartOfPlayerRaycast.transform.position, hit.point, Color.black, 3.0f);
-
+            inDirection = Vector3.Reflect(r.direction, -hit.normal);
+            Debug.DrawLine(hit.transform.position, inDirection, Color.cyan, 5.0f);
 
             //Target shotgunTarget = hit.transform.GetComponent<Target>();
             //if (shotgunTarget != null)
@@ -494,19 +539,33 @@ public class CombinedScript : EventHandle {
                     hit.collider.gameObject.GetComponentInParent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
                 }
                 Debug.Log("I have shot " + hit.collider.gameObject.name);
+
+              
             }
+                
+                Ray r2 = new Ray(hit.point, inDirection);
+                RaycastHit hit2;
+                if (Physics.Raycast(r2, out hit2))
+                {
+                    Debug.DrawRay(hit2.point, -hit2.normal, Color.yellow, 5.0f);
+                    Debug.Log(gameObject);
+                }
+
+
 
         }
         else
         {
             //Vector3 centreCam = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
 
-            Debug.DrawLine(StartOfPlayerRaycast.transform.position, fpsCam.transform.forward * Range, Color.green,3.0f);
+            Debug.DrawLine(StartOfPlayerRaycast.transform.position, fpsCam.transform.forward * Range, Color.green, 3.0f);
         }
     }
+
     void OnEnable()
     {
         isReloading = false;
         animator.SetBool("Reloading", false);
     }
+
 }

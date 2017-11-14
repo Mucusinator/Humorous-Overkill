@@ -55,8 +55,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+<<<<<<< HEAD
+    - _BlueX: 0.001
+    - _BlueY: -0.001
+=======
     - _BlueX: 0.0004942765
     - _BlueY: -0.0027443964
+>>>>>>> e34a8d3753893c1c56ee9066110bcfb4bb6aafe8
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -64,14 +69,24 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+<<<<<<< HEAD
+    - _GreenX: -0.001
+    - _GreenY: -0.001
+=======
     - _GreenX: -0.0027443964
     - _GreenY: -0.0004942765
+>>>>>>> e34a8d3753893c1c56ee9066110bcfb4bb6aafe8
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+<<<<<<< HEAD
+    - _RedX: 0.001
+    - _RedY: 0.001
+=======
     - _RedX: 0.0027443964
     - _RedY: 0.0004942765
+>>>>>>> e34a8d3753893c1c56ee9066110bcfb4bb6aafe8
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
