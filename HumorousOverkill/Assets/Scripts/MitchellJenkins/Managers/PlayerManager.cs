@@ -14,6 +14,7 @@ using UnityEngine;
     public float m_cameraSensitivity; // 1
     public float m_cameraMinimumAngle; // -60
     public float m_cameraMaximumAngle; // 40
+
     // Type_1 = Shotgun
     // Type_2 = Laser Rainbow Gun 
     //public float m_gunFireRate_type1; // 2
@@ -26,8 +27,10 @@ using UnityEngine;
     //public float m_gunReloadSpeed_type2;
 }
 
+[EventHandler.BindListener("Weapon", typeof(CombinedScript))]
 public class PlayerManager : EventHandler.EventHandle {
     public Player m_ply;
+    private bool isFirstPickup = true;
 
     // Weapon Script.
     public CombinedScript m_weapon;
@@ -46,7 +49,13 @@ public class PlayerManager : EventHandler.EventHandle {
             break;
         case GameEvent.PICKUP_RIFLEAMMO:
                 // Calls the add ammo function from the ammo script using the enum.
-                m_weapon.maxRifleAmmo += (int)value;
+                if (!isFirstPickup)
+                    m_weapon.maxRifleAmmo += (int)value;
+                else {
+                    m_weapon.currentRifleAmmo += (int)value;
+                    isFirstPickup = false;
+                    GetEventListener("Weapon").GetComponent<CombinedScript>().gunType = CombinedScript.GunType.RIFLE;
+                }
                 break;
             case GameEvent.PICKUP_SHOTGUNAMMO:
                 m_weapon.maxShotgunAmmo += (int)value;

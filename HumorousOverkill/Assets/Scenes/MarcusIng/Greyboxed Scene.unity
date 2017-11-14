@@ -20178,6 +20178,7 @@ MonoBehaviour:
   m_healthTEST: 1
   m_ammoCurTEST: 99
   m_ammoMaxTEST: 99
+  gif: []
   DEBUG: 0
 --- !u!114 &685693636
 MonoBehaviour:
@@ -26472,7 +26473,7 @@ MonoBehaviour:
     targetRadius: 5
     errorMargin: 2
     damage: 5
-    wanderSpeed: 4
+    wanderSpeed: 6
     turnSpeed: 4
     avoidRadius: 3
     health: 50
@@ -26488,12 +26489,12 @@ MonoBehaviour:
     health: 100
     damage: 10
     fireRate: 1
-    rollSpeed: 5
+    rollSpeed: 10
     turnSpeed: 5
     deployRange: 3
     hitRange: 20
     maximumTargetHeight: 0
-    accuracy: 5
+    accuracy: 2
     ammoDropRate: 0.5
     targetRadius: 5
     avoidRadius: 5
@@ -55286,7 +55287,7 @@ MonoBehaviour:
   Range: 10
   maxShotgunAmmo: 20
   currentShotgunAmmo: 0
-  reloadShotgunTime: 2.5
+  reloadShotgunTime: 2
   FireDelay: 0.4
   animator: {fileID: 1288187068}
   SelectedWeapon: 0

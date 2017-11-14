@@ -7,7 +7,7 @@ public class LaserTest : MonoBehaviour
     RaycastHit hit = new RaycastHit();
     public GameObject laser;
   
-    private Camera cam;
+    public Camera cam;
     private List<GameObject> laserParts = new List<GameObject>(); // list to prevent scene clutter
     public List<Color> laserColors = new List<Color>(); // list of colors for the laser to cycle through
     public GameObject shootPoint; // point that laser shoots from
