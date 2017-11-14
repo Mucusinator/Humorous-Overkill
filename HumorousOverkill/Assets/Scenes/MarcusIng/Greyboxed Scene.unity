@@ -25574,7 +25574,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &856662369
 MonoBehaviour:
@@ -26491,9 +26491,9 @@ MonoBehaviour:
     fireRate: 1
     rollSpeed: 10
     turnSpeed: 5
-    deployRange: 3
-    hitRange: 20
-    maximumTargetHeight: 0
+    deployRange: 10
+    hitRange: 12
+    maximumTargetHeight: 20
     accuracy: 2
     ammoDropRate: 0.5
     targetRadius: 5
@@ -30914,8 +30914,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f99943e6f7ec4459f8823c2213d8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  confettiImage: {fileID: 21300000, guid: a161a93e873e2014dbdf0ab729e00688, type: 3}
-  LaserImage: {fileID: 21300000, guid: bd517c54d0bb7b541b6e42d1b20ddeeb, type: 3}
+  confettiImage: {fileID: 21300000, guid: 12500e60ecc967a478c42c5c23b87ecb, type: 3}
+  LaserImage: {fileID: 21300000, guid: 984bbbc7b028abd44be9985de3816a81, type: 3}
   baseImage: {fileID: 1144539235}
   weaponScript: {fileID: 1622053385}
 --- !u!114 &1042051006
@@ -38904,6 +38904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laser: {fileID: 1426574552836422, guid: 7c8190cb4b470484cb2bbb45f5095e25, type: 2}
+  cam: {fileID: 0}
   laserColors:
   - {r: 0.84148824, g: 0.015030292, b: 1, a: 0}
   - {r: 0.15862082, g: 0, b: 1, a: 0}
@@ -58814,7 +58815,7 @@ MonoBehaviour:
       rate: 0
       units: []
     groups:
-    - rate: 3
+    - rate: 2
       units:
       - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
           type: 2}
