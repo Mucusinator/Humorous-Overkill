@@ -119,6 +119,7 @@ public class createLevel : MonoBehaviour
         GameObject light = Instantiate(new GameObject(), Vector3.up * wallData.height * wallData.spacing.y, Quaternion.identity);
         light.name = "light";
         Light lightComponent = light.AddComponent<Light>();
-        lightComponent.range = Mathf.Sqrt(floorData.gridSize.sqrMagnitude + floorData.spacing.sqrMagnitude);
+        Vector3 s = new Vector3(floorData.gridSize.x * floorData.spacing.x, wallData.height * wallData.spacing.x, floorData.gridSize.y * floorData.spacing.x);
+        lightComponent.range = s.magnitude;
     }
 }
