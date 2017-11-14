@@ -148,9 +148,9 @@ class MapEventHandler : MonoBehaviour {
 
     public void OnHandleEvent (object s, __eArg<MapState> e) {
         // Log Events that happen after Event has been Raised
-        if (e.target != (System.Object)this && s != (System.Object)this)
-            _Debug.Log(":: Args (" + e.arg.ToString() + ") To <" + e.target + ">\nfrom <" + s + "> This <" + this +">");
-        if (e.target == __event<MapState>.SendToAll && s != (System.Object)this)
-            _Debug.Log(":: Args (" + e.arg.ToString() + ") To <ALL>\nfrom <" + s + "> This <" + this + ">");
+        //if (e.target != (System.Object)this && s != (System.Object)this)
+        //    _Debug.Log(":: Args (" + e.arg.ToString() + ") To <" + e.target + ">\nfrom <" + s + "> This <" + this +">");
+        //if (e.target == __event<MapState>.SendToAll && s != (System.Object)this)
+        //    _Debug.Log(":: Args (" + e.arg.ToString() + ") To <ALL>\nfrom <" + s + "> This <" + this + ">");
     }
 }
