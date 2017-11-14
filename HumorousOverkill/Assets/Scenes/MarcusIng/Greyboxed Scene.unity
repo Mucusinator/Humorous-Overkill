@@ -30914,8 +30914,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f99943e6f7ec4459f8823c2213d8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  confettiImage: {fileID: 21300000, guid: a161a93e873e2014dbdf0ab729e00688, type: 3}
-  LaserImage: {fileID: 21300000, guid: bd517c54d0bb7b541b6e42d1b20ddeeb, type: 3}
+  confettiImage: {fileID: 21300000, guid: 12500e60ecc967a478c42c5c23b87ecb, type: 3}
+  LaserImage: {fileID: 21300000, guid: 984bbbc7b028abd44be9985de3816a81, type: 3}
   baseImage: {fileID: 1144539235}
   weaponScript: {fileID: 1622053385}
 --- !u!114 &1042051006
