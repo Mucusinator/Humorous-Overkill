@@ -29,6 +29,16 @@ public class Player : EventHandle {
         // m_cc.height = 1.8f;
     }
 
+    public void Start () {
+        __event<MapState>.InvokeEvent(
+            this,
+            new __eArg<MapState>(
+                MapState.PING,
+                null,
+                this.gameObject.transform,
+                typeof(Player) ));
+    }
+
     public CharacterController _CharacterController {
         get { return this.m_cc; }
     }

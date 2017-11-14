@@ -8,6 +8,8 @@ public class UIManager : EventHandler.EventHandle
     [Range(0, 99)] public float m_ammoCurTEST = 99.0f;
     [Range(0, 99)] public float m_ammoMaxTEST = 99.0f;
 
+    public Texture[] gif;
+
     private UIImage m_playerStatsHealth = new UIImage();
     private UIText m_playerStatsMaxAmmo = new UIText();
     private UIText m_playerStatsCurAmmo = new UIText();
