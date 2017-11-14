@@ -127,9 +127,8 @@ public class CupcakeAI : EventHandler.EventHandle
             Vector3 shotPoint = player.transform.position + accuracyOffset;
 
             // create the projectile
-            GameObject currentProjectile = Instantiate(projectile, transform.position + transform.forward, Quaternion.LookRotation(shotPoint - (transform.position + transform.forward)) * Quaternion.Euler(0, 0, 0)) as GameObject;
+            GameObject currentProjectile = Instantiate(projectile, transform.position + transform.forward, Quaternion.LookRotation(shotPoint - (transform.position + transform.forward)) * Quaternion.Euler(0, 90, 0)) as GameObject;
             Debug.DrawRay(transform.position + transform.forward, shotPoint - (transform.position + transform.forward), Color.cyan, 0.5f);
-            //Debug.Break();
             // add impulse force to the projectile towards the player at shotForce
             currentProjectile.GetComponent<Rigidbody>().AddForce((shotPoint - currentProjectile.transform.position).normalized * myInfo.shotForce, ForceMode.Impulse);
             // destroy the projectile after a set time
