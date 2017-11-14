@@ -26536,7 +26536,7 @@ MonoBehaviour:
     attackRange: 5
     projectileLifetime: 3
     shotForce: 10
-    pickupDropRate: 0
+    pickupDropRate: 1
     explosionForce: 5
     explosionRadius: 5
   defaultDonutInfo:
@@ -26549,7 +26549,7 @@ MonoBehaviour:
     hitRange: 12
     maximumTargetHeight: 20
     accuracy: 2
-    pickupDropRate: 0
+    pickupDropRate: 1
     targetRadius: 5
     avoidRadius: 5
     errorMargin: 2
