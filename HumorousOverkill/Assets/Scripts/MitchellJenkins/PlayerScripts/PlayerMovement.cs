@@ -52,7 +52,7 @@ public class PlayerMovement : EventHandle {
 
         Debug.DrawLine(this.transform.position + Vector3.down, this.transform.position + Vector3.down * 1.3f, Color.cyan);
         if (Physics.Raycast(this.transform.position + Vector3.down, Vector3.down, 0.3f, m_groundMask )) { m_grounded = true; }
-        else { m_moveDirection.y -= m_gravity * Time.deltaTime; }
+        else { m_moveDirection.y -= m_gravity * Time.deltaTime; m_grounded = false; }
 
         m_cc.Move(m_moveDirection * Time.deltaTime);
     }

@@ -55357,6 +55357,9 @@ MonoBehaviour:
   EndOfGun: {fileID: 832826554}
   fpsCam: {fileID: 1628796563}
   isRifleSelected: 0
+  glitchRifleEffect: 0
+  stuff:
+    ReflectiveShots: 0
 --- !u!1001 &1622354212
 Prefab:
   m_ObjectHideFlags: 0
@@ -55715,6 +55718,7 @@ GameObject:
   - component: {fileID: 1628796566}
   - component: {fileID: 1628796565}
   - component: {fileID: 1628796564}
+  - component: {fileID: 1628796568}
   m_Layer: 8
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -55804,6 +55808,19 @@ Transform:
   m_Father: {fileID: 1042050999}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1628796568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1628796562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e3aa9ad61e81e4589fe27a60e2b606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _material: {fileID: 2100000, guid: 6d9496fba7e9502468be873bd59a7366, type: 2}
+  offset: 0
 --- !u!1001 &1630060812
 Prefab:
   m_ObjectHideFlags: 0
