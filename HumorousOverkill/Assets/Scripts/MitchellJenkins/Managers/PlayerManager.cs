@@ -27,6 +27,7 @@ using UnityEngine;
     //public float m_gunReloadSpeed_type2;
 }
 
+[EventHandler.BindListener("Weapon", typeof(CombinedScript))]
 public class PlayerManager : EventHandler.EventHandle {
     public Player m_ply;
     private bool isFirstPickup = true;
@@ -53,6 +54,7 @@ public class PlayerManager : EventHandler.EventHandle {
                 else {
                     m_weapon.currentRifleAmmo += (int)value;
                     isFirstPickup = false;
+                    GetEventListener("Weapon").GetComponent<CombinedScript>().gunType = CombinedScript.GunType.RIFLE;
                 }
                 break;
             case GameEvent.PICKUP_SHOTGUNAMMO:
