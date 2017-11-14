@@ -81,6 +81,7 @@ public class createLevel : MonoBehaviour
         {
             wallStrips[i] = Instantiate(new GameObject(), transform.position, Quaternion.identity, walls.transform);
             wallStrips[i].name = "wall strip";
+            wallStrips[i].tag = "Avoid";
 
             BoxCollider newCollider = wallStrips[i].AddComponent<BoxCollider>();
 

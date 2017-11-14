@@ -203,11 +203,11 @@ MonoBehaviour:
     avoidRadius: 3
     health: 100
     fireRate: 1
-    accuracy: 5
+    accuracy: 0
     attackRange: 3
     projectileLifetime: 3
     shotForce: 10
-    ammoDropRate: 0.5
+    pickupDropRate: 0.75
     explosionForce: 10
     explosionRadius: 10
   defaultDonutInfo:
@@ -220,7 +220,7 @@ MonoBehaviour:
     hitRange: 10
     maximumTargetHeight: 0
     accuracy: 4
-    ammoDropRate: 0.5
+    pickupDropRate: 0.75
     targetRadius: 6
     avoidRadius: 5
     errorMargin: 3
@@ -273,7 +273,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 163190124}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalPosition: {x: 0, y: -52.6, z: 0}
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
@@ -343,7 +343,7 @@ RectTransform:
   m_GameObject: {fileID: 163972283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1158713027}
   m_RootOrder: 0
@@ -372,7 +372,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 11da952f0b37ec7449f08ea34cf4d524, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 10fa0946ee72aaa4785a1fb97daa5068, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -497,7 +497,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &639317134
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -523,8 +523,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 40, y: 20, z: 20}
-  m_Center: {x: -22.5, y: 5, z: -32.5}
+  m_Size: {x: 50, y: 20, z: 50}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &639317136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,9 +543,15 @@ MonoBehaviour:
     current:
       rate: 0
       units: []
-    groups: []
-  doors:
-  - {fileID: 0}
+    groups:
+    - rate: 3
+      units:
+      - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
+          type: 2}
+        points:
+        - amount: 50
+          position: {x: 0, y: 0, z: 0}
+  doors: []
 --- !u!4 &639317137
 Transform:
   m_ObjectHideFlags: 0
@@ -1042,7 +1048,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a161a93e873e2014dbdf0ab729e00688, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 984bbbc7b028abd44be9985de3816a81, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1407,6 +1413,65 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2050025314}
+--- !u!1 &2055806458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2055806460}
+  - component: {fileID: 2055806459}
+  m_Layer: 0
+  m_Name: decalPlacer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2055806459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2055806458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3105ccbda4f2fa940a6cdb5a567df3f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decalTextures:
+  - {fileID: 2800000, guid: 98276d93a0775c047bd4b0d973e9fbe7, type: 3}
+  - {fileID: 2800000, guid: 03afd1417d5b823428145bfc753f0fef, type: 3}
+  - {fileID: 2800000, guid: 9f2ac427eccb276448f2e3d901b6dfc7, type: 3}
+  - {fileID: 2800000, guid: e7916a41bb1a33b4f9edf8d8309194a4, type: 3}
+  - {fileID: 2800000, guid: 538f75f4ab0f36c4f9e84187e6015bab, type: 3}
+  - {fileID: 2800000, guid: a7d76b14a83446449a24e893dd19c9eb, type: 3}
+  - {fileID: 2800000, guid: 4bb58985bd97268489db0003c1676281, type: 3}
+  - {fileID: 2800000, guid: 972f24ac2ae807748ae5d3df434a9585, type: 3}
+  - {fileID: 2800000, guid: 9689053ffe7f5594a94ff9f4080c9079, type: 3}
+  - {fileID: 2800000, guid: 78e5cb056c71c5245bf41239ac54c377, type: 3}
+  - {fileID: 2800000, guid: d065df8a055623c4e9856ac28350799d, type: 3}
+  - {fileID: 2800000, guid: bd2046917b9aa8a4b930d7f30429d065, type: 3}
+  - {fileID: 2800000, guid: 0c25c9b809192314c9f2b6ba32374d72, type: 3}
+  placementPositions: []
+  placementRotations: []
+  decalPrefab: {fileID: 1350416893915034, guid: 07298b54ec4f7e2499f6d163ff76b6c7,
+    type: 2}
+  decalSize: {x: 3, y: 3, z: 3}
+--- !u!4 &2055806460
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2055806458}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2099493732
 GameObject:
   m_ObjectHideFlags: 0
