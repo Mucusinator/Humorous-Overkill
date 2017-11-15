@@ -14793,7 +14793,7 @@ GameObject:
   - component: {fileID: 494416522}
   - component: {fileID: 494416524}
   m_Layer: 0
-  m_Name: spawner
+  m_Name: DonutRoomSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14806,8 +14806,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 494416520}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.8226, y: 6.22, z: 16.55}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -20.9, y: 41.3, z: 334.7}
+  m_LocalScale: {x: 1.0255699, y: 1, z: 0.82939583}
   m_Children: []
   m_Father: {fileID: 889218441}
   m_RootOrder: 0
@@ -14858,33 +14858,13 @@ MonoBehaviour:
       rate: 0
       units: []
     groups:
-    - rate: 2
+    - rate: 5
       units:
       - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
           type: 2}
         points:
         - amount: 3
-          position: {x: 10, y: 0, z: 0}
-        - amount: 3
-          position: {x: -5, y: 0, z: 10}
-        - amount: 2
-          position: {x: 2, y: 0, z: -10}
-    - rate: 2
-      units:
-      - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
-          type: 2}
-        points:
-        - amount: 3
-          position: {x: 10, y: 0, z: 0}
-        - amount: 3
-          position: {x: 10, y: 0, z: 12}
-        - amount: 4
-          position: {x: -10, y: 0, z: 10}
-      - prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
-          type: 2}
-        points:
-        - amount: 4
-          position: {x: 0, y: 0, z: 0}
+          position: {x: 22, y: -6, z: 8}
   doors: []
 --- !u!1001 &497419974
 Prefab:
@@ -26536,7 +26516,7 @@ MonoBehaviour:
     attackRange: 5
     projectileLifetime: 3
     shotForce: 10
-    pickupDropRate: 1
+    pickupDropRate: 0
     explosionForce: 5
     explosionRadius: 5
   defaultDonutInfo:
@@ -26549,7 +26529,7 @@ MonoBehaviour:
     hitRange: 12
     maximumTargetHeight: 20
     accuracy: 2
-    pickupDropRate: 1
+    pickupDropRate: 0
     targetRadius: 5
     avoidRadius: 5
     errorMargin: 2
@@ -30849,7 +30829,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1042050998}
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 23.5, y: -2.5, z: 307.3}
+  m_LocalPosition: {x: 23.5, y: 37.5, z: 307.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1628796567}
@@ -43015,7 +42995,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1449570406
+  randomSeed: -306881341
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -57985,7 +57965,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1706010836}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 26.43, y: -6.7, z: 301.69995}
+  m_LocalPosition: {x: 26.43, y: 34, z: 301.69995}
   m_LocalScale: {x: 0.9999999, y: 1, z: 1.4999998}
   m_Children: []
   m_Father: {fileID: 1155101299}
@@ -63593,7 +63573,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cb6069a2f7e912f468fb628b6968d9b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cb6069a2f7e912f468fb628b6968d9b7, type: 3}
       propertyPath: m_LocalPosition.z
