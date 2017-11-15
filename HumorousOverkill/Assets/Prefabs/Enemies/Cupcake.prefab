@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4668510748567290}
   - component: {fileID: 33808368026542262}
   - component: {fileID: 23413283686566690}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:pCube3 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4403328011290550}
   - component: {fileID: 33518422977568302}
   - component: {fileID: 23641763777390280}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface7 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4650347141949968}
   - component: {fileID: 33002269385750592}
   - component: {fileID: 23538562392707276}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4359452865567650}
   - component: {fileID: 33364610906969114}
   - component: {fileID: 23204963232388838}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface6 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4109275711197942}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pivot3 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4442653548552668}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 4848969125398350}
   - component: {fileID: 33938206709187920}
   - component: {fileID: 23663522874307426}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:pCylinder5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 4230200132191616}
   - component: {fileID: 198736896902927982}
   - component: {fileID: 199176106270489800}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 4087307956494084}
   - component: {fileID: 33425180048414320}
   - component: {fileID: 23407147639027122}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface6 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4912181969341454}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pivot2 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 4960141193617092}
   - component: {fileID: 33354123098208386}
   - component: {fileID: 23813660247066338}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface5 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 4899563117317746}
   - component: {fileID: 33920846020622060}
   - component: {fileID: 23254722630455708}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:Thruster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 4835224994686028}
   - component: {fileID: 33102933594853036}
   - component: {fileID: 23267912605137914}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:pCylinder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 4268003646886040}
   - component: {fileID: 33946214949152366}
   - component: {fileID: 23160600650225520}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:pCylinder2 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 4247659479213252}
   - component: {fileID: 33286837025071036}
   - component: {fileID: 23679282932149152}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:pCylinder5 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 4578015860296130}
   - component: {fileID: 198907625361887210}
   - component: {fileID: 199759260875584176}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 95695768153362144}
   - component: {fileID: 65852099629438424}
   - component: {fileID: 114884254411808652}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cupcake
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 4549403452276978}
   - component: {fileID: 33236062674222592}
   - component: {fileID: 23142144490889674}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:Thruster 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 4791512836419954}
   - component: {fileID: 33941149042400590}
   - component: {fileID: 23248165667456882}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4327878862530880}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:Leg1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 4685889117775330}
   - component: {fileID: 33723092938194484}
   - component: {fileID: 23748973668452768}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4661506879993388}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:Legs2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 4163764156694198}
   - component: {fileID: 198884531651641626}
   - component: {fileID: 199638701900666884}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 4068300044645852}
   - component: {fileID: 33411447512448330}
   - component: {fileID: 23602487708003132}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Topping
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4716674926018342}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pivot1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +435,7 @@ GameObject:
   - component: {fileID: 4180430891881480}
   - component: {fileID: 33409568801992362}
   - component: {fileID: 23100963134195748}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 4813918795620202}
   - component: {fileID: 33552395321729778}
   - component: {fileID: 23502756188047196}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:pCube3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,7 +467,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4104949798315248}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:Leg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,7 +482,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4104132371907258}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pivot1 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -499,7 +499,7 @@ GameObject:
   - component: {fileID: 4859650154562278}
   - component: {fileID: 33604172215770308}
   - component: {fileID: 23902252212269532}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface3 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4865926286907608}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pivot3 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 4772461243968762}
   - component: {fileID: 33309520717433808}
   - component: {fileID: 23615813517511814}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface5 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,7 +548,7 @@ GameObject:
   - component: {fileID: 4181956265603696}
   - component: {fileID: 33524190930086312}
   - component: {fileID: 23316527210684172}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:pCube3 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,7 +563,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4138854485786100}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pivot2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4872735736600762}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:Legs3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: 4586340332842520}
   - component: {fileID: 33587353959784470}
   - component: {fileID: 23688556181696544}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:pCylinder5 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 4339051025595486}
   - component: {fileID: 33237589691269198}
   - component: {fileID: 23252735440016158}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -629,7 +629,7 @@ GameObject:
   - component: {fileID: 4848261471870298}
   - component: {fileID: 33944020927744294}
   - component: {fileID: 23611886826903924}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface3 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 4078849727563982}
   - component: {fileID: 33819188043661776}
   - component: {fileID: 23270827749803474}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:pCylinder2 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -663,7 +663,7 @@ GameObject:
   - component: {fileID: 4549567026301890}
   - component: {fileID: 33187245108494452}
   - component: {fileID: 23578651713068166}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface8 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,7 +678,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4639720976033982}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pivot3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 4371104940695734}
   - component: {fileID: 33395778772199598}
   - component: {fileID: 23154380432601754}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -710,7 +710,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4751529336651586}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pivot2 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -727,7 +727,7 @@ GameObject:
   - component: {fileID: 4800700661694838}
   - component: {fileID: 33473351311494330}
   - component: {fileID: 23380557761208264}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface7 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +742,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4770349062796626}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:Leg1 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -759,7 +759,7 @@ GameObject:
   - component: {fileID: 4212485068655734}
   - component: {fileID: 33761487613034774}
   - component: {fileID: 23513336086851780}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:polySurface8 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -776,7 +776,7 @@ GameObject:
   - component: {fileID: 4870931966018486}
   - component: {fileID: 33164375717112472}
   - component: {fileID: 23437936779061758}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CupcakeDrone_Mesh_v006:Thruster 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -791,7 +791,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4489961000792096}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pivot1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -806,7 +806,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4103433525483228}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cupcake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2694,6 +2694,9 @@ MonoBehaviour:
   - {fileID: 1213382271234258, guid: 8d25769cf16b0c8418074cfcc48d3970, type: 2}
   - {fileID: 1987807335771420, guid: 0093c3e35370a1e49a5a17207350087f, type: 2}
   - {fileID: 1047466508615190, guid: 7f265e36d39fec84da1f38d7aacf4c14, type: 2}
+  pickupSpawnLayerMask:
+    serializedVersion: 2
+    m_Bits: 768
 --- !u!198 &198736896902927982
 ParticleSystem:
   m_ObjectHideFlags: 1

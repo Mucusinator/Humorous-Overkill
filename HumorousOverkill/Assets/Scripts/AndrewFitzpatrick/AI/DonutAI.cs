@@ -32,6 +32,8 @@ public class DonutAI : EventHandler.EventHandle
     // what types of pickups to drop
     public List<GameObject> pickupPrefabs;
 
+    private LayerMask pickupSpawnLayerMask;
+
     #endregion
 
     public override void Awake()
@@ -51,6 +53,8 @@ public class DonutAI : EventHandler.EventHandle
         findCircumference();
 
         pickTarget();
+
+        pickupSpawnLayerMask = LayerMask.GetMask("Player", "Enemy");
     }
 
     void Update()
@@ -219,7 +223,7 @@ public class DonutAI : EventHandler.EventHandle
         if (Random.Range(0, 100) < myInfo.pickupDropRate * 100)
         {
             RaycastHit ammoDropRay;
-            if (Physics.Raycast(transform.position, -Vector3.up, out ammoDropRay))
+            if (Physics.Raycast(transform.position, -Vector3.up, out ammoDropRay, pickupSpawnLayerMask))
             {
                 Instantiate(pickupPrefabs[Random.Range(0, pickupPrefabs.Count)], ammoDropRay.point, Quaternion.identity);
             }
