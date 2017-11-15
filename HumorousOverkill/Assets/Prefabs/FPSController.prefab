@@ -799,6 +799,7 @@ GameObject:
   - component: {fileID: 81723194457211770}
   - component: {fileID: 124298515353687908}
   - component: {fileID: 114913052065892226}
+  - component: {fileID: 114146399943510970}
   m_Layer: 8
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -2688,6 +2689,19 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114146399943510970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1496018852909422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e3aa9ad61e81e4589fe27a60e2b606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _material: {fileID: 2100000, guid: 7f4820b491df95241a6f760028c58ee3, type: 2}
+  offset: 0
 --- !u!114 &114237353846905910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2792,6 +2806,9 @@ MonoBehaviour:
   EndOfGun: {fileID: 1866156374817980}
   fpsCam: {fileID: 20546139333886822}
   isRifleSelected: 0
+  glitchRifleEffect: 0
+  stuff:
+    ReflectiveShots: 0
 --- !u!114 &114701516145576802
 MonoBehaviour:
   m_ObjectHideFlags: 1
