@@ -79,9 +79,13 @@ public class CombinedScript : EventHandle {
     public GameObject WeaponRaycast;
     // This is the UI text element for the UI.
     //public Text Ammo;
-
+    /// <summary>
+    ///  this is the end of the gun shown as a game object.
+    /// </summary>
     public GameObject EndOfGun;
-
+    /// <summary>
+    ///  This is the first person camera.
+    /// </summary>
     public Camera fpsCam;
 
     //public LineRenderer shotTrail;
@@ -233,7 +237,7 @@ public class CombinedScript : EventHandle {
             {
                 SelectedWeapon = 0;
                 gunType = GunType.SHOTGUN;
-
+                glitchRifleEffect = false;
             }
 
             if (isReloading)
@@ -367,7 +371,11 @@ public class CombinedScript : EventHandle {
 
     }
 
-    
+    /// <summary>
+    /// This is the reload function.
+    /// </summary>
+    /// <param name="time"> used to keep track of time.</param>
+    /// <returns></returns>
     bool ReloadTimer(float time)
     {
         if (m_timer <= 0)
