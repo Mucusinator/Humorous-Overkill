@@ -30849,7 +30849,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1042050998}
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 23.5, y: -2.5, z: 307.3}
+  m_LocalPosition: {x: 24, y: 2, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1628796567}
@@ -55349,6 +55349,7 @@ MonoBehaviour:
   currentShotgunAmmo: 0
   reloadShotgunTime: 2
   FireDelay: 0.4
+  isReloading: 0
   animator: {fileID: 1288187068}
   SelectedWeapon: 0
   gunType: 0
@@ -55358,8 +55359,12 @@ MonoBehaviour:
   fpsCam: {fileID: 1628796563}
   isRifleSelected: 0
   glitchRifleEffect: 0
+  m_timer: 0
   stuff:
     ReflectiveShots: 0
+    ReflectMultiplier: 0
+    enemyHealth: {fileID: 0}
+    showEnemyHealth: 0
 --- !u!1001 &1622354212
 Prefab:
   m_ObjectHideFlags: 0
