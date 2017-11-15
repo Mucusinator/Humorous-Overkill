@@ -4,34 +4,40 @@ using UnityEngine;
 
 public class movePlatform : MonoBehaviour
 {
-    public GameObject startPoint;
-    public GameObject endPoint;
+    public GameObject goal;
 
-    public float travelSpeed;
+    [Tooltip("How long it takes for the platform to travel to and from the goal")]
+    public float[] travelTimes = new float[2];
+
 
     private Vector3[] points = new Vector3[2];
+
+    // private stuff
     private float currentFactor = 0.0f;
-    private bool returning = false;
+    private bool hasPlayer = false;
 
     void Start()
     {
-        // set points
-        points[0] = startPoint.transform.position;
-        points[1] = endPoint.transform.position;
+        // first point is the current position
+        points[0] = transform.position;
+
+        // second point is the goal
+        points[1] = goal.transform.position;
     }
 
 	void Update ()
     {
         // update factor
-        currentFactor += Time.deltaTime / travelSpeed * (returning ? -1.0f : 1.0f);
-
-        // ping pong
-        if(currentFactor >= 1.0f || currentFactor <- 0.0f)
+        if (hasPlayer)
         {
-            returning = !returning;
+            currentFactor = Mathf.Min(currentFactor + Time.deltaTime / travelTimes[0], 1.0f);
+        }
+        else
+        {
+            currentFactor = Mathf.Max(currentFactor - Time.deltaTime / travelTimes[1], 0.0f);
         }
 
-        // set position
+        // update position
         transform.position = Vector3.Lerp(points[0], points[1], currentFactor);
 	}
 
@@ -42,6 +48,7 @@ public class movePlatform : MonoBehaviour
         {
             Debug.Log("Player jumped on " + gameObject.name);
             other.gameObject.transform.parent = transform;
+            hasPlayer = true;
         }
     }
 
@@ -52,6 +59,7 @@ public class movePlatform : MonoBehaviour
         {
             Debug.Log("Player jumped off " + gameObject.name);
             other.gameObject.transform.parent = null;
+            hasPlayer = false;
         }
     }
 }
