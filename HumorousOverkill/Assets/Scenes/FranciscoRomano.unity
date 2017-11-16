@@ -951,7 +951,7 @@ MonoBehaviour:
     attackRange: 0
     projectileLifetime: 0
     shotForce: 0
-    ammoDropRate: 0
+    pickupDropRate: 0
     explosionForce: 0
     explosionRadius: 0
   defaultDonutInfo:
@@ -964,7 +964,7 @@ MonoBehaviour:
     hitRange: 0
     maximumTargetHeight: 0
     accuracy: 0
-    ammoDropRate: 0
+    pickupDropRate: 0
     targetRadius: 0
     avoidRadius: 0
     errorMargin: 0
@@ -1062,7 +1062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256225637b3a71a4d9d5bb3b8cfe60e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gif: {fileID: 4900000, guid: 2fa4936adcaa9b0489157eefeb6dfe9c, type: 3}
+  file: {fileID: 4900000, guid: f8d3858c6efa2ce49a5ef1551c40a022, type: 3}
 --- !u!1 &2059719501
 GameObject:
   m_ObjectHideFlags: 0
