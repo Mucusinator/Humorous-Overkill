@@ -30,18 +30,28 @@ public class CupcakeAI : EventHandler.EventHandle
 
     private float startHealth;
 
+    // what types of pickups to drop
+    public List<GameObject> pickupPrefabs;
+
+    private LayerMask pickupSpawnLayerMask;
+
     #endregion
 
     public override void Awake()
     {
         base.Awake();
 
+        // find the player
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        // get default info from enemyManager
         myInfo = GetEventListener("enemyManager").gameObject.GetComponent<EnemyManager>().defaultDroneInfo;
 
         startHealth = myInfo.health;
 
         pickTarget();
-        player = GameObject.FindGameObjectWithTag("Player");
+
+        pickupSpawnLayerMask = LayerMask.GetMask("Player", "Enemy");
     }
 
     void Update ()
@@ -52,7 +62,7 @@ public class CupcakeAI : EventHandler.EventHandle
         }
         else if(dead)
         {
-            HandleEvent(GameEvent.ENEMY_DIED);
+            die();
         }
 	}
 
@@ -64,12 +74,12 @@ public class CupcakeAI : EventHandler.EventHandle
             pickTarget();
         }
 
-        // avoid walls and otgher enemies
+        // avoid walls and other enemies
         if (Physics.Raycast(transform.position, transform.forward, out wanderHitInfo, myInfo.avoidRadius))
         {
             if (wanderHitInfo.collider.gameObject.tag == "Avoid" || wanderHitInfo.collider.gameObject.tag == "Enemy")
             {
-                currentTarget += wanderHitInfo.normal * myInfo.avoidRadius;
+                currentTarget += wanderHitInfo.normal;
             }
         }
 
@@ -154,7 +164,12 @@ public class CupcakeAI : EventHandler.EventHandle
         }
 
         // disable animation
-        GetComponent<Animator>().enabled = false;
+        if(GetComponent<Animator>() != null)
+        {
+            GetComponent<Animator>().enabled = false;
+        }
+
+        dropPickup();
 
         GetComponent<BoxCollider>().enabled = false;
 
@@ -162,15 +177,15 @@ public class CupcakeAI : EventHandler.EventHandle
         Transform[] childTransforms = GetComponentsInChildren<Transform>();
         foreach (Transform child in childTransforms)
         {
-            // add boxCollider
+            // add a collider
             MeshCollider newCollider = child.gameObject.AddComponent<MeshCollider>();
             newCollider.convex = true;
 
-            // add RigidBody
+            // add a RigidBody
             child.gameObject.AddComponent<Rigidbody>();
 
             // add explosion force to launch the model
-            child.GetComponent<Rigidbody>().AddExplosionForce(myInfo.explosionForce, transform.position, myInfo.explosionRadius);
+            child.GetComponent<Rigidbody>().AddExplosionForce(myInfo.explosionForce, transform.position - Vector3.up * myInfo.explosionRadius, myInfo.explosionRadius);
         }
 
         // disable this script to prevent any more actions
@@ -178,7 +193,20 @@ public class CupcakeAI : EventHandler.EventHandle
 
         // fully delete this gameObject after a set number of seconds
         Destroy(this.gameObject, 5);
-}
+    }
+
+    void dropPickup()
+    {
+        // randomly drop a pickup (on the floor)
+        if (Random.Range(0, 100) < myInfo.pickupDropRate * 100)
+        {
+            RaycastHit ammoDropRay;
+            if (Physics.Raycast(transform.position, -Vector3.up, out ammoDropRay, pickupSpawnLayerMask))
+            {
+                Instantiate(pickupPrefabs[Random.Range(0, pickupPrefabs.Count)], ammoDropRay.point, Quaternion.identity);
+            }
+        }
+    }
 
     void changeColor(Color newColor)
     {

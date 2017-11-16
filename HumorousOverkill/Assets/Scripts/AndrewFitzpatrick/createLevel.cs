@@ -35,15 +35,16 @@ public class createLevel : MonoBehaviour
     {
         createFloor();
         createWalls();
-        createLight();
+        createRoof();
+        // createLight();
         transform.position = -floorData.totalFloorSize / 2;
     }
 
     void createFloor()
     {
         // create floor GameObject
-        GameObject floor = Instantiate(new GameObject(), transform.position, Quaternion.identity, transform);
-        floor.name = "floor";
+        GameObject floor = new GameObject("floor");
+        floor.transform.parent = transform;
 
         // add tiles as children
         for (int x = 0; x < floorData.gridSize.x; x++)
@@ -54,6 +55,7 @@ public class createLevel : MonoBehaviour
                 Vector3 spawnPos = new Vector3(x * floorData.spacing.x, 0, y * floorData.spacing.y);
 
                 GameObject currentFloorTile = Instantiate(floorData.floorPrefabs[Random.Range(0, floorData.floorPrefabs.Count)], spawnPos, Quaternion.identity, floor.transform);
+                currentFloorTile.name = "floor tile";
                 floorData.spawnedTiles.Add(currentFloorTile);
             }
         }
@@ -72,15 +74,16 @@ public class createLevel : MonoBehaviour
     void createWalls()
     {
         // create wall GameObject
-        GameObject walls = Instantiate(new GameObject(), transform.position, Quaternion.identity, transform);
-        walls.name = "walls";
+        GameObject walls = new GameObject("walls");
+        walls.transform.parent = transform;
 
         // create wall strips and add colliders
         GameObject[] wallStrips = new GameObject[4];
         for(int i = 0; i < 4; i++)
         {
-            wallStrips[i] = Instantiate(new GameObject(), transform.position, Quaternion.identity, walls.transform);
-            wallStrips[i].name = "wall strip";
+            wallStrips[i] = new GameObject("wall strip");
+            wallStrips[i].tag = "Avoid";
+            wallStrips[i].transform.parent = walls.transform;
 
             BoxCollider newCollider = wallStrips[i].AddComponent<BoxCollider>();
 
@@ -112,6 +115,33 @@ public class createLevel : MonoBehaviour
             wallStrips[r].transform.position = new Vector3(r > 1 ? floorData.totalFloorSize.x : 0, 0, (r > 0 && r < 3) ? floorData.totalFloorSize.z : 0);
             wallStrips[r].transform.rotation = Quaternion.Euler(0, r * 90, 0);
         }
+    }
+
+    void createRoof()
+    {
+        // simply copy the floor
+        GameObject roof = new GameObject("roof");
+        roof.transform.parent = transform;
+
+        // add tiles as children
+        for (int x = 0; x < floorData.gridSize.x; x++)
+        {
+            for (int y = 0; y < floorData.gridSize.y; y++)
+            {
+                // find spawn position on grid
+                Vector3 spawnPos = new Vector3(x * floorData.spacing.x, wallData.height * wallData.spacing.y, y * floorData.spacing.y);
+
+                GameObject currentRoofTile = Instantiate(floorData.floorPrefabs[Random.Range(0, floorData.floorPrefabs.Count)], spawnPos, Quaternion.identity, roof.transform);
+                currentRoofTile.name = "roof tile";
+            }
+        }
+
+        // add ceiling box collider
+        BoxCollider roofCollider = roof.AddComponent<BoxCollider>();
+        roofCollider.center = floorData.totalFloorSize / 2 + Vector3.up * wallData.height * wallData.spacing.y;
+        roofCollider.size = floorData.totalFloorSize;
+
+        //roof.transform.lossyScale = new Vector3(1, , 1);
     }
 
     void createLight()

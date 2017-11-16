@@ -29,6 +29,11 @@ public class DonutAI : EventHandler.EventHandle
     // checking this will kill the donut instantly
     public bool dead = false;
 
+    // what types of pickups to drop
+    public List<GameObject> pickupPrefabs;
+
+    private LayerMask pickupSpawnLayerMask;
+
     #endregion
 
     public override void Awake()
@@ -48,6 +53,8 @@ public class DonutAI : EventHandler.EventHandle
         findCircumference();
 
         pickTarget();
+
+        pickupSpawnLayerMask = LayerMask.GetMask("Player", "Enemy");
     }
 
     void Update()
@@ -90,7 +97,7 @@ public class DonutAI : EventHandler.EventHandle
         {
             if (rollHitInfo.collider.gameObject.tag == "Avoid" || rollHitInfo.collider.gameObject.tag == "Enemy")
             {
-                currentTarget += rollHitInfo.normal * myInfo.avoidRadius;
+                currentTarget += rollHitInfo.normal;
             }
         }
 
@@ -190,6 +197,8 @@ public class DonutAI : EventHandler.EventHandle
         // disable collider preventing more deaths
         GetComponentInChildren<BoxCollider>().enabled = false;
 
+        dropPickup();
+
         // find the regular model and the broken one
         GameObject model = GetComponentsInChildren<Transform>(true)[1].gameObject;
         GameObject brokenModel = GetComponentsInChildren<Transform>(true)[2].gameObject;
@@ -201,11 +210,24 @@ public class DonutAI : EventHandler.EventHandle
         model.SetActive(false);
         brokenModel.SetActive(true);
 
-        // disable this script
+        // disable this script to prevent any more actions
         this.enabled = false;
 
         // destroy this gameobject after 5 seconds
         Destroy(this.gameObject, 5.0f);
+    }
+
+    void dropPickup()
+    {
+        // randomly drop a pickup (on the floor)
+        if (Random.Range(0, 100) < myInfo.pickupDropRate * 100)
+        {
+            RaycastHit ammoDropRay;
+            if (Physics.Raycast(transform.position, -Vector3.up, out ammoDropRay, pickupSpawnLayerMask))
+            {
+                Instantiate(pickupPrefabs[Random.Range(0, pickupPrefabs.Count)], ammoDropRay.point, Quaternion.identity);
+            }
+        }
     }
 
     void pickTarget()
