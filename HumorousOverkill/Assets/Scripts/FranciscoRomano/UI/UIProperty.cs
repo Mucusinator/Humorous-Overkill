@@ -4,17 +4,15 @@ using System.Collections.Generic;
 
 public class UIProperty : MonoBehaviour
 {
-    public enum UIPropertyType
+    public enum Type
     {
         NONE,
         TEXT,
-        IMAGE,
-        BUTTON,
-        OBJECT,
+        IMAGE_ANIMATION,
     }
     // :: variables
-    public UIPropertyType type;
-    public GameEvent gameEvent;
-    // :: initializers
-    // :: class functions
+    bool isDynamic = true;
+    public Type type = Type.NONE;
+    public GameEvent triggerEvent;
+    public List<Sprite> sprites;
 }

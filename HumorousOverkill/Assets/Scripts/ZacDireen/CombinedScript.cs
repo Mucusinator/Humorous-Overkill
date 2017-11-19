@@ -88,7 +88,12 @@ public class CombinedScript : EventHandle {
     /// </summary>
     public Camera fpsCam;
 
-    //public LineRenderer shotTrail;
+    private bool stillGlitching;
+
+    private bool switchingWeapon;
+
+
+   
 
     // This boolean is for the rifle, to show if it is active or not.
     public bool isRifleSelected;
@@ -184,6 +189,7 @@ public class CombinedScript : EventHandle {
                 gunType = GunType.SHOTGUN;
                 SelectedWeapon = 0;
                 isRifleSelected = false;
+                switchingWeapon = true;
             }
             else
             {
@@ -194,6 +200,7 @@ public class CombinedScript : EventHandle {
                         gunType = GunType.RIFLE;
                         SelectedWeapon = 1;
                         isRifleSelected = true;
+                        switchingWeapon = true;
                     }
                 }
             }
@@ -203,10 +210,7 @@ public class CombinedScript : EventHandle {
 
         if (SelectedWeapon == 0)
         {
-            if (isReloading)
-            {
-                //return;
-            }
+          
 
             if (currentShotgunAmmo <= 0 && maxShotgunAmmo > 0)
             {
@@ -243,7 +247,9 @@ public class CombinedScript : EventHandle {
             if (isReloading)
             {
 
-                //return;
+                glitchRifleEffect = false;
+
+               
             }
 
             if (currentRifleAmmo <= 0 && maxRifleAmmo > 0)
@@ -300,7 +306,7 @@ public class CombinedScript : EventHandle {
 
         if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE && !isReloading)
         {
-
+            
             if (currentRifleAmmo > 0 && Time.time >= nextTimeToFire)
             {
 
@@ -318,7 +324,6 @@ public class CombinedScript : EventHandle {
         //    glitchRifleEffect = true;
 
         //}
-
 
         //if (Input.GetKeyUp(KeyCode.Mouse0))
         //{
@@ -347,6 +352,15 @@ public class CombinedScript : EventHandle {
         //        glitchRifleEffect = false;
         //    }
         }
+
+
+        if (isRifleSelected == false)
+        {
+            glitchRifleEffect = false;
+            
+        }
+      
+
         Glitching();
 
 
@@ -411,6 +425,7 @@ public class CombinedScript : EventHandle {
             if (fpsCam.GetComponent<GlitchPostRender>().offset > 0.01f)
             {
                 fpsCam.GetComponent<GlitchPostRender>().offset = 0.01f;
+                stillGlitching = true;
             }
         }
         else
@@ -420,9 +435,18 @@ public class CombinedScript : EventHandle {
             if (fpsCam.GetComponent<GlitchPostRender>().offset < 0)
             {
                 fpsCam.GetComponent<GlitchPostRender>().offset = 0;
+                stillGlitching = false;
             }
         }
-
+        if (SelectedWeapon == 0)
+        {
+            fpsCam.GetComponent<GlitchPostRender>().offset -= 0.01f * Time.deltaTime;
+            if (fpsCam.GetComponent<GlitchPostRender>().offset < 0)
+            {
+                fpsCam.GetComponent<GlitchPostRender>().offset = 0;
+                switchingWeapon = false;
+            }
+        }
     }
 
 

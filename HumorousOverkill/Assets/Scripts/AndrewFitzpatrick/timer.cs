@@ -19,7 +19,7 @@ public class timer : MonoBehaviour
     void Start()
     {
         // don't destroy the timer when loading other scenes
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
 
         // get text component
         myText = GetComponent<Text>();
@@ -41,7 +41,7 @@ public class timer : MonoBehaviour
     // update the text each frame to display the time
     void OnGUI()
     {
-        float minutes = elapsedTime / 60.0f;
+        float minutes = elapsedTime;
         float seconds = elapsedTime;
         float milliseconds = elapsedTime * 1000.0f;
         string displayString = displayTextFormat;
@@ -61,7 +61,7 @@ public class timer : MonoBehaviour
             Debug.Log("MIL");
         }
         Debug.Log(displayString);
-        myText.text = seconds.ToString();
+        myText.text = displayString;
     }
 
     // allow future scripts to toggle whether the timer should be timing
