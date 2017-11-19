@@ -36,7 +36,7 @@ public class LaserTest : MonoBehaviour
         // if the mouse is clicked
         if (Input.GetMouseButton(0))
         {
-            
+
             if (WeaponScript.isRifleSelected == true)
             {
                 // cleanup old laser parts
@@ -72,6 +72,11 @@ public class LaserTest : MonoBehaviour
                         rotation.z += 15;
                     }
                 }
+            }
+            else
+            {
+                laser.SetActive(false);
+                laserParts.Clear();
             }
         }
 
