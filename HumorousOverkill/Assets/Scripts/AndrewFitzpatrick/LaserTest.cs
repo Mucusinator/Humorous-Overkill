@@ -75,8 +75,7 @@ public class LaserTest : MonoBehaviour
             }
             else
             {
-                laser.SetActive(false);
-                laserParts.Clear();
+                cleanup();
             }
         }
 
