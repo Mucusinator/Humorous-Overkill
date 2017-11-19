@@ -7,13 +7,12 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Text))]
 public class timer : MonoBehaviour
 {
-    private float elapsedTime = 0;
+    public float elapsedTime = 0;
     private bool isTiming = true;
     private Text myText;
 
-    // allow designers to modify text
-    [Tooltip("Text to be displayed. use MIN for minutes, SEC for seconds, and MIL for milliseconds")]
-    public string displayTextFormat;
+    [Range(0, 5)]
+    public int precision;
 
     // runs once when this timer is created at the start of the main scene
     void Start()
@@ -30,37 +29,23 @@ public class timer : MonoBehaviour
 
     void Update()
     {
-        // add to elapsed game
+        // add to elapsed game time (clamp at 1 hour)
         if (isTiming)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime = Mathf.Min(elapsedTime + Time.deltaTime, 60 * 60 - 1);
         }
-        //Debug.Log(elapsedTime);
     }
 
     // update the text each frame to display the time
     void OnGUI()
     {
-        float minutes = elapsedTime;
-        float seconds = elapsedTime;
-        float milliseconds = elapsedTime * 1000.0f;
-        string displayString = displayTextFormat;
-        if(displayString.Contains("MIN"))
-        {
-            displayString.Replace("MIN", minutes.ToString());
-            Debug.Log("MIN");
-        }
-        if (displayString.Contains("SEC"))
-        {
-            displayString.Replace("SEC", seconds.ToString());
-            Debug.Log("SEC");
-        }
-        if (displayString.Contains("MIL"))
-        {
-            displayString.Replace("MIL", milliseconds.ToString());
-            Debug.Log("MIL");
-        }
-        Debug.Log(displayString);
+        // find minutes
+        float minutes = Mathf.Floor(elapsedTime / 60.0f);
+
+        // find seconds
+        float seconds = elapsedTime - (minutes * 60.0f);
+
+        string displayString = "elapsed time: " + minutes.ToString() + ":" + seconds.ToString("F" + precision.ToString()).Replace(".", ":");
         myText.text = displayString;
     }
 
