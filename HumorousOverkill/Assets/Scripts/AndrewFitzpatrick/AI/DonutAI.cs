@@ -26,8 +26,7 @@ public class DonutAI : EventHandler.EventHandle
     private RaycastHit rollHitInfo;
     private float shotTimer = 0;
 
-    // checking this will kill the donut instantly
-    public bool dead = false;
+    private bool dead = false;
 
     // what types of pickups to drop
     public List<GameObject> pickupPrefabs;
@@ -59,21 +58,14 @@ public class DonutAI : EventHandler.EventHandle
 
     void Update()
     {
-        if(!dead)
+        // either deploy or roll
+        if (deployed)
         {
-            // either deploy or roll
-            if (deployed)
-            {
-                deploySequence();
-            }
-            else
-            {
-                roll();
-            }
+            deploySequence();
         }
         else
         {
-            die();
+            roll();
         }
     }
 
@@ -188,7 +180,8 @@ public class DonutAI : EventHandler.EventHandle
     // do manager stuff
     void die()
     {
-        Debug.Log("die");
+        Debug.Log("die has been called");
+
         // tell enemy manager that an enemy has died
         if (GetEventListener("enemyManager") != null)
         {
@@ -319,13 +312,18 @@ public class DonutAI : EventHandler.EventHandle
         switch (e)
         {
             case GameEvent.ENEMY_DAMAGED:
-                myInfo.health -= value;
-                if (myInfo.health <= 0)
+                if(!dead)
                 {
-                    die();
+                    myInfo.health -= value;
+                    if (myInfo.health <= 0)
+                    {
+                        dead = true;
+                        die();
+                    }
                 }
                 break;
         }
+
         return true;
     }
 
