@@ -165,57 +165,16 @@ public class CombinedScript : EventHandle {
 
 
 
-        //GameObject.FindGameObjectWithTag("UI").GetComponent<UIManager>().HandleEvent(GameEvent.UI_AMMO_CUR);
-        if (gunType == GunType.RIFLE)
+        DisplayAmmo();
+
+
+        RightClickSwitching();
+
+
+        if (SelectedWeapon == 0 && maxShotgunAmmo > 0)
         {
-            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_CUR, (float)currentRifleAmmo);
-            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_MAX, (float)maxRifleAmmo);
-        }
-        else if (gunType == GunType.SHOTGUN)
-        {
-
-            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_CUR, (float)currentShotgunAmmo);
-            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_MAX, (float)maxShotgunAmmo);
-
-        }
-
-        int previousSelectedWeapon = SelectedWeapon;
-
-
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !isReloading)
-        {
-            if (isRifleSelected)
+            if (currentShotgunAmmo <= 0)
             {
-                gunType = GunType.SHOTGUN;
-                SelectedWeapon = 0;
-                isRifleSelected = false;
-                switchingWeapon = true;
-            }
-            else
-            {
-                if (!isRifleSelected)
-                {
-                    if (currentRifleAmmo > 0 || maxRifleAmmo > 0)
-                    {
-                        gunType = GunType.RIFLE;
-                        SelectedWeapon = 1;
-                        isRifleSelected = true;
-                        switchingWeapon = true;
-                    }
-                }
-            }
-
-        }
-        
-
-        if (SelectedWeapon == 0)
-        {
-          
-
-            if (currentShotgunAmmo <= 0 && maxShotgunAmmo > 0)
-            {
-                gunType = GunType.SHOTGUN;
-                //StartCoroutine(Reload());
 
                 if (ReloadTimer(reloadShotgunTime))
                 {
@@ -230,9 +189,12 @@ public class CombinedScript : EventHandle {
                         maxShotgunAmmo -= magTubeSize;
                     }
                 }
-                //return;
             }
         }
+
+
+
+      
 
         //if (gunType == GunType.SHOTGUN)
         if (SelectedWeapon == 1)
@@ -278,31 +240,10 @@ public class CombinedScript : EventHandle {
 
         if (Input.GetKey(KeyCode.R))
         {
-            switch (gunType)
-            {
-                case GunType.SHOTGUN:
-                    maxShotgunAmmo += currentShotgunAmmo;
-                    currentShotgunAmmo = 0;
-                    //StartCoroutine(Reload());
-                    break;
-                case GunType.RIFLE:
-                    maxRifleAmmo += currentRifleAmmo;
-                    currentRifleAmmo = 0;
-                    //StartCoroutine(Reload());
-                    break;
-                default:
-                    break;
-            }
+            ManualReloading();
         }
 
-        //if (Input.GetButtonDown("Fire1") && gunType == GunType.RIFLE)
-        //{
-        //    shotTrail.enabled = true;
-        //}
-        //if (Input.GetKeyUp(KeyCode.Mouse0) || isReloading && gunType == GunType.RIFLE)
-        //{
-        //    glitchRifleEffect = false;
-        //}
+    
 
         if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE && !isReloading)
         {
@@ -311,7 +252,7 @@ public class CombinedScript : EventHandle {
             {
 
                 nextTimeToFire = Time.time + 60f / RoundsPerMinute;
-                //StartCoroutine(Shot());
+               
                 Shoot();
             }
 
@@ -319,48 +260,9 @@ public class CombinedScript : EventHandle {
         }
 
 
-        //if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.RIFLE)
-        //{
-        //    glitchRifleEffect = true;
-
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.Mouse0))
-        //{
-        //    fpsCam.GetComponent<GlitchPostRender>().offset -= 0.01f * Time.deltaTime;
-        //}
-        if (Input.GetKeyUp(KeyCode.Mouse0) && gunType == GunType.RIFLE)
-        {
-            glitchRifleEffect = false;
-            _Debug.Log("Up");
-        }
-        //if (isReloading)
-        //{ 
-        //    glitchRifleEffect = false;
-        //}
 
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.RIFLE)
-        {
-        //    if (currentRifleAmmo > 0)
-        //    {
-                glitchRifleEffect = true;
-            _Debug.Log("Down");
-        //    }
-        //    else
-        //    {
-        //        glitchRifleEffect = false;
-        //    }
-        }
-
-
-        if (isRifleSelected == false)
-        {
-            glitchRifleEffect = false;
-            
-        }
-      
-
+        GlitchCheck();
         Glitching();
 
 
@@ -374,7 +276,7 @@ public class CombinedScript : EventHandle {
                 currentShotgunAmmo--;
                 for (int i = 0; i < pelletCount; ++i)
                 {
-                    //StartCoroutine(Shot());
+           
                     ShootRay();
 
                 }
@@ -382,6 +284,102 @@ public class CombinedScript : EventHandle {
 
             }
         }
+
+    }
+
+
+
+    void ManualReloading()
+    {
+        switch (gunType)
+        {
+            case GunType.SHOTGUN:
+                maxShotgunAmmo += currentShotgunAmmo;
+                currentShotgunAmmo = 0;
+                //StartCoroutine(Reload());
+                break;
+            case GunType.RIFLE:
+                maxRifleAmmo += currentRifleAmmo;
+                currentRifleAmmo = 0;
+                //StartCoroutine(Reload());
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    void GlitchCheck()
+    {
+
+        if (Input.GetKeyUp(KeyCode.Mouse0) && gunType == GunType.RIFLE)
+        {
+            glitchRifleEffect = false;
+
+        }
+
+
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.RIFLE)
+        {
+
+            glitchRifleEffect = true;
+
+
+        }
+
+
+        if (isRifleSelected == false)
+        {
+            glitchRifleEffect = false;
+
+        }
+    }
+
+    void RightClickSwitching()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !isReloading)
+        {
+            if (isRifleSelected)
+            {
+                gunType = GunType.SHOTGUN;
+                SelectedWeapon = 0;
+                isRifleSelected = false;
+                switchingWeapon = true;
+            }
+            else
+            {
+                if (!isRifleSelected && !isReloading)
+                {
+                    if (currentRifleAmmo > 0 || maxRifleAmmo > 0)
+                    {
+                        gunType = GunType.RIFLE;
+                        SelectedWeapon = 1;
+                        isRifleSelected = true;
+                        switchingWeapon = true;
+                    }
+                }
+            }
+
+        }
+
+
+    }
+    void DisplayAmmo()
+    {
+        if (gunType == GunType.RIFLE)
+        {
+            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_CUR, (float)currentRifleAmmo);
+            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_MAX, (float)maxRifleAmmo);
+        }
+        else
+        {
+
+            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_CUR, (float)currentShotgunAmmo);
+            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_MAX, (float)maxShotgunAmmo);
+
+        }
+
 
     }
 
@@ -418,7 +416,7 @@ public class CombinedScript : EventHandle {
     }
     void Glitching()
     {
-        if (glitchRifleEffect == true && !isReloading)
+        if (glitchRifleEffect == true && !isReloading && gunType == GunType.RIFLE)
         {
 
             fpsCam.GetComponent<GlitchPostRender>().offset += 0.01f * Time.deltaTime;
@@ -447,9 +445,11 @@ public class CombinedScript : EventHandle {
                 switchingWeapon = false;
             }
         }
+        if (gunType == GunType.SHOTGUN)
+        {
+
+        }
     }
-
-
 
 
     private IEnumerator Shot()
@@ -532,19 +532,10 @@ public class CombinedScript : EventHandle {
         {
             Vector3 centreCam = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
 
-            //shotTrail.SetPosition(1, centreCam + (fpsCam.transform.forward * Range));
-            //shotTrail.SetPosition(1, fpsCam.transform.position + (EndOfGun.transform.forward * Range));
         }
-        //shotTrail.enabled = false;
-        //}
+       
 
     }
-
-
-
-
-
-
 
 
     void ShootRay()
@@ -578,15 +569,9 @@ public class CombinedScript : EventHandle {
         if (Physics.Raycast(r, out hit))
         {
             
-            //Debug.DrawLine(StartOfPlayerRaycast.transform.position, hit.point, Color.black, 3.0f);
-            inDirection = Vector3.Reflect(r.direction, -hit.normal);
-            //Debug.DrawLine(hit.transform.position, inDirection, Color.cyan, 5.0f);
 
-            //Target shotgunTarget = hit.transform.GetComponent<Target>();
-            //if (shotgunTarget != null)
-            //{
-            //    shotgunTarget.TakeDamage(PelletDamage);
-            //}
+            inDirection = Vector3.Reflect(r.direction, -hit.normal);
+  
             if (hit.collider.gameObject.tag == "Enemy")
             {
                 GetEventListener("Enemy").HandleEvent(GameEvent.ENEMY_DAMAGED, hit.transform.gameObject);
