@@ -188,6 +188,7 @@ public class DonutAI : EventHandler.EventHandle
     // do manager stuff
     void die()
     {
+        Debug.Log("die");
         // tell enemy manager that an enemy has died
         if (GetEventListener("enemyManager") != null)
         {
