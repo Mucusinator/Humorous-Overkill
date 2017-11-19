@@ -4774,7 +4774,7 @@ Prefab:
     - target: {fileID: 114889605338311258, guid: 303f41ea608987c48901c8dbecc7fb81,
         type: 2}
       propertyPath: type
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 114889605338311258, guid: 303f41ea608987c48901c8dbecc7fb81,
         type: 2}
@@ -8100,7 +8100,7 @@ Prefab:
     - target: {fileID: 114889605338311258, guid: 303f41ea608987c48901c8dbecc7fb81,
         type: 2}
       propertyPath: type
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 114889605338311258, guid: 303f41ea608987c48901c8dbecc7fb81,
         type: 2}
@@ -19734,7 +19734,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  gameEvent: 14
+  triggerEvent: 14
+  sprites: []
 --- !u!222 &664715317
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20263,10 +20264,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29940c8ab3976ad42ab8adc430d70660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_healthTEST: 1
-  m_ammoCurTEST: 99
-  m_ammoMaxTEST: 99
-  gif: []
+  m_health: 1
+  m_ammoCur: 99
+  m_ammoMax: 99
   DEBUG: 0
 --- !u!114 &685693636
 MonoBehaviour:
@@ -31987,7 +31987,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  gameEvent: 16
+  triggerEvent: 16
+  sprites: []
 --- !u!222 &1066872565
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -60128,7 +60129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  gameEvent: 15
+  triggerEvent: 15
+  sprites: []
 --- !u!222 &1751325671
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -68524,7 +68526,7 @@ Prefab:
     - target: {fileID: 114889605338311258, guid: 303f41ea608987c48901c8dbecc7fb81,
         type: 2}
       propertyPath: type
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 114889605338311258, guid: 303f41ea608987c48901c8dbecc7fb81,
         type: 2}
