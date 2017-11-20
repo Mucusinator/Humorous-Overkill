@@ -41,7 +41,7 @@ public class PlayerManager : EventHandler.EventHandle {
 
     // Override for the handle event system
     public override bool HandleEvent (GameEvent e, float value) {
-        Debug.Log(e.ToString() + " :: " + value);
+        //Debug.Log(e.ToString() + " :: " + value);
         switch (e) {
         case GameEvent.PICKUP_HEALTH:
             // calls a function add health to the player
@@ -52,9 +52,11 @@ public class PlayerManager : EventHandler.EventHandle {
                 if (!isFirstPickup)
                     m_weapon.maxRifleAmmo += (int)value;
                 else {
-                    m_weapon.currentRifleAmmo += (int)value;
+                    Debug.Log(e.ToString() + " :: " + value);
+                    GetEventListener("Weapon").GetComponent<CombinedScript>().currentRifleAmmo += (int)value;
                     isFirstPickup = false;
                     GetEventListener("Weapon").GetComponent<CombinedScript>().gunType = CombinedScript.GunType.RIFLE;
+                    GetEventListener("Weapon").GetComponent<CombinedScript>().SelectedWeapon = 1;
                     GetEventListener("Weapon").GetComponent<CombinedScript>().isRifleSelected = true;
                 }
                 break;

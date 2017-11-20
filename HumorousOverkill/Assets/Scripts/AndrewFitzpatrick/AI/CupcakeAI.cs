@@ -25,8 +25,8 @@ public class CupcakeAI : EventHandler.EventHandle
 
     // freeze for when the game is paused
     public bool freeze = false;
-    // dead for the explosion
-    public bool dead = false;
+
+    private bool dead = false;
 
     private float startHealth;
 
@@ -56,13 +56,9 @@ public class CupcakeAI : EventHandler.EventHandle
 
     void Update ()
     {
-        if(!freeze && !dead)
+        if(!freeze)
         {
             wander();
-        }
-        else if(dead)
-        {
-            die();
         }
 	}
 
@@ -152,6 +148,8 @@ public class CupcakeAI : EventHandler.EventHandle
     // disable all AI and explode into pieces
     void die()
     {
+        Debug.Log("die has been called");
+
         if(enableColorChanges)
         {
             changeColor(Color.black);
@@ -228,23 +226,27 @@ public class CupcakeAI : EventHandler.EventHandle
         // Health is depleted
         if (e == GameEvent.ENEMY_DAMAGED)
         {
-            // subtract health
-            myInfo.health -= value;
-
-            // change color if enabled
-            if(enableColorChanges)
+            if(!dead)
             {
-                changeColor(Color.Lerp(Color.red, Color.white, 1.0f / startHealth * myInfo.health));
-            }
+                // subtract health
+                myInfo.health -= value;
 
-            // if the health is now 0 die
-            if (myInfo.health <= 0)
-            {
-                die();
+                // change color if enabled
+                if (enableColorChanges)
+                {
+                    changeColor(Color.Lerp(Color.red, Color.white, 1.0f / startHealth * myInfo.health));
+                }
+
+                // if the health is now 0 die
+                if (myInfo.health <= 0)
+                {
+                    dead = true;
+                    die();
+                }
             }
         }
 
-        return true; // TODO
+        return true;
     }
 
     #endregion
