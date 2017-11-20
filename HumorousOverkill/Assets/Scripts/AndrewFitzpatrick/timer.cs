@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 // require text component
 [RequireComponent(typeof(Text))]
-public class timer : MonoBehaviour
+public class timer : EventHandler.EventHandle
 {
     public float elapsedTime = 0;
     private bool isTiming = true;

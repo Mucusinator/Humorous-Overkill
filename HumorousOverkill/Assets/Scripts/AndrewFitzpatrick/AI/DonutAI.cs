@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 [EventHandler.BindListener("playerManager", typeof(PlayerManager))]
 [EventHandler.BindListener("enemyManager", typeof(EnemyManager))]
+[EventHandler.BindListener("scoreManager", typeof(scoreManager))]
 public class DonutAI : EventHandler.EventHandle
 {
     enum ANIMATIONSTATE { ROLL, DEPLOY, RAISEGUN, SHOOT, LOWERGUN, GETUP };
@@ -186,6 +187,12 @@ public class DonutAI : EventHandler.EventHandle
         if (GetEventListener("enemyManager") != null)
         {
             GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
+        }
+
+        // tell score manager that a donut has died
+        if (GetEventListener("scoreManager") != null)
+        {
+            GetEventListener("scoreManager").HandleEvent(GameEvent.ENEMY_DIED, 0);
         }
 
         // disable collider preventing more deaths
