@@ -270,7 +270,7 @@ public class DonutAI : EventHandler.EventHandle
             // reset shot timer
             shotTimer = 0;
 
-            // cant hit player (too far)
+            // can't hit player (too far)
             if ((player.transform.position - transform.position).magnitude > myInfo.hitRange)
             {
                 return;
@@ -283,7 +283,7 @@ public class DonutAI : EventHandler.EventHandle
             float playerHeightOffset = player.transform.position.y - transform.position.y;
             Debug.Log(playerHeightOffset);
 
-            // cant hit player (too high)
+            // can't hit player (too high)
             if (playerHeightOffset > myInfo.maximumTargetHeight)
             {
                 return;
