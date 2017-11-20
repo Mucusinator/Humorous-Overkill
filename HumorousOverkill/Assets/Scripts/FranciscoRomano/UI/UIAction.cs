@@ -10,6 +10,7 @@ public class UIAction : EventHandle
 
     public void SendEvent()
     {
-        GetEventListener("uimanager").HandleEvent(type);
+        EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), type);
+        //GetEventListener("uimanager").HandleEvent(type);
     }
 }

@@ -14920,8 +14920,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 494416520}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.9, y: 41.3, z: 334.7}
-  m_LocalScale: {x: 1.0255699, y: 1, z: 0.82939583}
+  m_LocalPosition: {x: 45.34, y: 10.75, z: 137.75}
+  m_LocalScale: {x: 1.0255699, y: 1.2612538, z: 0.82939583}
   m_Children: []
   m_Father: {fileID: 889218441}
   m_RootOrder: 0
@@ -14972,13 +14972,22 @@ MonoBehaviour:
       rate: 0
       units: []
     groups:
-    - rate: 5
+    - rate: 4
       units:
       - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
           type: 2}
         points:
         - amount: 3
           position: {x: 22, y: -6, z: 8}
+    - rate: 3
+      units:
+      - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
+          type: 2}
+        points:
+        - amount: 5
+          position: {x: 22, y: -7, z: 8}
+        - amount: 5
+          position: {x: -3, y: -7, z: -6}
   doors: []
 --- !u!1001 &497419974
 Prefab:
@@ -26806,8 +26815,8 @@ MonoBehaviour:
   playOnAwake: 1
   fade: 1
   volume: 0.7
-  audioClips:
-  - {fileID: 8300000, guid: edd5b2dbb9c971d4f990aabe735dbc28, type: 3}
+  musicClips: []
+  soundClips: []
 --- !u!1001 &893086159
 Prefab:
   m_ObjectHideFlags: 0
@@ -61565,7 +61574,7 @@ GameObject:
   - component: {fileID: 1780194063}
   - component: {fileID: 1780194062}
   m_Layer: 0
-  m_Name: spawner (1)
+  m_Name: CupcakeRoomSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61578,8 +61587,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1780194060}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 39.87823, y: 6.22, z: 15.74275}
-  m_LocalScale: {x: 1.1951385, y: 1, z: 1.250511}
+  m_LocalPosition: {x: 79.3, y: 18.3, z: 142.69}
+  m_LocalScale: {x: 1.1951385, y: 2.5530565, z: 1.250511}
   m_Children: []
   m_Father: {fileID: 889218441}
   m_RootOrder: 1
@@ -61603,29 +61612,41 @@ MonoBehaviour:
       rate: 0
       units: []
     groups:
-    - rate: 1
+    - rate: 2
       units:
-      - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
+      - prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
           type: 2}
         points:
         - amount: 5
-          position: {x: 0, y: 0, z: 0}
-      - prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
-          type: 2}
-        points:
-        - amount: 3
-          position: {x: 5, y: 0, z: 0}
-        - amount: 3
-          position: {x: -5, y: 0, z: 3}
-        - amount: 3
-          position: {x: -10, y: 0, z: -10}
-    - rate: 1
+          position: {x: 10, y: -8, z: 10}
+        - amount: 5
+          position: {x: 10, y: -8, z: -4}
+        - amount: 4
+          position: {x: 6, y: -8, z: 3}
+    - rate: 2
       units:
       - prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
           type: 2}
         points:
-        - amount: 20
-          position: {x: 0, y: 0, z: 0}
+        - amount: 5
+          position: {x: 5, y: 0, z: 10}
+        - amount: 5
+          position: {x: 5, y: 0, z: -4}
+        - amount: 5
+          position: {x: 10, y: 0, z: 3}
+    - rate: 2
+      units:
+      - prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
+          type: 2}
+        points:
+        - amount: 6
+          position: {x: -2, y: 6, z: 10}
+        - amount: 6
+          position: {x: 12, y: 6, z: 10}
+        - amount: 6
+          position: {x: 5, y: 6, z: 3}
+        - amount: 6
+          position: {x: -2, y: 6, z: -4}
   doors: []
 --- !u!54 &1780194063
 Rigidbody:
