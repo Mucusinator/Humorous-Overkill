@@ -39,6 +39,37 @@ public class PlayerManager : EventHandler.EventHandle {
     public PlayerInfo m_playerInfo;
     public PlayerInfo GetPlayerInfo { get { return m_playerInfo; } }
 
+    void Start () {
+        EventManager<GameEvent>.Add(HandleMessage);
+    }
+
+    public void HandleMessage (System.Object s, __eArg<GameEvent> e) {
+        if (s == (System.Object)this) return;
+        switch (e.arg) {
+        case GameEvent.PICKUP_HEALTH:
+            // calls a function add health to the player
+            m_ply.AddHealth((int)e.value);
+            break;
+        case GameEvent.PICKUP_RIFLEAMMO:
+            // Calls the add ammo function from the ammo script using the enum.
+            if (!isFirstPickup)
+                m_weapon.maxRifleAmmo += (int)e.value;
+            else {
+                Debug.Log(e.ToString() + " :: " + e.value);
+                GetEventListener("Weapon").GetComponent<CombinedScript>().currentRifleAmmo += (int)e.value;
+                isFirstPickup = false;
+                GetEventListener("Weapon").GetComponent<CombinedScript>().gunType = CombinedScript.GunType.RIFLE;
+            }
+            break;
+        case GameEvent.PICKUP_SHOTGUNAMMO:
+            m_weapon.maxShotgunAmmo += (int)e.value;
+            break;
+        default:
+            break;
+        }
+    }
+
+
     // Override for the handle event system
     public override bool HandleEvent (GameEvent e, float value) {
         //Debug.Log(e.ToString() + " :: " + value);

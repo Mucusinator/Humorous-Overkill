@@ -9,8 +9,10 @@ public class pickupMovement : MonoBehaviour
 
     public float floatSpeed;
     public float floatMagnitude;
+    public float floatHeightOffset;
 
     private Vector3 startPos;
+    private Vector3 pivotPoint;
 
     void Start()
     {
@@ -20,7 +22,7 @@ public class pickupMovement : MonoBehaviour
     void Update()
     {
         // float
-        transform.position = startPos + Vector3.up * Mathf.Sin(Time.time * floatSpeed) * floatMagnitude;
+        transform.position = startPos + Vector3.up * (floatHeightOffset + Mathf.Sin(Time.time * floatSpeed) * floatMagnitude);
 
         // spin
         currentRotation += rotationSpeed * Time.deltaTime;
