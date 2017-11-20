@@ -134,22 +134,10 @@ public class CombinedScript : EventHandle {
         RIFLE
 
     }
-
-
-
-
-
-
-
-
-
-
-
+    
     void Start() {
 
         currentShotgunAmmo = magTubeSize;
-  
-
     }
 
     // Update is called once per frame
