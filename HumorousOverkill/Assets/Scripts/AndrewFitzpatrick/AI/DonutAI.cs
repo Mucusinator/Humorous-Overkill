@@ -184,16 +184,10 @@ public class DonutAI : EventHandler.EventHandle
         Debug.Log("die has been called");
 
         // tell enemy manager that an enemy has died
-        if (GetEventListener("enemyManager") != null)
-        {
-            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
-        }
+        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
 
         // tell score manager that a donut has died
-        if (GetEventListener("scoreManager") != null)
-        {
-            GetEventListener("scoreManager").HandleEvent(GameEvent.ENEMY_DIED, 0);
-        }
+        GetEventListener("scoreManager").HandleEvent(GameEvent.ENEMY_DIED, 0);
 
         // disable collider preventing more deaths
         GetComponentInChildren<BoxCollider>().enabled = false;
@@ -270,7 +264,7 @@ public class DonutAI : EventHandler.EventHandle
             // reset shot timer
             shotTimer = 0;
 
-            // cant hit player (too far)
+            // can't hit player (too far)
             if ((player.transform.position - transform.position).magnitude > myInfo.hitRange)
             {
                 return;
@@ -283,7 +277,7 @@ public class DonutAI : EventHandler.EventHandle
             float playerHeightOffset = player.transform.position.y - transform.position.y;
             Debug.Log(playerHeightOffset);
 
-            // cant hit player (too high)
+            // can't hit player (too high)
             if (playerHeightOffset > myInfo.maximumTargetHeight)
             {
                 return;

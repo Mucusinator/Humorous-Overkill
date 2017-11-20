@@ -37,7 +37,7 @@ public class LaserTest : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
 
-            if (WeaponScript.isRifleSelected == true)
+            if (WeaponScript.gunType == CombinedScript.GunType.RIFLE)
             {
                 // cleanup old laser parts
                 cleanup();

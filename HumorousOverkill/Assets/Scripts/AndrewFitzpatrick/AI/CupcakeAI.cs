@@ -157,16 +157,10 @@ public class CupcakeAI : EventHandler.EventHandle
         }
 
         // tell enemy manager that an enemy has died
-        if(GetEventListener("enemyManager") != null)
-        {
-            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
-        }
+        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
 
         // tell score manager that a cupcake has died
-        if(GetEventListener("scoreManager") != null)
-        {
-            GetEventListener("scoreManager").HandleEvent(GameEvent.ENEMY_DIED, 1);
-        }
+        GetEventListener("scoreManager").HandleEvent(GameEvent.ENEMY_DIED, 1);
 
         // disable animation
         if(GetComponent<Animator>() != null)

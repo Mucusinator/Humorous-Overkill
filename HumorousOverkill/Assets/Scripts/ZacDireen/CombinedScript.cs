@@ -96,7 +96,7 @@ public class CombinedScript : EventHandle {
 
 
     // This boolean is for the rifle, to show if it is active or not.
-    public bool isRifleSelected;
+    // public bool isRifleSelected;
 
     // This boolean is for if the user has access to the rifle.
 
@@ -340,7 +340,7 @@ public class CombinedScript : EventHandle {
         }
 
 
-        if (isRifleSelected == false)
+        if (gunType == GunType.SHOTGUN)
         {
             glitchRifleEffect = false;
 
@@ -351,11 +351,11 @@ public class CombinedScript : EventHandle {
     {
         if (Input.GetKeyDown(KeyCode.Mouse1) && !isReloading)
         {
-            if (isRifleSelected)
+            if (gunType == GunType.RIFLE)
             {
                 gunType = GunType.SHOTGUN;
-                //SelectedWeapon = 0;
-                isRifleSelected = false;
+                
+                //isRifleSelected = false;
                 switchingWeapon = true;
             }
             else
@@ -365,7 +365,7 @@ public class CombinedScript : EventHandle {
                     {
                         gunType = GunType.RIFLE;
                         //SelectedWeapon = 1;
-                        isRifleSelected = true;
+                        //isRifleSelected = true;
                         switchingWeapon = true;
                     }
                 
