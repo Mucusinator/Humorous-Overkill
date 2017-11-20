@@ -43,7 +43,7 @@ public class AudioManager : MonoBehaviour
     public void Add(AudioClip clip)
     {
         // create objects
-        GameObject gameObj = Instantiate(new GameObject(), transform);
+        GameObject gameObj = Instantiate(new GameObject("manager-audio"), transform);
         AudioSource source = gameObj.AddComponent<AudioSource>();
         source.playOnAwake = false;
         source.clip = clip;
