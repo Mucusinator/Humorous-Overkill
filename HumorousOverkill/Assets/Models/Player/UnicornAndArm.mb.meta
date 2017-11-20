@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 87b5f3a9e9774554f91afee7a1c3ea1c
 timeCreated: 1510532474
 licenseType: Pro
@@ -511,6 +512,14 @@ ModelImporter:
     13700000: ARMatige_polySurface187
     13700002: polySurface187
     13700004: polySurface41
+=======
+guid: 430dff68bb9a05f4c8e4371fff6a46e3
+timeCreated: 1510697152
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName: {}
+>>>>>>> 1f90e3cba838d26195cb8f22593a60aeabc67e01
   materials:
     importMaterials: 1
     materialName: 0
@@ -521,8 +530,11 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+<<<<<<< HEAD
     rigImportErrors: 
     rigImportWarnings: 
+=======
+>>>>>>> 1f90e3cba838d26195cb8f22593a60aeabc67e01
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -533,7 +545,10 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+<<<<<<< HEAD
     extraUserProperties: []
+=======
+>>>>>>> 1f90e3cba838d26195cb8f22593a60aeabc67e01
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -541,10 +556,14 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+<<<<<<< HEAD
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+=======
+    importBlendShapes: 1
+>>>>>>> 1f90e3cba838d26195cb8f22593a60aeabc67e01
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -560,7 +579,10 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+<<<<<<< HEAD
     normalCalculationMode: 4
+=======
+>>>>>>> 1f90e3cba838d26195cb8f22593a60aeabc67e01
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
