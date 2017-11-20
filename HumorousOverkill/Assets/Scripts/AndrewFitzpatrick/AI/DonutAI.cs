@@ -34,6 +34,9 @@ public class DonutAI : EventHandler.EventHandle
 
     private LayerMask pickupSpawnLayerMask;
 
+    // reference to scoremanager
+    private scoreManager scoremanager;
+
     #endregion
 
     public override void Awake()
@@ -55,6 +58,12 @@ public class DonutAI : EventHandler.EventHandle
         pickTarget();
 
         pickupSpawnLayerMask = LayerMask.GetMask("Player", "Enemy");
+
+        // find score manager (if it exists)
+        if (GameObject.FindObjectsOfType<scoreManager>().Length != 0)
+        {
+            scoremanager = GameObject.FindObjectsOfType<scoreManager>()[0];
+        }
     }
 
     void Update()
@@ -186,8 +195,11 @@ public class DonutAI : EventHandler.EventHandle
         // tell enemy manager that an enemy has died
         GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
 
-        // tell score manager that a donut has died
-        GetEventListener("scoreManager").HandleEvent(GameEvent.ENEMY_DIED, 0);
+        // tell score manager that a cupcake has died (if it exists)
+        if (scoremanager != null)
+        {
+            scoremanager.updatePoints(scoreManager.ENEMYTYPE.DONUT);
+        }
 
         // disable collider preventing more deaths
         GetComponentInChildren<BoxCollider>().enabled = false;

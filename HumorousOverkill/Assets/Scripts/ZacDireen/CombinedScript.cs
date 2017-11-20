@@ -604,47 +604,49 @@ public class CombinedScript : EventHandle {
 
             Ray r2 = new Ray(hit.point, reflectVec);
             RaycastHit hit2;
-            if (Physics.Raycast(r2, out hit2, 400))
+            if (stuff.ReflectiveShots == true)
             {
-                //Debug.DrawRay(hit2.point, -hit2.normal, Color.yellow, 5.0f);
-                //Debug.Log(gameObject);
-                    Debug.DrawRay(hit.point, reflectVec, Color.green, 5.0f);
-                if (hit.collider.gameObject.tag == "Enemy")
+                if (Physics.Raycast(r2, out hit2, 400))
                 {
-                    GetEventListener("Enemy").HandleEvent(GameEvent.ENEMY_DAMAGED, hit.transform.gameObject);
-
-                    if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
+                    //Debug.DrawRay(hit2.point, -hit2.normal, Color.yellow, 5.0f);
+                    //Debug.Log(gameObject);
+                    Debug.DrawRay(hit.point, reflectVec, Color.green, 5.0f);
+                    if (hit.collider.gameObject.tag == "Enemy")
                     {
-                        hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, (PelletDamage * stuff.ReflectMultiplier/ 100));
-                    }
-                    if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
-                    {
-                        hit.collider.gameObject.GetComponentInParent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, (PelletDamage * stuff.ReflectMultiplier / 100));
-                    }
-                    Debug.Log("I have shot " + hit.collider.gameObject.name);
+                        GetEventListener("Enemy").HandleEvent(GameEvent.ENEMY_DAMAGED, hit.transform.gameObject);
+
+                        if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
+                        {
+                            hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, (PelletDamage * stuff.ReflectMultiplier / 100));
+                        }
+                        if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
+                        {
+                            hit.collider.gameObject.GetComponentInParent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, (PelletDamage * stuff.ReflectMultiplier / 100));
+                        }
+                        Debug.Log("I have shot " + hit.collider.gameObject.name);
 
 
-                }
-                      Target target = hit2.transform.GetComponent<Target>();
-                if (target != null)
+                    }
+                    Target target = hit2.transform.GetComponent<Target>();
+                    if (target != null)
                     {
 
                         //show the enemy health (testing)
                         //show the enemy health
                         if (stuff.showEnemyHealth)
                         {
-                            
+
                             target.TakeDamage((PelletDamage * stuff.ReflectMultiplier) / 100);
                             stuff.enemyHealth.text = "Enemies health:" + target.health;
-                        
-                                
+
+
                         }
 
-                    } 
-                
-            
-            }
+                    }
 
+
+                }
+            }
             
             
 
