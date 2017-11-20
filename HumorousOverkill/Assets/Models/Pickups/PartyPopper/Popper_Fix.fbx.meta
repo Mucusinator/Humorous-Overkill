@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b0d3ab6aa92a0324bae5d55c1204ac41
-timeCreated: 1509338254
+guid: 2715a1654df1bda40a7002f0e74dad0d
+timeCreated: 1511220547
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: polySurface172
+    4300000: PartyPopper1
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -61,7 +61,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -80,7 +80,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
