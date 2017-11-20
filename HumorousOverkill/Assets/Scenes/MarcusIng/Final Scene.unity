@@ -6831,7 +6831,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f2449e719d6f5ff46823ae2bb112ae52, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2449e719d6f5ff46823ae2bb112ae52, type: 3}
@@ -14920,7 +14920,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 494416520}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.9, y: 41.3, z: 334.7}
+  m_LocalPosition: {x: 38.14, y: 9.2, z: 136.56}
   m_LocalScale: {x: 1.0255699, y: 1, z: 0.82939583}
   m_Children: []
   m_Father: {fileID: 889218441}
@@ -14972,13 +14972,20 @@ MonoBehaviour:
       rate: 0
       units: []
     groups:
-    - rate: 5
+    - rate: 4
       units:
       - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
           type: 2}
         points:
         - amount: 3
           position: {x: 22, y: -6, z: 8}
+    - rate: 2
+      units:
+      - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
+          type: 2}
+        points:
+        - amount: 5
+          position: {x: 23, y: 0, z: 10}
   doors: []
 --- !u!1001 &497419974
 Prefab:
@@ -56088,7 +56095,7 @@ MonoBehaviour:
   reloadShotgunTime: 2
   FireDelay: 0.4
   isReloading: 0
-  animator: {fileID: 1288187068}
+  m_animator: {fileID: 0}
   SelectedWeapon: 0
   gunType: 0
   StartOfPlayerRaycast: {fileID: 1042050998}
@@ -59649,7 +59656,7 @@ GameObject:
   - component: {fileID: 1724611379}
   - component: {fileID: 1724611378}
   m_Layer: 0
-  m_Name: spawner (2)
+  m_Name: MixedRoomSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59701,11 +59708,11 @@ MonoBehaviour:
       - prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
           type: 2}
         points:
-        - amount: 10
+        - amount: 7
           position: {x: 0, y: 0, z: 0}
-        - amount: 10
+        - amount: 7
           position: {x: 25, y: 0, z: 0}
-        - amount: 10
+        - amount: 7
           position: {x: -25, y: 0, z: 0}
   doors: []
 --- !u!54 &1724611379
@@ -61565,7 +61572,7 @@ GameObject:
   - component: {fileID: 1780194063}
   - component: {fileID: 1780194062}
   m_Layer: 0
-  m_Name: spawner (1)
+  m_Name: CucpakeRoomSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61578,8 +61585,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1780194060}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 39.87823, y: 6.22, z: 15.74275}
-  m_LocalScale: {x: 1.1951385, y: 1, z: 1.250511}
+  m_LocalPosition: {x: 81.3, y: 20.3, z: 150.9}
+  m_LocalScale: {x: 1.1951385, y: 3.0196636, z: 1.250511}
   m_Children: []
   m_Father: {fileID: 889218441}
   m_RootOrder: 1
