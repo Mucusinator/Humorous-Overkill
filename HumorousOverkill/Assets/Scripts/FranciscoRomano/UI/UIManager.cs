@@ -74,6 +74,8 @@ public class UIManager : EventHandler.EventHandle
             case GameEvent.DIFFICULTY_EASY:
             case GameEvent.DIFFICULTY_MEDI:
             case GameEvent.DIFFICULTY_HARD:
+                //EventManager<GameEvent>.InvokeGameState(null, null, null, typeof(GameManager), e);
+                GameObject.FindGameObjectWithTag("Manager").GetComponent<EnemyManager>().HandleEvent(e);
                 break;
             // handle Game states
             case GameEvent.STATE_MENU:
@@ -81,6 +83,8 @@ public class UIManager : EventHandler.EventHandle
             case GameEvent.STATE_PAUSE:
             case GameEvent.STATE_RESTART:
             case GameEvent.STATE_CONTINUE:
+                //EventManager<GameEvent>.InvokeGameState(null, null, null, typeof(GameManager), e);
+                GameObject.FindGameObjectWithTag("Manager").GetComponent<EnemyManager>().HandleEvent(e);
                 foreach (UIProperty property in propertyList)
                 {
                     property.gameObject.SetActive(false);
@@ -96,8 +100,6 @@ public class UIManager : EventHandler.EventHandle
                 }
                 break;
         }
-        //EventManager<GameEvent>.InvokeGameState(null, null, null, typeof(GameManager), e);
-        GameObject.FindGameObjectWithTag("Manager").GetComponent<EnemyManager>().HandleEvent(e);
         return true;
     }
 
