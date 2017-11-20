@@ -588,7 +588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &639317134
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -640,7 +640,7 @@ MonoBehaviour:
       - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
           type: 2}
         points:
-        - amount: 3
+        - amount: 50
           position: {x: -10, y: 0, z: -10}
   doors: []
 --- !u!4 &639317137

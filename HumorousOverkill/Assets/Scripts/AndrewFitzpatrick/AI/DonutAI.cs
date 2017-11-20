@@ -184,16 +184,10 @@ public class DonutAI : EventHandler.EventHandle
         Debug.Log("die has been called");
 
         // tell enemy manager that an enemy has died
-        if (GetEventListener("enemyManager") != null)
-        {
-            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
-        }
+        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
 
         // tell score manager that a donut has died
-        if (GetEventListener("scoreManager") != null)
-        {
-            GetEventListener("scoreManager").HandleEvent(GameEvent.ENEMY_DIED, 0);
-        }
+        GetEventListener("scoreManager").HandleEvent(GameEvent.ENEMY_DIED, 0);
 
         // disable collider preventing more deaths
         GetComponentInChildren<BoxCollider>().enabled = false;
