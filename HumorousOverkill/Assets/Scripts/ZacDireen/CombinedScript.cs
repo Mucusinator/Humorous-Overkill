@@ -68,7 +68,7 @@ public class CombinedScript : EventHandle {
     // This boolean tests if you are already reloading or not.
     public bool isReloading;
     // This animatior is resonsible for the reloading mechanic of the weapons.
-    public Animator m_animator;
+    public Animator animator;
     // This is a public int of the currently selected weapon.
     public int SelectedWeapon = 0;
     // This is the two different weapon types.
@@ -135,8 +135,21 @@ public class CombinedScript : EventHandle {
 
     }
 
+
+
+
+
+
+
+
+
+
+
     void Start() {
+
         currentShotgunAmmo = magTubeSize;
+  
+
     }
 
     // Update is called once per frame
@@ -144,53 +157,65 @@ public class CombinedScript : EventHandle {
     {
         showEnemyHealth();
 
+
+
+
         DisplayAmmo();
+
+
         RightClickSwitching();
 
 
         if (gunType == GunType.SHOTGUN)
         {
-            m_animator.SetBool("IsFiring", false);
             checkReloadShotgun();
         }
+
+
+
+
+
         //if (gunType == GunType.SHOTGUN)
         if (gunType == GunType.RIFLE)
         {
             checkReloadRifle();
         }
+
+
+
         if (Input.GetKey(KeyCode.R))
         {
             ManualReloading();
         }
-        if (currentRifleAmmo > 0) {
-            m_animator.SetBool("HasAmmo", true);
-        } else {
-            m_animator.SetBool("HasAmmo", false);
-        }
+
+
+
         if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE && !isReloading)
         {
-            m_animator.SetBool("IsFiring", true);
+
             shootRifle();
+
+
         }
-        if (Input.GetKeyUp(KeyCode.Mouse0)) {
-            m_animator.SetBool("IsFiring", false);
-        }
+
+
 
 
         GlitchCheck();
         Glitching();
-        
+
+
         if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
         {
             shootShotgun();
         }
+
     }
 
 
 
     void showEnemyHealth()
     {
-        if (!stuff.enemyHealth) return;
         if (stuff.showEnemyHealth == true)
         {
             stuff.enemyHealth.enabled = true;
@@ -679,6 +704,7 @@ public class CombinedScript : EventHandle {
     void OnEnable()
     {
         isReloading = false;
+        animator.SetBool("Reloading", false);
     }
 
 }
