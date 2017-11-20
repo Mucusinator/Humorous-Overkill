@@ -19,7 +19,7 @@ public struct DroneEnemyInfo
     public float attackRange; // distance to fire at the player from
     public float projectileLifetime; // time that projectiles will exist before getting destroyed
     public float shotForce; // effects speed of projectiles
-    public float ammoDropRate; // chance to drop ammo (0 = never 1 = always)
+    public float pickupDropRate; // chance to drop ammo (0 = never 1 = always)
     public float explosionForce;
     public float explosionRadius;
 }
@@ -37,7 +37,7 @@ public struct DonutEnemyInfo
     public float hitRange;
     public float maximumTargetHeight;
     public float accuracy;
-    public float ammoDropRate;
+    public float pickupDropRate;
     public float targetRadius;
     public float avoidRadius;
     public float errorMargin;

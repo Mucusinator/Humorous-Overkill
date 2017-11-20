@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4717253462750088}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 23908103838206448}
   - component: {fileID: 54034602581088370}
   - component: {fileID: 64035700236437672}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface49
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4289617803979862}
   - component: {fileID: 95015958360597322}
   - component: {fileID: 114689897827245990}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Donut
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4877502526818996}
   - component: {fileID: 33043039535122346}
   - component: {fileID: 23970511704012598}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface37
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 23078083402838866}
   - component: {fileID: 54601322200381762}
   - component: {fileID: 64389031467158208}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface39
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4558040824920342}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: transform14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 23609018468130462}
   - component: {fileID: 54880914467309412}
   - component: {fileID: 64997119530537900}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface34
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 23770614536708182}
   - component: {fileID: 54531777292386834}
   - component: {fileID: 64695290323002340}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface62
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4602315246464356}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: transform15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4448759809631374}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 23158229230260092}
   - component: {fileID: 54017152847559648}
   - component: {fileID: 64815282156713984}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface64
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 23524341715010752}
   - component: {fileID: 54749436951417498}
   - component: {fileID: 64142417738044674}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 23297264481019002}
   - component: {fileID: 54423981953003580}
   - component: {fileID: 64546095524770274}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface36
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 4703460127916102}
   - component: {fileID: 33508674573137548}
   - component: {fileID: 23987940446589242}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface41
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 23879630024561958}
   - component: {fileID: 54600155389834808}
   - component: {fileID: 64930889452089344}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface59
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 23771066963893804}
   - component: {fileID: 54890202668266398}
   - component: {fileID: 64386273305441962}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface58
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 23677262557909876}
   - component: {fileID: 54263575708783228}
   - component: {fileID: 64247442532059588}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface51
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 23103866027751162}
   - component: {fileID: 54939837281374764}
   - component: {fileID: 64290982879728600}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface61
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 23940051164775966}
   - component: {fileID: 54171257023994274}
   - component: {fileID: 64318336341657064}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface57
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 4383406379715270}
   - component: {fileID: 33586247733377930}
   - component: {fileID: 23819217940996444}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pPlane20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 23063397998185414}
   - component: {fileID: 54920005472266494}
   - component: {fileID: 64217576361365352}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface63
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 23747911535848840}
   - component: {fileID: 54595802703275274}
   - component: {fileID: 64637701448773892}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface48
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 4704001075181028}
   - component: {fileID: 33892412721934486}
   - component: {fileID: 23208023221223620}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface36
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 4600577519815452}
   - component: {fileID: 33265841755696598}
   - component: {fileID: 23293161081597758}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface46
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 23952340088427244}
   - component: {fileID: 54674873877515220}
   - component: {fileID: 64678324104962726}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface42
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 23212569342711816}
   - component: {fileID: 54032763574391988}
   - component: {fileID: 64015395243237112}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface55
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 23579308799683032}
   - component: {fileID: 54691743402178812}
   - component: {fileID: 64780089881148650}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface53
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 4450401263418924}
   - component: {fileID: 33035019255691994}
   - component: {fileID: 23167020004005298}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -521,7 +521,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4619319419606018}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lower_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -540,7 +540,7 @@ GameObject:
   - component: {fileID: 23399760312975338}
   - component: {fileID: 54722275804844244}
   - component: {fileID: 64018701541665308}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface43
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +555,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4955111774354472}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Model_Broken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -574,7 +574,7 @@ GameObject:
   - component: {fileID: 23418350583537934}
   - component: {fileID: 54935704989622360}
   - component: {fileID: 64697067961350808}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface67
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -593,7 +593,7 @@ GameObject:
   - component: {fileID: 23658280788290142}
   - component: {fileID: 54899094026486864}
   - component: {fileID: 64103649334650694}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface50
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 23906163832262968}
   - component: {fileID: 54605694783481048}
   - component: {fileID: 64564334339129994}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface46
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -631,7 +631,7 @@ GameObject:
   - component: {fileID: 23697265593724560}
   - component: {fileID: 54663919481097048}
   - component: {fileID: 64349821839516944}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface37
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -650,7 +650,7 @@ GameObject:
   - component: {fileID: 23684052107900580}
   - component: {fileID: 54888437064777534}
   - component: {fileID: 64917823421108858}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface38
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -669,7 +669,7 @@ GameObject:
   - component: {fileID: 23625665590721294}
   - component: {fileID: 54157479415169112}
   - component: {fileID: 64152434857345360}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface56
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -684,7 +684,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4405829166160400}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Upper_LEg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,7 +703,7 @@ GameObject:
   - component: {fileID: 23689160012681110}
   - component: {fileID: 54279604492394696}
   - component: {fileID: 64289355523523126}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface65
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -722,7 +722,7 @@ GameObject:
   - component: {fileID: 23296052705068746}
   - component: {fileID: 54353566157003418}
   - component: {fileID: 64658577074461714}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface60
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,7 +739,7 @@ GameObject:
   - component: {fileID: 4662994721172886}
   - component: {fileID: 33777341955561560}
   - component: {fileID: 23798796091967680}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface38
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +754,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4655838483189450}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lower_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -773,7 +773,7 @@ GameObject:
   - component: {fileID: 23220929595419412}
   - component: {fileID: 54268843934397852}
   - component: {fileID: 64931651463302626}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface52
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -789,7 +789,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4340884899887522}
   - component: {fileID: 65305633869846470}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Model
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -808,7 +808,7 @@ GameObject:
   - component: {fileID: 23107314821440394}
   - component: {fileID: 54678161794072904}
   - component: {fileID: 64187026496560190}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -825,7 +825,7 @@ GameObject:
   - component: {fileID: 4899750065901470}
   - component: {fileID: 33576160745849708}
   - component: {fileID: 23453437033797450}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface42
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -840,7 +840,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4475747237171552}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Upper_LEg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -857,7 +857,7 @@ GameObject:
   - component: {fileID: 4020531215304360}
   - component: {fileID: 33206731519933076}
   - component: {fileID: 23770304859329798}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface43
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -876,7 +876,7 @@ GameObject:
   - component: {fileID: 23815205733008574}
   - component: {fileID: 54659887788529648}
   - component: {fileID: 64678475883793056}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface41
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -891,7 +891,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4343894357392562}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Donut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -910,7 +910,7 @@ GameObject:
   - component: {fileID: 23598566728212206}
   - component: {fileID: 54461369292378388}
   - component: {fileID: 64656872121148478}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface54
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,7 +929,7 @@ GameObject:
   - component: {fileID: 23448430344082286}
   - component: {fileID: 54168177021032626}
   - component: {fileID: 64050728267681546}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface66
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -946,7 +946,7 @@ GameObject:
   - component: {fileID: 4540313827249962}
   - component: {fileID: 33743326748726774}
   - component: {fileID: 23292887699634726}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface39
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -961,7 +961,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4903918014646464}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Donut_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -978,7 +978,7 @@ GameObject:
   - component: {fileID: 4470849026927362}
   - component: {fileID: 33810238395560014}
   - component: {fileID: 23418227270233124}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface34
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4341,10 +4341,12 @@ MonoBehaviour:
     hitRange: 0
     maximumTargetHeight: 0
     accuracy: 0
-    ammoDropRate: 0
+    pickupDropRate: 0
     targetRadius: 0
     avoidRadius: 0
     errorMargin: 0
-  showMovementGizmos: 0
-  showAttackGizmos: 0
-  dead: 0
+  showMovementGizmos: 1
+  showAttackGizmos: 1
+  pickupPrefabs:
+  - {fileID: 1047466508615190, guid: 7f265e36d39fec84da1f38d7aacf4c14, type: 2}
+  - {fileID: 1213382271234258, guid: 8d25769cf16b0c8418074cfcc48d3970, type: 2}
