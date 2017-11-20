@@ -26596,6 +26596,7 @@ GameObject:
   - component: {fileID: 889218442}
   - component: {fileID: 889218443}
   - component: {fileID: 889218440}
+  - component: {fileID: 889218444}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Manager
@@ -26700,6 +26701,23 @@ MonoBehaviour:
     m_cameraSensitivity: 1.5
     m_cameraMinimumAngle: -60
     m_cameraMaximumAngle: 40
+--- !u!114 &889218444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 889218439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ab3906764cfad4f9057a087686bf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipIndex: 0
+  playOnAwake: 1
+  fade: 1
+  volume: 0.7
+  audioClips:
+  - {fileID: 8300000, guid: edd5b2dbb9c971d4f990aabe735dbc28, type: 3}
 --- !u!1001 &893086159
 Prefab:
   m_ObjectHideFlags: 0
@@ -55680,7 +55698,6 @@ MonoBehaviour:
   WeaponRaycast: {fileID: 1288187066}
   EndOfGun: {fileID: 832826554}
   fpsCam: {fileID: 1628796563}
-  isRifleSelected: 0
   glitchRifleEffect: 0
   m_timer: 0
   stuff:
