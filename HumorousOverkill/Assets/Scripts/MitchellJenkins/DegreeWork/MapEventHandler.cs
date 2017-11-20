@@ -41,6 +41,21 @@ public class __eArg<_T> {
     public _T arg { get; private set; }
 }
 
+public static class EventHandlingSystem {
+    public static void Add(__eHandle<System.Object, __eArg<GameEvent>> func) {
+        __event<GameEvent>.HandleEvent += func;
+    }
+    public static void Invoke (System.Object sender, System.Object target, GameEvent e) {
+        __event<MapState>.InvokeEvent(
+                sender,
+                new __eArg<MapState>(
+                    MapState.NOTENABLED,
+                    __event<MapState>.SendToAll,
+                    null,
+                    null));
+    }
+}
+
 // Event
 public class __event<_T> {
     /// <summary>
