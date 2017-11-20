@@ -852,6 +852,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1265723601}
   - component: {fileID: 1265723602}
+  - component: {fileID: 1265723603}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Manager
@@ -916,6 +917,23 @@ MonoBehaviour:
     targetRadius: 0
     avoidRadius: 0
     errorMargin: 0
+--- !u!114 &1265723603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1265723600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ab3906764cfad4f9057a087686bf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipIndex: 0
+  playOnAwake: 1
+  fade: 1
+  volume: 0.7
+  audioClips:
+  - {fileID: 8300000, guid: edd5b2dbb9c971d4f990aabe735dbc28, type: 3}
 --- !u!1 &1555105942
 GameObject:
   m_ObjectHideFlags: 0
