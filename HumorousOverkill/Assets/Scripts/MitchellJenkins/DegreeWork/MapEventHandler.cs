@@ -41,18 +41,15 @@ public class __eArg<_T> {
     public _T arg { get; private set; }
 }
 
-public static class EventHandlingSystem {
-    public static void Add(__eHandle<System.Object, __eArg<GameEvent>> func) {
-        __event<GameEvent>.HandleEvent += func;
+
+public static class EventManager<T> {
+    public class Arg : __eArg<T> { public Arg (T sender, object target, object value, Type type) : base(sender, target, value, type) { } };
+    public delegate void EventDelegate (object s, __eArg<T> e);
+    public static void Add (EventDelegate del) {
+        __event<T>.HandleEvent += new __eHandle<System.Object, __eArg<T>>(del);
     }
-    public static void Invoke (System.Object sender, System.Object target, GameEvent e) {
-        __event<MapState>.InvokeEvent(
-                sender,
-                new __eArg<MapState>(
-                    MapState.NOTENABLED,
-                    __event<MapState>.SendToAll,
-                    null,
-                    null));
+    public static void InvokeGameState (System.Object sender, System.Object target, System.Object value, System.Type type, T e) {
+        __event<T>.InvokeEvent(sender, new __eArg<T>(e, target, value, type));
     }
 }
 
@@ -92,6 +89,7 @@ class MapEventHandler : MonoBehaviour {
 
     private void Awake () {
         // Raise and Invoke Event
+
         if (isEnabled)
             __event<MapState>.HandleEvent += new __eHandle<System.Object, __eArg<MapState>>(OnHandleEvent);
         else
