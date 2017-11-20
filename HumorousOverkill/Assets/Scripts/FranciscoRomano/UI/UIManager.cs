@@ -69,7 +69,7 @@ public class UIManager : EventHandler.EventHandle
             case GameEvent.DIFFICULTY_EASY:
             case GameEvent.DIFFICULTY_MEDI:
             case GameEvent.DIFFICULTY_HARD:
-                EventManager<GameEvent>.InvokeEvent(null, null, null, typeof(GameManager), e);
+                EventManager<GameEvent>.InvokeGameState(null, null, null, typeof(GameManager), e);
                 break;
             // handle Game states
             case GameEvent.STATE_MENU:
