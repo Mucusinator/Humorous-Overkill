@@ -121,6 +121,8 @@ public class AudioManager : MonoBehaviour
         m_musicSources[m_musicIndex1].Play();
     }
 
+    public void Fade()
+
     [System.Serializable]
     public class AudioData
     {
@@ -135,18 +137,20 @@ public class AudioManager : MonoBehaviour
         public bool fading = false;
         public AudioData data = null;
 
-        //public bool Update(float volume, float delta)
-        //{
-        //    if (data.sources[index1].volume < volume)
-        //    {
-        //        data.sources[index1].volume += delta;
-        //        data.sources[index2].volume -= delta;
-        //    }
-        //    else
-        //    {
-        //        data.sources[index2].volume = 0;
-        //        data.sources[index1].volume = volume;
-        //    }
-        //}
+        public bool Update(float volume, float delta)
+        {
+            if (data.sources[index1].volume < volume)
+            {
+                data.sources[index1].volume += delta;
+                data.sources[index2].volume -= delta;
+                return true;
+            }
+            else
+            {
+                data.sources[index2].volume = 0;
+                data.sources[index1].volume = volume;
+                return false;
+            }
+        }
     }
 }
