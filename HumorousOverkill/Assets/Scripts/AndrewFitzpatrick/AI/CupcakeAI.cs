@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[EventHandler.BindListener("playerManager", typeof(PlayerManager))]
-[EventHandler.BindListener("enemyManager", typeof(EnemyManager))]
-public class CupcakeAI : EventHandler.EventHandle
+public class CupcakeAI : MonoBehaviour
 {
     #region variables
 
@@ -40,15 +38,22 @@ public class CupcakeAI : EventHandler.EventHandle
 
     #endregion
 
-    public override void Awake()
+    public void Awake()
     {
-        base.Awake();
+        EventManager<GameEvent>.Add(HandleEvent);
 
         // find the player
         player = GameObject.FindGameObjectWithTag("Player");
 
-        // get default info from enemyManager
-        myInfo = GetEventListener("enemyManager").gameObject.GetComponent<EnemyManager>().defaultDroneInfo;
+        // get default info from EnemyManager (if it exists)
+        if(GameObject.FindObjectOfType<EnemyManager>() != null)
+        {
+            myInfo = GameObject.FindObjectOfType<EnemyManager>().defaultDroneInfo;
+        }
+        else
+        {
+            Debug.Log("Cupcake could not find an EnemyManager");
+        }
 
         startHealth = myInfo.health;
 
@@ -165,10 +170,10 @@ public class CupcakeAI : EventHandler.EventHandle
         }
 
         // tell enemy manager that an enemy has died
-        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
+        EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(EnemyManager), GameEvent.ENEMY_SPAWNER_REMOVE);
 
         // tell score manager that a cupcake has died (if it exists)
-        if(scoremanager != null)
+        if (scoremanager != null)
         {
             scoremanager.updatePoints(scoreManager.ENEMYTYPE.CUPCAKE);
         }
@@ -233,15 +238,16 @@ public class CupcakeAI : EventHandler.EventHandle
         }
     }
 
-    public override bool HandleEvent(GameEvent e, float value)
+    public void HandleEvent(object sender, __eArg<GameEvent> e)
     {
+        if (sender == (object)this) return;
         // Health is depleted
-        if (e == GameEvent.ENEMY_DAMAGED)
+        if (e.arg == GameEvent.ENEMY_DAMAGED)
         {
             if(!dead)
             {
                 // subtract health
-                myInfo.health -= value;
+                myInfo.health -= (float)e.value;
 
                 // change color if enabled
                 if (enableColorChanges)
@@ -257,8 +263,6 @@ public class CupcakeAI : EventHandler.EventHandle
                 }
             }
         }
-
-        return true;
     }
 
     #endregion

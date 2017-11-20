@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[EventHandler.BindListener("playerManager", typeof(PlayerManager))]
-[EventHandler.BindListener("enemyManager", typeof(EnemyManager))]
-[EventHandler.BindListener("scoreManager", typeof(scoreManager))]
-public class DonutAI : EventHandler.EventHandle
+public class DonutAI : MonoBehaviour
 {
     enum ANIMATIONSTATE { ROLL, DEPLOY, RAISEGUN, SHOOT, LOWERGUN, GETUP };
 
@@ -39,18 +36,23 @@ public class DonutAI : EventHandler.EventHandle
 
     #endregion
 
-    public override void Awake()
+    public void Awake()
     {
-        base.Awake();
-
         // find the player
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindObjectOfType<Player>().gameObject;
 
         // store animator
         myAnimator = GetComponent<Animator>();
 
         // get default info from enemyManager
-        myInfo = GetEventListener("enemyManager").gameObject.GetComponent<EnemyManager>().defaultDonutInfo;
+        if(GameObject.FindObjectOfType<EnemyManager>() != null)
+        {
+            myInfo = GameObject.FindObjectOfType<EnemyManager>().defaultDonutInfo;
+        }
+        else
+        {
+            Debug.Log("Donut could not find an EnemyManager");
+        }
 
         // calculate circumference (needed for nice rolling)
         findCircumference();
@@ -193,7 +195,7 @@ public class DonutAI : EventHandler.EventHandle
         Debug.Log("die has been called");
 
         // tell enemy manager that an enemy has died
-        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
+        EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(EnemyManager), GameEvent.ENEMY_SPAWNER_REMOVE);
 
         // tell score manager that a cupcake has died (if it exists)
         if (scoremanager != null)
@@ -320,14 +322,14 @@ public class DonutAI : EventHandler.EventHandle
         }
     }
 
-    public override bool HandleEvent(GameEvent e, float value)
+    public void HandleEvent(object sender, __eArg<GameEvent> e)
     {
-        switch (e)
+        switch (e.arg)
         {
             case GameEvent.ENEMY_DAMAGED:
                 if(!dead)
                 {
-                    myInfo.health -= value;
+                    myInfo.health -= (float)e.value;
                     if (myInfo.health <= 0)
                     {
                         dead = true;
@@ -336,8 +338,6 @@ public class DonutAI : EventHandler.EventHandle
                 }
                 break;
         }
-
-        return true;
     }
 
 #if UNITY_EDITOR
