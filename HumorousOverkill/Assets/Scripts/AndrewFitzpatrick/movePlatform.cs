@@ -9,6 +9,11 @@ public class movePlatform : MonoBehaviour
     [Tooltip("How long it takes for the platform to travel to and from the goal")]
     public float[] travelTimes = new float[2];
 
+    [Tooltip("Whether to draw line")]
+    public bool drawLine = false;
+
+    [Tooltip("Color of line")]
+    public Color lineColor = Color.white;
 
     private Vector3[] points = new Vector3[2];
 
@@ -62,4 +67,16 @@ public class movePlatform : MonoBehaviour
             hasPlayer = false;
         }
     }
+
+#if UNITY_EDITOR
+    void OnDrawGizmos()
+    {
+        if(drawLine)
+        {
+            // draw line toward goal
+            Gizmos.color = lineColor;
+            Gizmos.DrawLine(points[0], points[1]);
+        }
+    }
+#endif
 }
