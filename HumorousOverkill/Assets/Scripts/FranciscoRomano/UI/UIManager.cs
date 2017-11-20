@@ -23,6 +23,7 @@ public class UIManager : EventHandler.EventHandle
     // :: functions
     void Start()
     {
+        EventManager<GameEvent>.Add(HandleMessage);
         foreach (GameEvent e in Enum.GetValues(typeof(GameEvent)))
         {
             propertyDictionary.Add(e, new List<UIProperty>());
@@ -37,6 +38,7 @@ public class UIManager : EventHandler.EventHandle
             propertyDictionary[property.triggerEvent].Add(property);
         }
     }
+
     void Update()
     {
         if (DEBUG)
@@ -62,30 +64,36 @@ public class UIManager : EventHandler.EventHandle
         m_stateStart = false;
     }
 
-    public override bool HandleEvent(GameEvent e)
+    public void HandleMessage(object obj, __eArg<GameEvent> e)
     {
-        switch (e)
+        if (obj == (object)this) return;
+        switch (e.arg)
         {
-            case GameEvent.DIFFICULTY_EASY:
-            case GameEvent.DIFFICULTY_MEDI:
-            case GameEvent.DIFFICULTY_HARD:
-                EventManager<GameEvent>.InvokeGameState(null, null, null, typeof(GameManager), e);
+            case GameEvent.UI_HEALTH:
+            case GameEvent.UI_AMMO_CUR:
+            case GameEvent.UI_AMMO_MAX:
+                if (propertyDictionary.ContainsKey(e.arg))
+                {
+                    foreach (UIProperty property in propertyDictionary[e.arg])
+                    {
+                        property.UpdateComponent(e.arg != GameEvent.UI_HEALTH ? Mathf.Floor((float)e.value) : (float)e.value);
+                    }
+                }
                 break;
-            // handle Game states
+            // handle Game States
             case GameEvent.STATE_MENU:
             case GameEvent.STATE_START:
             case GameEvent.STATE_PAUSE:
             case GameEvent.STATE_RESTART:
             case GameEvent.STATE_CONTINUE:
-                //GetEventListener("gameManager").HandleEvent(e);
                 foreach (UIProperty property in propertyList)
                 {
                     property.gameObject.SetActive(false);
                 }
                 propertyList.Clear();
-                if (propertyDictionary.ContainsKey(e))
+                if (propertyDictionary.ContainsKey(e.arg))
                 {
-                    foreach (UIProperty property in propertyDictionary[e])
+                    foreach (UIProperty property in propertyDictionary[e.arg])
                     {
                         property.gameObject.SetActive(true);
                         propertyList.Add(property);
@@ -93,25 +101,17 @@ public class UIManager : EventHandler.EventHandle
                 }
                 break;
         }
+    }
+
+    public override bool HandleEvent(GameEvent e)
+    {
+        HandleMessage(null, new __eArg<GameEvent>(e, this, null, typeof(UIManager)));
         return true;
     }
 
     public override bool HandleEvent(GameEvent e, float amount)
     {
-        switch (e)
-        {
-            case GameEvent.UI_HEALTH:
-            case GameEvent.UI_AMMO_CUR:
-            case GameEvent.UI_AMMO_MAX:
-                if (propertyDictionary.ContainsKey(e))
-                {
-                    foreach (UIProperty property in propertyDictionary[e])
-                    {
-                        property.UpdateComponent(e != GameEvent.UI_HEALTH ? Mathf.Floor(amount) : amount);
-                    }
-                }
-                break;
-        }
+        HandleMessage(null, new __eArg<GameEvent>(e, this, amount, typeof(UIManager)));
         return true;
     }
 
