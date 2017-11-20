@@ -135,21 +135,8 @@ public class CombinedScript : EventHandle {
 
     }
 
-
-
-
-
-
-
-
-
-
-
     void Start() {
-
         currentShotgunAmmo = magTubeSize;
-  
-
     }
 
     // Update is called once per frame
@@ -157,12 +144,7 @@ public class CombinedScript : EventHandle {
     {
         showEnemyHealth();
 
-
-
-
         DisplayAmmo();
-
-
         RightClickSwitching();
 
 
@@ -170,52 +152,35 @@ public class CombinedScript : EventHandle {
         {
             checkReloadShotgun();
         }
-
-
-
-
-
         //if (gunType == GunType.SHOTGUN)
         if (gunType == GunType.RIFLE)
         {
             checkReloadRifle();
         }
-
-
-
         if (Input.GetKey(KeyCode.R))
         {
             ManualReloading();
         }
-
-
-
         if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE && !isReloading)
         {
-
+            animator.SetBool("IsFiring", true);
             shootRifle();
-
-
         }
-
-
-
-
+        
         GlitchCheck();
         Glitching();
-
-
+        
         if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
         {
             shootShotgun();
         }
-
     }
 
 
 
     void showEnemyHealth()
     {
+        if (!stuff.enemyHealth) return;
         if (stuff.showEnemyHealth == true)
         {
             stuff.enemyHealth.enabled = true;
