@@ -39,6 +39,10 @@
     PICKUP_HEALTH,
     PICKUP_RIFLEAMMO,
     PICKUP_SHOTGUNAMMO,
-    PLAYER_DAMAGE
+    PLAYER_DAMAGE,
     /**************************************************************************************************/
+
+    DIFFICULTY_EASY,
+    DIFFICULTY_MEDI,
+    DIFFICULTY_HARD,
 }

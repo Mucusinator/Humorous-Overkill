@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
+
 public class UIManager : EventHandler.EventHandle
 {
     public bool DEBUG;
@@ -65,6 +66,11 @@ public class UIManager : EventHandler.EventHandle
     {
         switch (e)
         {
+            case GameEvent.DIFFICULTY_EASY:
+            case GameEvent.DIFFICULTY_MEDI:
+            case GameEvent.DIFFICULTY_HARD:
+                EventManager<GameEvent>.InvokeEvent(null, null, null, typeof(GameManager), e);
+                break;
             // handle Game states
             case GameEvent.STATE_MENU:
             case GameEvent.STATE_START:
