@@ -56,8 +56,6 @@ public class PlayerManager : EventHandler.EventHandle {
                     GetEventListener("Weapon").GetComponent<CombinedScript>().currentRifleAmmo += (int)value;
                     isFirstPickup = false;
                     GetEventListener("Weapon").GetComponent<CombinedScript>().gunType = CombinedScript.GunType.RIFLE;
-                    GetEventListener("Weapon").GetComponent<CombinedScript>().SelectedWeapon = 1;
-                    GetEventListener("Weapon").GetComponent<CombinedScript>().isRifleSelected = true;
                 }
                 break;
             case GameEvent.PICKUP_SHOTGUNAMMO:
