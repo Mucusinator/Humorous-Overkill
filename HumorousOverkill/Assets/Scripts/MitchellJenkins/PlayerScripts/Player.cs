@@ -23,11 +23,13 @@ public class Player : EventHandle {
         base.Awake();
         m_ply = GetEventListener("PlayerManager").gameObject.GetComponent<PlayerManager>().GetPlayerInfo;
         m_cc = this.GetComponent<CharacterController>() as CharacterController;
-
         // m_animator.runtimeAnimatorController = m_animatorController;
         // m_cc.center = new Vector3(0f, 1f, 0f);
         // m_cc.height = 1.8f;
+        
     }
+
+
 
     public void Start () {
         __event<MapState>.InvokeEvent(
