@@ -85,7 +85,7 @@ public class SpawnEditor
         }
         else if (currentGroup != null)
         {
-            if (OnInspectorGUI(currentGroup, "Group", backMsg, true) == Status.RETURN)
+            if (OnInspectorGUI(currentGroup, "Wave", backMsg, true) == Status.RETURN)
             {
                 currentGroup = null;
             }
@@ -188,7 +188,7 @@ public class SpawnEditor
         {
             EditorGUILayout.BeginVertical("Button");
             EditorGUILayout.Space();
-            OnInspectorGUI(stage.groups, "Groups");
+            OnInspectorGUI(stage.groups, "Waves");
             EditorGUILayout.EndVertical();
         }
         // return default inspector status
@@ -272,7 +272,7 @@ public class SpawnEditor
             for (int i = 0; i < list.Count; i++)
             {
                 EditorGUILayout.Space();
-                Status listStatus = OnInspectorGUI(list[i], "Group " + (i + 1), listMsg, false);
+                Status listStatus = OnInspectorGUI(list[i], "Wave " + (i + 1), listMsg, false);
                 if (listStatus == Status.CHANGE)
                 {
                     currentGroup = list[i];
