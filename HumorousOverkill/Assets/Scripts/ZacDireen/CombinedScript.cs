@@ -155,6 +155,10 @@ public class CombinedScript : EventHandle {
     // Update is called once per frame
     void Update()
     {
+        showEnemyHealth();
+
+
+
 
         DisplayAmmo();
 
@@ -208,6 +212,20 @@ public class CombinedScript : EventHandle {
 
     }
 
+
+
+    void showEnemyHealth()
+    {
+        if (stuff.showEnemyHealth == true)
+        {
+            stuff.enemyHealth.enabled = true;
+        }
+        else
+        {
+            stuff.enemyHealth.enabled = false;
+        }
+
+    }
     void checkReloadShotgun()
     {
         if (currentShotgunAmmo <= 0)
@@ -497,6 +515,7 @@ public class CombinedScript : EventHandle {
         // TESTING
         //shotTrail.material.mainTextureOffset = new Vector2(Time.time, 0);
 
+
         //shotTrail.SetPosition(0, EndOfGun.transform.position);
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward * Range, out hit, RifleRange))
         {
@@ -525,6 +544,7 @@ public class CombinedScript : EventHandle {
                         if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
                         {
                             hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                            
                         }
                         if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                         {
@@ -534,7 +554,18 @@ public class CombinedScript : EventHandle {
                         //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
                         //target.TakeDamage(RifleDamage);
 
+
+                        Target target = hit.transform.GetComponent<Target>();
+                        if (target != null)
+                        {
+                            if (stuff.showEnemyHealth)
+                            {
+                                target.TakeDamage(PelletDamage);
+                                stuff.enemyHealth.text = "Enemies health:" + target.health;
+                            }
+                        }
                     }
+
                 }
             }
         }
@@ -596,6 +627,16 @@ public class CombinedScript : EventHandle {
                 }
                 Debug.Log("I have shot " + hit.collider.gameObject.name);
 
+
+                Target target = hit.transform.GetComponent<Target>();
+                if (target != null)
+                {
+                    if (stuff.showEnemyHealth)
+                    {
+                        target.TakeDamage(PelletDamage);
+                        stuff.enemyHealth.text = "Enemies health:" + target.health;
+                    }
+                }
               
             }
             Debug.DrawLine(EndOfGun.transform.position, hit.point, Color.red, 5.0f);
