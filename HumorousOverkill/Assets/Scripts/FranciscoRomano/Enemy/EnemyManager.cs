@@ -108,15 +108,6 @@ public class EnemyManager : EventHandler.EventHandle
                 if (spawner == null) return false;
                 spawner.HandleEvent(e);
                 break;
-            case GameEvent.DIFFICULTY_EASY:
-                Debug.Log("Easy");
-                break;
-            case GameEvent.DIFFICULTY_MEDI:
-                Debug.Log("Medi");
-                break;
-            case GameEvent.DIFFICULTY_HARD:
-                Debug.Log("Hard");
-                break;
         }
         return true;
     }
