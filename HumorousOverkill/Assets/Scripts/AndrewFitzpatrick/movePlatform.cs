@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+    
+#endif
 public class movePlatform : MonoBehaviour
 {
     public GameObject goal;
