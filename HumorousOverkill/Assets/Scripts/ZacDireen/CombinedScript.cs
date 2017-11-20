@@ -93,7 +93,7 @@ public class CombinedScript : EventHandle {
     private bool switchingWeapon;
 
 
-   
+
 
     // This boolean is for the rifle, to show if it is active or not.
     public bool isRifleSelected;
@@ -120,7 +120,7 @@ public class CombinedScript : EventHandle {
         public bool showEnemyHealth;
 
 
-       
+
 
     }
 
@@ -144,16 +144,11 @@ public class CombinedScript : EventHandle {
 
 
 
-    // Use this for initialization
 
-        ///
     void Start() {
 
-
-        //currentRifleAmmo = rifleMagSize;
         currentShotgunAmmo = magTubeSize;
-        //currentShotgunAmmo = 0;
-        //shotTrail = GetComponent<LineRenderer>();
+  
 
     }
 
@@ -161,79 +156,25 @@ public class CombinedScript : EventHandle {
     void Update()
     {
 
-
-
-
-
         DisplayAmmo();
 
 
         RightClickSwitching();
 
 
-        if (SelectedWeapon == 0 && maxShotgunAmmo > 0)
+        if (SelectedWeapon == 0)
         {
-            if (currentShotgunAmmo <= 0)
-            {
-
-                if (ReloadTimer(reloadShotgunTime))
-                {
-                    if (maxShotgunAmmo < magTubeSize)
-                    {
-                        currentShotgunAmmo = maxShotgunAmmo;
-                        maxShotgunAmmo = 0;
-                    }
-                    else
-                    {
-                        currentShotgunAmmo = magTubeSize;
-                        maxShotgunAmmo -= magTubeSize;
-                    }
-                }
-            }
+            checkReloadShotgun();
         }
 
 
 
-      
+
 
         //if (gunType == GunType.SHOTGUN)
         if (SelectedWeapon == 1)
         {
-            if (maxRifleAmmo == 0 && currentRifleAmmo == 0)
-            {
-                SelectedWeapon = 0;
-                gunType = GunType.SHOTGUN;
-                glitchRifleEffect = false;
-            }
-
-            if (isReloading)
-            {
-
-                glitchRifleEffect = false;
-
-               
-            }
-
-            if (currentRifleAmmo <= 0 && maxRifleAmmo > 0)
-            {
-                gunType = GunType.RIFLE;
-                //StartCoroutine(Reload());
-                if (ReloadTimer(reloadRifleTime))
-                {
-                    if (maxRifleAmmo < rifleMagSize)
-                    {
-                        currentRifleAmmo = maxRifleAmmo;
-                        maxRifleAmmo = 0;
-                    }
-                    else
-                    {
-                        currentRifleAmmo = rifleMagSize;
-                        maxRifleAmmo -= rifleMagSize;
-                    }
-                }
-                
-            }
-
+            checkReloadRifle();
         }
 
 
@@ -243,18 +184,12 @@ public class CombinedScript : EventHandle {
             ManualReloading();
         }
 
-    
+
 
         if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE && !isReloading)
         {
-            
-            if (currentRifleAmmo > 0 && Time.time >= nextTimeToFire)
-            {
 
-                nextTimeToFire = Time.time + 60f / RoundsPerMinute;
-               
-                Shoot();
-            }
+            shootRifle();
 
 
         }
@@ -268,25 +203,101 @@ public class CombinedScript : EventHandle {
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
         {
-            if (currentShotgunAmmo > 0)
-            {
-
-                ShotgunMuzzleEffect.Play();
-
-                currentShotgunAmmo--;
-                for (int i = 0; i < pelletCount; ++i)
-                {
-           
-                    ShootRay();
-
-                }
-
-
-            }
+            shootShotgun();
         }
 
     }
 
+    void checkReloadShotgun()
+    {
+        if (currentShotgunAmmo <= 0)
+        {
+
+            if (ReloadTimer(reloadShotgunTime))
+            {
+                if (maxShotgunAmmo < magTubeSize)
+                {
+                    currentShotgunAmmo = maxShotgunAmmo;
+                    maxShotgunAmmo = 0;
+                }
+                else
+                {
+                    currentShotgunAmmo = magTubeSize;
+                    maxShotgunAmmo -= magTubeSize;
+                }
+            }
+        }
+    }
+
+    void checkReloadRifle()
+    {
+        if (maxRifleAmmo == 0 && currentRifleAmmo == 0)
+        {
+            SelectedWeapon = 0;
+            gunType = GunType.SHOTGUN;
+            glitchRifleEffect = false;
+        }
+
+        if (isReloading)
+        {
+
+            glitchRifleEffect = false;
+
+
+        }
+
+        if (currentRifleAmmo <= 0 && maxRifleAmmo > 0)
+        {
+            gunType = GunType.RIFLE;
+
+            if (ReloadTimer(reloadRifleTime))
+            {
+                if (maxRifleAmmo < rifleMagSize)
+                {
+                    currentRifleAmmo = maxRifleAmmo;
+                    maxRifleAmmo = 0;
+                }
+                else
+                {
+                    currentRifleAmmo = rifleMagSize;
+                    maxRifleAmmo -= rifleMagSize;
+                }
+            }
+
+        }
+
+    }
+
+    void shootRifle()
+    {
+        if (currentRifleAmmo > 0 && Time.time >= nextTimeToFire)
+        {
+
+            nextTimeToFire = Time.time + 60f / RoundsPerMinute;
+
+            Shoot();
+        }
+    }
+
+    void shootShotgun()
+    {
+        if (currentShotgunAmmo > 0)
+        {
+
+            ShotgunMuzzleEffect.Play();
+
+            currentShotgunAmmo--;
+            for (int i = 0; i < pelletCount; ++i)
+            {
+
+                ShootRay();
+
+            }
+
+
+        }
+
+    }
 
 
     void ManualReloading()
@@ -349,8 +360,7 @@ public class CombinedScript : EventHandle {
             }
             else
             {
-                if (!isRifleSelected && !isReloading)
-                {
+               
                     if (currentRifleAmmo > 0 || maxRifleAmmo > 0)
                     {
                         gunType = GunType.RIFLE;
@@ -358,7 +368,7 @@ public class CombinedScript : EventHandle {
                         isRifleSelected = true;
                         switchingWeapon = true;
                     }
-                }
+                
             }
 
         }
@@ -387,7 +397,7 @@ public class CombinedScript : EventHandle {
     /// This is the reload function.
     /// </summary>
     /// <param name="time"> used to keep track of time.</param>
-    /// <returns></returns>
+    /// <returns>void</returns>
     bool ReloadTimer(float time)
     {
         if (m_timer <= 0)
