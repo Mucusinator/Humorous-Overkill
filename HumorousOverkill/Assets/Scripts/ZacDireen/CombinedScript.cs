@@ -162,7 +162,7 @@ public class CombinedScript : EventHandle {
         RightClickSwitching();
 
 
-        if (SelectedWeapon == 0)
+        if (gunType == GunType.SHOTGUN)
         {
             checkReloadShotgun();
         }
@@ -172,7 +172,7 @@ public class CombinedScript : EventHandle {
 
 
         //if (gunType == GunType.SHOTGUN)
-        if (SelectedWeapon == 1)
+        if (gunType == GunType.RIFLE)
         {
             checkReloadRifle();
         }
@@ -233,7 +233,7 @@ public class CombinedScript : EventHandle {
     {
         if (maxRifleAmmo == 0 && currentRifleAmmo == 0)
         {
-            SelectedWeapon = 0;
+            //SelectedWeapon = 0;
             gunType = GunType.SHOTGUN;
             glitchRifleEffect = false;
         }
@@ -354,7 +354,7 @@ public class CombinedScript : EventHandle {
             if (isRifleSelected)
             {
                 gunType = GunType.SHOTGUN;
-                SelectedWeapon = 0;
+                //SelectedWeapon = 0;
                 isRifleSelected = false;
                 switchingWeapon = true;
             }
@@ -364,7 +364,7 @@ public class CombinedScript : EventHandle {
                     if (currentRifleAmmo > 0 || maxRifleAmmo > 0)
                     {
                         gunType = GunType.RIFLE;
-                        SelectedWeapon = 1;
+                        //SelectedWeapon = 1;
                         isRifleSelected = true;
                         switchingWeapon = true;
                     }
@@ -446,7 +446,7 @@ public class CombinedScript : EventHandle {
                 stillGlitching = false;
             }
         }
-        if (SelectedWeapon == 0)
+        if (gunType == GunType.SHOTGUN)
         {
             fpsCam.GetComponent<GlitchPostRender>().offset -= 0.01f * Time.deltaTime;
             if (fpsCam.GetComponent<GlitchPostRender>().offset < 0)

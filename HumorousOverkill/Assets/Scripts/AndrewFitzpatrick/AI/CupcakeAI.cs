@@ -4,6 +4,7 @@ using UnityEngine;
 
 [EventHandler.BindListener("playerManager", typeof(PlayerManager))]
 [EventHandler.BindListener("enemyManager", typeof(EnemyManager))]
+[EventHandler.BindListener("scoreManager", typeof(scoreManager))]
 public class CupcakeAI : EventHandler.EventHandle
 {
     #region variables
@@ -54,7 +55,7 @@ public class CupcakeAI : EventHandler.EventHandle
         pickupSpawnLayerMask = LayerMask.GetMask("Player", "Enemy");
     }
 
-    void Update ()
+    void Update()
     {
         if(!freeze)
         {
@@ -159,6 +160,12 @@ public class CupcakeAI : EventHandler.EventHandle
         if(GetEventListener("enemyManager") != null)
         {
             GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
+        }
+
+        // tell score manager that a cupcake has died
+        if(GetEventListener("scoreManager") != null)
+        {
+            GetEventListener("scoreManager").HandleEvent(GameEvent.ENEMY_DIED, 1);
         }
 
         // disable animation

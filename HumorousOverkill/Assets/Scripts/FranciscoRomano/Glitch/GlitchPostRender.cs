@@ -54,13 +54,13 @@ public class GlitchPostRender : MonoBehaviour
         float xRandom = Random.Range(-offset, offset);
         float yRandom = Random.Range(-offset, offset);
 
-        _material.SetFloat("_RedX", xRandom + 0.001f);
-        _material.SetFloat("_BlueX", yRandom + 0.001f);
-        _material.SetFloat("_GreenX", -xRandom - 0.001f);
+        _material.SetFloat("_RedX", xRandom);
+        _material.SetFloat("_BlueX", yRandom);
+        _material.SetFloat("_GreenX", -xRandom);
 
-        _material.SetFloat("_RedY", yRandom + 0.001f);
-        _material.SetFloat("_BlueY", -xRandom - 0.001f);
-        _material.SetFloat("_GreenY", -yRandom - 0.001f);
+        _material.SetFloat("_RedY", yRandom);
+        _material.SetFloat("_BlueY", -xRandom);
+        _material.SetFloat("_GreenY", -yRandom);
 
 
         Graphics.Blit(source, destination, _material);
