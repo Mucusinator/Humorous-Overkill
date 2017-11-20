@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 // require text component
 [RequireComponent(typeof(Text))]
-[EventHandler.BindListener("timer", typeof(timer))]
-public class scoreManager : EventHandler.EventHandle
+public class scoreManager : MonoBehaviour
 {
     // difficulty enum
     public enum DIFFICULTY { EASY, NORMAL, HARD };
+
+    // types of enemy
+    public enum ENEMYTYPE { DONUT, CUPCAKE };
 
     // contains point values for each difficulty
     [System.Serializable]
@@ -54,27 +56,31 @@ public class scoreManager : EventHandler.EventHandle
     // refernce to Text
     private Text myText;
 
-    public override void Awake()
+    // reference to timer
+    private timer myTimer;
+
+    public void Awake()
     {
-        // do base Awake
-        base.Awake();
-
-        // get total game enemies from enemyManager
-
         // get Text
         myText = GetComponent<Text>();
 
         // set Text
         myText.text = displayString + currentScore;
+
+        // find timer (if it exists)
+        if(GameObject.FindObjectsOfType<timer>().Length != 0)
+        {
+            myTimer = GameObject.FindObjectsOfType<timer>()[0];
+        }
     }
 
-    public override bool HandleEvent(GameEvent e, float value)
+    public bool updatePoints(ENEMYTYPE e)
     {
         switch(e)
         {
-            case (GameEvent.ENEMY_DIED):
+            case (ENEMYTYPE.DONUT):
                 // add correct ammount of points
-                currentScore += getPoints(value);
+                currentScore += getPoints(e);
 
                 // update score text
                 myText.text = displayString + currentScore;
@@ -85,10 +91,10 @@ public class scoreManager : EventHandler.EventHandle
     }
 
     // returns the ammount of points for an enemy on the current difficulty
-    int getPoints(float enemyType)
+    int getPoints(ENEMYTYPE e)
     {
         // donut
-        if(enemyType == 0)
+        if(e == ENEMYTYPE.DONUT)
         {
             if(difficulty == DIFFICULTY.EASY)
             {
@@ -104,7 +110,7 @@ public class scoreManager : EventHandler.EventHandle
             }
         }
         // cupcake
-        else if(enemyType == 1)
+        else if(e == ENEMYTYPE.CUPCAKE)
         {
             if (difficulty == DIFFICULTY.EASY)
             {
@@ -126,7 +132,7 @@ public class scoreManager : EventHandler.EventHandle
     public int getFinalScore()
     {
         float finalScore = currentScore;
-        float finalTime = GetEventListener("timer").GetComponent<timer>().elapsedTime;
+        float finalTime = myTimer.elapsedTime;
 
         // multiply the score by the correct ultiplier based on completion time
         foreach(timeMultiplier currentMultiplier in timeMultipliers)
