@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using EventHandler;
 
-[BindListener("Enemy", typeof(EnemyManager))]
-[BindListener("Player", typeof(PlayerManager))]
-[BindListener("UI", typeof(UIManager))]
-public class CombinedScript : EventHandle {
+//[BindListener("Enemy", typeof(EnemyManager))]
+//[BindListener("Player", typeof(PlayerManager))]
+//[BindListener("UI", typeof(UIManager))]
+public class CombinedScript : MonoBehaviour {
 
     // Rifle/Laser Variables.
 
@@ -134,22 +134,10 @@ public class CombinedScript : EventHandle {
         RIFLE
 
     }
-
-
-
-
-
-
-
-
-
-
-
+    
     void Start() {
 
         currentShotgunAmmo = magTubeSize;
-  
-
     }
 
     // Update is called once per frame
@@ -397,15 +385,13 @@ public class CombinedScript : EventHandle {
     {
         if (gunType == GunType.RIFLE)
         {
-            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_CUR, (float)currentRifleAmmo);
-            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_MAX, (float)maxRifleAmmo);
+            EventManager<GameEvent>.InvokeGameState(this, null, (float)currentRifleAmmo, typeof(UIManager), GameEvent.UI_AMMO_CUR);
+            EventManager<GameEvent>.InvokeGameState(this, null, (float)maxRifleAmmo, typeof(UIManager), GameEvent.UI_AMMO_MAX);
         }
         else
         {
-
-            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_CUR, (float)currentShotgunAmmo);
-            GetEventListener("UI").HandleEvent(GameEvent.UI_AMMO_MAX, (float)maxShotgunAmmo);
-
+            EventManager<GameEvent>.InvokeGameState(this, null, (float)currentShotgunAmmo, typeof(UIManager), GameEvent.UI_AMMO_CUR);
+            EventManager<GameEvent>.InvokeGameState(this, null, (float)maxShotgunAmmo, typeof(UIManager), GameEvent.UI_AMMO_MAX);
         }
 
 
@@ -543,12 +529,12 @@ public class CombinedScript : EventHandle {
                     {
                         if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
                         {
-                            hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
-                            
+                            //hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                            EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)RifleDamage, typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
                         }
                         if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                         {
-                            hit.collider.gameObject.GetComponentInParent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                            EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
                         }
                         Debug.Log("I have shot " + hit.collider.gameObject.name);
                         //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
@@ -615,15 +601,15 @@ public class CombinedScript : EventHandle {
   
             if (hit.collider.gameObject.tag == "Enemy")
             {
-                GetEventListener("Enemy").HandleEvent(GameEvent.ENEMY_DAMAGED, hit.transform.gameObject);
+                
 
                 if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
                 {
-                    hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                    EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)RifleDamage, typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
                 }
                 if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                 {
-                    hit.collider.gameObject.GetComponentInParent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                    EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
                 }
                 Debug.Log("I have shot " + hit.collider.gameObject.name);
 
@@ -654,15 +640,13 @@ public class CombinedScript : EventHandle {
                     Debug.DrawRay(hit.point, reflectVec, Color.green, 5.0f);
                     if (hit.collider.gameObject.tag == "Enemy")
                     {
-                        GetEventListener("Enemy").HandleEvent(GameEvent.ENEMY_DAMAGED, hit.transform.gameObject);
-
                         if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
                         {
-                            hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, (PelletDamage * stuff.ReflectMultiplier / 100));
+                            EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)(PelletDamage * stuff.ReflectMultiplier / 100), typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
                         }
                         if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                         {
-                            hit.collider.gameObject.GetComponentInParent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, (PelletDamage * stuff.ReflectMultiplier / 100));
+                            EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)(PelletDamage * stuff.ReflectMultiplier / 100), typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
                         }
                         Debug.Log("I have shot " + hit.collider.gameObject.name);
 

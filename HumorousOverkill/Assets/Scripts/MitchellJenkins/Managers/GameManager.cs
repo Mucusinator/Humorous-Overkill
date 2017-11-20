@@ -12,6 +12,31 @@
 public class GameManager : EventHandler.EventHandle {
     [SerializeField] GameInfo m_gameInfo;
 
+    void Start () {
+        EventManager<GameEvent>.Add(HandleMessage);
+        EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(UIManager), GameEvent.STATE_MENU);
+    }
+
+    public void HandleMessage(object s, __eArg<GameEvent> e) {
+        if (s == (object)this) return;
+        switch (e.arg) {
+        case GameEvent.STATE_CONTINUE:
+        case GameEvent.STATE_MENU:
+        case GameEvent.STATE_PAUSE:
+        case GameEvent.STATE_RESTART:
+        case GameEvent.STATE_START:
+            if (e.type == GetType())
+                EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
+            break;
+        case GameEvent.PICKUP_RIFLEAMMO:
+        case GameEvent.PICKUP_SHOTGUNAMMO:
+        case GameEvent.PICKUP_HEALTH:
+            if (e.type == GetType())
+                EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
+            break;
+        }
+    }
+
     public override bool HandleEvent (GameEvent e) {
         switch (e) {
         // UI
