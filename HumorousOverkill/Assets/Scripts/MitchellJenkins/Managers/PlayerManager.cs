@@ -59,7 +59,9 @@ public class PlayerManager : EventHandler.EventHandle {
                 }
                 break;
             case GameEvent.PICKUP_SHOTGUNAMMO:
-                m_weapon.maxShotgunAmmo += (int)value;
+                //m_weapon.maxShotgunAmmo += (int)value;
+                GetEventListener("Weapon").GetComponent<CombinedScript>().maxShotgunAmmo += (int)value;
+                
                 break;
         default:
             break;
