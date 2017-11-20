@@ -4,7 +4,6 @@ using UnityEngine;
 
 [EventHandler.BindListener("playerManager", typeof(PlayerManager))]
 [EventHandler.BindListener("enemyManager", typeof(EnemyManager))]
-[EventHandler.BindListener("scoreManager", typeof(scoreManager))]
 public class CupcakeAI : EventHandler.EventHandle
 {
     #region variables
@@ -36,6 +35,9 @@ public class CupcakeAI : EventHandler.EventHandle
 
     private LayerMask pickupSpawnLayerMask;
 
+    // reference to scoremanager
+    private scoreManager scoremanager;
+
     #endregion
 
     public override void Awake()
@@ -53,6 +55,12 @@ public class CupcakeAI : EventHandler.EventHandle
         pickTarget();
 
         pickupSpawnLayerMask = LayerMask.GetMask("Player", "Enemy");
+
+        // find score manager (if it exists)
+        if (GameObject.FindObjectsOfType<scoreManager>().Length != 0)
+        {
+            scoremanager = GameObject.FindObjectsOfType<scoreManager>()[0];
+        }
     }
 
     void Update()
@@ -157,19 +165,16 @@ public class CupcakeAI : EventHandler.EventHandle
         }
 
         // tell enemy manager that an enemy has died
-        if(GetEventListener("enemyManager") != null)
-        {
-            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
-        }
+        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
 
-        // tell score manager that a cupcake has died
-        if(GetEventListener("scoreManager") != null)
+        // tell score manager that a cupcake has died (if it exists)
+        if(scoremanager != null)
         {
-            GetEventListener("scoreManager").HandleEvent(GameEvent.ENEMY_DIED, 1);
+            scoremanager.updatePoints(scoreManager.ENEMYTYPE.CUPCAKE);
         }
 
         // disable animation
-        if(GetComponent<Animator>() != null)
+        if (GetComponent<Animator>() != null)
         {
             GetComponent<Animator>().enabled = false;
         }

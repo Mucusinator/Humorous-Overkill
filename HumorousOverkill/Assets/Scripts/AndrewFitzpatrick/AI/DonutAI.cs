@@ -34,6 +34,9 @@ public class DonutAI : EventHandler.EventHandle
 
     private LayerMask pickupSpawnLayerMask;
 
+    // reference to scoremanager
+    private scoreManager scoremanager;
+
     #endregion
 
     public override void Awake()
@@ -55,6 +58,12 @@ public class DonutAI : EventHandler.EventHandle
         pickTarget();
 
         pickupSpawnLayerMask = LayerMask.GetMask("Player", "Enemy");
+
+        // find score manager (if it exists)
+        if (GameObject.FindObjectsOfType<scoreManager>().Length != 0)
+        {
+            scoremanager = GameObject.FindObjectsOfType<scoreManager>()[0];
+        }
     }
 
     void Update()
@@ -184,15 +193,12 @@ public class DonutAI : EventHandler.EventHandle
         Debug.Log("die has been called");
 
         // tell enemy manager that an enemy has died
-        if (GetEventListener("enemyManager") != null)
-        {
-            GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
-        }
+        GetEventListener("enemyManager").HandleEvent(GameEvent.ENEMY_SPAWNER_REMOVE);
 
-        // tell score manager that a donut has died
-        if (GetEventListener("scoreManager") != null)
+        // tell score manager that a cupcake has died (if it exists)
+        if (scoremanager != null)
         {
-            GetEventListener("scoreManager").HandleEvent(GameEvent.ENEMY_DIED, 0);
+            scoremanager.updatePoints(scoreManager.ENEMYTYPE.DONUT);
         }
 
         // disable collider preventing more deaths
@@ -270,7 +276,7 @@ public class DonutAI : EventHandler.EventHandle
             // reset shot timer
             shotTimer = 0;
 
-            // cant hit player (too far)
+            // can't hit player (too far)
             if ((player.transform.position - transform.position).magnitude > myInfo.hitRange)
             {
                 return;
@@ -283,7 +289,7 @@ public class DonutAI : EventHandler.EventHandle
             float playerHeightOffset = player.transform.position.y - transform.position.y;
             Debug.Log(playerHeightOffset);
 
-            // cant hit player (too high)
+            // can't hit player (too high)
             if (playerHeightOffset > myInfo.maximumTargetHeight)
             {
                 return;
