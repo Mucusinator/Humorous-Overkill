@@ -10,9 +10,27 @@ public class Map : MonoBehaviour {
     private bool isInitialized = false;
     private bool isFullscreen = false;
 
-    // Variables
-    Transform m_player;
-    RectTransform m_map;
+    // Tracking Positions
+    public Transform m_player;
+    public Transform[] m_enemy;
+    // Map texture
+    public Texture2D m_map;
+    // Map Icons
+    public Texture2D m_playerIcon;
+    public Texture2D m_enemyIcon;
+    // Map Variables
+    public float m_mapOffSetX;
+    public float m_mapOffSetY;
+    public float m_mapWidth;
+    public float m_mapHeight;
+    public float m_sceneWidth;
+    public float m_sceneHeight;
+    public float m_iconSize;
+    public float m_sceneOffSet;
+    float pX;
+    float pZ;
+    float playerMapX;
+    float playerMapZ;
 
     void Awake () {
         // Raise and Invoke Event
@@ -28,22 +46,35 @@ public class Map : MonoBehaviour {
                 GetType() ));
     }
 
+    float MapPos(float pos, float mapSize, float sceneSize) {
+        return pos * mapSize / sceneSize;
+    }
+
     void Init () {
         // Init Variables
-        m_map = this.GetComponent<RectTransform>();
 
         
         // Initialization Finished
         isInitialized = true;
     }
 
-    void Update () {
+    void OnGUI () {
         if (!isInitialized) return;
+        GUI.BeginGroup(new Rect(m_mapOffSetX, m_mapOffSetY, m_mapWidth, m_mapHeight), m_map);
 
-        Vector3 r = m_map.eulerAngles;
-        r.z = m_player.eulerAngles.y;
-        m_map.eulerAngles = r;
+        pX = MapPos(transform.position.x, m_mapWidth, m_sceneWidth);
+        pZ = MapPos(transform.position.z, m_mapHeight, m_sceneHeight);
+        
 
+        playerMapX = pX - (m_iconSize/2);
+        playerMapZ = ((pZ * -1) - (m_iconSize / 2)) + m_mapHeight;
+        GUI.Box(new Rect(playerMapX * m_sceneOffSet, playerMapZ * m_sceneOffSet, m_iconSize, m_iconSize), m_playerIcon, new GUIStyle());
+
+
+        GUI.EndGroup();
+        //Vector3 r = m_map.eulerAngles;
+        //r.z = m_player.eulerAngles.y;
+        //m_map.eulerAngles = r;
     }
 
     public void OnHandleEvent (object s, __eArg<MapState> e) {
@@ -67,15 +98,11 @@ public class Map : MonoBehaviour {
             // Check if map is fullscreen
             if (e.arg == MapState.FULLSCREENMAP) {
                 isFullscreen = true;
-                m_map.position = new Vector2(Screen.width / 2, Screen.height / 2);
-                m_map.sizeDelta = new Vector2(300, 300);
             }
 
             // Check if map is minimized
             if (e.arg == MapState.MINIMAP) {
                 isFullscreen = false;
-                m_map.position = new Vector2(Screen.width - 200, 150);
-                m_map.sizeDelta = new Vector2(100, 100);
             }
         }
     }
