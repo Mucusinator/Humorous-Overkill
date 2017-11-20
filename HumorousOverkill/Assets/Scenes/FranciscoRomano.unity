@@ -930,10 +930,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clipIndex: 0
   playOnAwake: 1
-  fade: 1
-  volume: 0.7
-  audioClips:
+  fade: 0.2
+  volume: 0.2
+  musicClips:
   - {fileID: 8300000, guid: edd5b2dbb9c971d4f990aabe735dbc28, type: 3}
+  soundClips: []
 --- !u!1 &1555105942
 GameObject:
   m_ObjectHideFlags: 0

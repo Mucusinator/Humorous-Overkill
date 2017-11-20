@@ -100,13 +100,13 @@ public class DonutAI : EventHandler.EventHandle
             if (rollHitInfo.collider.gameObject.tag == "Avoid" || rollHitInfo.collider.gameObject.tag == "Enemy")
             {
                 currentTarget += rollHitInfo.normal;
+                currentTarget.y = transform.position.y;
             }
         }
 
         if (nearTarget())
         {
-            currentTarget = player.transform.position;
-            currentTarget.y = 0;
+            pickTarget();
         }
 
         // deploy if within deployRange
