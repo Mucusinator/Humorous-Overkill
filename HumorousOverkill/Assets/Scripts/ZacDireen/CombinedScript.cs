@@ -68,7 +68,7 @@ public class CombinedScript : EventHandle {
     // This boolean tests if you are already reloading or not.
     public bool isReloading;
     // This animatior is resonsible for the reloading mechanic of the weapons.
-    public Animator animator;
+    public Animator m_animator;
     // This is a public int of the currently selected weapon.
     public int SelectedWeapon = 0;
     // This is the two different weapon types.
@@ -163,7 +163,7 @@ public class CombinedScript : EventHandle {
         }
         if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE && !isReloading)
         {
-            animator.SetBool("IsFiring", true);
+            m_animator.SetBool("IsFiring", true);
             shootRifle();
         }
         
@@ -669,7 +669,6 @@ public class CombinedScript : EventHandle {
     void OnEnable()
     {
         isReloading = false;
-        animator.SetBool("Reloading", false);
     }
 
 }
