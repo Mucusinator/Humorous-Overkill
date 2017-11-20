@@ -327,15 +327,8 @@ public class DonutAI : MonoBehaviour
     public void HandleEvent(object sender, __eArg<GameEvent> e)
     {
         // if we are not the sender or we are not the target return
-        if (sender == (object)this)
+        if (sender == (object)this || e.target != (object)this.gameObject)
         {
-            Debug.Log("Donut broke because of sendr");
-            return;
-        }
-
-        if (e.target != (object)this.gameObject)
-        {
-            Debug.Log("Donut broke because target was " + (GameObject)e.target);
             return;
         }
 

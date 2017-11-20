@@ -609,7 +609,7 @@ public class CombinedScript : MonoBehaviour {
                 }
                 if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                 {
-                    EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
+                    EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject.transform.parent.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
                 }
                 Debug.Log("I have shot " + hit.collider.gameObject.name);
 
