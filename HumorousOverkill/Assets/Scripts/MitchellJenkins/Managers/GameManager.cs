@@ -14,6 +14,7 @@ public class GameManager : EventHandler.EventHandle {
 
     void Start () {
         EventManager<GameEvent>.Add(HandleMessage);
+        EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(UIManager), GameEvent.STATE_MENU);
     }
 
     public void HandleMessage(object s, __eArg<GameEvent> e) {
