@@ -150,6 +150,7 @@ public class CombinedScript : EventHandle {
 
         if (gunType == GunType.SHOTGUN)
         {
+            m_animator.SetBool("IsFiring", false);
             checkReloadShotgun();
         }
         //if (gunType == GunType.SHOTGUN)
@@ -161,12 +162,21 @@ public class CombinedScript : EventHandle {
         {
             ManualReloading();
         }
+        if (currentRifleAmmo > 0) {
+            m_animator.SetBool("HasAmmo", true);
+        } else {
+            m_animator.SetBool("HasAmmo", false);
+        }
         if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE && !isReloading)
         {
             m_animator.SetBool("IsFiring", true);
             shootRifle();
         }
-        
+        if (Input.GetKeyUp(KeyCode.Mouse0)) {
+            m_animator.SetBool("IsFiring", false);
+        }
+
+
         GlitchCheck();
         Glitching();
         
