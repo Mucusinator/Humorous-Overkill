@@ -1,5 +1,4 @@
 ﻿using System;
-using FR.Util;
 using UnityEngine;
 using UnityEditor;
 using EventHandler;
@@ -72,8 +71,8 @@ public class EnemySpawnerEditor : Editor
     void OnEnable()
     {
         component = target as EnemySpawner;
-        SpawnInfo.isEditingWave = false;
-        SpawnInfo.isEditingUnit = false;
+        //SpawnInfo.isEditingWave = false;
+        //SpawnInfo.isEditingUnit = false;
 
         SpawnEditor.currentStage = component.stage;
         //PointEditor.style = new GUIStyle("button");

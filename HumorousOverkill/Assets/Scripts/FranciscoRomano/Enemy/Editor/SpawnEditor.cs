@@ -40,7 +40,7 @@ public class SpawnEditor
             Handles.color = Color.magenta;
             foreach (Point point in currentUnit.points)
             {
-                Handles.DrawSolidDisc(point.position + transform.position, Vector3.up, 0.5f);
+                Handles.DrawSolidDisc(transform.position + transform.rotation * point.position, Vector3.up, 0.5f);
             }
             SceneView.RepaintAll();
         }
@@ -51,7 +51,7 @@ public class SpawnEditor
             {
                 foreach (Point point in unit.points)
                 {
-                    Handles.DrawSolidDisc(point.position + transform.position, Vector3.up, 0.5f);
+                    Handles.DrawSolidDisc(transform.position + transform.rotation * point.position, Vector3.up, 0.5f);
                 }
             }
             SceneView.RepaintAll();
@@ -65,7 +65,7 @@ public class SpawnEditor
                 {
                     foreach (Point point in unit.points)
                     {
-                        Handles.DrawSolidDisc(point.position + transform.position, Vector3.up, 0.5f);
+                        Handles.DrawSolidDisc(transform.position + transform.rotation * point.position, Vector3.up, 0.5f);
                     }
                 }
             }
