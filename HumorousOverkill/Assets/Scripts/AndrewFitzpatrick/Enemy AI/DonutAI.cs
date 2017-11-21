@@ -197,8 +197,6 @@ public class DonutAI : MonoBehaviour
     {
         Debug.Log("die has been called");
 
-        __event<GameEvent>.HandleEvent -= events;
-
         // tell enemy manager that an enemy has died
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(EnemyManager), GameEvent.ENEMY_SPAWNER_REMOVE);
 
@@ -229,6 +227,11 @@ public class DonutAI : MonoBehaviour
 
         // destroy this gameobject after 5 seconds
         Destroy(this.gameObject, 5.0f);
+    }
+
+    public void OnDestroy()
+    {
+        __event<GameEvent>.HandleEvent -= events;
     }
 
     void dropPickup()
@@ -356,6 +359,8 @@ public class DonutAI : MonoBehaviour
         }
     }
 
+    #endregion
+
 #if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
@@ -389,6 +394,4 @@ public class DonutAI : MonoBehaviour
         }
     }
 #endif
-
-    #endregion
 }
