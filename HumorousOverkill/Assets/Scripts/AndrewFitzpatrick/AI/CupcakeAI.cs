@@ -164,7 +164,9 @@ public class CupcakeAI : MonoBehaviour
     {
         Debug.Log("die has been called");
 
-        if(enableColorChanges)
+        __event<GameEvent>.HandleEvent -= new __eHandle<object, __eArg<GameEvent>>(HandleEvent);
+
+        if (enableColorChanges)
         {
             changeColor(Color.black);
         }
@@ -241,7 +243,11 @@ public class CupcakeAI : MonoBehaviour
     public void HandleEvent(object sender, __eArg<GameEvent> e)
     {
         // if we are not the sender or we are not the target return
-        if (sender == (object)this || e.target != (object)this.gameObject)
+        if (sender == (object)this)
+        {
+            return;
+        }
+        if(e.target != (object)this.gameObject)
         {
             return;
         }
