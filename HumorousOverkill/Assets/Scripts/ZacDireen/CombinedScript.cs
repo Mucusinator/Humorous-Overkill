@@ -204,14 +204,14 @@ public class CombinedScript : MonoBehaviour {
 
     void showEnemyHealth()
     {
-        if (stuff.showEnemyHealth == true)
-        {
-            stuff.enemyHealth.enabled = true;
-        }
-        else
-        {
-            stuff.enemyHealth.enabled = false;
-        }
+        //if (stuff.showEnemyHealth == true)
+        //{
+        //    stuff.enemyHealth.enabled = true;
+        //}
+        //else
+        //{
+        //    stuff.enemyHealth.enabled = false;
+        //}
 
     }
     void checkReloadShotgun()
