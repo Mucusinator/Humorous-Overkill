@@ -60,7 +60,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void HandleEvent (object s, __eArg<GameEvent> e) {
-        if (s == (object)this) return;
         switch (e.arg) {
         case GameEvent._NULL_:
             if (e.type == typeof(PlayerManager)) {
