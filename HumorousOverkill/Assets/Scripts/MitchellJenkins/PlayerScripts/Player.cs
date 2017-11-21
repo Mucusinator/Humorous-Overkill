@@ -79,7 +79,7 @@ public class Player : MonoBehaviour {
             }
             break;
         case GameEvent.PLAYER_DAMAGE:
-            m_ply.m_playerHealth -= (int)e.value;
+            m_ply.m_playerHealth -= (float)e.value;
             CheckHealth();
             break;
         }
