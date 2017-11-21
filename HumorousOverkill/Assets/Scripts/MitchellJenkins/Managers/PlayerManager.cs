@@ -27,8 +27,7 @@ using UnityEngine;
     //public float m_gunReloadSpeed_type2;
 }
 
-[EventHandler.BindListener("Weapon", typeof(CombinedScript))]
-public class PlayerManager : EventHandler.EventHandle {
+public class PlayerManager : MonoBehaviour {
     public Player m_ply;
     private bool isFirstPickup = true;
 
@@ -43,9 +42,13 @@ public class PlayerManager : EventHandler.EventHandle {
         EventManager<GameEvent>.Add(HandleMessage);
     }
 
-    public void HandleMessage (System.Object s, __eArg<GameEvent> e) {
+    public void HandleMessage (object s, __eArg<GameEvent> e) {
         if (s == (System.Object)this) return;
         switch (e.arg) {
+        case GameEvent._NULL_:
+            if (e.type == typeof(CombinedScript))
+                m_weapon = (CombinedScript)s;
+            break;
         case GameEvent.PICKUP_HEALTH:
             // calls a function add health to the player
             m_ply.AddHealth((int)e.value);
@@ -56,9 +59,9 @@ public class PlayerManager : EventHandler.EventHandle {
                 m_weapon.maxRifleAmmo += (int)e.value;
             else {
                 Debug.Log(e.ToString() + " :: " + e.value);
-                GetEventListener("Weapon").GetComponent<CombinedScript>().currentRifleAmmo += (int)e.value;
+                m_weapon.currentRifleAmmo += (int)e.value;
                 isFirstPickup = false;
-                GetEventListener("Weapon").GetComponent<CombinedScript>().gunType = CombinedScript.GunType.RIFLE;
+                m_weapon.gunType = CombinedScript.GunType.RIFLE;
             }
             break;
         case GameEvent.PICKUP_SHOTGUNAMMO:
@@ -68,33 +71,4 @@ public class PlayerManager : EventHandler.EventHandle {
             break;
         }
     }
-
-
-    // Override for the handle event system
-    public override bool HandleEvent (GameEvent e, float value) {
-        //Debug.Log(e.ToString() + " :: " + value);
-        switch (e) {
-        case GameEvent.PICKUP_HEALTH:
-            // calls a function add health to the player
-            m_ply.AddHealth((int)value);
-            break;
-        case GameEvent.PICKUP_RIFLEAMMO:
-                // Calls the add ammo function from the ammo script using the enum.
-                if (!isFirstPickup)
-                    m_weapon.maxRifleAmmo += (int)value;
-                else {
-                    Debug.Log(e.ToString() + " :: " + value);
-                    GetEventListener("Weapon").GetComponent<CombinedScript>().currentRifleAmmo += (int)value;
-                    isFirstPickup = false;
-                    GetEventListener("Weapon").GetComponent<CombinedScript>().gunType = CombinedScript.GunType.RIFLE;
-                }
-                break;
-            case GameEvent.PICKUP_SHOTGUNAMMO:
-                m_weapon.maxShotgunAmmo += (int)value;
-                break;
-        default:
-            break;
-        } return true;
-    }
-
 }
