@@ -240,7 +240,12 @@ public class CupcakeAI : MonoBehaviour
 
     public void HandleEvent(object sender, __eArg<GameEvent> e)
     {
-        if (sender == (object)this) return;
+        // if we are not the sender or we are not the target return
+        if (sender == (object)this || e.target != (object)this.gameObject)
+        {
+            return;
+        }
+
         // Health is depleted
         if (e.arg == GameEvent.ENEMY_DAMAGED)
         {

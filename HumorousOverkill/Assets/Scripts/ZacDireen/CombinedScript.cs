@@ -204,14 +204,14 @@ public class CombinedScript : MonoBehaviour {
 
     void showEnemyHealth()
     {
-        if (stuff.showEnemyHealth == true)
-        {
-            stuff.enemyHealth.enabled = true;
-        }
-        else
-        {
-            stuff.enemyHealth.enabled = false;
-        }
+        //if (stuff.showEnemyHealth == true)
+        //{
+        //    stuff.enemyHealth.enabled = true;
+        //}
+        //else
+        //{
+        //    stuff.enemyHealth.enabled = false;
+        //}
 
     }
     void checkReloadShotgun()
@@ -530,11 +530,11 @@ public class CombinedScript : MonoBehaviour {
                         if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
                         {
                             //hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
-                            EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)RifleDamage, typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
+                            EventManager<GameEvent>.InvokeGameState(this, (GameObject)hit.collider.gameObject, (float)RifleDamage, typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
                         }
                         if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                         {
-                            EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
+                            EventManager<GameEvent>.InvokeGameState(this, (GameObject)hit.collider.gameObject.transform.parent.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
                         }
                         Debug.Log("I have shot " + hit.collider.gameObject.name);
                         //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
@@ -609,7 +609,7 @@ public class CombinedScript : MonoBehaviour {
                 }
                 if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                 {
-                    EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
+                    EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject.transform.parent.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
                 }
                 Debug.Log("I have shot " + hit.collider.gameObject.name);
 
