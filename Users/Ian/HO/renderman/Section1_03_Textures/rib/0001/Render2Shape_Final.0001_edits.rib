@@ -1,0 +1,6 @@
+##RenderMan RIB
+version 3.04
+EditBegin "attribute" 
+EditEnd 
+Option "rerender" "int[2] lodrange" [0 0]
+##streammarker28
