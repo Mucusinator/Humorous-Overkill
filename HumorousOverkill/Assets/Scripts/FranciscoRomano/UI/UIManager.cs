@@ -72,7 +72,7 @@ public class UIManager : EventHandler.EventHandle
             case GameEvent.UI_HEALTH:
             case GameEvent.UI_AMMO_CUR:
             case GameEvent.UI_AMMO_MAX:
-                if (propertyDictionary.ContainsKey(e.arg))
+                if (propertyDictionary[e.arg].Count < 0)
                 {
                     foreach (UIProperty property in propertyDictionary[e.arg])
                     {
@@ -90,7 +90,7 @@ public class UIManager : EventHandler.EventHandle
                 {
                     foreach (UIProperty property in propertyDictionary[otherE])
                     {
-                        property.gameObject.SetActive(otherE == e.arg);
+                        //property.gameObject.SetActive(otherE == e.arg);
                     }
                 }
                 //foreach (UIProperty property in propertyList)
