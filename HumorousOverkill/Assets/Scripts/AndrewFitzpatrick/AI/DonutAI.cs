@@ -38,6 +38,8 @@ public class DonutAI : MonoBehaviour
 
     public void Awake()
     {
+        EventManager<GameEvent>.Add(HandleEvent);
+
         // find the player
         player = GameObject.FindObjectOfType<Player>().gameObject;
 
@@ -324,6 +326,13 @@ public class DonutAI : MonoBehaviour
 
     public void HandleEvent(object sender, __eArg<GameEvent> e)
     {
+        // if we are not the sender or we are not the target return
+        if (sender == (object)this || e.target != (object)this.gameObject)
+        {
+            return;
+        }
+
+        Debug.Log("Donut is handle event");
         switch (e.arg)
         {
             case GameEvent.ENEMY_DAMAGED:
