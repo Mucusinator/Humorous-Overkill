@@ -47,6 +47,7 @@ public class AudioManager : MonoBehaviour
     }
     public void Add(AudioClip clip)
     {
+        if (audioDictionary.ContainsKey(clip)) return;
         // create objects
         GameObject gameObj = Instantiate(new GameObject("manager-audio"), transform);
         AudioSource source = gameObj.AddComponent<AudioSource>();
