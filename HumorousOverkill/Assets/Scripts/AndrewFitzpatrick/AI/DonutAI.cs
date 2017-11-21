@@ -34,11 +34,14 @@ public class DonutAI : MonoBehaviour
     // reference to scoremanager
     private scoreManager scoremanager;
 
+    __eHandle<object, __eArg<GameEvent>> events;
+
     #endregion
 
     public void Awake()
     {
-        EventManager<GameEvent>.Add(HandleEvent);
+        events = new __eHandle<object, __eArg<GameEvent>>(HandleEvent);
+        __event<GameEvent>.HandleEvent += events;
 
         // find the player
         player = GameObject.FindObjectOfType<Player>().gameObject;
@@ -191,7 +194,7 @@ public class DonutAI : MonoBehaviour
     {
         Debug.Log("die has been called");
 
-        __event<GameEvent>.HandleEvent -= new __eHandle<object, __eArg<GameEvent>>(HandleEvent);
+        __event<GameEvent>.HandleEvent -= events;
 
         // tell enemy manager that an enemy has died
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(EnemyManager), GameEvent.ENEMY_SPAWNER_REMOVE);
