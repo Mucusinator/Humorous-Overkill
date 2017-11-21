@@ -185,7 +185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1191761077740104
 GameObject:
   m_ObjectHideFlags: 1
@@ -1143,7 +1143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922aca34aa3702e418b06e165cd20412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 22
+  type: 3329
 --- !u!114 &114023414700541150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1630,7 +1630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922aca34aa3702e418b06e165cd20412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 25
+  type: 3332
 --- !u!114 &114172762287922908
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1826,7 +1826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  triggerEvent: 3
+  triggerEvent: 2567
   sprites: []
 --- !u!114 &114255108778987836
 MonoBehaviour:
@@ -1952,7 +1952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  triggerEvent: 6
+  triggerEvent: 2564
   sprites: []
 --- !u!114 &114277505472583250
 MonoBehaviour:
@@ -2039,7 +2039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922aca34aa3702e418b06e165cd20412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 23
+  type: 3330
 --- !u!114 &114290752426375434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2450,7 +2450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  triggerEvent: 5
+  triggerEvent: 2562
   sprites: []
 --- !u!114 &114434733015530794
 MonoBehaviour:
@@ -2464,7 +2464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  triggerEvent: 4
+  triggerEvent: 2565
   sprites: []
 --- !u!114 &114435049442881862
 MonoBehaviour:
@@ -2529,7 +2529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922aca34aa3702e418b06e165cd20412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  type: 2560
 --- !u!114 &114450563512560850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2662,7 +2662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  triggerEvent: 17
+  triggerEvent: 18
   sprites: []
 --- !u!114 &114519564928372886
 MonoBehaviour:
@@ -2889,7 +2889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  triggerEvent: 16
+  triggerEvent: 17
   sprites: []
 --- !u!114 &114549776383597440
 MonoBehaviour:
@@ -3498,7 +3498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  triggerEvent: 3
+  triggerEvent: 2566
   sprites: []
 --- !u!114 &114769621972762348
 MonoBehaviour:
@@ -3564,7 +3564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  triggerEvent: 4
+  triggerEvent: 2561
   sprites: []
 --- !u!114 &114790928800940834
 MonoBehaviour:
@@ -3637,7 +3637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922aca34aa3702e418b06e165cd20412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 24
+  type: 3331
 --- !u!114 &114804530541555532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3850,7 +3850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922aca34aa3702e418b06e165cd20412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  type: 2560
 --- !u!114 &114845418523516296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3862,7 +3862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922aca34aa3702e418b06e165cd20412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  type: 2565
 --- !u!114 &114876289357854496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3978,7 +3978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  triggerEvent: 3
+  triggerEvent: 2560
   sprites: []
 --- !u!114 &114928795176315212
 MonoBehaviour:
@@ -4115,7 +4115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922aca34aa3702e418b06e165cd20412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 5
+  type: 2562
 --- !u!114 &114976083354150646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4127,7 +4127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922aca34aa3702e418b06e165cd20412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  type: 2560
 --- !u!114 &114991401114277472
 MonoBehaviour:
   m_ObjectHideFlags: 1
