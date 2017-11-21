@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class Pickup : MonoBehaviour
 {
-    public float amount;
+    public int amount;
     public GameEvent type;
 	
 	void Start ()

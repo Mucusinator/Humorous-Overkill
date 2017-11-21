@@ -77,16 +77,11 @@ public class scoreManager : MonoBehaviour
 
     public bool updatePoints(ENEMYTYPE e)
     {
-        switch(e)
-        {
-            case (ENEMYTYPE.DONUT):
-                // add correct ammount of points
-                currentScore += getPoints(e);
+        // add correct ammount of points
+        currentScore += getPoints(e);
 
-                // update score text
-                myText.text = displayString + currentScore;
-                break;
-        }
+        // update score text
+        myText.text = displayString + currentScore;
 
         return true;
     }
