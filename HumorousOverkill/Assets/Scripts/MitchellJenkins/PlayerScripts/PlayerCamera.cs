@@ -1,16 +1,26 @@
 ﻿using UnityEngine;
 using EventHandler;
 
-[BindListener("PlayerManager", typeof(PlayerManager))]
-public class PlayerCamera : EventHandle {
+public class PlayerCamera : MonoBehaviour {
     private PlayerInfo m_ply;
     private float m_rotation = 0;
-    void Start () {
-        m_ply = GetEventListener("PlayerManager").gameObject.GetComponent<PlayerManager>().GetPlayerInfo;
+    void Awake () {
+        EventManager<GameEvent>.Add(HandleMessage);
     }
 
     private void LateUpdate () {
         RotateCamera();
+    }
+
+    public void HandleMessage(object s, __eArg<GameEvent> e) {
+        if (s == (object)this) return;
+        switch (e.arg) {
+        case GameEvent._NULL_:
+            if (e.type == typeof(PlayerManager)) {
+                m_ply = (PlayerInfo)e.value;
+            }
+            break;
+        }
     }
 
     private void RotateCamera () {
