@@ -17,7 +17,7 @@ public class UIManager : EventHandler.EventHandle
     // This boolean is for when the UI manager nees to be tested. (Added by Zack.) 
 
     // :: variables
-    List<UIProperty> propertyList = new List<UIProperty>();
+    //List<UIProperty> propertyList = new List<UIProperty>();
     Dictionary<GameEvent, List<UIProperty>> propertyDictionary = new Dictionary<GameEvent, List<UIProperty>>();
 
     // :: functions
@@ -86,19 +86,26 @@ public class UIManager : EventHandler.EventHandle
             case GameEvent.STATE_PAUSE:
             case GameEvent.STATE_RESTART:
             case GameEvent.STATE_CONTINUE:
-                foreach (UIProperty property in propertyList)
+                foreach (GameEvent otherE in Enum.GetValues(typeof(GameEvent)))
                 {
-                    property.gameObject.SetActive(false);
-                }
-                propertyList.Clear();
-                if (propertyDictionary.ContainsKey(e.arg))
-                {
-                    foreach (UIProperty property in propertyDictionary[e.arg])
+                    foreach (UIProperty property in propertyDictionary[otherE])
                     {
-                        property.gameObject.SetActive(true);
-                        propertyList.Add(property);
+                        property.gameObject.SetActive(otherE == e.arg);
                     }
                 }
+                //foreach (UIProperty property in propertyList)
+                //{
+                //    property.gameObject.SetActive(false);
+                //}
+                //propertyList.Clear();
+                //if (propertyDictionary.ContainsKey(e.arg))
+                //{
+                //    foreach (UIProperty property in propertyDictionary[e.arg])
+                //    {
+                //        property.gameObject.SetActive(true);
+                //        propertyList.Add(property);
+                //    }
+                //}
                 break;
         }
     }
