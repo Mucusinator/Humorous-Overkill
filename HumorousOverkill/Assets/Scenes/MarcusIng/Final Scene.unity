@@ -4752,6 +4752,10 @@ Prefab:
       propertyPath: m_TagString
       value: Avoid
       objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 85326ceaf382ad049a060471ecbc2645, type: 3}
+      propertyPath: m_TagString
+      value: Avoid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 85326ceaf382ad049a060471ecbc2645, type: 3}
   m_IsPrefabParent: 0
@@ -15202,7 +15206,7 @@ MonoBehaviour:
           type: 2}
         points:
         - amount: 3
-          position: {x: 16, y: -7.55, z: 6}
+          position: {x: 10.07, y: -7.55, z: 5.4}
     - rate: 3
       units:
       - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
@@ -26909,15 +26913,15 @@ MonoBehaviour:
     damage: 10
     fireRate: 1
     rollSpeed: 10
-    turnSpeed: 5
+    turnSpeed: 15
     deployRange: 10
     hitRange: 12
     maximumTargetHeight: 20
     accuracy: 2
     pickupDropRate: 99
     targetRadius: 5
-    avoidRadius: 5
-    errorMargin: 2
+    avoidRadius: 10
+    errorMargin: 2.5
 --- !u!4 &889218441
 Transform:
   m_ObjectHideFlags: 0
@@ -49653,6 +49657,47 @@ Transform:
   m_PrefabParentObject: {fileID: 4306886731855626, guid: a555eae4ddf017547b4a243bb749397a,
     type: 2}
   m_PrefabInternal: {fileID: 1617088889}
+--- !u!1 &1618886496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1618886497}
+  - component: {fileID: 1618886498}
+  m_Layer: 0
+  m_Name: collider
+  m_TagString: Avoid
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1618886497
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1618886496}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1646079442}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1618886498
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1618886496}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 30.7, y: 41.22, z: 1}
+  m_Center: {x: 0, y: -8.72, z: -10.3}
 --- !u!1001 &1622354212
 Prefab:
   m_ObjectHideFlags: 0
@@ -50694,6 +50739,10 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 0}
+--- !u!4 &1646079442 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400004, guid: da6778dff62ffcd46a7466a80c481f90, type: 3}
+  m_PrefabInternal: {fileID: 1656801557}
 --- !u!1001 &1646477666
 Prefab:
   m_ObjectHideFlags: 0
@@ -50929,6 +50978,10 @@ Prefab:
     - target: {fileID: 400004, guid: da6778dff62ffcd46a7466a80c481f90, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180.00002
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: da6778dff62ffcd46a7466a80c481f90, type: 3}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: da6778dff62ffcd46a7466a80c481f90, type: 3}
