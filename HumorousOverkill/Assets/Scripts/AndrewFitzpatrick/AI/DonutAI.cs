@@ -34,11 +34,14 @@ public class DonutAI : MonoBehaviour
     // reference to scoremanager
     private scoreManager scoremanager;
 
+    __eHandle<object, __eArg<GameEvent>> events;
+
     #endregion
 
     public void Awake()
     {
-        EventManager<GameEvent>.Add(HandleEvent);
+        events = new __eHandle<object, __eArg<GameEvent>>(HandleEvent);
+        __event<GameEvent>.HandleEvent += events;
 
         // find the player
         player = GameObject.FindObjectOfType<Player>().gameObject;
@@ -134,11 +137,6 @@ public class DonutAI : MonoBehaviour
         // circumference is 2PIr aka PI * diameter
         donutCircumference = (size * Mathf.PI);
 
-        // set height properly
-        Vector3 position = transform.position;
-        position.y = size / 2;
-        transform.position = position;
-
         // set roll animation speed
         myAnimator.SetFloat("rollSpeed", (1.0f / donutCircumference) * myInfo.rollSpeed);
     }
@@ -195,6 +193,8 @@ public class DonutAI : MonoBehaviour
     void die()
     {
         Debug.Log("die has been called");
+
+        __event<GameEvent>.HandleEvent -= events;
 
         // tell enemy manager that an enemy has died
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(EnemyManager), GameEvent.ENEMY_SPAWNER_REMOVE);
@@ -327,7 +327,11 @@ public class DonutAI : MonoBehaviour
     public void HandleEvent(object sender, __eArg<GameEvent> e)
     {
         // if we are not the sender or we are not the target return
-        if (sender == (object)this || e.target != (object)this.gameObject)
+        if (sender == (object)this)
+        {
+            return;
+        }
+        if (e.target != (object)this.gameObject)
         {
             return;
         }

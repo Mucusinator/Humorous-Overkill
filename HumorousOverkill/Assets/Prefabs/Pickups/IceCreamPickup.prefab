@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 60
-  floatSpeed: 3
+  floatSpeed: 4
   floatMagnitude: 0.5
   floatHeightOffset: 1
 --- !u!114 &114630758835691574

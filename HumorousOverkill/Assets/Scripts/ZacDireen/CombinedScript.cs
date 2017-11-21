@@ -136,7 +136,7 @@ public class CombinedScript : MonoBehaviour {
     }
     
     void Start() {
-
+        EventManager<GameEvent>.InvokeGameState(this, null, null, GetType(), GameEvent._NULL_);
         currentShotgunAmmo = magTubeSize;
     }
 
@@ -204,14 +204,14 @@ public class CombinedScript : MonoBehaviour {
 
     void showEnemyHealth()
     {
-        if (stuff.showEnemyHealth == true)
-        {
-            stuff.enemyHealth.enabled = true;
-        }
-        else
-        {
-            stuff.enemyHealth.enabled = false;
-        }
+        //if (stuff.showEnemyHealth == true)
+        //{
+        //    stuff.enemyHealth.enabled = true;
+        //}
+        //else
+        //{
+        //    stuff.enemyHealth.enabled = false;
+        //}
 
     }
     void checkReloadShotgun()

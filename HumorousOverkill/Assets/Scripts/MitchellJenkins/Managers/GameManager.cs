@@ -14,6 +14,8 @@ public class GameManager : EventHandler.EventHandle {
 
     void Start () {
         EventManager<GameEvent>.Add(HandleMessage);
+        EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent._NULL_);
+
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(UIManager), GameEvent.STATE_MENU);
     }
 
@@ -34,30 +36,12 @@ public class GameManager : EventHandler.EventHandle {
             if (e.type == GetType())
                 EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
             break;
+        case GameEvent.DIFFICULTY_EASY:
+        case GameEvent.DIFFICULTY_MEDI:
+        case GameEvent.DIFFICULTY_HARD:
+        case GameEvent.DIFFICULTY_NM:
+            EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
+            break;
         }
     }
-
-    public override bool HandleEvent (GameEvent e) {
-        switch (e) {
-        // UI
-        case GameEvent.STATE_CONTINUE:
-        case GameEvent.STATE_MENU:
-        case GameEvent.STATE_PAUSE:
-        case GameEvent.STATE_RESTART:
-        case GameEvent.STATE_START:
-            this.GetComponent<UIManager>().HandleEvent(e);
-            break;
-        // Player
-        case GameEvent.PICKUP_RIFLEAMMO:
-
-        case GameEvent.PICKUP_SHOTGUNAMMO:
-
-        case GameEvent.PICKUP_HEALTH:
-            this.GetComponent<PlayerManager>().HandleEvent(e);
-            break;
-        default:
-            break;
-        } return true;
-    }
-
 }

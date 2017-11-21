@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class Pickup : MonoBehaviour
 {
-    public float amount;
+    public int amount;
     public GameEvent type;
 	
 	void Start ()
@@ -20,8 +20,11 @@ public class Pickup : MonoBehaviour
         // check if player
         if (collider.tag == "Player")
         {
+
+            EventManager<GameEvent>.InvokeGameState(this, null, amount, typeof(PlayerManager), type);
+
             // send event to player
-            GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(type, amount);
+            //GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(type, amount);
             // destroy current game object
             Destroy(gameObject);
         }

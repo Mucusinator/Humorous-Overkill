@@ -14,6 +14,9 @@ public class timer : MonoBehaviour
     [Range(0, 5)]
     public int precision;
 
+    [Tooltip("Change this to change the string displayed in front of the time")]
+    public string displayString;
+
     // runs once when this timer is created at the start of the main scene
     void Start()
     {
@@ -45,8 +48,8 @@ public class timer : MonoBehaviour
         // find seconds
         float seconds = elapsedTime - (minutes * 60.0f);
 
-        string displayString = "elapsed time: " + minutes.ToString() + ":" + seconds.ToString("F" + precision.ToString()).Replace(".", ":");
-        myText.text = displayString;
+        string currentDisplayString = displayString + minutes.ToString() + ":" + seconds.ToString("F" + precision.ToString()).Replace(".", ":");
+        myText.text = currentDisplayString;
     }
 
     // allow future scripts to toggle whether the timer should be timing
