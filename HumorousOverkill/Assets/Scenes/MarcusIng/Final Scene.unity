@@ -7473,6 +7473,73 @@ Transform:
   m_PrefabParentObject: {fileID: 4306886731855626, guid: a555eae4ddf017547b4a243bb749397a,
     type: 2}
   m_PrefabInternal: {fileID: 226236421}
+--- !u!1 &228908259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 228908260}
+  - component: {fileID: 228908263}
+  - component: {fileID: 228908262}
+  - component: {fileID: 228908261}
+  m_Layer: 0
+  m_Name: Scaffolding Platform Colldiers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &228908260
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 228908259}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2072404385}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &228908261
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 228908259}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 16.127377, y: 0.9868164, z: 1.9190822}
+  m_Center: {x: -10.029715, y: 1.4065666, z: -14.996529}
+--- !u!65 &228908262
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 228908259}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20.156883, y: 0.9868164, z: 1.979537}
+  m_Center: {x: -8.01496, y: 1.4065666, z: -5.0664845}
+--- !u!65 &228908263
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 228908259}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20.156883, y: 0.9868164, z: 2.1089544}
+  m_Center: {x: -8.01496, y: 1.4065666, z: 2.9527605}
 --- !u!1001 &231014004
 Prefab:
   m_ObjectHideFlags: 0
@@ -64332,6 +64399,7 @@ Transform:
   - {fileID: 1494045843}
   - {fileID: 305175964}
   - {fileID: 302027273}
+  - {fileID: 228908260}
   m_Father: {fileID: 1064994199}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
