@@ -4,11 +4,15 @@ using System.Collections.Generic;
 
 public class Popup : MonoBehaviour
 {
+    [HideInInspector]
     public int index = 0;
+    [HideInInspector]
     public bool fadeIn = true;
+    [HideInInspector]
     public bool running = false;
-    public float fadeInSpeed = 0.1f;
-    public float fadeOutDelay = 5.0f;
+    public float fadeInDelay = 1.0f;
+    public float fadeInSpeed = 1.0f;
+    public float fadeOutDelay = 1.0f;
     public float fadeOutSpeed = 1.0f;
     public Sprite[] sprites;
     public UnityEngine.UI.Image image;
@@ -17,6 +21,7 @@ public class Popup : MonoBehaviour
 	void Start ()
     {
         EventManager<GameEvent>.Add(HandleMessage);
+        ResetAll();
 	}
 
     void Update()
@@ -27,27 +32,25 @@ public class Popup : MonoBehaviour
             if (image.color.a < 1)
             {
                 Color color1 = image.color;
-                color1.a = Mathf.Min(color1.a + Time.deltaTime * fadeInSpeed, 1);
+                color1.a = Mathf.Min(color1.a + (Time.deltaTime / fadeInSpeed), 1);
                 image.color = color1;
                 currentTime = Time.time;
             }
-            else
+            else if ((currentTime + fadeOutDelay) < Time.time)
             {
-                if (currentTime < (Time.time + fadeOutDelay))
-                {
-                    fadeIn = false;
-                };
-            }
+                fadeIn = false;
+            };
         }
         else
         {
             if (image.color.a > 0)
             {
                 Color color1 = image.color;
-                color1.a = Mathf.Max(color1.a - Time.deltaTime * fadeOutSpeed, 0);
+                color1.a = Mathf.Max(color1.a - (Time.deltaTime / fadeOutSpeed), 0);
                 image.color = color1;
+                currentTime = Time.time;
             }
-            else
+            else if ((currentTime + fadeOutDelay) < Time.time)
             {
                 fadeIn = true;
                 NextSprite();
@@ -90,6 +93,6 @@ public class Popup : MonoBehaviour
 
     public void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "player") running = true;
+        if (collider.tag == "Player") running = true;
     }
 }
