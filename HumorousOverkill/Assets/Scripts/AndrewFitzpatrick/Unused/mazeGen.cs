@@ -13,6 +13,9 @@ public class mazeGen : MonoBehaviour
     // total size of the maze
     private Vector3 totalMazeSize;
 
+    public bool colored;
+    public bool roof;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -39,7 +42,10 @@ public class mazeGen : MonoBehaviour
                     GameObject currentMazePart = Instantiate(mazeBlock, new Vector3(x * mazeBlock.transform.localScale.x, mazeBlock.transform.localScale.y / 2, y * mazeBlock.transform.localScale.z), Quaternion.identity, transform);
                     currentMazePart.name = "maze (" + x + ", " + y + ")";
 
-                    currentMazePart.GetComponent<Renderer>().material.SetColor("_Color", randomColor());
+                    if(colored)
+                    {
+                        currentMazePart.GetComponent<Renderer>().material.SetColor("_Color", randomColor());
+                    }
                 }
             }
         }
@@ -53,9 +59,16 @@ public class mazeGen : MonoBehaviour
 
         floorTransform.localScale = roofTransform.localScale = totalMazeSize / 2;
         floorTransform.position = totalMazeSize / 4;
-        roofTransform.position = floorTransform.position + Vector3.up * mazeBlock.transform.localScale.y;
 
-        roofTransform.gameObject.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        if(roof)
+        {
+            roofTransform.position = floorTransform.position + Vector3.up * mazeBlock.transform.localScale.y;
+            roofTransform.gameObject.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        }
+        else
+        {
+            Destroy(roofTransform.gameObject);
+        }
     }
 
     // add a single light to illuminate the maze

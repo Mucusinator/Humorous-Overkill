@@ -53,6 +53,10 @@ public class EnemyManager : EventHandler.EventHandle
     public DonutEnemyInfo defaultDonutInfo;
 
     // :: functions
+    void Start()
+    {
+        EventManager<GameEvent>.Add(HandleMessage);
+    }
     void OnGUI()
     {
         // check spawner status
@@ -99,16 +103,21 @@ public class EnemyManager : EventHandler.EventHandle
         }
     }
     // :: functions [events]
-    public override bool HandleEvent(GameEvent e)
+    public void HandleMessage(object sender, __eArg<GameEvent> e)
     {
-        switch(e)
+        if (sender == (object)this) return;
+        switch (e.arg)
         {
             case GameEvent.ENEMY_SPAWNER_CREATE:
             case GameEvent.ENEMY_SPAWNER_REMOVE:
-                if (spawner == null) return false;
-                spawner.HandleEvent(e);
+                if (spawner == null) return;
+                spawner.HandleEvent(e.arg);
                 break;
         }
+    }
+    public override bool HandleEvent(GameEvent e)
+    {
+        HandleMessage(this, new __eArg<GameEvent>(e, this, null, typeof(EnemyManager)));
         return true;
     }
     public override bool HandleEvent(GameEvent e, Object value)
