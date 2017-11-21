@@ -79,6 +79,8 @@ public class CupcakeAI : MonoBehaviour
         }
 	}
 
+    #region functions
+
     void wander()
     {
         // if we are within the margin of error pick a new target
@@ -110,8 +112,6 @@ public class CupcakeAI : MonoBehaviour
             shotTimer = 0;
         }
     }
-
-    #region functions
 
     void pickTarget()
     {
@@ -214,6 +214,11 @@ public class CupcakeAI : MonoBehaviour
 
         // fully delete this gameObject after a set number of seconds
         Destroy(this.gameObject, 5);
+    }
+
+    public void OnDestroy()
+    {
+        __event<GameEvent>.HandleEvent -= events;
     }
 
     void dropPickup()
