@@ -18,7 +18,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private bool m_movementEnabled = true;
 
     public void Awake () {
-        m_cc = this.GetComponent<CharacterController>() as CharacterController;        
+        m_cc = this.GetComponent<CharacterController>() as CharacterController;
+        EventManager<GameEvent>.Add(HandleEvent);       
     }
     
 
@@ -62,7 +63,7 @@ public class Player : MonoBehaviour {
     }
 
     void Update () {
-        EventManager<GameEvent>.InvokeGameState(this, null, m_ply.m_playerHealth / 100, typeof(UIManager), GameEvent.UI_HEALTH);
+        EventManager<GameEvent>.InvokeGameState(this, null, m_ply.m_playerHealth / 100.0f, typeof(UIManager), GameEvent.UI_HEALTH);
     }
 
     public void HandleEvent (object s, __eArg<GameEvent> e) {
