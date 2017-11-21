@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 34fd842823396f642a56b34ea7f56837
-timeCreated: 1510533914
+guid: 959890cce60dbc442b11d1b5e639b619
+timeCreated: 1511243586
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -156,11 +156,11 @@ ModelImporter:
     4300000: polySurface187
     4300002: ARMatige_polySurface187
     4300004: polySurface41
-    7400000: squeeze
+    7400000: Squeeze
     7400002: Hold
     7400004: Idle
+    7400006: Shotgun
     9500000: //RootNode
-    11100000: //RootNode
     13700000: ARMatige_polySurface187
     13700002: polySurface187
     13700004: polySurface41
@@ -180,7 +180,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -189,7 +189,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: squeeze
+      name: Squeeze
       takeName: Take 001
       firstFrame: 0
       lastFrame: 17
@@ -199,7 +199,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -272,6 +272,34 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Shotgun
+      takeName: Take 001
+      firstFrame: 53
+      lastFrame: 86
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -314,7 +342,7 @@ ModelImporter:
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2

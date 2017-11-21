@@ -20,6 +20,11 @@ public class AudioManager : MonoBehaviour
         Add(musics[0]);
         FadeIn(musics[0], fade);
     }
+
+    void Start () {
+        EventManager<GameEvent>.InvokeGameState(this, null, null, GetType(), GameEvent._NULL_);
+    }
+
     void Update()
     {
         foreach (AudioFade fade in audioFadeIn)
@@ -42,6 +47,7 @@ public class AudioManager : MonoBehaviour
     }
     public void Add(AudioClip clip)
     {
+        if (audioDictionary.ContainsKey(clip)) return;
         // create objects
         GameObject gameObj = Instantiate(new GameObject("manager-audio"), transform);
         AudioSource source = gameObj.AddComponent<AudioSource>();
