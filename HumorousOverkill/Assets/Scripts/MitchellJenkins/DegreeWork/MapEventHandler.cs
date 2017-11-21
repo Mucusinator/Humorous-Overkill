@@ -48,9 +48,13 @@ public static class EventManager<T> {
     public static void Add (EventDelegate del) {
         __event<T>.HandleEvent += new __eHandle<System.Object, __eArg<T>>(del);
     }
+    public static void Unsubscribe (EventDelegate del) {
+        __event<T>.HandleEvent -= new __eHandle<System.Object, __eArg<T>>(del);
+    }
     public static void InvokeGameState (System.Object sender, System.Object target, System.Object value, System.Type type, T e) {
         __event<T>.InvokeEvent(sender, new __eArg<T>(e, target, value, type));
     }
+    public static void UnsubscribeAll () { __event<T>.UnsubscribeAll(); }
 }
 
 // Event
@@ -72,6 +76,10 @@ public class __event<_T> {
         System.Object sender,   // The sender of the event
         __eArg<_T> e            // arguments for the event
         ) { if (HandleEvent != null) HandleEvent(sender, e); }
+    /// <summary>
+    /// Unsubscribe all event function attached to handler
+    /// </summary>
+    public static void UnsubscribeAll () { HandleEvent = null; }
 }
 
 // Event states that are passed as events
