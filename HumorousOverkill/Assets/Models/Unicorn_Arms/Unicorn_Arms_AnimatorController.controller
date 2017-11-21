@@ -12,7 +12,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: HasAmmo
     m_Type: 4
@@ -319,8 +319,8 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Shotgun
-  m_Speed: 2
+  m_Name: Release
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101966663375916586}
@@ -332,7 +332,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400006, guid: 959890cce60dbc442b11d1b5e639b619, type: 3}
+  m_Motion: {fileID: 7400006, guid: 177da5441bf061a46b6392773848694c, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
