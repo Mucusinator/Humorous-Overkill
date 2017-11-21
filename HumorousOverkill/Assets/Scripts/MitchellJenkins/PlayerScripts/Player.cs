@@ -2,15 +2,13 @@
 using EventHandler;
 using UnityEngine.SceneManagement;
 
-[BindListener("PlayerManager", typeof(PlayerManager))]
-[BindListener("UI", typeof(UIManager))]
-[BindListener("EnemyManager", typeof(EnemyManager))]
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerMovement))]
-public class Player : EventHandle {
+public class Player : MonoBehaviour {
 
     public PlayerInfo m_ply;
+    private DroneEnemyInfo m_droneInfo;
     private Animator m_animator;
     private CharacterController m_cc;
     private RuntimeAnimatorController m_animatorController;
@@ -19,27 +17,10 @@ public class Player : EventHandle {
     [SerializeField] private bool m_cameraEnabled = true;
     [SerializeField] private bool m_movementEnabled = true;
 
-    override public void Awake () {
-        base.Awake();
-        m_ply = GetEventListener("PlayerManager").gameObject.GetComponent<PlayerManager>().GetPlayerInfo;
-        m_cc = this.GetComponent<CharacterController>() as CharacterController;
-        // m_animator.runtimeAnimatorController = m_animatorController;
-        // m_cc.center = new Vector3(0f, 1f, 0f);
-        // m_cc.height = 1.8f;
-        
+    public void Awake () {
+        m_cc = this.GetComponent<CharacterController>() as CharacterController;        
     }
-
-
-
-    public void Start () {
-        __event<MapState>.InvokeEvent(
-            this,
-            new __eArg<MapState>(
-                MapState.PING,
-                null,
-                this.gameObject.transform,
-                typeof(Player) ));
-    }
+    
 
     public CharacterController _CharacterController {
         get { return this.m_cc; }
@@ -75,22 +56,31 @@ public class Player : EventHandle {
 
     void OnTriggerEnter(Collider c) {
         if (c.tag == "Projectile") {
-            m_ply.m_playerHealth -= GetEventListener("EnemyManager").gameObject.GetComponent<EnemyManager>().defaultDroneInfo.damage;
+            m_ply.m_playerHealth -= m_droneInfo.damage;
             CheckHealth();
         }
     }
 
     void Update () {
-        GetEventListener("UI").HandleEvent(GameEvent.UI_HEALTH, m_ply.m_playerHealth / 100);
+        EventManager<GameEvent>.InvokeGameState(this, null, m_ply.m_playerHealth / 100, typeof(UIManager), GameEvent.UI_HEALTH);
     }
 
-    public override bool HandleEvent (GameEvent e, float value) {
-        switch (e) {
+    public void HandleEvent (object s, __eArg<GameEvent> e) {
+        if (s == (object)this) return;
+
+        switch (e.arg) {
+        case GameEvent._NULL_:
+            if (e.type == typeof(PlayerManager)) {
+                m_ply = (PlayerInfo)e.value;
+            }
+            if (e.type == typeof(EnemyManager)) {
+                m_droneInfo = (DroneEnemyInfo)e.value;
+            }
+            break;
         case GameEvent.PLAYER_DAMAGE:
-            m_ply.m_playerHealth -= value;
+            m_ply.m_playerHealth -= (int)e.value;
             CheckHealth();
             break;
         }
-        return true;
     }
 }
