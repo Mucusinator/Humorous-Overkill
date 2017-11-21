@@ -41,8 +41,8 @@ public class PlayerManager : MonoBehaviour {
     void Awake () {
         EventManager<GameEvent>.Add(HandleMessage);
     }
-    void start () { 
-        EventManager<GameEvent>.InvokeGameState(this, null, m_playerInfo, typeof(Player), GameEvent._NULL_);
+    void Start () { 
+        EventManager<GameEvent>.InvokeGameState(this, null, m_playerInfo, typeof(PlayerManager), GameEvent._NULL_);
     }
 
     public void HandleMessage (object s, __eArg<GameEvent> e) {
