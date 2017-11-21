@@ -38,17 +38,24 @@ public class mazeGen : MonoBehaviour
                 {
                     GameObject currentMazePart = Instantiate(mazeBlock, new Vector3(x * mazeBlock.transform.localScale.x, mazeBlock.transform.localScale.y / 2, y * mazeBlock.transform.localScale.z), Quaternion.identity, transform);
                     currentMazePart.name = "maze (" + x + ", " + y + ")";
+
+                    currentMazePart.GetComponent<Renderer>().material.SetColor("_Color", randomColor());
                 }
             }
         }
     }
 
-    // resizes the floor to fit the maze
+    // resizes the floor and roof to fit the maze
     void resizeFloor()
     {
         Transform floorTransform = transform.GetChild(0);
-        floorTransform.localScale = totalMazeSize / 2;
+        Transform roofTransform = transform.GetChild(1);
+
+        floorTransform.localScale = roofTransform.localScale = totalMazeSize / 2;
         floorTransform.position = totalMazeSize / 4;
+        roofTransform.position = floorTransform.position + Vector3.up * mazeBlock.transform.localScale.y;
+
+        roofTransform.gameObject.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
     }
 
     // add a single light to illuminate the maze
@@ -73,5 +80,10 @@ public class mazeGen : MonoBehaviour
 
         // position light
         lightObject.transform.position = flatMazeSize / 4 + Vector3.up * 50.0f;
+    }
+
+    Color randomColor()
+    {
+        return new Color(Random.Range(0, 255) / 255.0f, Random.Range(0, 255) / 255.0f, Random.Range(0, 255) / 255.0f, 1);
     }
 }
