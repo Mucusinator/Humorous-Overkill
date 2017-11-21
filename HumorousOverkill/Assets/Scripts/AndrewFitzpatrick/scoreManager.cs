@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class scoreManager : MonoBehaviour
 {
     // difficulty enum
-    public enum DIFFICULTY { EASY, NORMAL, HARD };
+    public enum DIFFICULTY { EASY, NORMAL, HARD, NIGHTMARE };
 
     // types of enemy
     public enum ENEMYTYPE { DONUT, CUPCAKE };
@@ -20,6 +20,7 @@ public class scoreManager : MonoBehaviour
         public int easyPoints;
         public int normalPoints;
         public int hardPoints;
+        public int nightmarePoints;
     }
 
     // contains multipliers for different completion times
@@ -96,33 +97,31 @@ public class scoreManager : MonoBehaviour
         // donut
         if(e == ENEMYTYPE.DONUT)
         {
-            if(difficulty == DIFFICULTY.EASY)
+            switch (difficulty)
             {
-                return donutScoreValues.easyPoints;
-            }
-            if (difficulty == DIFFICULTY.NORMAL)
-            {
-                return donutScoreValues.normalPoints;
-            }
-            if (difficulty == DIFFICULTY.HARD)
-            {
-                return donutScoreValues.hardPoints;
+                case DIFFICULTY.EASY:
+                    return donutScoreValues.easyPoints;
+                case DIFFICULTY.NORMAL:
+                    return donutScoreValues.normalPoints;
+                case DIFFICULTY.HARD:
+                    return donutScoreValues.hardPoints;
+                case DIFFICULTY.NIGHTMARE:
+                    return donutScoreValues.nightmarePoints;
             }
         }
         // cupcake
         else if(e == ENEMYTYPE.CUPCAKE)
         {
-            if (difficulty == DIFFICULTY.EASY)
+            switch (difficulty)
             {
-                return cupcakeScoreValues.easyPoints;
-            }
-            if (difficulty == DIFFICULTY.NORMAL)
-            {
-                return cupcakeScoreValues.normalPoints;
-            }
-            if (difficulty == DIFFICULTY.HARD)
-            {
-                return cupcakeScoreValues.hardPoints;
+                case DIFFICULTY.EASY:
+                    return cupcakeScoreValues.easyPoints;
+                case DIFFICULTY.NORMAL:
+                    return cupcakeScoreValues.normalPoints;
+                case DIFFICULTY.HARD:
+                    return cupcakeScoreValues.hardPoints;
+                case DIFFICULTY.NIGHTMARE:
+                    return cupcakeScoreValues.nightmarePoints;
             }
         }
 

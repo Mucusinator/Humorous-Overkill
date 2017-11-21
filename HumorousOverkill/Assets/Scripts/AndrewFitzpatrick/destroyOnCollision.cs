@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class destroyOnCollision : MonoBehaviour
 {
-
     // destroys a gameobject when it collides with anything
     void OnCollisionEnter(Collision other)
     {
