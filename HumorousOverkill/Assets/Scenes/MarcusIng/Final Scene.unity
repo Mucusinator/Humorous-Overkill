@@ -9874,9 +9874,10 @@ GameObject:
   - component: {fileID: 302027273}
   - component: {fileID: 302027275}
   - component: {fileID: 302027274}
+  - component: {fileID: 302027276}
   m_Layer: 0
   m_Name: pCube121_MeshPart3
-  m_TagString: Untagged
+  m_TagString: Avoid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9940,6 +9941,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 302027272}
   m_Mesh: {fileID: 4300006, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
+--- !u!64 &302027276
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 302027272}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300006, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
 --- !u!1 &305175963
 GameObject:
   m_ObjectHideFlags: 0
@@ -9950,9 +9965,10 @@ GameObject:
   - component: {fileID: 305175964}
   - component: {fileID: 305175966}
   - component: {fileID: 305175965}
+  - component: {fileID: 305175967}
   m_Layer: 0
   m_Name: pCube121_MeshPart2
-  m_TagString: Untagged
+  m_TagString: Avoid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10025,6 +10041,20 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 305175963}
+  m_Mesh: {fileID: 4300004, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
+--- !u!64 &305175967
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 305175963}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
 --- !u!1001 &307224335
 Prefab:
@@ -42787,7 +42817,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 71}
+  m_SizeDelta: {x: 300, y: 71}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1405248872
 MonoBehaviour:
@@ -42802,6 +42832,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elapsedTime: 0
   precision: 2
+  displayString: 'Time: '
 --- !u!114 &1405248873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42823,12 +42854,12 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 45c605c6e5220d14bbe4d6ec91ab0667, type: 3}
-    m_FontSize: 14
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 0
+    m_MinSize: 3
+    m_MaxSize: 56
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -52019,9 +52050,10 @@ GameObject:
   - component: {fileID: 1494045843}
   - component: {fileID: 1494045845}
   - component: {fileID: 1494045844}
+  - component: {fileID: 1494045846}
   m_Layer: 0
   m_Name: pCube121_MeshPart1
-  m_TagString: Untagged
+  m_TagString: Avoid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52079,6 +52111,20 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1494045842}
+  m_Mesh: {fileID: 4300002, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
+--- !u!64 &1494045846
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1494045842}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
 --- !u!1 &1498262816 stripped
 GameObject:
@@ -63271,9 +63317,10 @@ GameObject:
   - component: {fileID: 1837117131}
   - component: {fileID: 1837117133}
   - component: {fileID: 1837117132}
+  - component: {fileID: 1837117134}
   m_Layer: 0
   m_Name: pCube121_MeshPart0
-  m_TagString: Untagged
+  m_TagString: Avoid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63339,6 +63386,20 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1837117130}
+  m_Mesh: {fileID: 4300000, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
+--- !u!64 &1837117134
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1837117130}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
 --- !u!1001 &1838941924
 Prefab:
