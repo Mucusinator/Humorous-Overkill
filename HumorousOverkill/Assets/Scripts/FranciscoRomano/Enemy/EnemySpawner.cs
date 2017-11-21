@@ -17,7 +17,7 @@ public class EnemySpawner : EventHandle
     public Stage stage = new Stage();
     public List<GameObject> doors = new List<GameObject>();
     // :: functions
-    public void Restart()
+    public void Reset()
     {
         units = 0;
         active = false;
@@ -71,12 +71,14 @@ public class EnemySpawner : EventHandle
             GetEventListener("EnemyManager").HandleEvent(GameEvent.CLASS_TYPE_ENEMY_SPAWNER, this);
         }
     }
-    public override bool HandleEvent(GameEvent e)
+    public void HandleMessage(object sender, __eArg<GameEvent> e)
     {
-        switch (e)
+        if (sender == (object)this) return;
+        switch (e.arg)
         {
+            case GameEvent.STATE_START:
             case GameEvent.STATE_RESTART:
-                Restart();
+                Reset();
                 break;
             case GameEvent.ENEMY_SPAWNER_NEXT:
                 SpawnerNext();
@@ -94,6 +96,10 @@ public class EnemySpawner : EventHandle
                 SpawnerRemove();
                 break;
         }
+    }
+    public override bool HandleEvent(GameEvent e)
+    {
+        HandleMessage(null, new __eArg<GameEvent>(e, this, null, typeof(EnemySpawner)));
         return true;
     }
 }
