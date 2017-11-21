@@ -70,6 +70,10 @@ public class CombinedScript : MonoBehaviour
     public bool isReloading;
     // This animatior is resonsible for the reloading mechanic of the weapons.
     public Animator animator;
+    public AudioClip LazerSound;
+    public AudioClip shotgunSound;
+    //Audio manager
+    private AudioManager m_audioManager;
     // This is a public int of the currently selected weapon.
     public int SelectedWeapon = 0;
     // This is the two different weapon types.
@@ -140,11 +144,30 @@ public class CombinedScript : MonoBehaviour
         RIFLE
 
     }
+<<<<<<< HEAD
+    
+    void Awake () {
+        EventManager<GameEvent>.Add(HandleMessage);
+    }
+
+    void Start() {
+=======
 
     void Start()
     {
+>>>>>>> 9eecb083c88f55ed29628ef181a6d6677095ec4c
         EventManager<GameEvent>.InvokeGameState(this, null, null, GetType(), GameEvent._NULL_);
         currentShotgunAmmo = magTubeSize;
+    }
+
+    public void HandleMessage(object s, __eArg<GameEvent> e) {
+        if (s == (object)this) return;
+        if (e.arg == GameEvent._NULL_)
+            if (e.type == typeof(AudioManager)) {
+                m_audioManager = (AudioManager)s;
+                m_audioManager.Add(LazerSound);
+                m_audioManager.Add(shotgunSound);
+            }
     }
 
     // Update is called once per frame
@@ -207,11 +230,21 @@ public class CombinedScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
         {
+            m_audioManager.Play1(shotgunSound);
             shootShotgun();
         }
+<<<<<<< HEAD
+        if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.RIFLE && currentRifleAmmo > 0) {
+            m_audioManager.Play(LazerSound);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse0)) {
+=======
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
+>>>>>>> 9eecb083c88f55ed29628ef181a6d6677095ec4c
             animator.SetBool("IsFiring", false);
+            m_audioManager.Stop(LazerSound);
         }
 
     }
