@@ -1,6 +1,21 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 98974e7ff4feea9468f4af010c851284
 timeCreated: 1511236949
+=======
+<<<<<<< HEAD
+guid: e21fa00ce42aec949bf4f0a2b61d9bb7
+timeCreated: 1511236759
+=======
+<<<<<<< HEAD
+guid: 98fc795a2a0cdf74b85d5d1268451ca9
+timeCreated: 1511237167
+=======
+guid: e70ee6f1b07821d46af90affe6acbf6c
+timeCreated: 1511236849
+>>>>>>> b25515f1b3542b8686b5e6bdcc2d90940e4fa162
+>>>>>>> 0f848a33f05377b843c99849384a5f7f85285f7f
+>>>>>>> 72a927b388507827ca75a13dc3941718aa2edacb
 licenseType: Pro
 DefaultImporter:
   userData: 
