@@ -166,9 +166,6 @@ public class CupcakeAI : MonoBehaviour
     void die()
     {
         Debug.Log("die has been called");
-        __event<GameEvent>.HandleEvent -= events;
-
-        //__event<GameEvent>.HandleEvent -= new __eHandle<object, __eArg<GameEvent>>(HandleEvent);
 
         if (enableColorChanges)
         {
