@@ -119,7 +119,11 @@ public class CombinedScript : MonoBehaviour {
 
         public bool showEnemyHealth;
 
+        public bool showStatistics;
 
+        public Text enemiesKilled;
+
+        public int killedCount;
 
 
     }
@@ -536,11 +540,29 @@ public class CombinedScript : MonoBehaviour {
                         {
                             //hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
                             EventManager<GameEvent>.InvokeGameState(this, (GameObject)hit.collider.gameObject, (float)RifleDamage, typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
+                            if (stuff.showStatistics == true)
+                            {
+                                if (hit.collider.gameObject.GetComponent<CupcakeAI>().myInfo.health <= 0)
+                                {
+                                    stuff.killedCount++;
+                                    stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
+                                }
+                            }
                         }
                         if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                         {
                             EventManager<GameEvent>.InvokeGameState(this, (GameObject)hit.collider.gameObject.transform.parent.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
+                        if (stuff.showStatistics == true)
+                        {
+                            if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
+                            {
+                                stuff.killedCount++;
+                                stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
+                            }
                         }
+                        }
+
+                        
                         Debug.Log("I have shot " + hit.collider.gameObject.name);
                         //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
                         //target.TakeDamage(RifleDamage);
@@ -627,6 +649,14 @@ public class CombinedScript : MonoBehaviour {
                         target.TakeDamage(PelletDamage);
                         stuff.enemyHealth.text = "Enemies health:" + target.health;
                     }
+                    if (stuff.showStatistics == true)
+                    {
+                        if (target.health <= 0)
+                        {
+                            stuff.killedCount++;
+                            stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
+                        }
+                    }
                 }
               
             }
@@ -670,6 +700,14 @@ public class CombinedScript : MonoBehaviour {
                             stuff.enemyHealth.text = "Enemies health:" + target.health;
 
 
+                        }
+                        if (stuff.showStatistics == true)
+                        {
+                            if (target.health <= 0)
+                            {
+                                stuff.killedCount++;
+                                stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
+                            }
                         }
 
                     }
