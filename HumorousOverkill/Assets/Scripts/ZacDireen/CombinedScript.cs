@@ -7,7 +7,8 @@ using EventHandler;
 //[BindListener("Enemy", typeof(EnemyManager))]
 //[BindListener("Player", typeof(PlayerManager))]
 //[BindListener("UI", typeof(UIManager))]
-public class CombinedScript : MonoBehaviour {
+public class CombinedScript : MonoBehaviour
+{
 
     // Rifle/Laser Variables.
 
@@ -125,10 +126,11 @@ public class CombinedScript : MonoBehaviour {
 
         public int killedCount;
 
-
+        public float damageDealt;
     }
 
-    [SerializeField] public BachelorStuff stuff;
+    [SerializeField]
+    public BachelorStuff stuff;
 
 
     // This is the two different weapon types.
@@ -138,8 +140,9 @@ public class CombinedScript : MonoBehaviour {
         RIFLE
 
     }
-    
-    void Start() {
+
+    void Start()
+    {
         EventManager<GameEvent>.InvokeGameState(this, null, null, GetType(), GameEvent._NULL_);
         currentShotgunAmmo = magTubeSize;
     }
@@ -187,9 +190,12 @@ public class CombinedScript : MonoBehaviour {
             animator.SetBool("IsFiring", true);
             shootRifle();
         }
-        if (currentRifleAmmo > 0) {
+        if (currentRifleAmmo > 0)
+        {
             animator.SetBool("HasAmmo", true);
-        } else {
+        }
+        else
+        {
             animator.SetBool("HasAmmo", false);
         }
 
@@ -203,7 +209,8 @@ public class CombinedScript : MonoBehaviour {
         {
             shootShotgun();
         }
-        if (Input.GetKeyUp(KeyCode.Mouse0)) {
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
             animator.SetBool("IsFiring", false);
         }
 
@@ -369,21 +376,21 @@ public class CombinedScript : MonoBehaviour {
             if (gunType == GunType.RIFLE)
             {
                 gunType = GunType.SHOTGUN;
-                
+
                 //isRifleSelected = false;
                 switchingWeapon = true;
             }
             else
             {
-               
-                    if (currentRifleAmmo > 0 || maxRifleAmmo > 0)
-                    {
-                        gunType = GunType.RIFLE;
-                        //SelectedWeapon = 1;
-                        //isRifleSelected = true;
-                        switchingWeapon = true;
-                    }
-                
+
+                if (currentRifleAmmo > 0 || maxRifleAmmo > 0)
+                {
+                    gunType = GunType.RIFLE;
+                    //SelectedWeapon = 1;
+                    //isRifleSelected = true;
+                    switchingWeapon = true;
+                }
+
             }
 
         }
@@ -494,7 +501,7 @@ public class CombinedScript : MonoBehaviour {
         }
     }
 
-   
+
     void Shoot()
     {
         //shotTrail.enabled = true;
@@ -552,17 +559,17 @@ public class CombinedScript : MonoBehaviour {
                         if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                         {
                             EventManager<GameEvent>.InvokeGameState(this, (GameObject)hit.collider.gameObject.transform.parent.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
-                        if (stuff.showStatistics == true)
-                        {
-                            if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
+                            if (stuff.showStatistics == true)
                             {
-                                stuff.killedCount++;
-                                stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
+                                if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
+                                {
+                                    stuff.killedCount++;
+                                    stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
+                                }
                             }
                         }
-                        }
 
-                        
+
                         Debug.Log("I have shot " + hit.collider.gameObject.name);
                         //hit.transform.gameObject.GetComponent<DonutAI>().HandleEvent(GameEvent.ENEMY_DAMAGED);
                         //target.TakeDamage(RifleDamage);
@@ -587,7 +594,7 @@ public class CombinedScript : MonoBehaviour {
             Vector3 centreCam = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
 
         }
-       
+
 
     }
 
@@ -622,13 +629,13 @@ public class CombinedScript : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(r, out hit))
         {
-            
+
 
             inDirection = Vector3.Reflect(r.direction, -hit.normal);
-  
+
             if (hit.collider.gameObject.tag == "Enemy")
             {
-                
+
 
                 if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
                 {
@@ -658,7 +665,7 @@ public class CombinedScript : MonoBehaviour {
                         }
                     }
                 }
-              
+
             }
             Debug.DrawLine(EndOfGun.transform.position, hit.point, Color.red, 5.0f);
             Vector3 incomingVec = hit.point - EndOfGun.transform.position;
@@ -715,8 +722,8 @@ public class CombinedScript : MonoBehaviour {
 
                 }
             }
-            
-            
+
+
 
 
         }
