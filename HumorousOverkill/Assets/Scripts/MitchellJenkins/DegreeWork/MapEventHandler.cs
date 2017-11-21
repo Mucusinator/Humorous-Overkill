@@ -41,6 +41,22 @@ public class __eArg<_T> {
     public _T arg { get; private set; }
 }
 
+
+public static class EventManager<T> {
+    public class Arg : __eArg<T> { public Arg (T sender, object target, object value, Type type) : base(sender, target, value, type) { } };
+    public delegate void EventDelegate (object s, __eArg<T> e);
+    public static void Add (EventDelegate del) {
+        __event<T>.HandleEvent += new __eHandle<System.Object, __eArg<T>>(del);
+    }
+    public static void Unsubscribe (EventDelegate del) {
+        __event<T>.HandleEvent -= new __eHandle<System.Object, __eArg<T>>(del);
+    }
+    public static void InvokeGameState (System.Object sender, System.Object target, System.Object value, System.Type type, T e) {
+        __event<T>.InvokeEvent(sender, new __eArg<T>(e, target, value, type));
+    }
+    public static void UnsubscribeAll () { __event<T>.UnsubscribeAll(); }
+}
+
 // Event
 public class __event<_T> {
     /// <summary>
@@ -60,6 +76,10 @@ public class __event<_T> {
         System.Object sender,   // The sender of the event
         __eArg<_T> e            // arguments for the event
         ) { if (HandleEvent != null) HandleEvent(sender, e); }
+    /// <summary>
+    /// Unsubscribe all event function attached to handler
+    /// </summary>
+    public static void UnsubscribeAll () { HandleEvent = null; }
 }
 
 // Event states that are passed as events
@@ -77,6 +97,7 @@ class MapEventHandler : MonoBehaviour {
 
     private void Awake () {
         // Raise and Invoke Event
+
         if (isEnabled)
             __event<MapState>.HandleEvent += new __eHandle<System.Object, __eArg<MapState>>(OnHandleEvent);
         else

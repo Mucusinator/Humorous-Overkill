@@ -9,30 +9,40 @@
 
 [RequireComponent(typeof(PlayerManager))]
 [RequireComponent(typeof(EnemyManager))]
-public class GameManager : EventHandler.EventHandle {
+public class GameManager : MonoBehaviour {
     [SerializeField] GameInfo m_gameInfo;
 
-    public override bool HandleEvent (GameEvent e) {
-        switch (e) {
-        // UI
+    void Awake () {
+        EventManager<GameEvent>.Add(HandleMessage);
+    }
+    void Start () {
+        EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent._NULL_);
+        EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(UIManager), GameEvent.STATE_MENU);
+    }
+
+    public void HandleMessage(object s, __eArg<GameEvent> e) {
+        if (s == (object)this) return;
+        switch (e.arg) {
         case GameEvent.STATE_CONTINUE:
         case GameEvent.STATE_MENU:
         case GameEvent.STATE_PAUSE:
         case GameEvent.STATE_RESTART:
         case GameEvent.STATE_START:
-            this.GetComponent<UIManager>().HandleEvent(e);
+            if (e.type == GetType())
+                EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
             break;
-        // Player
         case GameEvent.PICKUP_RIFLEAMMO:
-
         case GameEvent.PICKUP_SHOTGUNAMMO:
-
         case GameEvent.PICKUP_HEALTH:
-            this.GetComponent<PlayerManager>().HandleEvent(e);
+            if (e.type == GetType())
+                EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
             break;
-        default:
+        case GameEvent.DIFFICULTY_EASY:
+        case GameEvent.DIFFICULTY_MEDI:
+        case GameEvent.DIFFICULTY_HARD:
+        case GameEvent.DIFFICULTY_NM:
+            EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
             break;
-        } return true;
+        }
     }
-
 }

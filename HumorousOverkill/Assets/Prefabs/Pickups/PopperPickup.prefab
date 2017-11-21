@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23248116714416598}
   - component: {fileID: 65487031187620870}
   - component: {fileID: 114057722489061230}
+  - component: {fileID: 114013460807852486}
   m_Layer: 0
   m_Name: PopperPickup
   m_TagString: Untagged
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1047466508615190}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,7 +82,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1047466508615190}
-  m_Mesh: {fileID: 4300000, guid: b0d3ab6aa92a0324bae5d55c1204ac41, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 2715a1654df1bda40a7002f0e74dad0d, type: 3}
 --- !u!65 &65487031187620870
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -92,8 +93,23 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5822505, y: 1.0498432, z: 0.5676525}
-  m_Center: {x: -0.2516008, y: 0.5238759, z: -0.13118556}
+  m_Size: {x: 0.58225054, y: 1.0498431, z: 0.56765246}
+  m_Center: {x: 0, y: 0.52492154, z: -0.000000044703484}
+--- !u!114 &114013460807852486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1047466508615190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78f1ac0c81d3f843b8e3eb41ded2a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 60
+  floatSpeed: 4
+  floatMagnitude: 0.5
+  floatHeightOffset: 1
 --- !u!114 &114057722489061230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -106,4 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 10
-  type: 18
+  type: 20

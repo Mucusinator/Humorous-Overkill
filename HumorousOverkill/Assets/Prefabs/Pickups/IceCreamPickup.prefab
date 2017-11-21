@@ -19,10 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4452348310388864}
-  - component: {fileID: 65529283262946988}
-  - component: {fileID: 114630758835691574}
   - component: {fileID: 33475220271408710}
   - component: {fileID: 23331520487397462}
+  - component: {fileID: 65529283262946988}
+  - component: {fileID: 114630758835691574}
+  - component: {fileID: 114575091843862954}
   m_Layer: 0
   m_Name: IceCreamPickup
   m_TagString: Untagged
@@ -81,7 +82,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1987807335771420}
-  m_Mesh: {fileID: 4300000, guid: 2690e612f03c96c4eadc491542e86371, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 6332cfa119f56f34dadf77eb8e4fc0f6, type: 3}
 --- !u!65 &65529283262946988
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -92,8 +93,23 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2749175, y: 0.67499995, z: 0.9025964}
-  m_Center: {x: -0.49550572, y: 0.33749998, z: -0.3375}
+  m_Size: {x: 1.2749175, y: 0.67499995, z: 0.9025965}
+  m_Center: {x: 0.000000059604645, y: 0.33749998, z: 0.000000029802322}
+--- !u!114 &114575091843862954
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1987807335771420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78f1ac0c81d3f843b8e3eb41ded2a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 60
+  floatSpeed: 4
+  floatMagnitude: 0.5
+  floatHeightOffset: 1
 --- !u!114 &114630758835691574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -106,4 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 50
-  type: 17
+  type: 19
