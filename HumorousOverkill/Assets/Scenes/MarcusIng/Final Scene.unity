@@ -9874,9 +9874,10 @@ GameObject:
   - component: {fileID: 302027273}
   - component: {fileID: 302027275}
   - component: {fileID: 302027274}
+  - component: {fileID: 302027276}
   m_Layer: 0
   m_Name: pCube121_MeshPart3
-  m_TagString: Untagged
+  m_TagString: Avoid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9940,6 +9941,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 302027272}
   m_Mesh: {fileID: 4300006, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
+--- !u!64 &302027276
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 302027272}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300006, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
 --- !u!1 &305175963
 GameObject:
   m_ObjectHideFlags: 0
@@ -9950,9 +9965,10 @@ GameObject:
   - component: {fileID: 305175964}
   - component: {fileID: 305175966}
   - component: {fileID: 305175965}
+  - component: {fileID: 305175967}
   m_Layer: 0
   m_Name: pCube121_MeshPart2
-  m_TagString: Untagged
+  m_TagString: Avoid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10025,6 +10041,20 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 305175963}
+  m_Mesh: {fileID: 4300004, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
+--- !u!64 &305175967
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 305175963}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
 --- !u!1001 &307224335
 Prefab:
@@ -52020,9 +52050,10 @@ GameObject:
   - component: {fileID: 1494045843}
   - component: {fileID: 1494045845}
   - component: {fileID: 1494045844}
+  - component: {fileID: 1494045846}
   m_Layer: 0
   m_Name: pCube121_MeshPart1
-  m_TagString: Untagged
+  m_TagString: Avoid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52080,6 +52111,20 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1494045842}
+  m_Mesh: {fileID: 4300002, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
+--- !u!64 &1494045846
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1494045842}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
 --- !u!1 &1498262816 stripped
 GameObject:
@@ -63272,9 +63317,10 @@ GameObject:
   - component: {fileID: 1837117131}
   - component: {fileID: 1837117133}
   - component: {fileID: 1837117132}
+  - component: {fileID: 1837117134}
   m_Layer: 0
   m_Name: pCube121_MeshPart0
-  m_TagString: Untagged
+  m_TagString: Avoid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63340,6 +63386,20 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1837117130}
+  m_Mesh: {fileID: 4300000, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
+--- !u!64 &1837117134
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1837117130}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 7851f114c663ea4419f5ce30c3964619, type: 3}
 --- !u!1001 &1838941924
 Prefab:
