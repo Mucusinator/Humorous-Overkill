@@ -26651,7 +26651,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fade: 1
   volume: 0.7
-  musics: []
+  musics:
+  - {fileID: 8300000, guid: edd5b2dbb9c971d4f990aabe735dbc28, type: 3}
 --- !u!1001 &893086159
 Prefab:
   m_ObjectHideFlags: 0
