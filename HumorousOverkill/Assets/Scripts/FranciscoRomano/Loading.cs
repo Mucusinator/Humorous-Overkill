@@ -20,15 +20,15 @@ public class Loading : MonoBehaviour
     void Start()
     {
         Begin();
-        source = AddComponent<AudioSource>();
-        imageSource = AddComponent<Image>();
+        //source = AddComponent<AudioSource>();
+        //imageSource = AddComponent<Image>();
     }
     void Update()
     {
         if (!running) return;
         if (!complete && index < sprites.Count)
         {
-            if ((Time.getTime() - passedTime) > spriteDelay)
+            if ((Time.time - passedTime) > spriteDelay)
             {
                 imageSource.sprite = sprites[index++];
             }
@@ -56,7 +56,7 @@ public class Loading : MonoBehaviour
         source.Play();
         running = true;
         complete = false;
-        passedTime = Time.getTime();
+        passedTime = Time.time;
         spriteDelay = clip.length / sprites.Count;
         imageSource.sprite = sprites[index++];
     }
