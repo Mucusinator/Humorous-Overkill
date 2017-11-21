@@ -226,7 +226,6 @@ public class CombinedScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
         {
-            m_audioManager.Play1(shotgunSound);
             shootShotgun();
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.RIFLE && currentRifleAmmo > 0) {
@@ -336,7 +335,8 @@ public class CombinedScript : MonoBehaviour
             currentShotgunAmmo--;
             for (int i = 0; i < pelletCount; ++i)
             {
-
+                animator.Play("Release");
+                m_audioManager.Play1(shotgunSound);
                 ShootRay();
 
             }
@@ -400,6 +400,7 @@ public class CombinedScript : MonoBehaviour
         {
             if (gunType == GunType.RIFLE)
             {
+                animator.SetBool("IsRifle", false);
                 gunType = GunType.SHOTGUN;
 
                 //isRifleSelected = false;
@@ -410,6 +411,7 @@ public class CombinedScript : MonoBehaviour
 
                 if (currentRifleAmmo > 0 || maxRifleAmmo > 0)
                 {
+                    animator.SetBool("IsRifle", true);
                     gunType = GunType.RIFLE;
                     //SelectedWeapon = 1;
                     //isRifleSelected = true;
