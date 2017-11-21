@@ -180,12 +180,14 @@ public class CombinedScript : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE && !isReloading)
         {
-
+            animator.SetBool("IsFiring", true);
             shootRifle();
-
-
         }
-
+        if (currentRifleAmmo > 0) {
+            animator.SetBool("HasAmmo", true);
+        } else {
+            animator.SetBool("HasAmmo", false);
+        }
 
 
 
@@ -196,6 +198,9 @@ public class CombinedScript : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
         {
             shootShotgun();
+        }
+        if (Input.GetKeyUp(KeyCode.Mouse0)) {
+            animator.SetBool("IsFiring", false);
         }
 
     }
