@@ -34,6 +34,12 @@ public class GameManager : EventHandler.EventHandle {
             if (e.type == GetType())
                 EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
             break;
+        case GameEvent.DIFFICULTY_EASY:
+        case GameEvent.DIFFICULTY_MEDI:
+        case GameEvent.DIFFICULTY_HARD:
+        case GameEvent.DIFFICULTY_NM:
+            EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
+            break;
         }
     }
 
