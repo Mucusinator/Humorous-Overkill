@@ -226,8 +226,6 @@ public class CombinedScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
         {
-            m_audioManager.Play1(shotgunSound);
-            
             shootShotgun();
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.RIFLE && currentRifleAmmo > 0) {
@@ -338,6 +336,7 @@ public class CombinedScript : MonoBehaviour
             for (int i = 0; i < pelletCount; ++i)
             {
                 animator.Play("Release");
+                m_audioManager.Play1(shotgunSound);
                 ShootRay();
 
             }
