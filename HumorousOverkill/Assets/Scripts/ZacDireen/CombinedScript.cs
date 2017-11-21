@@ -136,7 +136,7 @@ public class CombinedScript : MonoBehaviour {
     }
     
     void Start() {
-
+        EventManager<GameEvent>.InvokeGameState(this, null, null, GetType(), GameEvent._NULL_);
         currentShotgunAmmo = magTubeSize;
     }
 
