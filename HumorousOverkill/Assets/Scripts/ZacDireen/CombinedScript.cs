@@ -144,18 +144,14 @@ public class CombinedScript : MonoBehaviour
         RIFLE
 
     }
-<<<<<<< HEAD
     
     void Awake () {
         EventManager<GameEvent>.Add(HandleMessage);
     }
 
-    void Start() {
-=======
 
     void Start()
     {
->>>>>>> 9eecb083c88f55ed29628ef181a6d6677095ec4c
         EventManager<GameEvent>.InvokeGameState(this, null, null, GetType(), GameEvent._NULL_);
         currentShotgunAmmo = magTubeSize;
     }
@@ -233,16 +229,12 @@ public class CombinedScript : MonoBehaviour
             m_audioManager.Play1(shotgunSound);
             shootShotgun();
         }
-<<<<<<< HEAD
         if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.RIFLE && currentRifleAmmo > 0) {
             m_audioManager.Play(LazerSound);
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0)) {
-=======
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
->>>>>>> 9eecb083c88f55ed29628ef181a6d6677095ec4c
             animator.SetBool("IsFiring", false);
             m_audioManager.Stop(LazerSound);
         }
