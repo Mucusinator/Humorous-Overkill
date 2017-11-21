@@ -645,8 +645,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 492461162}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -3.3, y: 0, z: 1.19}
-  m_LocalScale: {x: 0.33435988, y: 1, z: 1.0000005}
+  m_LocalPosition: {x: -3.3, y: 0, z: -2.02}
+  m_LocalScale: {x: 0.12652555, y: 1, z: 1.0000005}
   m_Children: []
   m_Father: {fileID: 1646079442}
   m_RootOrder: 6
@@ -1284,6 +1284,47 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 30.7, y: 41.22, z: 1}
   m_Center: {x: 0, y: -8.72, z: -10.3}
+--- !u!1 &1632766859
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1632766860}
+  - component: {fileID: 1632766861}
+  m_Layer: 0
+  m_Name: collider (5)
+  m_TagString: Avoid
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1632766860
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1632766859}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -3.3, y: 0, z: 4.02}
+  m_LocalScale: {x: 0.12653005, y: 1, z: 1.0000005}
+  m_Children: []
+  m_Father: {fileID: 1646079442}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &1632766861
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1632766859}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 30.7, y: 41.22, z: 1}
+  m_Center: {x: 0, y: -8.72, z: -10.3}
 --- !u!1001 &1632900251
 Prefab:
   m_ObjectHideFlags: 0
@@ -1466,8 +1507,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1669316914}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 21.59, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 21.89, y: 0, z: -7.4}
+  m_LocalScale: {x: 0.46932453, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1646079442}
   m_RootOrder: 3
@@ -2436,6 +2477,11 @@ Prefab:
       propertyPath: weaponScript
       value: 
       objectReference: {fileID: 1161446940}
+    - target: {fileID: 114277505472583250, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: precision
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30403f8d89b92a24e96897519077ab83, type: 2}
   m_IsPrefabParent: 0
