@@ -46,6 +46,10 @@ public class PlayerManager : EventHandler.EventHandle {
     public void HandleMessage (System.Object s, __eArg<GameEvent> e) {
         if (s == (System.Object)this) return;
         switch (e.arg) {
+        case GameEvent._NULL_:
+            if (e.type == typeof(CombinedScript))
+                m_weapon = (CombinedScript)s;
+            break;
         case GameEvent.PICKUP_HEALTH:
             // calls a function add health to the player
             m_ply.AddHealth((int)e.value);
@@ -56,9 +60,9 @@ public class PlayerManager : EventHandler.EventHandle {
                 m_weapon.maxRifleAmmo += (int)e.value;
             else {
                 Debug.Log(e.ToString() + " :: " + e.value);
-                GetEventListener("Weapon").GetComponent<CombinedScript>().currentRifleAmmo += (int)e.value;
+                m_weapon.currentRifleAmmo += (int)e.value;
                 isFirstPickup = false;
-                GetEventListener("Weapon").GetComponent<CombinedScript>().gunType = CombinedScript.GunType.RIFLE;
+                m_weapon.gunType = CombinedScript.GunType.RIFLE;
             }
             break;
         case GameEvent.PICKUP_SHOTGUNAMMO:
