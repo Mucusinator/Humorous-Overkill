@@ -2894,6 +2894,11 @@ Prefab:
       propertyPath: triggerEvent
       value: 2575
       objectReference: {fileID: 0}
+    - target: {fileID: 114277505472583250, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: precision
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30403f8d89b92a24e96897519077ab83, type: 2}
   m_IsPrefabParent: 0
