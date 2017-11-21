@@ -9,13 +9,14 @@
 
 [RequireComponent(typeof(PlayerManager))]
 [RequireComponent(typeof(EnemyManager))]
-public class GameManager : EventHandler.EventHandle {
+public class GameManager : MonoBehaviour {
     [SerializeField] GameInfo m_gameInfo;
 
-    void Start () {
+    void Awake () {
         EventManager<GameEvent>.Add(HandleMessage);
+    }
+    void Start () {
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent._NULL_);
-
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(UIManager), GameEvent.STATE_MENU);
     }
 

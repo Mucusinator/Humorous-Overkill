@@ -36,11 +36,14 @@ public class CupcakeAI : MonoBehaviour
     // reference to scoremanager
     private scoreManager scoremanager;
 
+    __eHandle<object, __eArg<GameEvent>> events;
+
     #endregion
 
     public void Awake()
     {
-        EventManager<GameEvent>.Add(HandleEvent);
+        events = new __eHandle<object, __eArg<GameEvent>>(HandleEvent);
+        __event<GameEvent>.HandleEvent += events;
 
         // find the player
         player = GameObject.FindGameObjectWithTag("Player");
@@ -163,8 +166,9 @@ public class CupcakeAI : MonoBehaviour
     void die()
     {
         Debug.Log("die has been called");
+        __event<GameEvent>.HandleEvent -= events;
 
-        __event<GameEvent>.HandleEvent -= new __eHandle<object, __eArg<GameEvent>>(HandleEvent);
+        //__event<GameEvent>.HandleEvent -= new __eHandle<object, __eArg<GameEvent>>(HandleEvent);
 
         if (enableColorChanges)
         {

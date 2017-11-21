@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using EventHandler;
 
-[BindListener("PlayerManager", typeof(PlayerManager))]
-public class PlayerMovement : EventHandle {
+public class PlayerMovement : MonoBehaviour {
 
     private CharacterController m_cc;
     private PlayerCamera m_camera;
@@ -21,10 +20,13 @@ public class PlayerMovement : EventHandle {
     public bool m_grounded = true;
     public bool m_isUnderObject = false;
 
+    void Awake() {
+        EventManager<GameEvent>.Add(HandleEvent);
+    }
+
     void Start () {
         m_camera    = this.GetComponentInChildren<PlayerCamera>();
         m_cc        = this.GetComponent<CharacterController>() as CharacterController;
-        m_ply       = this.GetEventListener("PlayerManager").gameObject.GetComponent<PlayerManager>().GetPlayerInfo;
         m_transform = this.transform;
     }
 
@@ -55,6 +57,16 @@ public class PlayerMovement : EventHandle {
         else { m_moveDirection.y -= m_gravity * Time.deltaTime; m_grounded = false; }
 
         m_cc.Move(m_moveDirection * Time.deltaTime);
+    }
+
+    public void HandleEvent (object s, __eArg<GameEvent> e) {
+        switch (e.arg) {
+        case GameEvent._NULL_:
+            if (e.type == typeof(PlayerManager)) {
+                m_ply = (PlayerInfo)e.value;
+            }
+            break;
+        }
     }
 
     private void Jump () {

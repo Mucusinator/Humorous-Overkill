@@ -688,7 +688,7 @@ public class CombinedScript : MonoBehaviour {
     void OnEnable()
     {
         isReloading = false;
-        animator.SetBool("Reloading", false);
+        //animator.SetBool("Reloading", false);
     }
 
 }

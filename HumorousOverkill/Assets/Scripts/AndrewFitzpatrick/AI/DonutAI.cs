@@ -318,7 +318,7 @@ public class DonutAI : MonoBehaviour
                 if (shootHitInfo.collider.gameObject.tag == "Player" && shootHitInfo.collider.gameObject.GetComponent<Player>() != null)
                 {
                     // send the player a PLAYER_DAMAGE event
-                    shootHitInfo.collider.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, myInfo.damage);
+                    EventManager<GameEvent>.InvokeGameState(this, shootHitInfo.collider.gameObject, myInfo.damage, null, GameEvent.PLAYER_DAMAGE);
                 }
             }
         }
