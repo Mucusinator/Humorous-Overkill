@@ -19,7 +19,7 @@ public class DeathBarrier : MonoBehaviour
             // send damage equal to the current health (guaranteed to kill) 
             float playerHealth = other.gameObject.GetComponent<Player>().m_ply.m_playerHealth;
             Debug.Log("Player has hit the respawn barrier. Sending " + playerHealth + " damage.");
-            other.gameObject.GetComponent<Player>().HandleEvent(GameEvent.PLAYER_DAMAGE, playerHealth);
+            EventManager<GameEvent>.InvokeGameState(this, other.gameObject, playerHealth, null, GameEvent.PLAYER_DAMAGE);
         }
     }
 }
