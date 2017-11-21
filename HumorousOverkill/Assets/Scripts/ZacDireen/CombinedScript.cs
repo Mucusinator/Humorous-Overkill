@@ -183,7 +183,11 @@ public class CombinedScript : MonoBehaviour {
             animator.SetBool("IsFiring", true);
             shootRifle();
         }
-
+        if (currentRifleAmmo > 0) {
+            animator.SetBool("HasAmmo", true);
+        } else {
+            animator.SetBool("HasAmmo", false);
+        }
 
 
 
