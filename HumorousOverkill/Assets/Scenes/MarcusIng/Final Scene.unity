@@ -859,6 +859,7 @@ GameObject:
   - component: {fileID: 494416523}
   - component: {fileID: 494416522}
   - component: {fileID: 494416524}
+  - component: {fileID: 494416525}
   m_Layer: 0
   m_Name: DonutRoomSpawner
   m_TagString: Untagged
@@ -944,6 +945,97 @@ MonoBehaviour:
         - amount: 5
           position: {x: -5.28, y: -7.55, z: -7.6}
   doors: []
+--- !u!114 &494416525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 494416520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56041aeee70a3d54aa17875aff8bab6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  fadeIn: 1
+  running: 0
+  fadeInDelay: 1
+  fadeInSpeed: 1
+  fadeOutDelay: 6
+  fadeOutSpeed: 1
+  sprites:
+  - {fileID: 21300000, guid: e73d395236eed4349b6e2f93731f2d7d, type: 3}
+  - {fileID: 21300000, guid: 73f201b09521b0a419b3d3157db4a040, type: 3}
+  - {fileID: 21300000, guid: f1f832b4763d3e743882e10994940521, type: 3}
+  image: {fileID: 494882111}
+--- !u!1 &494882109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 494882110}
+  - component: {fileID: 494882112}
+  - component: {fileID: 494882111}
+  m_Layer: 5
+  m_Name: Popups
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &494882110
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 494882109}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1362903554}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -111}
+  m_SizeDelta: {x: 1070.1, y: 602.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &494882111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 494882109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: e73d395236eed4349b6e2f93731f2d7d, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &494882112
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 494882109}
 --- !u!1 &628780138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,6 +1436,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 30.7, y: 41.22, z: 1}
   m_Center: {x: 0, y: -8.72, z: -10.3}
+--- !u!224 &1362903554 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224482350814636420, guid: 30403f8d89b92a24e96897519077ab83,
+    type: 2}
+  m_PrefabInternal: {fileID: 2095065403}
 --- !u!1 &1412138548 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100002, guid: da6778dff62ffcd46a7466a80c481f90, type: 3}
@@ -2946,6 +3043,11 @@ Prefab:
         type: 2}
       propertyPath: precision
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224839464079363532, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30403f8d89b92a24e96897519077ab83, type: 2}
