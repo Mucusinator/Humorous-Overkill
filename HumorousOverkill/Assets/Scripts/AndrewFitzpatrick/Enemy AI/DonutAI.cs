@@ -137,6 +137,9 @@ public class DonutAI : MonoBehaviour
         // circumference is 2PIr aka PI * diameter
         donutCircumference = (size * Mathf.PI);
 
+        // position nicely above the ground
+        transform.position += Vector3.up * size / 2;
+
         // set roll animation speed
         myAnimator.SetFloat("rollSpeed", (1.0f / donutCircumference) * myInfo.rollSpeed);
     }
