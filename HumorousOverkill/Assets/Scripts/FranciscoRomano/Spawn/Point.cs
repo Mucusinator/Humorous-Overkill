@@ -26,7 +26,7 @@ namespace FranciscoRomano.Spawn
         public GameObject Create(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
         {
             if (IsEmpty()) return null; else amount--;
-            return Object.Instantiate(prefab, parent.rotation * (this.position + position), parent.rotation * rotation, parent);
+            return Object.Instantiate(prefab, parent.position + parent.rotation * this.position, parent.rotation * rotation, parent);
         }
     }
 }
