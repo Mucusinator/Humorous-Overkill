@@ -12,6 +12,8 @@
 public class GameManager : MonoBehaviour {
     [SerializeField] GameInfo m_gameInfo;
 
+    Loading m_loading;
+
     void Awake () {
         EventManager<GameEvent>.Add(HandleMessage);
     }
@@ -23,13 +25,26 @@ public class GameManager : MonoBehaviour {
     public void HandleMessage(object s, __eArg<GameEvent> e) {
         if (s == (object)this) return;
         switch (e.arg) {
-        case GameEvent.STATE_CONTINUE:
         case GameEvent.STATE_MENU:
         case GameEvent.STATE_PAUSE:
-        case GameEvent.STATE_RESTART:
-        case GameEvent.STATE_START:
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
             if (e.type == GetType())
                 EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
+            break;
+        case GameEvent.STATE_START:
+        case GameEvent.STATE_RESTART:
+        case GameEvent.STATE_CONTINUE:
+            if (m_loading.IsComplete())
+            {
+                m_loading.gameObject.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+
+                if (e.type == GetType())
+                    EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
+            }
             break;
         case GameEvent.PICKUP_RIFLEAMMO:
         case GameEvent.PICKUP_SHOTGUNAMMO:
@@ -42,6 +57,11 @@ public class GameManager : MonoBehaviour {
         case GameEvent.DIFFICULTY_HARD:
         case GameEvent.DIFFICULTY_NM:
             EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
+            break;
+        case GameEvent._NULL_:
+            if (e.type == typeof(Loading)) {
+                m_loading = (Loading)s;
+            }
             break;
         }
     }
