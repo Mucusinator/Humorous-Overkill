@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class UIManager : EventHandler.EventHandle
+public class UIManager : MonoBehaviour
 {
     public bool DEBUG;
     public bool m_stateMenu = false;
@@ -17,26 +17,41 @@ public class UIManager : EventHandler.EventHandle
     // This boolean is for when the UI manager nees to be tested. (Added by Zack.) 
 
     // :: variables
-    //List<UIProperty> propertyList = new List<UIProperty>();
-    Dictionary<GameEvent, List<UIProperty>> propertyDictionary = new Dictionary<GameEvent, List<UIProperty>>();
+
+    public List<UIProperty> propertyList = new List<UIProperty>();
+    //Dictionary<GameEvent, List<UIProperty>> propertyDictionary = new Dictionary<GameEvent, List<UIProperty>>();
 
     // :: functions
+    void Awake()
+    {
+        //propertyList.Clear();
+        EventManager<GameEvent>.Add(HandleMessage);
+    }
     void Start()
     {
-        EventManager<GameEvent>.Add(HandleMessage);
-        foreach (GameEvent e in Enum.GetValues(typeof(GameEvent)))
-        {
-            propertyDictionary.Add(e, new List<UIProperty>());
-        }
-
-        foreach (UIProperty property in GetComponentsInChildren<UIProperty>())
+        foreach (UIProperty property in GetComponentsInChildren<UIProperty>(true))
         {
             if (property.type == UIProperty.Type.NONE)
             {
                 property.gameObject.SetActive(false);
             }
-            propertyDictionary[property.triggerEvent].Add(property);
         }
+        //propertyDictionary.Clear();
+        //Debug.Log("ui [0] :: " + propertyDictionary.Count);
+        //foreach (GameEvent e in Enum.GetValues(typeof(GameEvent)))
+        //{
+        //    propertyDictionary.Add(e, new List<UIProperty>());
+        //}
+
+        //foreach (UIProperty property in GetComponentsInChildren<UIProperty>())
+        //{
+        //    if (property.type == UIProperty.Type.NONE)
+        //    {
+        //        property.gameObject.SetActive(false);
+        //    }
+        //    propertyDictionary[property.triggerEvent].Add(property);
+        //}
+        //Debug.Log("ui [1] :: " + propertyDictionary.Count);
     }
 
     void Update()
@@ -72,11 +87,11 @@ public class UIManager : EventHandler.EventHandle
             case GameEvent.UI_HEALTH:
             case GameEvent.UI_AMMO_CUR:
             case GameEvent.UI_AMMO_MAX:
-                if (propertyDictionary[e.arg].Count < 0)
+                foreach (UIProperty property in GetComponentsInChildren<UIProperty>(true))
                 {
-                    foreach (UIProperty property in propertyDictionary[e.arg])
+                    if (property.triggerEvent == e.arg)
                     {
-                        property.UpdateComponent(e.arg != GameEvent.UI_HEALTH ? Mathf.Floor((float)e.value) : (float)e.value);
+                        property.UpdateComponent((float)e.value);
                     }
                 }
                 break;
@@ -86,54 +101,36 @@ public class UIManager : EventHandler.EventHandle
             case GameEvent.STATE_PAUSE:
             case GameEvent.STATE_RESTART:
             case GameEvent.STATE_CONTINUE:
-                foreach (GameEvent otherE in Enum.GetValues(typeof(GameEvent)))
+                
+                foreach (UIProperty property in propertyList)
                 {
-                    foreach (UIProperty property in propertyDictionary[otherE])
+                    property.gameObject.SetActive(false);
+                }
+                propertyList.Clear();
+
+                
+                foreach (UIProperty property in GetComponentsInChildren<UIProperty>(true))
+                {
+                    if (property.triggerEvent == e.arg)
                     {
-                        //property.gameObject.SetActive(otherE == e.arg);
+                        property.gameObject.SetActive(true);
+                        propertyList.Add(property);
                     }
                 }
-                //foreach (UIProperty property in propertyList)
-                //{
-                //    property.gameObject.SetActive(false);
-                //}
-                //propertyList.Clear();
-                //if (propertyDictionary.ContainsKey(e.arg))
-                //{
-                //    foreach (UIProperty property in propertyDictionary[e.arg])
-                //    {
-                //        property.gameObject.SetActive(true);
-                //        propertyList.Add(property);
-                //    }
-                //}
                 break;
         }
     }
 
-    public override bool HandleEvent(GameEvent e)
+    public bool HandleEvent(GameEvent e)
     {
         HandleMessage(null, new __eArg<GameEvent>(e, this, null, typeof(UIManager)));
         return true;
     }
 
-    public override bool HandleEvent(GameEvent e, float amount)
+    public bool HandleEvent(GameEvent e, float amount)
     {
         HandleMessage(null, new __eArg<GameEvent>(e, this, amount, typeof(UIManager)));
         return true;
     }
-
-    //public void SuperCoolEventHanbdler(object s, __eArg<GameEvent> e)
-    //{
-    //    if (s != (System.Object)this)
-    //    {
-    //        switch (e.arg)
-    //        {
-    //            case GameEvent.UI_HEALTH:
-    //                __event<GameEvent>.InvokeEvent(this, new __eArg<GameEvent>(GameEvent.STATE_CONTINUE, null, null, null));
-    //                break;
-
-    //        }   
-    //    }
-    //}
 
 }
