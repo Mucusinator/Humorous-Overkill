@@ -13,7 +13,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     [SerializeField] GameInfo m_gameInfo;
 
-    Loading m_loading;
+    public Loading m_loading;
 
     void Awake () {
         EventManager<GameEvent>.Add(HandleMessage);
@@ -69,11 +69,6 @@ public class GameManager : MonoBehaviour {
         case GameEvent.DIFFICULTY_HARD:
         case GameEvent.DIFFICULTY_NM:
             EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
-            break;
-        case GameEvent._NULL_:
-            if (e.type == typeof(Loading)) {
-                m_loading = (Loading)s;
-            }
             break;
         }
     }

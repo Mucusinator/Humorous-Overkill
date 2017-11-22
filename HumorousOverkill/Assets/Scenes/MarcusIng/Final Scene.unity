@@ -30946,6 +30946,7 @@ MonoBehaviour:
     m_lightIntensity: 0
     m_LightColor: {r: 0, g: 0, b: 0, a: 0}
     m_UIColor: {r: 0, g: 0, b: 0, a: 0}
+  m_loading: {fileID: 388004862}
 --- !u!114 &889218443
 MonoBehaviour:
   m_ObjectHideFlags: 0
