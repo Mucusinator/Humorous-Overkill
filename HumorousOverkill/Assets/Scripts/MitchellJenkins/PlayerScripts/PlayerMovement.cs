@@ -31,8 +31,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Update () {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         transform.Rotate(0f, Input.GetAxis("Mouse X") * 200 * m_ply.m_cameraSensitivity * Time.deltaTime, 0f);
 
         m_moveDirection.x = Input.GetAxis("Horizontal") * m_moveSpeed;

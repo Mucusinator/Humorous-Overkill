@@ -22,6 +22,8 @@ public class Loading : MonoBehaviour
         Begin();
         //source = AddComponent<AudioSource>();
         //imageSource = AddComponent<Image>();
+
+        EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(Loading), GameEvent._NULL_);
     }
     void Update()
     {
@@ -39,6 +41,7 @@ public class Loading : MonoBehaviour
             running = false;
             complete = true;
             // send event again to manager
+            EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
         }
     }
     public bool IsComplete()
