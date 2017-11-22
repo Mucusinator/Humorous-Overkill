@@ -38,12 +38,18 @@ public class GameManager : MonoBehaviour {
         case GameEvent.STATE_CONTINUE:
             if (m_loading.IsComplete())
             {
+                GetComponent<AudioManager>().FadeIn(GetComponent<AudioManager>().musics[0], 1);
                 m_loading.gameObject.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
 
                 if (e.type == GetType())
                     EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
+            }
+            else
+            {
+                m_loading.Begin();
+                GetComponent<AudioManager>().Stop(GetComponent<AudioManager>().musics[0]);
             }
             break;
         case GameEvent.PICKUP_RIFLEAMMO:
