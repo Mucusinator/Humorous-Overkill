@@ -50,7 +50,7 @@ public class Popup : MonoBehaviour
                 image.color = color1;
                 currentTime = Time.time;
             }
-            else if ((currentTime + fadeOutDelay) < Time.time)
+            else if ((currentTime + fadeInDelay) < Time.time)
             {
                 fadeIn = true;
                 NextSprite();
@@ -93,6 +93,10 @@ public class Popup : MonoBehaviour
 
     public void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "Player") running = true;
+        if (collider.tag == "Player")
+        {
+            ResetAll();
+            running = true;
+        }
     }
 }
