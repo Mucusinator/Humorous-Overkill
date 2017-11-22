@@ -2690,7 +2690,7 @@ MonoBehaviour:
   enableColorChanges: 0
   freeze: 0
   pickupPrefabs:
-  - {fileID: 1213382271234258, guid: 8d25769cf16b0c8418074cfcc48d3970, type: 2}
+  - {fileID: 1662524914935242, guid: 62b303e816493b245a75813f1ed09d3d, type: 2}
   - {fileID: 1987807335771420, guid: 0093c3e35370a1e49a5a17207350087f, type: 2}
   - {fileID: 1047466508615190, guid: 7f265e36d39fec84da1f38d7aacf4c14, type: 2}
 --- !u!198 &198736896902927982
