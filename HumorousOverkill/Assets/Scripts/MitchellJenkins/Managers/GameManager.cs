@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // Struct holding all the Game info
 [System.Serializable] struct GameInfo {
@@ -29,13 +30,18 @@ public class GameManager : MonoBehaviour {
         case GameEvent.STATE_PAUSE:
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            Time.timeScale = 0;
 
             if (e.type == GetType())
                 EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
             break;
-        case GameEvent.STATE_START:
         case GameEvent.STATE_RESTART:
+                __event<GameEvent>.UnsubscribeAll();
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                break;
+        case GameEvent.STATE_START:
         case GameEvent.STATE_CONTINUE:
+            Time.timeScale = 1;
             if (m_loading.IsComplete())
             {
                 GetComponent<AudioManager>().FadeIn(GetComponent<AudioManager>().musics[0], 1);
