@@ -1,28 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections.Generic;
 
 namespace FranciscoRomano.Util.GIF.V89a
 {
     public class ColorTable
     {
-        public class Color { public byte r, g, b; }
         // :: variables
-        public Color[] colors;
+        public UnityEngine.Color[] colors;
         // :: constants
         public int Offset { get { return colors.Length * 3; } }
-        // :: constructors
-        public ColorTable(byte[] bytes, int index, int size)
+        // :: constructors/destructors
+        public ColorTable(byte[] bytes, int size, int index)
         {
-            colors = new Color[size];
+            colors = new UnityEngine.Color[size];
             for (int i = 0; i < size; i++)
             {
-                colors[i] = new Color();
-                colors[i].r = bytes[index + (i * 3)];
-                colors[i].g = bytes[index + (i * 3) + 1];
-                colors[i].b = bytes[index + (i * 3) + 2];
+                colors[i] = new UnityEngine.Color();
+                colors[i].r = bytes[index + (i * 3)] / 255.0f;
+                colors[i].g = bytes[index + (i * 3) + 1] / 255.0f;
+                colors[i].b = bytes[index + (i * 3) + 2] / 255.0f;
             }
         }
+        public ColorTable(byte[] bytes, ImageDescriptor obj, int index) : this(bytes, obj.localColorTableFlag ? 1 << (obj.sizeOfLocalColorTable + 1) : 0, index) {}
+        public ColorTable(byte[] bytes, LogicalScreenDescriptor obj, int index) : this(bytes, obj.globalColorTableFlag ? 1 << (obj.sizeOfGlobalColorTable + 1) : 0, index) {}
     }
 }
