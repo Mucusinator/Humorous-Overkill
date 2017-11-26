@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(MapEventHandler))]
 public class Map : MonoBehaviour {
 
     // Game Checks
+    private bool isVisable = false;
     private bool isEnabled = true;
     private bool isInitialized = false;
     private bool isFullscreen = false;
+
 
     // Tracking Positions
     public Transform m_player;
@@ -34,7 +34,8 @@ public class Map : MonoBehaviour {
 
     void Awake () {
         // Raise and Invoke Event
-        __event<MapState>.HandleEvent += new __eHandle<System.Object, __eArg<MapState>>(OnHandleEvent);
+        __event<MapState>.HandleEvent += new __eHandle<System.Object, __eArg<MapState>>(OnMapHandleEvent);
+        __event<GameEvent>.HandleEvent += new __eHandle<System.Object, __eArg<GameEvent>>(OnGUIHandleEvent);
 
         // Ping its location to all others that are listening
         __event<MapState>.InvokeEvent(
@@ -60,24 +61,34 @@ public class Map : MonoBehaviour {
 
     void OnGUI () {
         if (!isInitialized) return;
+        if (!isVisable) return;
         GUI.BeginGroup(new Rect(m_mapOffSetX, m_mapOffSetY, m_mapWidth, m_mapHeight), m_map);
-
         pX = MapPos(transform.position.x, m_mapWidth, m_sceneWidth);
         pZ = MapPos(transform.position.z, m_mapHeight, m_sceneHeight);
-        
-
         playerMapX = pX - (m_iconSize/2);
         playerMapZ = ((pZ * -1) - (m_iconSize / 2)) + m_mapHeight;
         GUI.Box(new Rect(playerMapX * m_sceneOffSet, playerMapZ * m_sceneOffSet, m_iconSize, m_iconSize), m_playerIcon, new GUIStyle());
-
-
         GUI.EndGroup();
-        //Vector3 r = m_map.eulerAngles;
-        //r.z = m_player.eulerAngles.y;
-        //m_map.eulerAngles = r;
     }
 
-    public void OnHandleEvent (object s, __eArg<MapState> e) {
+    public void OnGUIHandleEvent (object s, __eArg<GameEvent> e) {
+        switch (e.arg) {
+        case GameEvent.STATE_START:
+        case GameEvent.STATE_CONTINUE:
+            isVisable = true;
+            break;
+        case GameEvent.STATE_MENU:
+        case GameEvent.STATE_PAUSE:
+        case GameEvent.STATE_RESTART:
+        case GameEvent.STATE_WIN_SCREEN:
+        case GameEvent.STATE_LOSE_SCREEN:
+        case GameEvent.STATE_DIFFICULTY:
+            isVisable = false;
+            break;
+        }
+    }
+
+    public void OnMapHandleEvent (object s, __eArg<MapState> e) {
         // If not enabled, don't check for events
         if (!isEnabled) return;
 
