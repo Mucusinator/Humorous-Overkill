@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 76509482}
   - component: {fileID: 76509481}
   - component: {fileID: 76509480}
+  - component: {fileID: 76509484}
   m_Layer: 0
   m_Name: Player-TEST
   m_TagString: Player
@@ -190,6 +191,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &76509484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 76509479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 256225637b3a71a4d9d5bb3b8cfe60e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  file: {fileID: 4900000, guid: d8856449a8025e5488625443d2adecd2, type: 3}
+  image: {fileID: 1662898421}
+  sprites: []
 --- !u!1001 &132334715
 Prefab:
   m_ObjectHideFlags: 0
@@ -338,6 +353,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1522686117807804, guid: 30403f8d89b92a24e96897519077ab83, type: 2}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114743337214189512, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -748,7 +768,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1265723601}
   - component: {fileID: 1265723602}
-  - component: {fileID: 1265723603}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Manager
@@ -813,21 +832,6 @@ MonoBehaviour:
     targetRadius: 0
     avoidRadius: 0
     errorMargin: 0
---- !u!114 &1265723603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1265723600}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ab3906764cfad4f9057a087686bf37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fade: 1
-  volume: 0.7
-  musics:
-  - {fileID: 8300000, guid: edd5b2dbb9c971d4f990aabe735dbc28, type: 3}
 --- !u!1 &1555105942
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,6 +940,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f1f832b4763d3e743882e10994940521, type: 3}
   - {fileID: 21300000, guid: 8dc44209d9e848c4783af3784874fb98, type: 3}
   image: {fileID: 1024470089}
+--- !u!114 &1662898421 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114933505931015282, guid: 30403f8d89b92a24e96897519077ab83,
+    type: 2}
+  m_PrefabInternal: {fileID: 132334715}
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!224 &2071898286 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224482350814636420, guid: 30403f8d89b92a24e96897519077ab83,

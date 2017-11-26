@@ -11,28 +11,37 @@ public class Loading : MonoBehaviour
     bool complete = false;
     float passedTime = 0;
     float spriteDelay = 0;
-    Image imageSource = null;
-    AudioSource source = null;
+    public Image imageSource = null;
+    public AudioSource source = null;
     public AudioClip clip = null;
     public List<Sprite> sprites = new List<Sprite>();
 
     // :: functions
-    void Start()
+    void Awake()
     {
-        Begin();
-        //source = AddComponent<AudioSource>();
-        //imageSource = AddComponent<Image>();
+        source = gameObject.GetComponent<AudioSource>();
+        imageSource = gameObject.GetComponent<Image>();
+        //Begin();
 
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(Loading), GameEvent._NULL_);
     }
     void Update()
     {
         if (!running) return;
-        if (!complete && index < sprites.Count)
+        if (!complete)
         {
-            if ((Time.time - passedTime) > spriteDelay)
+            if (index < sprites.Count)
             {
-                imageSource.sprite = sprites[index++];
+
+                if ((Time.time - passedTime) > spriteDelay)
+                {
+                    imageSource.sprite = sprites[index++];
+                    passedTime = Time.time;
+                }
+            }
+            else
+            {
+                complete = true;
             }
         }
         else
@@ -51,6 +60,7 @@ public class Loading : MonoBehaviour
     public void Begin()
     {
         if (running) return;
+        if (complete) return;
         index = 0;
         source.Stop();
         source.clip = clip;
@@ -60,7 +70,7 @@ public class Loading : MonoBehaviour
         running = true;
         complete = false;
         passedTime = Time.time;
-        spriteDelay = clip.length / sprites.Count;
+        spriteDelay = clip.length / (float)sprites.Count;
         imageSource.sprite = sprites[index++];
     }
 }

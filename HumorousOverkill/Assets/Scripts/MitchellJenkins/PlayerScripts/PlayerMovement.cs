@@ -50,6 +50,11 @@ public class PlayerMovement : MonoBehaviour {
             if (Input.GetKey(KeyCode.LeftShift)) { m_moveSpeed = m_ply.m_playerRunSpeed; } else { m_moveSpeed = m_ply.m_playerWalkSpeed; }
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            EventManager<GameEvent>.InvokeGameState(this, null, null, null, GameEvent.STATE_PAUSE);
+        }
+
         Debug.DrawLine(this.transform.position + Vector3.down, this.transform.position + Vector3.down * 1.3f, Color.cyan);
         if (Physics.Raycast(this.transform.position + Vector3.down, Vector3.down, 0.3f, m_groundMask )) { m_grounded = true; }
         else { m_moveDirection.y -= m_gravity * Time.deltaTime; m_grounded = false; }

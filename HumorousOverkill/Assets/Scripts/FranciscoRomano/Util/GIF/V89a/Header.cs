@@ -8,11 +8,11 @@ namespace FranciscoRomano.Util.GIF.V89a
     public class Header
     {
         // :: variables
-        public string version;
         public string signature;
+        public string version;
         // :: constants
         public int Offset { get { return 6; } }
-        // :: constructors
+        // :: constructors/destructors
         public Header(byte[] bytes, int index)
         {
             signature = BitConverter.ToString(bytes, index, 3);

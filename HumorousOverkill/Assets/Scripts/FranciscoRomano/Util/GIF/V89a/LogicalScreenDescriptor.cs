@@ -8,23 +8,23 @@ namespace FranciscoRomano.Util.GIF.V89a
     public class LogicalScreenDescriptor
     {
         // :: variables
-        public byte packedField;
-        public byte pixelAspectRatio;
+        public uint width;
+        public uint height;
+        public byte packedFields;
         public byte backgroundColorIndex;
-        public ushort screenWidth;
-        public ushort screenHeight;
+        public byte pixelAspectRatio;
         // :: constants
         public int Offset { get { return 7; } }
-        public int colorResolution { get { return (packedField & 0x70) >> 4; } }
-        public int sizeOfGlobalColorTable { get { return (packedField & 0x07); } }
-        public bool sortFlag { get { return (packedField | 0x08) == packedField; } }
-        public bool globalColorTableFlag { get { return (packedField | 0x80) == packedField; } }
-        // :: constructors
+        public bool globalColorTableFlag { get { return (packedFields | 0x80) == packedFields; } }
+        public int colorResolution { get { return (packedFields & 0x70) >> 4; } }
+        public bool sortFlag { get { return (packedFields | 0x08) == packedFields; } }
+        public int sizeOfGlobalColorTable { get { return (packedFields & 0x07); } }
+        // :: constructors/destructors
         public LogicalScreenDescriptor(byte[] bytes, int index)
         {
-            screenWidth = BitConverter.ToUInt16(bytes, index);
-            screenHeight = BitConverter.ToUInt16(bytes, index + 2);
-            packedField = bytes[index + 4];
+            width = BitConverter.ToUInt16(bytes, index);
+            height = BitConverter.ToUInt16(bytes, index + 2);
+            packedFields = bytes[index + 4];
             backgroundColorIndex = bytes[index + 5];
             pixelAspectRatio = bytes[index + 6];
         }
