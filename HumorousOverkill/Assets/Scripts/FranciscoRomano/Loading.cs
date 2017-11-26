@@ -17,7 +17,7 @@ public class Loading : MonoBehaviour
     public List<Sprite> sprites = new List<Sprite>();
 
     // :: functions
-    void Start()
+    void Awake()
     {
         source = gameObject.GetComponent<AudioSource>();
         imageSource = gameObject.GetComponent<Image>();

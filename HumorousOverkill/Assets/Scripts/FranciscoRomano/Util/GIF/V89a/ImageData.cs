@@ -9,34 +9,14 @@ namespace FranciscoRomano.Util.GIF.V89a
     {
         // :: variables
         public byte LZWMinimumCodeSize;
-        public List<byte[]> dataSubBlocks;
+        public DataSubBlocks dataSubBlocks;
         // :: constants
-        public int Offset {
-            get {
-                int size = 0;
-                foreach (byte[] dataSubBlock in dataSubBlocks)
-                {
-                    size += dataSubBlock.Length + 1;
-                }
-                return size + 2;
-            }
-        }
-        // :: constructors
+        public int Offset { get { return dataSubBlocks.Offset + 2; } }
+        // :: constructors/destructors
         public ImageData(byte[] bytes, int index)
         {
-            int offset = index + 1;
-            dataSubBlocks = new List<byte[]>();
             LZWMinimumCodeSize = bytes[index];
-            while (bytes[offset] != 0)
-            {
-                byte[] data = new byte[bytes[offset]];
-                for (int i = 0; i < data.Length; i++)
-                {
-                    data[i] = bytes[offset + (i + 1)];
-                }
-                dataSubBlocks.Add(data);
-                offset += data.Length + 1;
-            }
+            dataSubBlocks = new DataSubBlocks(bytes, index + 1);
         }
     }
 }
