@@ -1,7 +1,19 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:HumorousOverkill/Assets/Models/Cupcake/CupcakeDrone_Retextured.fbm.meta
 guid: c6c6998a81f991e429ca0a52ab12557e
 folderAsset: yes
 timeCreated: 1509413100
+=======
+<<<<<<< HEAD
+guid: ad8fe449f19bd4d49b738f70e1fb5d2a
+folderAsset: yes
+timeCreated: 1511733871
+=======
+guid: b8725bd2a4d5f934db16c0772073388f
+folderAsset: yes
+timeCreated: 1511316273
+>>>>>>> 5e19c2728d6e6f4c88a8da8a8ce777d5933a43d8
+>>>>>>> 8925e1e6e36b99d65bcbea32261649bdb176490c:HumorousOverkill/Assets/Models/Donut/donutdroneBIG_GUNS_ANIMATED_asset_v01.fbm/2.meta
 licenseType: Pro
 DefaultImporter:
   userData: 
