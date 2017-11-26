@@ -24,6 +24,7 @@ public class DonutAI : MonoBehaviour
     private RaycastHit rollHitInfo;
     private float shotTimer = 0;
 
+    public bool freeze = false;
     private bool dead = false;
 
     // what types of pickups to drop
@@ -75,14 +76,17 @@ public class DonutAI : MonoBehaviour
 
     void Update()
     {
-        // either deploy or roll
-        if (deployed)
+        if(!freeze)
         {
-            deploySequence();
-        }
-        else
-        {
-            roll();
+            // either deploy or roll
+            if (deployed)
+            {
+                deploySequence();
+            }
+            else
+            {
+                roll();
+            }
         }
     }
 
