@@ -7,13 +7,17 @@ using System.Collections.Generic;
 public class Pickup : MonoBehaviour
 {
     public int amount;
-    List<AudioClip> clips;
     public GameEvent type;
+    public List<AudioClip> clips = new List<AudioClip>();
 	
 	void Start ()
     {
         // set collider as trigger
         GetComponent<BoxCollider>().isTrigger = true;
+        foreach (AudioClip clip in clips)
+        {
+            FindObjectOfType<AudioManager>().Add(clip);
+        }
 	}
 
     void OnTriggerEnter(Collider collider)

@@ -108,6 +108,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 25
   type: 2578
+  clips:
+  - {fileID: 8300000, guid: 281b24bef34e57e4298026307e3e01a3, type: 3}
+  - {fileID: 8300000, guid: 690a97bbbe1d5684aa2a1c033b45f2f4, type: 3}
+  - {fileID: 8300000, guid: a6b100b7cb222104f9266db8026a049b, type: 3}
 --- !u!114 &114172851631601456
 MonoBehaviour:
   m_ObjectHideFlags: 1
