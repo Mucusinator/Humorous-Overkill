@@ -30,7 +30,7 @@ public class shotgunShoot : MonoBehaviour {
 
     public ParticleSystem shotgunBlast;
 
-    private bool isReloading;
+    //private bool isReloading;
 
     void Start()
     {
@@ -102,19 +102,19 @@ public class shotgunShoot : MonoBehaviour {
 
     void OnEnable()
     {
-        isReloading = false;
+        //isReloading = false;
         animator.SetBool("Reloading", false);
     }
     IEnumerator Reload()
     {
 
-        isReloading = true;
+        //isReloading = true;
         animator.SetBool("Reloading", true);
         yield return new WaitForSeconds(reloadTime - 0.25f);
         animator.SetBool("Reloading", false);
         yield return new WaitForSeconds(0.25f);
         currentAmmo = maxAmmo;
-        isReloading = false;
+        //isReloading = false;
 
     }
 }

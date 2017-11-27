@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {
         m_moveDirection.z = Input.GetAxis("Vertical") * m_moveSpeed;
         m_moveDirection = this.transform.TransformDirection(m_moveDirection);
 
-        if (Input.GetKeyDown(KeyCode.Space) && m_grounded) { Jump(); }
+        if (Input.GetKeyDown(KeyCode.Space) && m_grounded) { Jump();}
         
         if (Input.GetKey(KeyCode.LeftControl) || m_isUnderObject) {
             Debug.DrawLine(this.transform.position, this.transform.position + Vector3.up * 2f, Color.cyan);
@@ -74,5 +74,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Jump () {
         m_moveDirection.y = m_jumpHeight;
+        PlayerPrefs.SetInt("timesJumped", PlayerPrefs.GetInt("timesJumped") + 1);
+
     }
 }
