@@ -7,7 +7,7 @@ public class destroyOnCollision : MonoBehaviour
     // destroys a gameobject when it collides with anything
     void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag != "Enemy")
+        if(other.gameObject.tag != "Enemy" && other.gameObject.tag != "Manager")
         {
             Debug.Log(gameObject.name + " was destroyed when it collided with " + other.gameObject.name);
             Destroy(gameObject);
