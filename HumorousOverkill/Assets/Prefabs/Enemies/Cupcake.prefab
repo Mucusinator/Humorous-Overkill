@@ -2687,8 +2687,9 @@ MonoBehaviour:
     explosionRadius: 0
   showGizmos: 1
   projectile: {fileID: 1439759218794244, guid: 04783e23afccaa449bd0702e42bc2f2f, type: 2}
-  enableColorChanges: 0
   freeze: 0
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashSpeed: 3
   pickupPrefabs:
   - {fileID: 1680843322557176, guid: cbd1a3b2321aa5d44bf126afb8a98351, type: 2}
   - {fileID: 1987807335771420, guid: 0093c3e35370a1e49a5a17207350087f, type: 2}

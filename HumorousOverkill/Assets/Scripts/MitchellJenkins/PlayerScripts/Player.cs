@@ -53,7 +53,7 @@ public class Player : MonoBehaviour {
         if (m_ply.m_playerHealth <= 0) {
             __event<GameEvent>.UnsubscribeAll();
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            __event<GameEvent>.InvokeEvent(this, new __eArg<GameEvent>(GameEvent.STATE_LOSE_SCREEN, null, null, null));
         }
     }
 
