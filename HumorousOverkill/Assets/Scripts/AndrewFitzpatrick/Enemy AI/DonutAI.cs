@@ -37,6 +37,14 @@ public class DonutAI : MonoBehaviour
 
     __eHandle<object, __eArg<GameEvent>> events;
 
+    [Tooltip("Color to flash when taking damage")]
+    public Color flashColor;
+    [Tooltip("How fast to flash when taking damage")]
+    public float flashSpeed;
+    // flash timer
+    private float flashTimer = 0;
+    private bool flashing = false;
+
     #endregion
 
     public void Awake()
@@ -86,6 +94,15 @@ public class DonutAI : MonoBehaviour
             else
             {
                 roll();
+            }
+        }
+
+        if (!dead)
+        {
+            // flash if needed
+            if (flashing)
+            {
+                flash();
             }
         }
     }
@@ -251,6 +268,14 @@ public class DonutAI : MonoBehaviour
         }
     }
 
+    void changeColor(Color newColor)
+    {
+        foreach (MeshRenderer child in GetComponentsInChildren<MeshRenderer>())
+        {
+            child.material.SetColor("_Color", newColor);
+        }
+    }
+
     void pickTarget()
     {
         currentTarget = transform.position + getRandomVector(myInfo.targetRadius);
@@ -350,9 +375,16 @@ public class DonutAI : MonoBehaviour
         switch (e.arg)
         {
             case GameEvent.ENEMY_DAMAGED:
-                if(!dead)
+                if (!dead)
                 {
+                    // subtract health
                     myInfo.health -= (float)e.value;
+
+                    // flash
+                    flashTimer = 0.0f;
+                    flashing = true;
+
+                    // if the health is now 0 die
                     if (myInfo.health <= 0)
                     {
                         dead = true;
@@ -366,6 +398,20 @@ public class DonutAI : MonoBehaviour
             case GameEvent.STATE_CONTINUE:
                 freeze = false;
                 break;
+        }
+    }
+
+    public void flash()
+    {
+        flashTimer += flashSpeed * Time.deltaTime;
+
+        // change color
+        changeColor(Color.Lerp(flashColor, Color.white, flashTimer));
+
+        if (flashTimer >= 1.0f)
+        {
+            flashing = false;
+            flashTimer = 0.0f;
         }
     }
 
