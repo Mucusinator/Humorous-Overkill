@@ -5551,5 +5551,5 @@ MonoBehaviour:
   pickupPrefabs:
   - {fileID: 1047466508615190, guid: 7f265e36d39fec84da1f38d7aacf4c14, type: 2}
   - {fileID: 1680843322557176, guid: cbd1a3b2321aa5d44bf126afb8a98351, type: 2}
-  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashColor: {r: 0.9338235, g: 0.020599067, b: 0.020599067, a: 0}
   flashSpeed: 3

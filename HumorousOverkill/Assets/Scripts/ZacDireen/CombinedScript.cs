@@ -132,6 +132,7 @@ public class CombinedScript : MonoBehaviour
 
         public float damageDealt;
 
+        public int ReflectAmount;
 
     }
 
@@ -555,6 +556,45 @@ public class CombinedScript : MonoBehaviour
     }
 
 
+    void ShootReflect()
+    {
+        int nPoints = stuff.ReflectAmount;
+        
+        Transform startingRaycastPoint;
+
+
+
+        //remove a round of ammunition 
+        currentRifleAmmo--;
+        // play the rifle effect.
+        RifleMuzzleEffect.Play();
+
+        // THe two different Raycast hit variables to gather information on the collision. 
+        RaycastHit hit, hit2;
+
+        Debug.DrawRay(fpsCam.transform.position, fpsCam.transform.forward * Range, Color.red, 3.0f);
+
+
+
+        for (int i = 0; i <= stuff.ReflectAmount; i++)
+        {
+            if (i == 0)
+            {
+                if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward * Range, out hit, RifleRange))
+                {
+                    if (Physics.Raycast(EndOfGun.transform.position, hit.point - transform.position, out hit2, RifleRange))
+                    {
+
+
+                    }
+
+                }
+            }
+        }
+
+    }
+
+
     void Shoot()
     {
         //shotTrail.enabled = true;
@@ -646,6 +686,9 @@ public class CombinedScript : MonoBehaviour
         stuff.enemiesKilled.text += "Damage Dealt: " + PlayerPrefs.GetFloat("damageDealt").ToString();
 
     }
+
+
+  
 
 
     void ShootRay()
