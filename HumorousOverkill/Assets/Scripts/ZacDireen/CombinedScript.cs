@@ -399,7 +399,7 @@ public class CombinedScript : MonoBehaviour
 
     void RightClickSwitching()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !isReloading)
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (gunType == GunType.RIFLE)
             {
