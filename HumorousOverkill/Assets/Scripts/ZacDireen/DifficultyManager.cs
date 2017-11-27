@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DifficultyManager : MonoBehaviour {
+public class DifficultyManager : MonoBehaviour
+{
 
     public CombinedScript combinedScript;
     public EnemyManager enemyManager;
@@ -21,7 +22,8 @@ public class DifficultyManager : MonoBehaviour {
     public void HandleEvent(object sender, __eArg<GameEvent> e)
     {
         // if this event is being sent to itself, just skip it
-        if (sender != (object)this) return;
+        if (sender == (object)this) return;
+        Debug.Log(e.arg.ToString());
         switch (e.arg)
         {
             case GameEvent.DIFFICULTY_EASY:
@@ -30,25 +32,16 @@ public class DifficultyManager : MonoBehaviour {
                 combinedScript.RifleDamage = 40.0f;
                 enemyManager.defaultDonutInfo.health = 25;
                 enemyManager.defaultDroneInfo.health = 25;
-           
-                foreach (FranciscoRomano.Spawn.Group group in enemyManager.spawner.stage.groups)
-                {
-                    group.rate = 5.0f;
-                    foreach (FranciscoRomano.Spawn.Unit unit in group.units)
-                    {
-                        foreach (FranciscoRomano.Spawn.Point point in unit.points)
-                        {
-                            point.amount = Random.Range(3,5);
-                        }
-                    }
-                }
+
+                UpdateSpawners(3, 5, 5.0f);
+                
                 enemyManager.defaultDonutInfo.pickupDropRate = 0.75f;
                 enemyManager.defaultDroneInfo.pickupDropRate = 0.75f;
-
+                EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 break;
             case GameEvent.DIFFICULTY_MEDI:
 
-
+                EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 break;
             case GameEvent.DIFFICULTY_HARD:
                 playerManager.m_playerInfo.m_playerHealth = 75;
@@ -56,43 +49,50 @@ public class DifficultyManager : MonoBehaviour {
                 enemyManager.defaultDroneInfo.health = 80;
                 combinedScript.PelletDamage = 2.0f;
                 combinedScript.RifleDamage = 25.0f;
-                foreach (FranciscoRomano.Spawn.Group group in enemyManager.spawner.stage.groups)
-                {
-                    group.rate = 3.0f;
-                    foreach (FranciscoRomano.Spawn.Unit unit in group.units)
-                    {
-                        foreach (FranciscoRomano.Spawn.Point point in unit.points)
-                        {
-                            point.amount = Random.Range(7, 10);
-                        }
-                    }
-                }
+
+                UpdateSpawners(7, 10, 3.0f);
+
                 enemyManager.defaultDonutInfo.pickupDropRate = 0.3f;
                 enemyManager.defaultDroneInfo.pickupDropRate = 0.3f;
-
+                EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 break;
             case GameEvent.DIFFICULTY_NM:
-                
+
                 playerManager.m_playerInfo.m_playerHealth = 25;
                 enemyManager.defaultDonutInfo.health = 120;
                 enemyManager.defaultDroneInfo.health = 120;
                 combinedScript.PelletDamage = 1.5f;
                 combinedScript.RifleDamage = 15.0f;
-                foreach (FranciscoRomano.Spawn.Group group in enemyManager.spawner.stage.groups)
-                {
-                    group.rate = 1.0f;
-                    foreach (FranciscoRomano.Spawn.Unit unit in group.units)
-                    {
-                        foreach (FranciscoRomano.Spawn.Point point in unit.points)
-                        {
-                            point.amount = Random.Range(10, 15);
-                        }
-                    }
-                }
+
+                UpdateSpawners(10, 15, 1.0f);
+                
                 enemyManager.defaultDonutInfo.pickupDropRate = 0.05f;
                 enemyManager.defaultDroneInfo.pickupDropRate = 0.05f;
+                EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 NoSpawnPoints = true;
                 break;
+        }
+    }
+
+    void UpdateSpawners(int min, int max, float rate)
+    {
+        EnemySpawner[] spawners = GameObject.FindObjectsOfType<EnemySpawner>();
+
+        Debug.Log(spawners.Length);
+
+        foreach (EnemySpawner spawner in spawners)
+        {
+            foreach (FranciscoRomano.Spawn.Group group in spawner.stage.groups)
+            {
+                group.rate = rate;
+                foreach (FranciscoRomano.Spawn.Unit unit in group.units)
+                {
+                    foreach (FranciscoRomano.Spawn.Point point in unit.points)
+                    {
+                        point.amount = Random.Range(min, max);
+                    }
+                }
+            }
         }
     }
 }

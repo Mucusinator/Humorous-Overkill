@@ -98,7 +98,7 @@ public class CombinedScript : MonoBehaviour
     private bool switchingWeapon;
 
 
-
+    public GameEvent currentState = GameEvent._NULL_;
 
     // This boolean is for the rifle, to show if it is active or not.
     // public bool isRifleSelected;
@@ -164,12 +164,25 @@ public class CombinedScript : MonoBehaviour
                 m_audioManager.Add(LazerSound);
                 m_audioManager.Add(shotgunSound);
             }
+        switch (e.arg)
+        {
+            case GameEvent.STATE_MENU:
+            case GameEvent.STATE_RESTART:
+            case GameEvent.STATE_CONTINUE:
+            case GameEvent.STATE_PAUSE:
+            case GameEvent.STATE_DIFFICULTY:
+            case GameEvent.STATE_LOSE_SCREEN:
+            case GameEvent.STATE_START:
+            case GameEvent.STATE_WIN_SCREEN:
+                currentState = e.arg;
+                break;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        showEnemyHealth();
+     
 
 
 
@@ -242,18 +255,8 @@ public class CombinedScript : MonoBehaviour
 
 
 
-    void showEnemyHealth()
-    {
-        //if (stuff.showEnemyHealth == true)
-        //{
-        //    stuff.enemyHealth.enabled = true;
-        //}
-        //else
-        //{
-        //    stuff.enemyHealth.enabled = false;
-        //}
 
-    }
+    
     void checkReloadShotgun()
     {
         if (currentShotgunAmmo <= 0)
@@ -396,7 +399,7 @@ public class CombinedScript : MonoBehaviour
 
     void RightClickSwitching()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !isReloading)
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (gunType == GunType.RIFLE)
             {
@@ -476,10 +479,10 @@ public class CombinedScript : MonoBehaviour
         if (glitchRifleEffect == true && !isReloading && gunType == GunType.RIFLE)
         {
 
-            fpsCam.GetComponent<GlitchPostRender>().offset += 0.01f * Time.deltaTime;
-            if (fpsCam.GetComponent<GlitchPostRender>().offset > 0.01f)
+            fpsCam.GetComponent<GlitchPostRender>().offset += 0.003f * Time.deltaTime;
+            if (fpsCam.GetComponent<GlitchPostRender>().offset > 0.003f)
             {
-                fpsCam.GetComponent<GlitchPostRender>().offset = 0.01f;
+                fpsCam.GetComponent<GlitchPostRender>().offset = 0.003f;
                 stillGlitching = true;
             }
         }
@@ -502,10 +505,7 @@ public class CombinedScript : MonoBehaviour
                 switchingWeapon = false;
             }
         }
-        if (gunType == GunType.SHOTGUN)
-        {
-
-        }
+   
     }
 
 
@@ -654,86 +654,39 @@ public class CombinedScript : MonoBehaviour
 
         // the object that gets hit from the raycast.
         RaycastHit hit;
-        if (Physics.Raycast(r, out hit))
+
+
+
+        if (currentState == GameEvent.STATE_START)
         {
-
-
-            inDirection = Vector3.Reflect(r.direction, -hit.normal);
-
-            if (hit.collider.gameObject.tag == "Enemy")
+            if (Physics.Raycast(r, out hit))
             {
 
 
-                if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
+                inDirection = Vector3.Reflect(r.direction, -hit.normal);
+
+                if (hit.collider.gameObject.tag == "Enemy")
                 {
-                    EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)RifleDamage, typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
-                }
-                if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
-                {
-                    EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject.transform.parent.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
-                }
-                Debug.Log("I have shot " + hit.collider.gameObject.name);
 
 
-                Target target = hit.transform.GetComponent<Target>();
-                if (target != null)
-                {
-                    if (stuff.showEnemyHealth)
+                    if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
                     {
-                        target.TakeDamage(PelletDamage);
-                        stuff.enemyHealth.text = "Enemies health:" + target.health;
+                        EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)RifleDamage, typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
                     }
-                    if (stuff.showStatistics == true)
+                    if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                     {
-                        if (target.health <= 0)
-                        {
-                            stuff.killedCount++;
-                            stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
-                        }
+                        EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject.transform.parent.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
                     }
-                }
-
-            }
-            Debug.DrawLine(EndOfGun.transform.position, hit.point, Color.red, 5.0f);
-            Vector3 incomingVec = hit.point - EndOfGun.transform.position;
-            Vector3 reflectVec = Vector3.Reflect(incomingVec, hit.normal);
-
-            Ray r2 = new Ray(hit.point, reflectVec);
-            RaycastHit hit2;
-            if (stuff.ReflectiveShots == true)
-            {
-                if (Physics.Raycast(r2, out hit2, 400))
-                {
-                    //Debug.DrawRay(hit2.point, -hit2.normal, Color.yellow, 5.0f);
-                    //Debug.Log(gameObject);
-                    Debug.DrawRay(hit.point, reflectVec, Color.green, 5.0f);
-                    if (hit.collider.gameObject.tag == "Enemy")
-                    {
-                        if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
-                        {
-                            EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)(PelletDamage * stuff.ReflectMultiplier / 100), typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
-                        }
-                        if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
-                        {
-                            EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)(PelletDamage * stuff.ReflectMultiplier / 100), typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
-                        }
-                        Debug.Log("I have shot " + hit.collider.gameObject.name);
+                    Debug.Log("I have shot " + hit.collider.gameObject.name);
 
 
-                    }
-                    Target target = hit2.transform.GetComponent<Target>();
+                    Target target = hit.transform.GetComponent<Target>();
                     if (target != null)
                     {
-
-                        //show the enemy health (testing)
-                        //show the enemy health
                         if (stuff.showEnemyHealth)
                         {
-
-                            target.TakeDamage((PelletDamage * stuff.ReflectMultiplier) / 100);
+                            target.TakeDamage(PelletDamage);
                             stuff.enemyHealth.text = "Enemies health:" + target.health;
-
-
                         }
                         if (stuff.showStatistics == true)
                         {
@@ -743,25 +696,77 @@ public class CombinedScript : MonoBehaviour
                                 stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
                             }
                         }
-
                     }
 
-
                 }
+                Debug.DrawLine(EndOfGun.transform.position, hit.point, Color.red, 5.0f);
+                Vector3 incomingVec = hit.point - EndOfGun.transform.position;
+                Vector3 reflectVec = Vector3.Reflect(incomingVec, hit.normal);
+
+                Ray r2 = new Ray(hit.point, reflectVec);
+                RaycastHit hit2;
+                if (stuff.ReflectiveShots == true)
+                {
+                    if (Physics.Raycast(r2, out hit2, 400))
+                    {
+                        //Debug.DrawRay(hit2.point, -hit2.normal, Color.yellow, 5.0f);
+                        //Debug.Log(gameObject);
+                        Debug.DrawRay(hit.point, reflectVec, Color.green, 5.0f);
+                        if (hit.collider.gameObject.tag == "Enemy")
+                        {
+                            if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
+                            {
+                                EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)(PelletDamage * stuff.ReflectMultiplier / 100), typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
+                            }
+                            if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
+                            {
+                                EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)(PelletDamage * stuff.ReflectMultiplier / 100), typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
+                            }
+                            Debug.Log("I have shot " + hit.collider.gameObject.name);
+
+
+                        }
+                        Target target = hit2.transform.GetComponent<Target>();
+                        if (target != null)
+                        {
+
+                            //show the enemy health (testing)
+                            //show the enemy health
+                            if (stuff.showEnemyHealth)
+                            {
+
+                                target.TakeDamage((PelletDamage * stuff.ReflectMultiplier) / 100);
+                                stuff.enemyHealth.text = "Enemies health:" + target.health;
+
+
+                            }
+                            if (stuff.showStatistics == true)
+                            {
+                                if (target.health <= 0)
+                                {
+                                    stuff.killedCount++;
+                                    stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
+                                }
+                            }
+
+                        }
+
+
+                    }
+                }
+
+
+
+
             }
+            else
+            {
+                //Vector3 centreCam = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
 
-
-
-
-        }
-        else
-        {
-            //Vector3 centreCam = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
-
-            Debug.DrawLine(StartOfPlayerRaycast.transform.position, fpsCam.transform.forward * Range, Color.cyan, 3.0f);
+                Debug.DrawLine(StartOfPlayerRaycast.transform.position, fpsCam.transform.forward * Range, Color.cyan, 3.0f);
+            }
         }
     }
-
     void OnEnable()
     {
         isReloading = false;
