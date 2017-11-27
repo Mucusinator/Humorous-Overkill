@@ -100,7 +100,7 @@ public class DifficultyManager : MonoBehaviour
 
                 for (int iii = 0; iii < spawners[i].stage.groups[ii].units.Count; iii++)
                 {
-                    for (int iiii = 0; iiii < spawners[i].stage.groups[ii].units[iii].points.Count; iii++)
+                    for (int iiii = 0; iiii < spawners[i].stage.groups[ii].units[iii].points.Count; iiii++)
                     {
                         spawners[i].stage.groups[ii].units[iii].points[iiii].amount = Random.Range(min, max);
                     }
