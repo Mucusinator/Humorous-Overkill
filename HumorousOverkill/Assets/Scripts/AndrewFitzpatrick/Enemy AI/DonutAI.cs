@@ -360,6 +360,12 @@ public class DonutAI : MonoBehaviour
                     }
                 }
                 break;
+            case GameEvent.STATE_PAUSE:
+                freeze = true;
+                break;
+            case GameEvent.STATE_CONTINUE:
+                freeze = false;
+                break;
         }
     }
 

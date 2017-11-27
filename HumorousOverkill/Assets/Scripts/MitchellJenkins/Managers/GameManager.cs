@@ -41,10 +41,10 @@ public class GameManager : MonoBehaviour {
                 break;
         case GameEvent.STATE_START:
         case GameEvent.STATE_CONTINUE:
+            Time.timeScale = 1;
             if (e.type != GetType()) break;
             if (m_loading.IsComplete())
             {
-                Time.timeScale = 1;
                 GetComponent<AudioManager>().FadeIn(GetComponent<AudioManager>().musics[0], 1);
                 m_loading.gameObject.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;

@@ -280,6 +280,16 @@ public class CupcakeAI : MonoBehaviour
                 }
             }
         }
+        // game paused
+        else if (e.arg == GameEvent.STATE_PAUSE)
+        {
+            freeze = true;
+        }
+        // game unpaused
+        else if(e.arg == GameEvent.STATE_CONTINUE)
+        {
+            freeze = false;
+        }
     }
 
     #endregion
