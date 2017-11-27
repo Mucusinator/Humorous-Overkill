@@ -8360,7 +8360,7 @@ GameObject:
   - component: {fileID: 214508774}
   m_Layer: 0
   m_Name: CupcakeRoomSpawner
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22145,7 +22145,7 @@ MonoBehaviour:
     explosionForce: 5
     explosionRadius: 5
   defaultDonutInfo:
-    health: 100
+    health: 25
     damage: 10
     fireRate: 1
     rollSpeed: 8
@@ -22197,6 +22197,9 @@ MonoBehaviour:
     m_lightIntensity: 0
     m_LightColor: {r: 0, g: 0, b: 0, a: 0}
     m_UIColor: {r: 0, g: 0, b: 0, a: 0}
+  m_data:
+    name: []
+    score: 
   m_loading: {fileID: 358725679}
 --- !u!1 &383868916
 GameObject:
@@ -22460,7 +22463,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 396561463}
-  m_LocalRotation: {x: -0.36942792, y: -0.6346858, z: -0.3414452, w: 0.58661085}
+  m_LocalRotation: {x: -0.3694279, y: -0.63468575, z: -0.34144518, w: 0.5866108}
   m_LocalPosition: {x: -0.03312643, y: -1.0928519e-17, z: -1.1863261e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -37200,7 +37203,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 842820392}
-  m_LocalRotation: {x: -0.36942792, y: -0.6346858, z: -0.3414452, w: 0.58661085}
+  m_LocalRotation: {x: -0.3694279, y: -0.63468575, z: -0.34144518, w: 0.5866108}
   m_LocalPosition: {x: -0.03312643, y: -1.0928519e-17, z: -1.1863261e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -62223,7 +62226,7 @@ GameObject:
   - component: {fileID: 1575626945}
   m_Layer: 0
   m_Name: MixedRoomSpawner
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66094,7 +66097,7 @@ GameObject:
   - component: {fileID: 1710637155}
   m_Layer: 0
   m_Name: DonutRoomSpawner
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -11171,8 +11171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56041aeee70a3d54aa17875aff8bab6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  fadeIn: 1
+  enabled: 0
   running: 0
   fadeInDelay: 1
   fadeInSpeed: 1
@@ -11180,7 +11179,6 @@ MonoBehaviour:
   fadeOutSpeed: 1
   sprites:
   - {fileID: 21300000, guid: f1f832b4763d3e743882e10994940521, type: 3}
-  image: {fileID: 494882111}
 --- !u!65 &303801030
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17794,12 +17792,6 @@ MonoBehaviour:
         - amount: 3
           position: {x: -10.76, y: -7.55, z: 0.02}
   doors: []
---- !u!114 &494882111 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114274094993518776, guid: 30403f8d89b92a24e96897519077ab83,
-    type: 2}
-  m_PrefabInternal: {fileID: 2095065403}
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &495782408
 GameObject:
   m_ObjectHideFlags: 0
@@ -31388,6 +31380,9 @@ MonoBehaviour:
     m_lightIntensity: 0
     m_LightColor: {r: 0, g: 0, b: 0, a: 0}
     m_UIColor: {r: 0, g: 0, b: 0, a: 0}
+  m_data:
+    name: []
+    score: 
   m_loading: {fileID: 388004862}
 --- !u!114 &889218443
 MonoBehaviour:
@@ -33213,8 +33208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56041aeee70a3d54aa17875aff8bab6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  fadeIn: 1
+  enabled: 0
   running: 0
   fadeInDelay: 1
   fadeInSpeed: 1
@@ -33222,7 +33216,6 @@ MonoBehaviour:
   fadeOutSpeed: 1
   sprites:
   - {fileID: 21300000, guid: e73d395236eed4349b6e2f93731f2d7d, type: 3}
-  image: {fileID: 494882111}
 --- !u!65 &944962987
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -45326,6 +45319,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1333637864 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82218963707667726, guid: 30403f8d89b92a24e96897519077ab83,
+    type: 2}
+  m_PrefabInternal: {fileID: 2095065403}
+--- !u!114 &1333637865 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114857759371639068, guid: 30403f8d89b92a24e96897519077ab83,
+    type: 2}
+  m_PrefabInternal: {fileID: 2095065403}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1334929772
 GameObject:
   m_ObjectHideFlags: 0
@@ -67399,8 +67403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56041aeee70a3d54aa17875aff8bab6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  fadeIn: 1
+  enabled: 0
   running: 0
   fadeInDelay: 1
   fadeInSpeed: 1
@@ -67408,7 +67411,6 @@ MonoBehaviour:
   fadeOutSpeed: 1
   sprites:
   - {fileID: 21300000, guid: cc0d6709c47b272479207e6fe395a2c2, type: 3}
-  image: {fileID: 494882111}
 --- !u!65 &1979716453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67873,8 +67875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56041aeee70a3d54aa17875aff8bab6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  fadeIn: 1
+  enabled: 0
   running: 0
   fadeInDelay: 1
   fadeInSpeed: 1
@@ -67882,7 +67883,6 @@ MonoBehaviour:
   fadeOutSpeed: 1
   sprites:
   - {fileID: 21300000, guid: 73f201b09521b0a419b3d3157db4a040, type: 3}
-  image: {fileID: 494882111}
 --- !u!65 &1996602606
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -71008,6 +71008,16 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: -57.4
       objectReference: {fileID: 0}
+    - target: {fileID: 114002802447892178, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 1333637864}
+    - target: {fileID: 114002802447892178, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: imageSource
+      value: 
+      objectReference: {fileID: 1333637865}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30403f8d89b92a24e96897519077ab83, type: 2}
   m_IsPrefabParent: 0
