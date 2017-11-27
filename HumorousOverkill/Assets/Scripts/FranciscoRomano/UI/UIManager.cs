@@ -101,7 +101,8 @@ public class UIManager : MonoBehaviour
             case GameEvent.STATE_PAUSE:
             case GameEvent.STATE_RESTART:
             case GameEvent.STATE_CONTINUE:
-                
+            case GameEvent.STATE_DIFFICULTY:
+                //if (e.type == typeof(GameManager)) break;
                 foreach (UIProperty property in propertyList)
                 {
                     property.gameObject.SetActive(false);
