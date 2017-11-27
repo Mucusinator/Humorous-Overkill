@@ -123,3 +123,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 10
   type: 2580
+  clips:
+  - {fileID: 8300000, guid: be6b29af7ad650c458c03412d7aeaf52, type: 3}
+  - {fileID: 8300000, guid: 79d3dc6ef07b06846b35713928ed3940, type: 3}
