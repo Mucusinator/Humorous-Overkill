@@ -11138,7 +11138,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 303801027}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 42.22, y: 11.458, z: 56.21}
+  m_LocalPosition: {x: 42.22, y: 11.91, z: 56.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 763972634}
@@ -17695,7 +17695,7 @@ GameObject:
   - component: {fileID: 494416524}
   m_Layer: 0
   m_Name: DonutRoomSpawner
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48369,6 +48369,9 @@ MonoBehaviour:
   DoorOne: {fileID: 0}
   DoorTwo: {fileID: 0}
   DoorThree: {fileID: 0}
+  ColliderOne: {fileID: 0}
+  ColliderTwo: {fileID: 0}
+  ColliderThree: {fileID: 0}
 --- !u!1 &1430458474
 GameObject:
   m_ObjectHideFlags: 0
@@ -57624,7 +57627,7 @@ GameObject:
   - component: {fileID: 1724611378}
   m_Layer: 0
   m_Name: MixedRoomSpawner
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59700,7 +59703,7 @@ GameObject:
   - component: {fileID: 1780194062}
   m_Layer: 0
   m_Name: CupcakeRoomSpawner
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
