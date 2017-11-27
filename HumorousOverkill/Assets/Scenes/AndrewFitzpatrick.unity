@@ -16832,7 +16832,6 @@ GameObject:
   - component: {fileID: 68403145}
   - component: {fileID: 330011684}
   - component: {fileID: 330011683}
-  - component: {fileID: 330011682}
   m_Layer: 8
   m_Name: Weapon Holder
   m_TagString: Untagged
@@ -16857,18 +16856,6 @@ Transform:
   m_Father: {fileID: 335523914}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &330011682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114436629796792412, guid: a1fb575e053d1554db8952022d9ab89b,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 330011680}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &330011683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18082,12 +18069,6 @@ Prefab:
     - {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 30403f8d89b92a24e96897519077ab83, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &358725678 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114274094993518776, guid: 30403f8d89b92a24e96897519077ab83,
-    type: 2}
-  m_PrefabInternal: {fileID: 358725677}
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!114 &358725679 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114002802447892178, guid: 30403f8d89b92a24e96897519077ab83,
@@ -22153,7 +22134,7 @@ MonoBehaviour:
     deployRange: 10
     hitRange: 12
     maximumTargetHeight: 20
-    accuracy: 2
+    accuracy: 0.5
     pickupDropRate: 99
     targetRadius: 5
     avoidRadius: 10
@@ -40613,8 +40594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56041aeee70a3d54aa17875aff8bab6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  fadeIn: 1
+  enabled: 0
   running: 0
   fadeInDelay: 1
   fadeInSpeed: 1
@@ -40622,7 +40602,6 @@ MonoBehaviour:
   fadeOutSpeed: 1
   sprites:
   - {fileID: 21300000, guid: 73f201b09521b0a419b3d3157db4a040, type: 3}
-  image: {fileID: 358725678}
 --- !u!65 &952392027
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -49856,8 +49835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56041aeee70a3d54aa17875aff8bab6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  fadeIn: 1
+  enabled: 0
   running: 0
   fadeInDelay: 1
   fadeInSpeed: 1
@@ -49865,7 +49843,6 @@ MonoBehaviour:
   fadeOutSpeed: 1
   sprites:
   - {fileID: 21300000, guid: f1f832b4763d3e743882e10994940521, type: 3}
-  image: {fileID: 358725678}
 --- !u!65 &1209998298
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51353,8 +51330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56041aeee70a3d54aa17875aff8bab6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  fadeIn: 1
+  enabled: 0
   running: 0
   fadeInDelay: 1
   fadeInSpeed: 1
@@ -51362,7 +51338,6 @@ MonoBehaviour:
   fadeOutSpeed: 1
   sprites:
   - {fileID: 21300000, guid: cc0d6709c47b272479207e6fe395a2c2, type: 3}
-  image: {fileID: 358725678}
 --- !u!65 &1239935670
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -79193,8 +79168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56041aeee70a3d54aa17875aff8bab6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  fadeIn: 1
+  enabled: 0
   running: 0
   fadeInDelay: 1
   fadeInSpeed: 1
@@ -79202,7 +79176,6 @@ MonoBehaviour:
   fadeOutSpeed: 1
   sprites:
   - {fileID: 21300000, guid: e73d395236eed4349b6e2f93731f2d7d, type: 3}
-  image: {fileID: 358725678}
 --- !u!65 &2088467183
 BoxCollider:
   m_ObjectHideFlags: 0
