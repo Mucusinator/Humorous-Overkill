@@ -93,9 +93,9 @@ public class CombinedScript : MonoBehaviour
     /// </summary>
     public Camera fpsCam;
 
-    private bool stillGlitching;
+    //private bool stillGlitching;
 
-    private bool switchingWeapon;
+    //private bool switchingWeapon;
 
 
     public GameEvent currentState = GameEvent._NULL_;
@@ -131,10 +131,17 @@ public class CombinedScript : MonoBehaviour
         public int killedCount;
 
         public float damageDealt;
+
+
     }
 
     [SerializeField]
     public BachelorStuff stuff;
+
+
+
+    // Keys for the PlayerPrefs.
+    //private const string enemiesKilled, timesJumped, damagedDealt;
 
 
     // This is the two different weapon types.
@@ -144,8 +151,8 @@ public class CombinedScript : MonoBehaviour
         RIFLE
 
     }
-    
-    void Awake () {
+
+    void Awake() {
         EventManager<GameEvent>.Add(HandleMessage);
     }
 
@@ -154,6 +161,13 @@ public class CombinedScript : MonoBehaviour
     {
         EventManager<GameEvent>.InvokeGameState(this, null, null, GetType(), GameEvent._NULL_);
         currentShotgunAmmo = magTubeSize;
+
+
+        // Default the playerPrefs
+        PlayerPrefs.SetInt("enemiesKilled", 0);
+        PlayerPrefs.SetInt("timesJumped", 0);
+        PlayerPrefs.SetInt("damageDealt", 0);
+        PlayerPrefs.SetInt("shotgunRoundsFired", 0);
     }
 
     public void HandleMessage(object s, __eArg<GameEvent> e) {
@@ -182,7 +196,6 @@ public class CombinedScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
 
 
 
@@ -251,12 +264,17 @@ public class CombinedScript : MonoBehaviour
             m_audioManager.Stop(LazerSound);
         }
 
+        if (stuff.showStatistics)
+        {
+            ShowDeadCount();
+        }
+
     }
 
 
 
 
-    
+
     void checkReloadShotgun()
     {
         if (currentShotgunAmmo <= 0)
@@ -332,19 +350,22 @@ public class CombinedScript : MonoBehaviour
     {
         if (currentShotgunAmmo > 0)
         {
-
-            ShotgunMuzzleEffect.Play();
-
-            currentShotgunAmmo--;
-            for (int i = 0; i < pelletCount; ++i)
+            if (currentState == GameEvent.STATE_START || currentState == GameEvent.STATE_CONTINUE)
             {
+                ShotgunMuzzleEffect.Play();
+
+                currentShotgunAmmo--;
+
                 animator.Play("Release");
                 m_audioManager.Play1(shotgunSound);
-                ShootRay();
+                for (int i = 0; i < pelletCount; i++)
+                {
+
+                    ShootRay();
+
+                }
 
             }
-
-
         }
 
     }
@@ -407,7 +428,7 @@ public class CombinedScript : MonoBehaviour
                 gunType = GunType.SHOTGUN;
 
                 //isRifleSelected = false;
-                switchingWeapon = true;
+                // switchingWeapon = true;
             }
             else
             {
@@ -418,7 +439,7 @@ public class CombinedScript : MonoBehaviour
                     gunType = GunType.RIFLE;
                     //SelectedWeapon = 1;
                     //isRifleSelected = true;
-                    switchingWeapon = true;
+                    //switchingWeapon = true;
                 }
 
             }
@@ -482,8 +503,13 @@ public class CombinedScript : MonoBehaviour
             fpsCam.GetComponent<GlitchPostRender>().offset += 0.003f * Time.deltaTime;
             if (fpsCam.GetComponent<GlitchPostRender>().offset > 0.003f)
             {
+
+                fpsCam.GetComponent<GlitchPostRender>().offset = 0.01f;
+                //stillGlitching = true;
+
                 fpsCam.GetComponent<GlitchPostRender>().offset = 0.003f;
-                stillGlitching = true;
+                //stillGlitching = true;
+
             }
         }
         else
@@ -493,7 +519,7 @@ public class CombinedScript : MonoBehaviour
             if (fpsCam.GetComponent<GlitchPostRender>().offset < 0)
             {
                 fpsCam.GetComponent<GlitchPostRender>().offset = 0;
-                stillGlitching = false;
+                //stillGlitching = false;
             }
         }
         if (gunType == GunType.SHOTGUN)
@@ -502,10 +528,10 @@ public class CombinedScript : MonoBehaviour
             if (fpsCam.GetComponent<GlitchPostRender>().offset < 0)
             {
                 fpsCam.GetComponent<GlitchPostRender>().offset = 0;
-                switchingWeapon = false;
+                //switchingWeapon = false;
             }
         }
-   
+
     }
 
 
@@ -558,42 +584,34 @@ public class CombinedScript : MonoBehaviour
 
                 if (hit.transform != null)
                 {
-                    //shotTrail.SetPosition(1, hit2.point);
-
-                    // Put in place the takeDamage event handler for the game manager here.
-                    //GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(GameEvent.)
-
-                    //Debug.Log(hit.transform.name);
-                    //Target target = hit.transform.GetComponent<Target>();
-
-
 
                     if (hit.collider.gameObject.tag == "Enemy")
                     {
                         if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
                         {
                             //hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
-                            EventManager<GameEvent>.InvokeGameState(this, (GameObject)hit.collider.gameObject, (float)RifleDamage, typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
-                            if (stuff.showStatistics == true)
+                            EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)RifleDamage, typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
+
+                            PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + RifleDamage);
+
+                            if (hit.collider.gameObject.GetComponentInParent<CupcakeAI>().myInfo.health <= 0)
                             {
-                                if (hit.collider.gameObject.GetComponent<CupcakeAI>().myInfo.health <= 0)
-                                {
-                                    stuff.killedCount++;
-                                    stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
-                                }
+                                stuff.killedCount++;
+                                PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
                             }
+
                         }
                         if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                         {
-                            EventManager<GameEvent>.InvokeGameState(this, (GameObject)hit.collider.gameObject.transform.parent.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
-                            if (stuff.showStatistics == true)
+                            EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject.transform.parent.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
+                            PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + RifleDamage);
+                            if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
                             {
-                                if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
-                                {
-                                    stuff.killedCount++;
-                                    stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
-                                }
+                                stuff.killedCount++;
+                                PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
                             }
+
+
                         }
 
 
@@ -602,15 +620,6 @@ public class CombinedScript : MonoBehaviour
                         //target.TakeDamage(RifleDamage);
 
 
-                        Target target = hit.transform.GetComponent<Target>();
-                        if (target != null)
-                        {
-                            if (stuff.showEnemyHealth)
-                            {
-                                target.TakeDamage(PelletDamage);
-                                stuff.enemyHealth.text = "Enemies health:" + target.health;
-                            }
-                        }
                     }
 
                 }
@@ -625,10 +634,23 @@ public class CombinedScript : MonoBehaviour
 
     }
 
+    void ShowDeadCount()
+    {
+        //stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
+        stuff.enemiesKilled.text = "Enemies Killed: ";
+
+        stuff.enemiesKilled.text += PlayerPrefs.GetInt("enemiesKilled").ToString() + "\n";
+
+        stuff.enemiesKilled.text += "Times Jumped: " + PlayerPrefs.GetInt("timesJumped").ToString() + "\n";
+
+        stuff.enemiesKilled.text += "Damage Dealt: " + PlayerPrefs.GetFloat("damageDealt").ToString();
+
+    }
+
 
     void ShootRay()
     {
-        Vector3 inDirection;
+        //Vector3 inDirection;
         //  Try this one first, before using the second one
         //  The Ray-hits will form a ring
         float randomRadius = spreadWidth;
@@ -638,9 +660,11 @@ public class CombinedScript : MonoBehaviour
         float randomAngle = Random.Range(0, 2 * Mathf.PI);
 
         //Calculating the raycast direction
-        Vector3 direction = new Vector3(
+        Vector3 direction = new Vector3
+        (
             randomRadius * Mathf.Cos(randomAngle),
-            randomRadius * Mathf.Sin(randomAngle), Range
+            randomRadius * Mathf.Sin(randomAngle), 
+            Range
 
         );
 
@@ -657,13 +681,13 @@ public class CombinedScript : MonoBehaviour
 
 
 
-        if (currentState == GameEvent.STATE_START)
+        if (currentState == GameEvent.STATE_START || currentState == GameEvent.STATE_CONTINUE)
         {
             if (Physics.Raycast(r, out hit))
             {
 
 
-                inDirection = Vector3.Reflect(r.direction, -hit.normal);
+                //inDirection = Vector3.Reflect(r.direction, -hit.normal);
 
                 if (hit.collider.gameObject.tag == "Enemy")
                 {
@@ -671,32 +695,32 @@ public class CombinedScript : MonoBehaviour
 
                     if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
                     {
-                        EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)RifleDamage, typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
+                        EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)PelletDamage, typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
+                        PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + PelletDamage);
+
+                        if (hit.collider.gameObject.GetComponentInParent<CupcakeAI>().myInfo.health <= 0)
+                        {
+                            stuff.killedCount++;
+                            PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
+
+                        }
                     }
                     if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                     {
-                        EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject.transform.parent.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
+                        EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject.transform.parent.gameObject, (float)PelletDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
+                        PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + PelletDamage);
+                        if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
+                        {
+                            stuff.killedCount++;
+                            PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
+                        }
+
+
                     }
                     Debug.Log("I have shot " + hit.collider.gameObject.name);
 
 
-                    Target target = hit.transform.GetComponent<Target>();
-                    if (target != null)
-                    {
-                        if (stuff.showEnemyHealth)
-                        {
-                            target.TakeDamage(PelletDamage);
-                            stuff.enemyHealth.text = "Enemies health:" + target.health;
-                        }
-                        if (stuff.showStatistics == true)
-                        {
-                            if (target.health <= 0)
-                            {
-                                stuff.killedCount++;
-                                stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
-                            }
-                        }
-                    }
+
 
                 }
                 Debug.DrawLine(EndOfGun.transform.position, hit.point, Color.red, 5.0f);
@@ -717,39 +741,28 @@ public class CombinedScript : MonoBehaviour
                             if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
                             {
                                 EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)(PelletDamage * stuff.ReflectMultiplier / 100), typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
+                                PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + PelletDamage * stuff.ReflectMultiplier/ 100);
+                                if (hit.collider.gameObject.GetComponentInParent<CupcakeAI>().myInfo.health <= 0)
+                                {
+                                    stuff.killedCount++;
+                                    PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
+                                }
                             }
                             if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
                             {
                                 EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)(PelletDamage * stuff.ReflectMultiplier / 100), typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
+                                PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + PelletDamage * stuff.ReflectMultiplier / 100);
+                                if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
+                                {
+                                    stuff.killedCount++;
+                                    PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
+                                }
                             }
                             Debug.Log("I have shot " + hit.collider.gameObject.name);
 
 
                         }
-                        Target target = hit2.transform.GetComponent<Target>();
-                        if (target != null)
-                        {
 
-                            //show the enemy health (testing)
-                            //show the enemy health
-                            if (stuff.showEnemyHealth)
-                            {
-
-                                target.TakeDamage((PelletDamage * stuff.ReflectMultiplier) / 100);
-                                stuff.enemyHealth.text = "Enemies health:" + target.health;
-
-
-                            }
-                            if (stuff.showStatistics == true)
-                            {
-                                if (target.health <= 0)
-                                {
-                                    stuff.killedCount++;
-                                    stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
-                                }
-                            }
-
-                        }
 
 
                     }
@@ -773,4 +786,6 @@ public class CombinedScript : MonoBehaviour
         //animator.SetBool("Reloading", false);
     }
 
+
+   
 }

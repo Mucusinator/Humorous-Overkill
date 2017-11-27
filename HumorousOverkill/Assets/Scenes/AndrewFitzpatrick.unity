@@ -8360,7 +8360,7 @@ GameObject:
   - component: {fileID: 214508774}
   m_Layer: 0
   m_Name: CupcakeRoomSpawner
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22197,6 +22197,9 @@ MonoBehaviour:
     m_lightIntensity: 0
     m_LightColor: {r: 0, g: 0, b: 0, a: 0}
     m_UIColor: {r: 0, g: 0, b: 0, a: 0}
+  m_data:
+    name: []
+    score: 
   m_loading: {fileID: 358725679}
 --- !u!1 &383868916
 GameObject:
@@ -62223,7 +62226,7 @@ GameObject:
   - component: {fileID: 1575626945}
   m_Layer: 0
   m_Name: MixedRoomSpawner
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66094,7 +66097,7 @@ GameObject:
   - component: {fileID: 1710637155}
   m_Layer: 0
   m_Name: DonutRoomSpawner
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
