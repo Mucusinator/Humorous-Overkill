@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
 
 // Struct holding all the Game info
@@ -13,19 +16,63 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     [SerializeField] GameInfo m_gameInfo;
 
+    public SavingData m_data;
     public Loading m_loading;
 
     void Awake () {
         EventManager<GameEvent>.Add(HandleMessage);
+        
+        Debug.Log(Application.persistentDataPath);
+
     }
     void Start () {
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent._NULL_);
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(UIManager), GameEvent.STATE_MENU);
     }
 
+    public void Save () {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/Leaderboard.dat");
+
+        SavingData data = new SavingData();
+        data.name = m_data.name;
+        data.score = m_data.score;
+
+        bf.Serialize(file, data);
+        file.Close();
+    }
+    // Loads in all the data
+    public void Load () {
+        if (File.Exists(Application.persistentDataPath + "/Leaderboard.dat")) {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/Leaderboard.dat", FileMode.Open);
+            SavingData data = (SavingData)bf.Deserialize(file);
+            file.Close();
+
+            m_data.name = data.name;
+            m_data.score = data.score;
+        }
+    }
+
     public void HandleMessage(object s, __eArg<GameEvent> e) {
         if (s == (object)this) return;
         switch (e.arg) {
+        case GameEvent.STATE_LOSE_SCREEN:
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0;
+            break;
+        case GameEvent.STATE_WIN_SCREEN:
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0;
+
+            m_data = new SavingData();
+            m_data.score = new List<int>();
+            m_data.score.Add(50);
+            Save();
+
+            break;
         case GameEvent.STATE_MENU:
         case GameEvent.STATE_PAUSE:
             Cursor.lockState = CursorLockMode.None;
@@ -36,9 +83,10 @@ public class GameManager : MonoBehaviour {
                 EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
             break;
         case GameEvent.STATE_RESTART:
-                __event<GameEvent>.UnsubscribeAll();
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                break;
+            
+            __event<GameEvent>.UnsubscribeAll();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            break;
         case GameEvent.STATE_START:
         case GameEvent.STATE_CONTINUE:
             Time.timeScale = 1;
@@ -72,4 +120,10 @@ public class GameManager : MonoBehaviour {
             break;
         }
     }
+}
+
+[System.Serializable]
+public struct SavingData {
+    public List<string> name;
+    public List<int> score;
 }
