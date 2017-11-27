@@ -2092,7 +2092,7 @@ GameObject:
   - component: {fileID: 44525867}
   m_Layer: 0
   m_Name: polySurface878_MeshPart1
-  m_TagString: Untagged
+  m_TagString: Avoid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17787,7 +17787,7 @@ MonoBehaviour:
       - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
           type: 2}
         points:
-        - amount: 5
+        - amount: 4
           position: {x: 7.08, y: -7.55, z: 6}
         - amount: 3
           position: {x: -10.76, y: -7.55, z: 0.02}
@@ -28725,7 +28725,7 @@ GameObject:
   - component: {fileID: 812924954}
   m_Layer: 0
   m_Name: polySurface878_MeshPart0
-  m_TagString: Untagged
+  m_TagString: Avoid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31328,7 +31328,7 @@ MonoBehaviour:
     avoidRadius: 3
     health: 50
     fireRate: 1
-    accuracy: 5
+    accuracy: 4
     attackRange: 10
     projectileLifetime: 3
     shotForce: 10
@@ -31344,7 +31344,7 @@ MonoBehaviour:
     deployRange: 10
     hitRange: 12
     maximumTargetHeight: 20
-    accuracy: 2
+    accuracy: 1
     pickupDropRate: 99
     targetRadius: 5
     avoidRadius: 10
