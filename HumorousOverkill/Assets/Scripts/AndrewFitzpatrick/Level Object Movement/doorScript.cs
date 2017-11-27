@@ -12,6 +12,9 @@ public class doorScript : MonoBehaviour
 
     private float currentFactor = 0.0f;
 
+    // which side is the entrance
+    Vector3 entrance = Vector3.zero;
+
     void Start()
     {
         // setup points
@@ -40,12 +43,28 @@ public class doorScript : MonoBehaviour
         // when the player enters the door trigger
         if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player>() != null)
         {
-            Debug.Log("player has entered the door");
-            // the wave is finished so open
-            if(attachedWave.IsGroupComplete())
+            // player is at the entrance
+            if(entrance == Vector3.zero)
             {
-                Debug.Log("Wave is complete");
-                // the wave is complete
+                entrance = other.gameObject.transform.position;
+            }
+            Debug.Log("player has entered the door");
+
+            // the wave is finished so open
+            if(attachedWave != null)
+            {
+                if (attachedWave.IsGroupComplete())
+                {
+                    // the wave is complete
+                    if ((other.gameObject.transform.position - entrance).magnitude < 1.0f)
+                    {
+                        // player is entering the entrance
+                        open = true;
+                    }
+                }
+            }
+            else
+            {
                 open = true;
             }
         }
@@ -56,8 +75,11 @@ public class doorScript : MonoBehaviour
         // when the player exits the door trigger
         if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player>() != null)
         {
-            Debug.Log("player has exited the door");
-            open = false;
+            if((other.gameObject.transform.position - entrance).magnitude > 1.0f)
+            {
+                // player exited
+                open = false;
+            }
         }
     }
 }
