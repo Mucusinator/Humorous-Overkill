@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class Pickup : MonoBehaviour
 {
     public int amount;
+    List<AudioClip> clips;
     public GameEvent type;
 	
 	void Start ()
@@ -20,7 +21,7 @@ public class Pickup : MonoBehaviour
         // check if player
         if (collider.tag == "Player")
         {
-
+            FindObjectOfType<AudioManager>().Play1(clips[Random.Range(0, clips.Count)]);
             EventManager<GameEvent>.InvokeGameState(this, null, amount, typeof(PlayerManager), type);
 
             // send event to player
