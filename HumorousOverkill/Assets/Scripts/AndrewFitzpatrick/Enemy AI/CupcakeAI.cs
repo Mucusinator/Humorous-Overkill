@@ -176,6 +176,9 @@ public class CupcakeAI : MonoBehaviour
     // disable all AI and explode into pieces
     void die()
     {
+        // stop flashing
+        changeColor(Color.white);
+
         // tell enemy manager that an enemy has died
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(EnemyManager), GameEvent.ENEMY_SPAWNER_REMOVE);
 
