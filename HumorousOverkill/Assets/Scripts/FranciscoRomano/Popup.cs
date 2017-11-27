@@ -16,6 +16,7 @@ public class Popup : MonoBehaviour
     public float fadeOutSpeed = 1.0f;
     public Sprite[] sprites;
     public UnityEngine.UI.Image image;
+    private bool complete = false;
     private float currentTime = 0;
 
 	void Start ()
@@ -63,6 +64,7 @@ public class Popup : MonoBehaviour
         index = 0;
         fadeIn = true;
         running = false;
+        complete = false;
         image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
         image.sprite = sprites[index++];
     }
@@ -91,12 +93,26 @@ public class Popup : MonoBehaviour
         }        
     }
 
+
+    public void OnTriggerExit(Collider collider)
+    {
+        if (collider.tag == "Player")
+        {
+            running = false;
+        }
+    }
+
     public void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "Player")
         {
-            ResetAll();
-            running = true;
+            if (complete) return;
+            if (!running)
+            {
+                ResetAll();
+                running = true;
+            }
+            currentTime = Time.time;
         }
     }
 }
