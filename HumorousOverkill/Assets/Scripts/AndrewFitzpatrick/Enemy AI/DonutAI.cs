@@ -27,6 +27,9 @@ public class DonutAI : MonoBehaviour
     public bool freeze = false;
     private bool dead = false;
 
+    // confetti prefab
+    public GameObject confetti;
+
     // what types of pickups to drop
     public List<GameObject> pickupPrefabs;
 
@@ -349,6 +352,11 @@ public class DonutAI : MonoBehaviour
             {
                 Debug.DrawRay(transform.position, aimPoint, Color.red, 0.5f);
             }
+
+            // spawn confetti
+            GameObject newConfetti = Instantiate(confetti, transform.position, Quaternion.LookRotation(aimPoint));
+            newConfetti.GetComponent<ParticleSystem>().Play();
+            Destroy(newConfetti, 1.0f);
 
             if (Physics.Raycast(transform.position, aimPoint, out shootHitInfo))
             {

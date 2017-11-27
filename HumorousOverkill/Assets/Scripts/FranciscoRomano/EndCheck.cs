@@ -6,8 +6,6 @@ using System.Collections.Generic;
 
 public class EndCheck : MonoBehaviour
 {
-    public int amount;
-    public GameEvent type;
     public EnemySpawner spawner;
 	
 	void Start ()
@@ -21,13 +19,7 @@ public class EndCheck : MonoBehaviour
         // check if player
         if (collider.tag == "Player" && spawner.IsStageComplete())
         {
-
-            EventManager<GameEvent>.InvokeGameState(this, null, amount, typeof(PlayerManager), GameEvent.STATE_RESTART);
-
-            // send event to player
-            //GameObject.FindGameObjectWithTag("Manager").GetComponent<PlayerManager>().HandleEvent(type, amount);
-            // destroy current game object
-            //Destroy(gameObject);
+            EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(PlayerManager), GameEvent.STATE_WIN_SCREEN);
         }
     }
 
