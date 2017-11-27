@@ -2,87 +2,110 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(BoxCollider))]
 public class Popup : MonoBehaviour
 {
     private class FadeInformation
     {
         // :: variables
-        public float speed;
-        public UnityEngine.UI.Image source;
+        public float speed = 1.0f;
+        public float delay = 1.0f;
+        public float curTime = 0.0f;
         public static float maximum = 1.0f;
         public static float minimum = 0.0f;
         // :: functions
-        public bool Update(float speed)
+        public void Update(UnityEngine.UI.Image source)
         {
+            // check status
+            if (!IsDelayComplete()) return;
+            // update fade values
             Color color = source.color;
-            color.a += speed * Time.deltaTime;
-            // calculate clamp
-            float clamp = Mathf.Clamp(color.a, minimum, maximum);
-            // check if volume is out of range
-            if (color.a != clamp)
-            {
-                // animation complete
-                color.a = clamp;
-                source.color = color;
-                return false;
-            }
-            // animation running
+            float amount = color.a + speed * Time.deltaTime;
+            color.a = Mathf.Clamp(amount, minimum, maximum);
             source.color = color;
-            return true;
+        }
+        public bool IsFadeComplete(UnityEngine.UI.Image source)
+        {
+            // check if fade finished
+            return source.color.a == maximum || source.color.a == minimum;
+        }
+        public bool IsDelayComplete()
+        {
+            // check if delay finished
+            return (Time.time - curTime) > delay;
         }
     }
     private class PopupFadeInformation
     {
         // :: variables
-        public Sprite image;
-        public float fadeInDelay;
-        public float fadeInSpeed;
-        public float fadeOutDelay;
-        public float fadeOutSpeed;
-        public FadeInformation fadeIn;
-        public FadeInformation fadeOut;
+        public int index = 0;
+        public Sprite sprite;
+        public UnityEngine.UI.Image source = null;
+        public FadeInformation[] fadeInNOut = new FadeInformation[2];
         // :: functions
-        public bool Update()
+        public void Begin()
         {
-            bool check = false;
-            // update fade in
-            if (!check && fadeIn != null)
+            // update sprite
+            source.sprite = sprite;
+            fadeInNOut[0].curTime = Time.time;
+        }
+        public void Update()
+        {
+            // check status
+            if (IsComplete()) return;
+            // update fade values
+            fadeInNOut[index].Update(source);
+            // check current fade status
+            if (!fadeInNOut[index].IsDelayComplete()) return;
+            if (!fadeInNOut[index].IsFadeComplete(source)) return;
+            // check if fade infomation left
+            index++;
+            if ((fadeInNOut.Length - index) > 0)
             {
-                check = fadeIn.Update(fadeInSpeed);
-                if (!check) fadeIn = null;
+                // increment index
+                fadeInNOut[index].curTime = Time.time;
             }
-            // update fade out
-            if (!check && fadeOut != null)
-            {
-                check = fadeOut.Update(fadeOutSpeed);
-                if (!check) fadeOut = null;
-            }
-            // return result
-            return check;
+        }
+        public bool IsComplete()
+        {
+            // check if fade finished
+            return index == fadeInNOut.Length;
         }
     }
     // :: variables
-    public bool enabled = false;
-    public bool running = false;
+    public bool active = true;
     public float fadeInDelay = 1.0f;
     public float fadeInSpeed = 1.0f;
     public float fadeOutDelay = 1.0f;
     public float fadeOutSpeed = 1.0f;
     public Sprite[] sprites = new Sprite[0];
-    private static List<PopupFadeInformation> fadeGroup = new List<PopupFadeInformation>();
+    public UnityEngine.UI.Image source = null;
+    private static Popup activeRunningPopup = null;
+    private List<PopupFadeInformation> fadeList = new List<PopupFadeInformation>();
     // :: functions
     void Start()
     {
         EventManager<GameEvent>.Add(HandleMessage);
+        source.color = new Color(1, 1, 1, 0);
     }
     void Update()
     {
-        if (!enabled) return;
-        if (!running) return;
-        if (fadeGroup.Count == 0) return;
-        if (!fadeGroup[0].Update())
+        if (!active) return;
+        if (fadeList.Count == 0) return;
+        // update current fade
+        fadeList[0].Update();
+        // check if fade finished
+        if (fadeList[0].IsComplete())
         {
-            fadeGroup.RemoveAt(0);
+            // remove current fade
+            fadeList.RemoveAt(0);
+            // check if list empty
+            if (fadeList.Count > 0)
+            {
+                // begin fade
+                fadeList[0].Begin();
+            }
         }
     }
     private void HandleMessage(object sender, __eArg<GameEvent> e)
@@ -92,139 +115,49 @@ public class Popup : MonoBehaviour
         {
             case GameEvent.STATE_MENU:
             case GameEvent.STATE_PAUSE:
-                enabled = false;
+                active = false;
                 break;
             case GameEvent.STATE_CONTINUE:
-                enabled = true;
+                if (fadeList.Count > 0) active = true;
                 break;
         }        
     }
 
-    //public void OnTriggerExit()
-    //public void OnTriggerEnter(Collider collider)
-    //{
-    //    if (collider.tag == "Player")
-    //    {
-    //        if (running) return;
-    //        if (!running)
-    //        {
-    //            ResetAll();
-    //            running = true;
-    //        }
-    //        currentTime = Time.time;
-    //    }
-    //}
-
-    //   [HideInInspector]
-    //   public int index = 0;
-    //   [HideInInspector]
-    //   public bool fadeIn = true;
-    //   [HideInInspector]
-    //   public bool running = false;
-    //   public float fadeInDelay = 1.0f;
-    //   public float fadeInSpeed = 1.0f;
-    //   public float fadeOutDelay = 1.0f;
-    //   public float fadeOutSpeed = 1.0f;
-    //   public Sprite[] sprites;
-    //   public UnityEngine.UI.Image image;
-    //   private bool complete = false;
-    //   private float currentTime = 0;
-    //   //private static Po
-
-    //   void Start ()
-    //   {
-    //       EventManager<GameEvent>.Add(HandleMessage);
-    //       ResetAll();
-    //}
-
-    //   void Update()
-    //   {
-    //       if (!running) return;
-    //       if (fadeIn)
-    //       {
-    //           if (image.color.a < 1)
-    //           {
-    //               Color color1 = image.color;
-    //               color1.a = Mathf.Min(color1.a + (Time.deltaTime / fadeInSpeed), 1);
-    //               image.color = color1;
-    //               currentTime = Time.time;
-    //           }
-    //           else if ((currentTime + fadeOutDelay) < Time.time)
-    //           {
-    //               fadeIn = false;
-    //           };
-    //       }
-    //       else
-    //       {
-    //           if (image.color.a > 0)
-    //           {
-    //               Color color1 = image.color;
-    //               color1.a = Mathf.Max(color1.a - (Time.deltaTime / fadeOutSpeed), 0);
-    //               image.color = color1;
-    //               currentTime = Time.time;
-    //           }
-    //           else if ((currentTime + fadeInDelay) < Time.time)
-    //           {
-    //               fadeIn = true;
-    //               NextSprite();
-    //           }
-    //       }
-    //   }
-
-    //   void ResetAll()
-    //   {
-    //       index = 0;
-    //       fadeIn = true;
-    //       running = false;
-    //       complete = false;
-    //       image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
-    //       image.sprite = sprites[index++];
-    //   }
-
-    //   void NextSprite()
-    //   {
-    //       if (index < sprites.Length)
-    //       {
-    //           image.sprite = sprites[index++];
-    //       }
-    //       else
-    //       {
-    //           running = false;
-    //       }
-    //   }
-
-    //   public void HandleMessage(object sender, __eArg<GameEvent> e)
-    //   {
-    //       if (sender == (object)this) return;
-    //       switch (e.arg)
-    //       {
-    //           case GameEvent.STATE_START:
-    //           case GameEvent.STATE_RESTART:
-    //               ResetAll();
-    //               break;
-    //       }        
-    //   }
-
-    //   public void OnTriggerExit(Collider collider)
-    //   {
-    //       if (collider.tag == "Player")
-    //       {
-    //           running = false;
-    //       }
-    //   }
-
-    //   public void OnTriggerEnter(Collider collider)
-    //   {
-    //       if (collider.tag == "Player")
-    //       {
-    //           if (complete) return;
-    //           if (!running)
-    //           {
-    //               ResetAll();
-    //               running = true;
-    //           }
-    //           currentTime = Time.time;
-    //       }
-    //   }
-
+    public void OnTriggerEnter(Collider collider)
+    {
+        // check if player
+        if (collider.tag == "Player")
+        {
+            if (!active) return;
+            if (activeRunningPopup == this) return;
+            // update previous popup
+            if (activeRunningPopup != null)
+            {
+                foreach (PopupFadeInformation oldInfo in activeRunningPopup.fadeList)
+                {
+                    oldInfo.source = source;
+                    fadeList.Add(oldInfo);
+                }
+                activeRunningPopup.active = false;
+                activeRunningPopup.fadeList.Clear();
+            }
+            // update current popup
+            activeRunningPopup = this;
+            foreach (Sprite sprite in sprites)
+            {
+                PopupFadeInformation newInfo = new PopupFadeInformation();
+                newInfo.fadeInNOut[0] = new FadeInformation();
+                newInfo.fadeInNOut[1] = new FadeInformation();
+                newInfo.fadeInNOut[0].curTime = Time.time;
+                newInfo.fadeInNOut[0].delay = fadeInDelay;
+                newInfo.fadeInNOut[1].delay = fadeOutDelay;
+                newInfo.fadeInNOut[0].speed = 1 / fadeInSpeed;
+                newInfo.fadeInNOut[1].speed = -1 / fadeOutSpeed;
+                newInfo.source = source;
+                newInfo.sprite = sprite;
+                fadeList.Add(newInfo);
+            }
+            fadeList[0].Begin();
+        }
+    }
 }
