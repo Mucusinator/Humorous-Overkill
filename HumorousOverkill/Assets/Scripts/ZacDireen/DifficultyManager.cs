@@ -15,10 +15,6 @@ public class DifficultyManager : MonoBehaviour
         EventManager<GameEvent>.Add(HandleEvent);
     }
 
-    void Update()
-
-    {
-    }
     public void HandleEvent(object sender, __eArg<GameEvent> e)
     {
         // if this event is being sent to itself, just skip it
@@ -40,7 +36,16 @@ public class DifficultyManager : MonoBehaviour
                 EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 break;
             case GameEvent.DIFFICULTY_MEDI:
+                playerManager.m_playerInfo.m_playerHealth = 100;
+                enemyManager.defaultDonutInfo.health = 50;
+                enemyManager.defaultDroneInfo.health = 50;
+                combinedScript.PelletDamage = 3.5f;
+                combinedScript.RifleDamage = 32.5f;
 
+                UpdateSpawners(5, 7, 4.0f);
+
+                enemyManager.defaultDonutInfo.pickupDropRate = 0.3f;
+                enemyManager.defaultDroneInfo.pickupDropRate = 0.3f;
                 EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 break;
             case GameEvent.DIFFICULTY_HARD:
