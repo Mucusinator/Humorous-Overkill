@@ -107,8 +107,11 @@ public class Popup : MonoBehaviour
         if (collider.tag == "Player")
         {
             if (complete) return;
-            ResetAll();
-            running = true;
+            if (!running)
+            {
+                ResetAll();
+                running = true;
+            }
             currentTime = Time.time;
         }
     }
