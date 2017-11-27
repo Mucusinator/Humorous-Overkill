@@ -18,15 +18,20 @@ public class CupcakeAI : MonoBehaviour
     public GameObject projectile; // projectile prefab
     private float shotTimer = 0;
 
-    // whether to change colors based on health
-    public bool enableColorChanges = false;
-
     // freeze for when the game is paused
     public bool freeze = false;
 
     private bool dead = false;
 
     private float startHealth;
+
+    [Tooltip("Color to flash when taking damage")]
+    public Color flashColor;
+    [Tooltip("How fast to flash when taking damage")]
+    public float flashSpeed;
+    // flash timer
+    private float flashTimer = 0;
+    private bool flashing = false;
 
     // what types of pickups to drop
     public List<GameObject> pickupPrefabs;
@@ -111,6 +116,12 @@ public class CupcakeAI : MonoBehaviour
         {
             shotTimer = 0;
         }
+
+        // flash if needed
+        if(flashing)
+        {
+            flash();
+        }
     }
 
     void pickTarget()
@@ -165,12 +176,8 @@ public class CupcakeAI : MonoBehaviour
     // disable all AI and explode into pieces
     void die()
     {
-        Debug.Log("die has been called");
-
-        if (enableColorChanges)
-        {
-            changeColor(Color.black);
-        }
+        // stop flashing
+        changeColor(Color.white);
 
         // tell enemy manager that an enemy has died
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(EnemyManager), GameEvent.ENEMY_SPAWNER_REMOVE);
@@ -233,16 +240,9 @@ public class CupcakeAI : MonoBehaviour
 
     void changeColor(Color newColor)
     {
-        if (enableColorChanges)
+        foreach (MeshRenderer child in GetComponentsInChildren<MeshRenderer>())
         {
-            Transform[] childTransforms = GetComponentsInChildren<Transform>();
-            foreach (Transform child in childTransforms)
-            {
-                if (child.gameObject.GetComponent<Renderer>() != null)
-                {
-                    child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", newColor);
-                }
-            }
+            child.material.SetColor("_Color", newColor);
         }
     }
 
@@ -266,11 +266,9 @@ public class CupcakeAI : MonoBehaviour
                 // subtract health
                 myInfo.health -= (float)e.value;
 
-                // change color if enabled
-                if (enableColorChanges)
-                {
-                    changeColor(Color.Lerp(Color.red, Color.white, 1.0f / startHealth * myInfo.health));
-                }
+                // flash
+                flashTimer = 0.0f;
+                flashing = true;
 
                 // if the health is now 0 die
                 if (myInfo.health <= 0)
@@ -289,6 +287,20 @@ public class CupcakeAI : MonoBehaviour
         else if(e.arg == GameEvent.STATE_CONTINUE)
         {
             freeze = false;
+        }
+    }
+
+    public void flash()
+    {
+        flashTimer += flashSpeed * Time.deltaTime;
+
+        // change color
+        changeColor(Color.Lerp(flashColor, Color.white, flashTimer));
+
+        if(flashTimer >= 1.0f)
+        {
+            flashing = false;
+            flashTimer = 0.0f;
         }
     }
 
