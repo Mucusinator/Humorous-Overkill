@@ -503,13 +503,13 @@ public class CombinedScript : MonoBehaviour
             fpsCam.GetComponent<GlitchPostRender>().offset += 0.003f * Time.deltaTime;
             if (fpsCam.GetComponent<GlitchPostRender>().offset > 0.003f)
             {
-<<<<<<< HEAD
+
                 fpsCam.GetComponent<GlitchPostRender>().offset = 0.01f;
                 //stillGlitching = true;
-=======
+
                 fpsCam.GetComponent<GlitchPostRender>().offset = 0.003f;
-                stillGlitching = true;
->>>>>>> 5de713ec06fe682ed7cef095a631da2e20ec1e10
+                //stillGlitching = true;
+
             }
         }
         else
