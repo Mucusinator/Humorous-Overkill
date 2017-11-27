@@ -53,10 +53,16 @@ public class EnemyManager : EventHandler.EventHandle
     public DonutEnemyInfo defaultDonutInfo;
 
     // :: functions
-    void Start()
+    public override void Awake()
     {
+        base.Awake();
         EventManager<GameEvent>.Add(HandleMessage);
     }
+    void Start()
+    {
+        EventManager<GameEvent>.InvokeGameState(this, null, defaultDroneInfo, GetType(), GameEvent._NULL_);
+    }
+
     void OnGUI()
     {
         // check spawner status
