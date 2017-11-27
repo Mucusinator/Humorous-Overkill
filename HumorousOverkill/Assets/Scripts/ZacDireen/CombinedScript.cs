@@ -500,11 +500,16 @@ public class CombinedScript : MonoBehaviour
         if (glitchRifleEffect == true && !isReloading && gunType == GunType.RIFLE)
         {
 
-            fpsCam.GetComponent<GlitchPostRender>().offset += 0.01f * Time.deltaTime;
-            if (fpsCam.GetComponent<GlitchPostRender>().offset > 0.01f)
+            fpsCam.GetComponent<GlitchPostRender>().offset += 0.003f * Time.deltaTime;
+            if (fpsCam.GetComponent<GlitchPostRender>().offset > 0.003f)
             {
+<<<<<<< HEAD
                 fpsCam.GetComponent<GlitchPostRender>().offset = 0.01f;
                 //stillGlitching = true;
+=======
+                fpsCam.GetComponent<GlitchPostRender>().offset = 0.003f;
+                stillGlitching = true;
+>>>>>>> 5de713ec06fe682ed7cef095a631da2e20ec1e10
             }
         }
         else

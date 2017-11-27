@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+//https://github.com/alexqfredrickson/LzwGifTools
+//http://www.matthewflickinger.com/lab/whatsinagif/lzw_image_data.asp
 //http://web.archive.org/web/20050217131148/http://www.danbbs.dk/~dino/whirlgif/lzw.html
 
 public class GIFAnimator : MonoBehaviour
@@ -17,17 +19,24 @@ public class GIFAnimator : MonoBehaviour
 
     void Start()
     {
-        // Get GIF textures
-        //StartCoroutine(UniGif.GetTextureListCoroutine(file.bytes, (gifTexList, loopCount, width, height) => {
-        //    foreach (UniGif.GifTexture giftexture in gifTexList)
-        //    {
-        //        sprites.Add(Sprite.Create(giftexture.m_texture2d, new Rect(0, 0, width, height), new Vector2(1, 1)));
-        //    }
-        //    previousTime = Time.time;
-        //}));
+        FranciscoRomano.Util.GIF.V89aData gifData;
+        FranciscoRomano.Util.GIF.V89a.ColorTable gifColorTable;
 
-        //FranciscoRomano.Util.GIF.V89aData gifData;
-        //gifData = FranciscoRomano.Util.GIF.V89aReader.Read(file.bytes);
+        gifData = FranciscoRomano.Util.GIF.V89aReader.Read(file.bytes);
+
+        foreach (FranciscoRomano.Util.GIF.V89aData.Image image in gifData.images)
+        {
+            if (image.localColorTable.colors.Length > 0)
+            {
+                gifColorTable = image.localColorTable;
+            }
+            else
+            {
+                gifColorTable = gifData.header.globalColorTable;
+            }
+
+            List<Color> pixels = GIFdecompress(image.imageData.dataSubBlocks.packedBytes, gifColorTable.colors);
+        }
         //for (int i = 0; i < gifData.images.Count; i++)
         //{
         //    sprites.Add(Decompress(gifData, i));
@@ -56,55 +65,6 @@ public class GIFAnimator : MonoBehaviour
             if (!(index < sprites.Count)) index = 0;
         }
     }
-
-    //private Sprite Decompress(FranciscoRomano.Util.GIF.V89aData data, int index)
-    //{
-    //    FranciscoRomano.Util.GIF.V89a.ColorTable colorTable = data.header.globalColorTable;
-    //    FranciscoRomano.Util.GIF.V89aData.Image image = data.images[index];
-    //    int height = (int)data.header.logicalScreenDescriptor.height;
-    //    int width = (int)data.header.logicalScreenDescriptor.width;
-    //    Texture2D texture = new Texture2D(width, height);
-    //    List<int> indexList = Decompress(image.imageData);
-
-    //    if (image.localColorTable.colors.Length > 0)
-    //    {
-    //        colorTable = image.localColorTable;
-    //    }
-
-    //    int i = 0;
-    //    int minY = (int)image.imageDescriptor.top;
-    //    int minX = (int)image.imageDescriptor.left;
-    //    int maxX = minX + (int)image.imageDescriptor.width;
-    //    int maxY = minY + (int)image.imageDescriptor.height;
-
-    //    for (int y = minY; y < maxY; y++)
-    //    {
-    //        for (int x = minX; x < maxX; x++)
-    //        {
-    //            if (i < indexList.Count)
-    //            {
-    //                if (indexList[i] < colorTable.colors.Length)
-    //                {
-    //                    texture.SetPixel(x, y, colorTable.colors[indexList[i++]]);
-    //                }
-    //            }
-    //        }
-            
-    //    }
-
-    //    texture.Apply();
-    //    texture.filterMode = FilterMode.Point;
-
-    //    Sprite sprite = Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(1, 1));
-
-    //    return sprite;
-    //}
-
-    //private List<int> Decompress(FranciscoRomano.Util.GIF.V89a.ImageData imageData)
-    //{
-    //    LzwTools.Decoder decoder = new LzwTools.Decoder((byte)(imageData.LZWMinimumCodeSize + 1));
-    //    return decoder.Decode(imageData.dataSubBlocks.packedBytes);
-    //}
 
     private class LZW
     {
@@ -173,4 +133,69 @@ public class GIFAnimator : MonoBehaviour
             return datastream;
         }
     }
+
+    private List<int> CODEdecompress(List<byte> stream, List<List<Color>> table)
+    {
+        List<int> result = new List<int>();
+        return result;
+    }
+    private List<Color> LZWdecompress(List<int> stream, List<List<Color>> table)
+    {
+        List<Color> result = new List<Color>();
+        return result;
+    }
+    private List<Color> GIFdecompress(List<byte> stream, Color[] colours)
+    {
+        List<List<Color>> table = new List<List<Color>>();
+        return LZWdecompress(CODEdecompress(stream, table), table);
+    }
+
+    //private Sprite Decompress(FranciscoRomano.Util.GIF.V89aData data, int index)
+    //{
+    //    FranciscoRomano.Util.GIF.V89a.ColorTable colorTable = data.header.globalColorTable;
+    //    FranciscoRomano.Util.GIF.V89aData.Image image = data.images[index];
+    //    int height = (int)data.header.logicalScreenDescriptor.height;
+    //    int width = (int)data.header.logicalScreenDescriptor.width;
+    //    Texture2D texture = new Texture2D(width, height);
+    //    List<int> indexList = Decompress(image.imageData);
+
+    //    if (image.localColorTable.colors.Length > 0)
+    //    {
+    //        colorTable = image.localColorTable;
+    //    }
+
+    //    int i = 0;
+    //    int minY = (int)image.imageDescriptor.top;
+    //    int minX = (int)image.imageDescriptor.left;
+    //    int maxX = minX + (int)image.imageDescriptor.width;
+    //    int maxY = minY + (int)image.imageDescriptor.height;
+
+    //    for (int y = minY; y < maxY; y++)
+    //    {
+    //        for (int x = minX; x < maxX; x++)
+    //        {
+    //            if (i < indexList.Count)
+    //            {
+    //                if (indexList[i] < colorTable.colors.Length)
+    //                {
+    //                    texture.SetPixel(x, y, colorTable.colors[indexList[i++]]);
+    //                }
+    //            }
+    //        }
+
+    //    }
+
+    //    texture.Apply();
+    //    texture.filterMode = FilterMode.Point;
+
+    //    Sprite sprite = Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(1, 1));
+
+    //    return sprite;
+    //}
+
+    //private List<int> Decompress(FranciscoRomano.Util.GIF.V89a.ImageData imageData)
+    //{
+    //    LzwTools.Decoder decoder = new LzwTools.Decoder((byte)(imageData.LZWMinimumCodeSize + 1));
+    //    return decoder.Decode(imageData.dataSubBlocks.packedBytes);
+    //}
 }
