@@ -41,10 +41,6 @@ public class AudioManager : MonoBehaviour
     void Update()
     {
         FadeInformation.maximum = volume;
-        foreach (AudioSource source in sourceTable.Values)
-        {
-            source.volume = volume;
-        }
         foreach (AudioClip clip in musicClips)
         {
             if (fadeTable.ContainsKey(clip))

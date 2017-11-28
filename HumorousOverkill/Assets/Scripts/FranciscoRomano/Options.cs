@@ -7,6 +7,7 @@ public class Options : MonoBehaviour
     public AudioManager audioManager;
     public PlayerCamera playerCamera;
     public PlayerMovement playerMovement;
+    public AudioSource loadingAudioSource;
     public UnityEngine.UI.Slider mouseSlider;
     public UnityEngine.UI.Slider volumeSlider;
 
@@ -14,10 +15,12 @@ public class Options : MonoBehaviour
     {
         mouseSlider.value = audioManager.volume;
         volumeSlider.value = playerCamera.m_ply.m_cameraSensitivity;
+        loadingAudioSource.volume = audioManager.volume;
     }
     public void UpdateMaxVolume()
     {
         audioManager.volume = volumeSlider.value;
+        loadingAudioSource.volume = volumeSlider.value;
     }
     public void UpdateMouseSensitivity()
     {
