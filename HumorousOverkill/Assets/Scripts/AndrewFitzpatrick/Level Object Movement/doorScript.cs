@@ -5,17 +5,23 @@ using UnityEngine;
 // opens and closes doors
 public class doorScript : MonoBehaviour
 {
+    [Tooltip("how far up to move when opening")]
     public float openHeight;
+
+    [Tooltip("time in seconds that it takes for the door to open / close")]
+    public float openCloseTime = 1.0f;
+
+    // points to move between
     private Vector3[] points = new Vector3[2];
 
-    // door can only open once
-    private bool canOpen = true;
+    [Tooltip("When the door has closed this many times it will never open again")]
+    public int closeCount = 1;
+
+    // whether the door is open
     public bool open = false;
 
+    // current close factor
     private float currentFactor = 0.0f;
-
-    // which side is the entrance
-    Vector3 entrance = Vector3.zero;
 
     void Start()
     {
@@ -29,11 +35,11 @@ public class doorScript : MonoBehaviour
         // update factor
         if (open)
         {
-            currentFactor = Mathf.Min(currentFactor + Time.deltaTime, 1.0f);
+            currentFactor = Mathf.Min(currentFactor + Time.deltaTime / openCloseTime, 1.0f);
         }
         else
         {
-            currentFactor = Mathf.Max(currentFactor - Time.deltaTime, 0.0f);
+            currentFactor = Mathf.Max(currentFactor - Time.deltaTime / openCloseTime, 0.0f);
         }
 
         // update position
@@ -42,7 +48,7 @@ public class doorScript : MonoBehaviour
 
     public void openDoor()
     {
-        if(canOpen)
+        if(closeCount > 0)
         {
             open = true;
         }
@@ -51,6 +57,6 @@ public class doorScript : MonoBehaviour
     public void closeDoor()
     {
         open = false;
-        canOpen = false;
+        closeCount--;
     }
 }
