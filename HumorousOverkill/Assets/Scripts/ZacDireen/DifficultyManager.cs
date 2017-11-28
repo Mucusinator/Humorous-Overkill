@@ -43,16 +43,16 @@ public class DifficultyManager : MonoBehaviour
                 EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 break;
             case GameEvent.DIFFICULTY_MEDI:
-                playerManager.m_playerInfo.m_playerHealth = 100;
-                enemyManager.defaultDonutInfo.health = 50;
-                enemyManager.defaultDroneInfo.health = 50;
-                combinedScript.PelletDamage = 3.5f;
-                combinedScript.RifleDamage = 32.5f;
+                //playerManager.m_playerInfo.m_playerHealth = 100;
+                //enemyManager.defaultDonutInfo.health = 50;
+                //enemyManager.defaultDroneInfo.health = 50;
+                //combinedScript.PelletDamage = 3.5f;
+                //combinedScript.RifleDamage = 32.5f;
 
-                UpdateSpawners(5, 7, 1.0f);
+                //UpdateSpawners(5, 7, 1.0f);
 
-                enemyManager.defaultDonutInfo.pickupDropRate = 0.3f;
-                enemyManager.defaultDroneInfo.pickupDropRate = 0.3f;
+                //enemyManager.defaultDonutInfo.pickupDropRate = 0.3f;
+                //enemyManager.defaultDroneInfo.pickupDropRate = 0.3f;
                 EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 break;
             case GameEvent.DIFFICULTY_HARD:
