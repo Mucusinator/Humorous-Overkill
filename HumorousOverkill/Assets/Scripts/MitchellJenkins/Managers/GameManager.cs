@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
 
     public scoreManager m_scoreManager;
     public Loading m_loading;
+    public UnityEngine.UI.Text m_highScore;
 
     void Awake () {
         EventManager<GameEvent>.Add(HandleMessage);
@@ -34,9 +35,24 @@ public class GameManager : MonoBehaviour {
         SavingSystem.Load();
     }
 
+    void Update () {
+        if (Input.GetKeyDown(KeyCode.L)) {
+            EventManager<GameEvent>.InvokeGameState(null, null, null, typeof(PlayerManager), GameEvent.STATE_HIGHSCORE);
+        }
+    }
+
     public void HandleMessage(object s, __eArg<GameEvent> e) {
         if (s == (object)this) return;
         switch (e.arg) {
+        case GameEvent.STATE_LEADERBOARD:
+            m_highScore.text = "High Scores:\n";
+            for (int i = 0; i < SavingSystem.m_data.name.Count; i++) {
+                if (i > 5) return;
+                m_highScore.text += SavingSystem.m_data.name[i] + "\t\t" + SavingSystem.m_data.score[i] + "\n";
+            }
+            break;
+        case GameEvent.STATE_HIGHSCORE:
+            break;
         case GameEvent.STATE_LOSE_SCREEN:
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

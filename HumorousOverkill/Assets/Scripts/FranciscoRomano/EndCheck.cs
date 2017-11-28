@@ -23,7 +23,7 @@ public class EndCheck : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().StopMusic(0);
             FindObjectOfType<AudioManager>().PlaySound(clip, false);
-            EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(PlayerManager), GameEvent.STATE_WIN_SCREEN);
+            EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(PlayerManager), GameEvent.STATE_HIGHSCORE);
         }
     }
 

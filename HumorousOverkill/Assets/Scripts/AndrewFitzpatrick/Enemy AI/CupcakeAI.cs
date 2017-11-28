@@ -97,7 +97,10 @@ public class CupcakeAI : MonoBehaviour
         {
             if (wanderHitInfo.collider.gameObject.tag == "Avoid" || wanderHitInfo.collider.gameObject.tag == "Enemy")
             {
-                currentTarget += wanderHitInfo.normal;
+                if(Time.timeScale != 0)
+                {
+                    currentTarget += wanderHitInfo.normal;
+                }
             }
         }
 

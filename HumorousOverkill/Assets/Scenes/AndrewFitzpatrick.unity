@@ -1991,7 +1991,9 @@ MonoBehaviour:
           position: {x: 7.08, y: -7.55, z: 6}
         - amount: 3
           position: {x: -10.76, y: -7.55, z: 0.02}
-  doors: []
+  doors:
+  - {fileID: 348806122}
+  - {fileID: 1741064623}
 --- !u!54 &57447752
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12248,7 +12250,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
@@ -38455,7 +38461,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 425e9f55981539e4ebecbe6913fc83b0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 425e9f55981539e4ebecbe6913fc83b0, type: 3}
       propertyPath: m_TagString
@@ -47161,7 +47167,9 @@ MonoBehaviour:
           position: {x: 2.8, y: 6, z: -1.15}
         - amount: 6
           position: {x: -2.52, y: 6, z: -8.07}
-  doors: []
+  doors:
+  - {fileID: 1741064623}
+  - {fileID: 999498252}
 --- !u!54 &1240615133
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63906,22 +63914,22 @@ Prefab:
     - target: {fileID: 224808852876805862, guid: 30403f8d89b92a24e96897519077ab83,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224384154069044710, guid: 30403f8d89b92a24e96897519077ab83,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224804808189810580, guid: 30403f8d89b92a24e96897519077ab83,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224383564307779770, guid: 30403f8d89b92a24e96897519077ab83,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224842868954164590, guid: 30403f8d89b92a24e96897519077ab83,
         type: 2}
@@ -67744,7 +67752,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
       propertyPath: m_TagString
