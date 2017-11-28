@@ -54,7 +54,7 @@ public class scoreManager : MonoBehaviour
     // total number of enemies in the game
     private int totalGameEnemies;
 
-    // refernce to Text
+    // reference to Text
     private Text myText;
 
     // reference to timer
@@ -77,7 +77,7 @@ public class scoreManager : MonoBehaviour
 
     public bool updatePoints(ENEMYTYPE e)
     {
-        // add correct ammount of points
+        // add correct amount of points
         currentScore += getPoints(e);
 
         // update score text
@@ -86,7 +86,7 @@ public class scoreManager : MonoBehaviour
         return true;
     }
 
-    // returns the ammount of points for an enemy on the current difficulty
+    // returns the amount of points for an enemy on the current difficulty
     int getPoints(ENEMYTYPE e)
     {
         // donut
@@ -128,7 +128,7 @@ public class scoreManager : MonoBehaviour
         float finalScore = currentScore;
         float finalTime = myTimer.elapsedTime;
 
-        // multiply the score by the correct ultiplier based on completion time
+        // multiply the score by the correct multiplier based on completion time
         foreach(timeMultiplier currentMultiplier in timeMultipliers)
         {
             if(finalTime < currentMultiplier.completionTime)

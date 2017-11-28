@@ -72,6 +72,7 @@ public class Map : MonoBehaviour {
     }
 
     public void OnGUIHandleEvent (object s, __eArg<GameEvent> e) {
+        if (e.type != null) return;
         switch (e.arg) {
         case GameEvent.STATE_START:
         case GameEvent.STATE_CONTINUE:
