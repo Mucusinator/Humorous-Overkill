@@ -180,9 +180,9 @@ public class CombinedScript : MonoBehaviour
         if (s == (object)this) return;
         if (e.arg == GameEvent._NULL_)
             if (e.type == typeof(AudioManager)) {
-                m_audioManager = (AudioManager)s;
-                m_audioManager.AddSound(LazerSound);
-                m_audioManager.AddSound(shotgunSound);
+                //m_audioManager = (AudioManager)s;
+                //m_audioManager.AddSound(LazerSound);
+                //m_audioManager.AddSound(shotgunSound);
             }
         switch (e.arg)
         {
@@ -348,8 +348,8 @@ public class CombinedScript : MonoBehaviour
 
             nextTimeToFire = Time.time + 60f / RoundsPerMinute;
 
-            Shoot();
-            //ShootReflect();
+            //Shoot();
+            ShootReflect();
         }
     }
 
@@ -598,9 +598,11 @@ public class CombinedScript : MonoBehaviour
                     {
 
                         //set the inDirection 
-                        inDirection = Vector3.Reflect(ray.direction, hit2.normal);
+                        inDirection = Vector3.Reflect(hit2.point - EndOfGun.transform.position, hit2.normal);
                         // cast the reflected ray, using the hit point as the origin and the reflected direction
                         ray = new Ray(hit2.point, inDirection);
+
+                        Debug.DrawRay(ray.origin, Vector3.Reflect(hit2.point - EndOfGun.transform.position, hit2.normal), Color.green, 5);
 
                         // Draw the normal - can only seen at the scene tab, for debugging purposes
                         Debug.DrawRay(hit2.point, hit.normal * 3, Color.blue,5);
@@ -613,7 +615,8 @@ public class CombinedScript : MonoBehaviour
             }
             else
             {
-                if (Physics.Raycast(ray.origin, ray.direction, out hit2, 200))
+                //Debug.DrawRay(ray.origin, inDirection * 3, Color.green, 5);
+                if (Physics.Raycast(ray.origin, ray.direction, out hit2, 1000))
                 {
                     inDirection = Vector3.Reflect(inDirection, hit2.normal);
 
