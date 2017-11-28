@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
     private class FadeInformation
     {
         // :: variables
-        public float speed = 1.0f;
+        public float speed = 0.1f;
         public AudioSource source = null;
         public static float maximum = 1.0f;
         public static float minimum = 0.0f;
@@ -15,7 +15,7 @@ public class AudioManager : MonoBehaviour
         public void Update()
         {
             // update fade values
-            float amount = source.volume + speed * Time.deltaTime;
+            float amount = source.volume + (speed * Time.deltaTime);
             source.volume = Mathf.Clamp(amount, minimum, maximum);
         }
         public bool IsFadeComplete()
@@ -40,6 +40,11 @@ public class AudioManager : MonoBehaviour
     }
     void Update()
     {
+        FadeInformation.maximum = volume;
+        foreach (AudioSource source in sourceTable.Values)
+        {
+            source.volume = volume;
+        }
         foreach (AudioClip clip in musicClips)
         {
             if (fadeTable.ContainsKey(clip))
@@ -90,6 +95,7 @@ public class AudioManager : MonoBehaviour
             if (repeat)
             {
                 sourceTable[clip].Play();
+                sourceTable[clip].loop = true;
             }
             else
             {
@@ -103,17 +109,16 @@ public class AudioManager : MonoBehaviour
         if (!musicClips.Contains(clip) && !soundClips.Contains(clip)) return;
         FadeInformation info = new FadeInformation();
         info.source = source;
-        info.speed = speed;
+        info.speed = 1 / speed;
         if (fadeTable.ContainsKey(clip))
         {
-            Debug.Log("[Fade] resetting clip");
             fadeTable[clip] = info;
         }
         else
         {
-            Debug.Log("[Fade] adding clip");
             fadeTable.Add(clip, info);
         }
+        info.Update();
     }
     public void AddMusic(AudioClip clip) { if (!musicClips.Contains(clip)) { AddClip(clip, 0); musicClips.Add(clip); } }
     public void AddSound(AudioClip clip) { if (!soundClips.Contains(clip)) { AddClip(clip, 1); soundClips.Add(clip); } }
@@ -127,7 +132,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySound(AudioClip clip, bool repeat) { PlayClip(clip, repeat); }
     public void FadeInMusic(int index, float speed) { FadeInMusic(musicClips[index], speed); }
     public void FadeInMusic(AudioClip clip, float speed) { FadeClip(sourceTable[clip], clip, speed); }
-    public void FadeOutMusic(int index, float speed) { FadeInMusic(musicClips[index], speed); }
+    public void FadeOutMusic(int index, float speed) { FadeOutMusic(musicClips[index], speed); }
     public void FadeOutMusic(AudioClip clip, float speed) { FadeClip(sourceTable[clip], clip, -speed); }
 }
 
