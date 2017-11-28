@@ -11,6 +11,20 @@ public class DifficultyManager : MonoBehaviour
     public bool NoSpawnPoints;
     private List<FranciscoRomano.Spawn.Stage> copyStages = new List<FranciscoRomano.Spawn.Stage>();
 
+    public struct DifficultySettings
+    {
+        public int playerHealth;
+        public float PelletDamage;
+        public float RifleDamage;
+        public int DonutHealth;
+        public int DroneHealth;
+    }
+
+    DifficultySettings EasyMode;
+    DifficultySettings HardMode;
+    DifficultySettings NightmareMode;
+
+
     void Start()
     {
         EventManager<GameEvent>.Add(HandleEvent);
