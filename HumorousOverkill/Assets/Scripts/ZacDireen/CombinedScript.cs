@@ -264,7 +264,7 @@ public class CombinedScript : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             animator.SetBool("IsFiring", false);
-            m_audioManager.Stop(LazerSound);
+            m_audioManager.StopSound(LazerSound);
         }
 
         if (stuff.showStatistics)
@@ -361,7 +361,7 @@ public class CombinedScript : MonoBehaviour
                 currentShotgunAmmo--;
 
                 animator.Play("Release");
-                m_audioManager.Play1(shotgunSound);
+                m_audioManager.PlaySound(shotgunSound,false);
                 for (int i = 0; i < pelletCount; i++)
                 {
 
