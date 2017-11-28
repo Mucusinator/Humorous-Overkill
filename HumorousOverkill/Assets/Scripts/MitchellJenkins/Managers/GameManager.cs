@@ -14,8 +14,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     [SerializeField] GameInfo m_gameInfo;
 
-    public scoreManager m_scoreManager;
     public Loading m_loading;
+    public UnityEngine.UI.Text m_highScores;
 
     void Awake () {
         EventManager<GameEvent>.Add(HandleMessage);
@@ -32,9 +32,23 @@ public class GameManager : MonoBehaviour {
         SavingSystem.Load();
     }
 
+    void Update () {
+        if (Input.GetKeyDown(KeyCode.L)) {
+            EventManager<GameEvent>.InvokeGameState(null, null, null, typeof(GameManager), GameEvent.STATE_HIGHSCORE);
+        }
+    }
+
     public void HandleMessage(object s, __eArg<GameEvent> e) {
         if (s == (object)this) return;
         switch (e.arg) {
+        case GameEvent.STATE_HIGHSCORE:
+            break;
+        case GameEvent.STATE_LEADERBOARD:
+            m_highScores.text = "High Scores:\n";
+            for (int i = 0; i < SavingSystem.m_data.name.Count; i++) {
+                m_highScores.text += SavingSystem.m_data.name[i] + "\t\t" + SavingSystem.m_data.score[i] + "\n";
+            }
+            break;
         case GameEvent.STATE_LOSE_SCREEN:
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -46,8 +60,6 @@ public class GameManager : MonoBehaviour {
             Cursor.visible = true;
             Time.timeScale = 0;
 
-            SavingSystem.Add(":NAME:", m_scoreManager.getFinalScore());
-            SavingSystem.Save();
 
             break;
         case GameEvent.STATE_MENU:

@@ -105,6 +105,7 @@ public class UIManager : MonoBehaviour
             case GameEvent.STATE_DIFFICULTY:
             case GameEvent.STATE_WIN_SCREEN:
             case GameEvent.STATE_LOSE_SCREEN:
+            case GameEvent.STATE_LEADERBOARD:
                 Debug.Log(e.arg.ToString());
                 //if (e.type == typeof(GameManager)) break;
                 foreach (UIProperty property in propertyList)

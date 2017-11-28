@@ -19,7 +19,7 @@ public class EndCheck : MonoBehaviour
         // check if player
         if (collider.tag == "Player" && spawner.IsStageComplete())
         {
-            EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(PlayerManager), GameEvent.STATE_WIN_SCREEN);
+            EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(PlayerManager), GameEvent.STATE_HIGHSCORE);
         }
     }
 
