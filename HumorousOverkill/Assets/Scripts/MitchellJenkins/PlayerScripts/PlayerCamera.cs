@@ -2,7 +2,8 @@
 using EventHandler;
 
 public class PlayerCamera : MonoBehaviour {
-    private PlayerInfo m_ply;
+    [HideInInspector]
+    public PlayerInfo m_ply;
     private float m_rotation = 0;
     void Awake () {
         EventManager<GameEvent>.Add(HandleMessage);
