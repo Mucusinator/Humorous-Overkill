@@ -43,6 +43,12 @@ public class CupcakeAI : MonoBehaviour
 
     __eHandle<object, __eArg<GameEvent>> events;
 
+    // reference to audio source
+    private AudioSource audioSource;
+
+    // audio settings
+    public EnemyAudioSettings audioSettings;
+
     #endregion
 
     public void Awake()
@@ -50,8 +56,25 @@ public class CupcakeAI : MonoBehaviour
         events = new __eHandle<object, __eArg<GameEvent>>(HandleEvent);
         __event<GameEvent>.HandleEvent += events;
 
+        // find AudioSource (if it exists)
+        if(GameObject.FindObjectOfType<AudioSource>() != null)
+        {
+            audioSource = GameObject.FindObjectOfType<AudioSource>();
+        }
+        else
+        {
+            Debug.Log("Cupcake could not find AudioSource");
+        }
+
         // find the player
-        player = GameObject.FindGameObjectWithTag("Player");
+        if(GameObject.FindGameObjectWithTag("Player"))
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+        else
+        {
+            Debug.Log("Cupcake could not find Player");
+        }
 
         // get default info from EnemyManager (if it exists)
         if(GameObject.FindObjectOfType<EnemyManager>() != null)
@@ -212,6 +235,21 @@ public class CupcakeAI : MonoBehaviour
 
             // add explosion force to launch the model
             child.GetComponent<Rigidbody>().AddExplosionForce(myInfo.explosionForce, transform.position - Vector3.up * myInfo.explosionRadius, myInfo.explosionRadius);
+        }
+
+        // play sound effect(s)
+        if(audioSource != null && audioSettings.deathSound != null)
+        {
+            audioSource.PlayOneShot(audioSettings.deathSound);
+
+            // there must be at least one random sound
+            if(audioSettings.randomDeathSoundChance > 0 && audioSettings.randomDeathSounds.Count > 0)
+            {
+                if (Random.Range(0, 100) / 100.0f < audioSettings.randomDeathSoundChance)
+                {
+                    audioSource.PlayOneShot(audioSettings.randomDeathSounds[Random.Range(0, audioSettings.randomDeathSounds.Count)]);
+                }
+            }
         }
 
         // disable this script to prevent any more actions
