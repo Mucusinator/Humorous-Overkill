@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
 
     void Awake () {
         EventManager<GameEvent>.Add(HandleMessage);
-        
+
         Debug.Log(Application.persistentDataPath);
 
     }
@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour {
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent._NULL_);
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(UIManager), GameEvent.STATE_MENU);
         Time.timeScale = 0;
+
+        GetComponent<AudioManager>().PlayMusic(0, true);
 
         SavingSystem.Load();
     }
@@ -46,12 +48,13 @@ public class GameManager : MonoBehaviour {
             Cursor.visible = true;
             Time.timeScale = 0;
 
-            SavingSystem.Add(":NAME:", m_scoreManager.getFinalScore());
-            SavingSystem.Save();
+            //SavingSystem.Add(":NAME:", m_scoreManager.getFinalScore());
+            //SavingSystem.Save();
 
             break;
         case GameEvent.STATE_MENU:
         case GameEvent.STATE_PAUSE:
+            GetComponent<AudioManager>().FadeOutMusic(0, 1);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 0;
@@ -70,6 +73,7 @@ public class GameManager : MonoBehaviour {
             Time.timeScale = 1;
             if (m_loading.IsComplete())
             {
+                GetComponent<AudioManager>().FadeInMusic(0, 5);
                 GameObject.FindObjectOfType<Player>().enabled = true;
                 GameObject.FindObjectOfType<PlayerCamera>().enabled = true;
                 GameObject.FindObjectOfType<PlayerMovement>().enabled = true;
@@ -85,8 +89,8 @@ public class GameManager : MonoBehaviour {
             }
             else
             {
+                GetComponent<AudioManager>().PlayMusic(0, true);
                 m_loading.Begin();
-                GetComponent<AudioManager>().StopMusic(0);
             }
             break;
         case GameEvent.PICKUP_RIFLEAMMO:
