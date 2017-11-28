@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(UIManager), GameEvent.STATE_MENU);
         Time.timeScale = 0;
 
-        GetComponent<AudioManager>().PlayMusic(0, true);
+        //GetComponent<AudioManager>().PlayMusic(0, true);
 
         SavingSystem.Load();
     }
