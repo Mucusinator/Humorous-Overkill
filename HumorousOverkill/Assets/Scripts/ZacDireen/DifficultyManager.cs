@@ -11,6 +11,25 @@ public class DifficultyManager : MonoBehaviour
     public bool NoSpawnPoints;
     private List<FranciscoRomano.Spawn.Stage> copyStages = new List<FranciscoRomano.Spawn.Stage>();
 
+    [System.Serializable]
+    public struct DifficultySettings
+    {
+        public int playerHealth;
+        public float PelletDamage;
+        public float RifleDamage;
+        public int DonutHealth;
+        public int DroneHealth;
+        public float spawnMultiplier;
+        public int PickupMultiplier;
+    }
+    [SerializeField]
+    DifficultySettings EasyMode;
+    [SerializeField]
+    DifficultySettings HardMode;
+    [SerializeField]
+    DifficultySettings NightmareMode;
+
+
     void Start()
     {
         EventManager<GameEvent>.Add(HandleEvent);
@@ -26,67 +45,67 @@ public class DifficultyManager : MonoBehaviour
     {
         // if this event is being sent to itself, just skip it
         if (sender == (object)this) return;
-        Debug.Log(e.arg.ToString());
+        //Debug.Log(e.arg.ToString());
         switch (e.arg)
         {
             case GameEvent.DIFFICULTY_EASY:
-                playerManager.m_playerInfo.m_playerHealth = 150;
-                combinedScript.PelletDamage = 5.0f;
-                combinedScript.RifleDamage = 40.0f;
-                enemyManager.defaultDonutInfo.health = 25;
-                enemyManager.defaultDroneInfo.health = 25;
+                playerManager.m_playerInfo.m_playerHealth = EasyMode.playerHealth;
+                combinedScript.PelletDamage = EasyMode.PelletDamage;
+                combinedScript.RifleDamage = EasyMode.RifleDamage;
+                enemyManager.defaultDonutInfo.health = EasyMode.DonutHealth;
+                enemyManager.defaultDroneInfo.health = EasyMode.DroneHealth;
 
-                UpdateSpawners(3, 5, 0.75f);
-                
-                enemyManager.defaultDonutInfo.pickupDropRate = 0.75f;
-                enemyManager.defaultDroneInfo.pickupDropRate = 0.75f;
+                UpdateSpawners(EasyMode.spawnMultiplier);
+
+                enemyManager.defaultDonutInfo.pickupDropRate = EasyMode.PickupMultiplier;
+                enemyManager.defaultDroneInfo.pickupDropRate = EasyMode.PickupMultiplier;
                 EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 break;
             case GameEvent.DIFFICULTY_MEDI:
-                playerManager.m_playerInfo.m_playerHealth = 100;
-                enemyManager.defaultDonutInfo.health = 50;
-                enemyManager.defaultDroneInfo.health = 50;
-                combinedScript.PelletDamage = 3.5f;
-                combinedScript.RifleDamage = 32.5f;
+                //playerManager.m_playerInfo.m_playerHealth = 100;
+                //enemyManager.defaultDonutInfo.health = 50;
+                //enemyManager.defaultDroneInfo.health = 50;
+                //combinedScript.PelletDamage = 3.5f;
+                //combinedScript.RifleDamage = 32.5f;
 
-                UpdateSpawners(5, 7, 1.0f);
+                //UpdateSpawners(5, 7, 1.0f);
 
-                enemyManager.defaultDonutInfo.pickupDropRate = 0.3f;
-                enemyManager.defaultDroneInfo.pickupDropRate = 0.3f;
+                //enemyManager.defaultDonutInfo.pickupDropRate = 0.3f;
+                //enemyManager.defaultDroneInfo.pickupDropRate = 0.3f;
                 EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 break;
             case GameEvent.DIFFICULTY_HARD:
-                playerManager.m_playerInfo.m_playerHealth = 75;
-                enemyManager.defaultDonutInfo.health = 80;
-                enemyManager.defaultDroneInfo.health = 80;
-                combinedScript.PelletDamage = 2.0f;
-                combinedScript.RifleDamage = 25.0f;
+                playerManager.m_playerInfo.m_playerHealth = HardMode.playerHealth;
+                enemyManager.defaultDonutInfo.health = HardMode.DonutHealth;
+                enemyManager.defaultDroneInfo.health = HardMode.DroneHealth;
+                combinedScript.PelletDamage = HardMode.PelletDamage;
+                combinedScript.RifleDamage = HardMode.RifleDamage;
 
-                UpdateSpawners(7, 10, 1.5f);
+                UpdateSpawners(HardMode.spawnMultiplier);
 
-                enemyManager.defaultDonutInfo.pickupDropRate = 0.3f;
-                enemyManager.defaultDroneInfo.pickupDropRate = 0.3f;
+                enemyManager.defaultDonutInfo.pickupDropRate = HardMode.PickupMultiplier;
+                enemyManager.defaultDroneInfo.pickupDropRate = HardMode.PickupMultiplier;
                 EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 break;
             case GameEvent.DIFFICULTY_NM:
 
-                playerManager.m_playerInfo.m_playerHealth = 25;
-                enemyManager.defaultDonutInfo.health = 120;
-                enemyManager.defaultDroneInfo.health = 120;
-                combinedScript.PelletDamage = 1.5f;
-                combinedScript.RifleDamage = 15.0f;
+                playerManager.m_playerInfo.m_playerHealth = NightmareMode.playerHealth;
+                enemyManager.defaultDonutInfo.health = NightmareMode.DonutHealth;
+                enemyManager.defaultDroneInfo.health = NightmareMode.DroneHealth;
+                combinedScript.PelletDamage = NightmareMode.PelletDamage;
+                combinedScript.RifleDamage = NightmareMode.RifleDamage;
 
-                UpdateSpawners(10, 15, 2.0f);
+                UpdateSpawners(NightmareMode.spawnMultiplier);
                 
-                enemyManager.defaultDonutInfo.pickupDropRate = 0.05f;
-                enemyManager.defaultDroneInfo.pickupDropRate = 0.05f;
+                enemyManager.defaultDonutInfo.pickupDropRate = NightmareMode.PickupMultiplier;
+                enemyManager.defaultDroneInfo.pickupDropRate = NightmareMode.PickupMultiplier;
                 EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 NoSpawnPoints = true;
                 break;
         }
     }
 
-    void UpdateSpawners(int min, int max, float multiplier)
+    void UpdateSpawners(float multiplier)
     {
         EnemySpawner[] spawners = GameObject.FindObjectsOfType<EnemySpawner>();
 
@@ -102,7 +121,7 @@ public class DifficultyManager : MonoBehaviour
                 {
                     for (int iiii = 0; iiii < spawners[i].stage.groups[ii].units[iii].points.Count; iiii++)
                     {
-                        spawners[i].stage.groups[ii].units[iii].points[iiii].amount = Random.Range(min, max);
+                        spawners[i].stage.groups[ii].units[iii].points[iiii].amount = (int)(copyStages[i].groups[ii].units[iii].points[iiii].amount * multiplier);
                     }
                 }
             }

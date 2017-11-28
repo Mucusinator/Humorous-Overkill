@@ -151,25 +151,6 @@ public class DonutAI : MonoBehaviour
     // attempts to approach the target by rolling
     void roll()
     {
-        // find direction to target
-        Vector3 toPlayer = (currentTarget - transform.position).normalized;
-        toPlayer.y = 0;
-
-        // rotate to look at target using lerping and turnSpeed
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(Vector3.up * 90) * Quaternion.LookRotation(toPlayer), myInfo.turnSpeed * Time.deltaTime);
-
-        // roll forward
-        transform.Translate(-transform.right * myInfo.rollSpeed * Time.deltaTime, Space.World);
-
-        // avoid walls and other enemies
-        if (Physics.Raycast(transform.position, -transform.right, out rollHitInfo, myInfo.avoidRadius))
-        {
-            if (rollHitInfo.collider.gameObject.tag == "Avoid" || rollHitInfo.collider.gameObject.tag == "Enemy")
-            {
-                currentTarget += rollHitInfo.normal;
-            }
-        }
-
         // if we are near the target repick a target
         if (nearTarget())
         {
@@ -182,6 +163,25 @@ public class DonutAI : MonoBehaviour
             deployed = true;
             myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.DEPLOY);
         }
+
+        // avoid walls and other enemies
+        if (Physics.Raycast(transform.position, -transform.right, out rollHitInfo, myInfo.avoidRadius))
+        {
+            if (rollHitInfo.collider.gameObject.tag == "Avoid" || rollHitInfo.collider.gameObject.tag == "Enemy")
+            {
+                currentTarget += rollHitInfo.normal * myInfo.avoidRadius;
+            }
+        }
+
+        // find direction to target
+        Vector3 toPlayer = (currentTarget - transform.position).normalized;
+        toPlayer.y = 0;
+
+        // rotate to look at target using lerping and turnSpeed
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(Vector3.up * 90) * Quaternion.LookRotation(toPlayer), myInfo.turnSpeed * Time.deltaTime);
+
+        // roll forward
+        transform.Translate(-transform.right * myInfo.rollSpeed * Time.deltaTime, Space.World);
     }
 
     // sets donutCircumference
@@ -377,7 +377,6 @@ public class DonutAI : MonoBehaviour
 
             // if the the player height offset is lower than maximumTargetHeight add that height independant of range
             float playerHeightOffset = player.transform.position.y - transform.position.y;
-            Debug.Log(playerHeightOffset);
 
             // can't hit player (too high)
             if (playerHeightOffset > myInfo.maximumTargetHeight)
@@ -435,7 +434,6 @@ public class DonutAI : MonoBehaviour
             return;
         }
 
-        Debug.Log("Donut is handle event");
         switch (e.arg)
         {
             case GameEvent.ENEMY_DAMAGED:

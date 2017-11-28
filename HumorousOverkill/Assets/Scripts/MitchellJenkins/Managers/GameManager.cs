@@ -14,12 +14,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     [SerializeField] GameInfo m_gameInfo;
 
+    public scoreManager m_scoreManager;
     public Loading m_loading;
-    public UnityEngine.UI.Text m_highScores;
 
     void Awake () {
         EventManager<GameEvent>.Add(HandleMessage);
-        
+
         Debug.Log(Application.persistentDataPath);
 
     }
@@ -29,26 +29,14 @@ public class GameManager : MonoBehaviour {
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(UIManager), GameEvent.STATE_MENU);
         Time.timeScale = 0;
 
-        SavingSystem.Load();
-    }
+        //GetComponent<AudioManager>().PlayMusic(0, true);
 
-    void Update () {
-        if (Input.GetKeyDown(KeyCode.L)) {
-            EventManager<GameEvent>.InvokeGameState(null, null, null, typeof(GameManager), GameEvent.STATE_HIGHSCORE);
-        }
+        SavingSystem.Load();
     }
 
     public void HandleMessage(object s, __eArg<GameEvent> e) {
         if (s == (object)this) return;
         switch (e.arg) {
-        case GameEvent.STATE_HIGHSCORE:
-            break;
-        case GameEvent.STATE_LEADERBOARD:
-            m_highScores.text = "High Scores:\n";
-            for (int i = 0; i < SavingSystem.m_data.name.Count; i++) {
-                m_highScores.text += SavingSystem.m_data.name[i] + "\t\t" + SavingSystem.m_data.score[i] + "\n";
-            }
-            break;
         case GameEvent.STATE_LOSE_SCREEN:
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -60,10 +48,13 @@ public class GameManager : MonoBehaviour {
             Cursor.visible = true;
             Time.timeScale = 0;
 
+            //SavingSystem.Add(":NAME:", m_scoreManager.getFinalScore());
+            //SavingSystem.Save();
 
             break;
         case GameEvent.STATE_MENU:
         case GameEvent.STATE_PAUSE:
+            GetComponent<AudioManager>().FadeOutMusic(0, 1);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 0;
@@ -82,6 +73,7 @@ public class GameManager : MonoBehaviour {
             Time.timeScale = 1;
             if (m_loading.IsComplete())
             {
+                GetComponent<AudioManager>().FadeInMusic(0, 5);
                 GameObject.FindObjectOfType<Player>().enabled = true;
                 GameObject.FindObjectOfType<PlayerCamera>().enabled = true;
                 GameObject.FindObjectOfType<PlayerMovement>().enabled = true;
@@ -97,8 +89,8 @@ public class GameManager : MonoBehaviour {
             }
             else
             {
+                GetComponent<AudioManager>().PlayMusic(0, true);
                 m_loading.Begin();
-                GetComponent<AudioManager>().StopMusic(0);
             }
             break;
         case GameEvent.PICKUP_RIFLEAMMO:
