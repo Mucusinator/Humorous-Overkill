@@ -48,7 +48,7 @@ public class AudioManager : MonoBehaviour
     {
         foreach (AudioClip clip in musicClips)
         {
-            if (sourceTable.ContainsKey(clip))
+            if (fadeTable.ContainsKey(clip))
             {
                 fadeTable[clip].Update();
                 if (fadeTable[clip].IsFadeComplete())
@@ -123,7 +123,7 @@ public class AudioManager : MonoBehaviour
         }
     }
     public void StopMusic(int index) { StopClip(musicClips[index]); }
-    public void StopSound(int index) { StopClip(soundClips[index]); }
+    public void StopSound(int index) { try { StopClip(soundClips[index]); } catch { } }
     public void StopMusic(AudioClip clip) { StopClip(clip); }
     public void StopSound(AudioClip clip) { StopClip(clip); }
     public void PlayMusic(int index, bool repeat) { PlayClip(soundClips[index], repeat); }
