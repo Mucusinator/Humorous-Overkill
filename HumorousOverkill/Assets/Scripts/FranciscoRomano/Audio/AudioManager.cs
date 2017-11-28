@@ -31,6 +31,20 @@ public class AudioManager : MonoBehaviour
     private Dictionary<AudioClip, AudioSource> sourceTable = new Dictionary<AudioClip, AudioSource>();
     private Dictionary<AudioClip, FadeInformation> fadeTable = new Dictionary<AudioClip, FadeInformation>();
     // :: functions
+    void Awake()
+    {
+        foreach (AudioClip clip in musicClips)
+        {
+            GameObject obj = Instantiate(new GameObject("manager-audio"), transform);
+            AudioSource source = new AudioSource();
+            source.playOnAwake = false;
+            source.clip = clip;
+            source.Stop();
+
+            musicClips.Add(clip);
+            sourceTable.Add(clip, source);
+        }
+    }
     void Update()
     {
         foreach (AudioClip clip in musicClips)
