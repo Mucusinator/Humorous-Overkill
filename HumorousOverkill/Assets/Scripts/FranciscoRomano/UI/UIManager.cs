@@ -106,8 +106,10 @@ public class UIManager : MonoBehaviour
             case GameEvent.STATE_DIFFICULTY:
             case GameEvent.STATE_WIN_SCREEN:
             case GameEvent.STATE_LOSE_SCREEN:
-                //if (e.type == typeof(GameManager)) break;
-                foreach (UIProperty property in propertyList)
+            case GameEvent.STATE_LEADERBOARD:
+            case GameEvent.STATE_HIGHSCORE:
+            //if (e.type == typeof(GameManager)) break;
+            foreach (UIProperty property in propertyList)
                 {
                     property.gameObject.SetActive(false);
                 }
