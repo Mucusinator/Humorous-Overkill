@@ -348,8 +348,16 @@ public class CombinedScript : MonoBehaviour
 
             nextTimeToFire = Time.time + 60f / RoundsPerMinute;
 
-            //Shoot();
-            ShootReflect();
+            if (stuff.ReflectiveShots == true)
+            {
+                ShootReflect();
+            }
+            else
+            {
+                Shoot();
+            }
+            
+           
         }
     }
 
