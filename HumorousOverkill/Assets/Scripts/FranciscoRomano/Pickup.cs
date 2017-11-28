@@ -16,7 +16,7 @@ public class Pickup : MonoBehaviour
         GetComponent<BoxCollider>().isTrigger = true;
         foreach (AudioClip clip in clips)
         {
-            FindObjectOfType<AudioManager>().Add(clip);
+            FindObjectOfType<AudioManager>().AddSound(clip);
         }
 	}
 
@@ -25,7 +25,7 @@ public class Pickup : MonoBehaviour
         // check if player
         if (collider.tag == "Player")
         {
-            FindObjectOfType<AudioManager>().Play1(clips[Random.Range(0, clips.Count)]);
+            FindObjectOfType<AudioManager>().PlaySound(clips[Random.Range(0, clips.Count)], false);
             EventManager<GameEvent>.InvokeGameState(this, null, amount, typeof(PlayerManager), type);
 
             // send event to player
