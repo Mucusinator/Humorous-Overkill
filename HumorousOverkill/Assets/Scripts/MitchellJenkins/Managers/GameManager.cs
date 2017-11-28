@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour {
             else
             {
                 m_loading.Begin();
-                GetComponent<AudioManager>().Stop(GetComponent<AudioManager>().musics[0]);
+                GetComponent<AudioManager>().StopMusic(0);
             }
             break;
         case GameEvent.PICKUP_RIFLEAMMO:
