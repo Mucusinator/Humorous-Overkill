@@ -111,6 +111,8 @@ public class CombinedScript : MonoBehaviour
     public float m_timer = 0;
     // THIS IS BACHELOR STUFF 
 
+    // Indirection is the reflection vector.
+    Vector3 inDirection;
 
     [System.Serializable]
     public struct BachelorStuff
@@ -176,8 +178,8 @@ public class CombinedScript : MonoBehaviour
         if (e.arg == GameEvent._NULL_)
             if (e.type == typeof(AudioManager)) {
                 m_audioManager = (AudioManager)s;
-                m_audioManager.Add(LazerSound);
-                m_audioManager.Add(shotgunSound);
+                m_audioManager.AddSound(LazerSound);
+                m_audioManager.AddSound(shotgunSound);
             }
         switch (e.arg)
         {
@@ -256,13 +258,13 @@ public class CombinedScript : MonoBehaviour
             shootShotgun();
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.RIFLE && currentRifleAmmo > 0) {
-            m_audioManager.Play(LazerSound);
+            m_audioManager.PlaySound(LazerSound,true);
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             animator.SetBool("IsFiring", false);
-            m_audioManager.Stop(LazerSound);
+            m_audioManager.StopSound(LazerSound);
         }
 
         if (stuff.showStatistics)
@@ -344,6 +346,7 @@ public class CombinedScript : MonoBehaviour
             nextTimeToFire = Time.time + 60f / RoundsPerMinute;
 
             Shoot();
+            //ShootReflect();
         }
     }
 
@@ -358,7 +361,7 @@ public class CombinedScript : MonoBehaviour
                 currentShotgunAmmo--;
 
                 animator.Play("Release");
-                m_audioManager.Play1(shotgunSound);
+                m_audioManager.PlaySound(shotgunSound,false);
                 for (int i = 0; i < pelletCount; i++)
                 {
 
@@ -560,8 +563,9 @@ public class CombinedScript : MonoBehaviour
     {
         int nPoints = stuff.ReflectAmount;
         
-        Transform startingRaycastPoint;
+        Transform startingRaycastPoint = EndOfGun.transform;
 
+        Ray ray = new Ray(EndOfGun.transform.position, EndOfGun.transform.forward);
 
 
         //remove a round of ammunition 
@@ -572,23 +576,58 @@ public class CombinedScript : MonoBehaviour
         // THe two different Raycast hit variables to gather information on the collision. 
         RaycastHit hit, hit2;
 
+        
+
         Debug.DrawRay(fpsCam.transform.position, fpsCam.transform.forward * Range, Color.red, 3.0f);
 
 
-
+        // For the amount of reflections
         for (int i = 0; i <= stuff.ReflectAmount; i++)
         {
+            // if we havent hit anything initally
             if (i == 0)
             {
+                // if we are able to hit it from the camera to the point of impact....
                 if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward * Range, out hit, RifleRange))
                 {
+                    // then test to see if we can hit them from the end of the gun to the point of inpact.
                     if (Physics.Raycast(EndOfGun.transform.position, hit.point - transform.position, out hit2, RifleRange))
                     {
 
+                        //set the inDirection 
+                        inDirection = Vector3.Reflect(ray.direction, hit2.normal);
+                        // cast the reflected ray, using the hit point as the origin and the reflected direction
+                        ray = new Ray(hit2.point, inDirection);
+
+                        // Draw the normal - can only seen at the scene tab, for debugging purposes
+                        Debug.DrawRay(hit2.point, hit.normal * 3, Color.blue,5);
+                        //represent the ray using a line that can only be viewed at scene tab
+                        Debug.DrawRay(hit2.point, inDirection * 100, Color.magenta,5);
 
                     }
 
                 }
+            }
+            else
+            {
+                if (Physics.Raycast(ray.origin, ray.direction, out hit2, 200))
+                {
+                    inDirection = Vector3.Reflect(inDirection, hit2.normal);
+
+                    ray = new Ray(hit2.point, inDirection);
+
+                    //Draw the normal - can only be seen at the Scene tab, for debugging purposes  
+                    Debug.DrawRay(hit2.point, hit2.normal * 3, Color.blue, 5);
+                    //represent the ray using a line that can only be viewed at the scene tab  
+                    Debug.DrawRay(hit2.point, inDirection * 100, Color.magenta, 5);
+
+                    //Print the name of the object the cast ray has hit, at the console  
+                    Debug.Log("Object name: " + hit2.transform.name);
+
+                }
+
+
+            
             }
         }
 
