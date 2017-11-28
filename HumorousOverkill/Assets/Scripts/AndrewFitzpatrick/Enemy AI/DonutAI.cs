@@ -12,9 +12,11 @@ public class DonutAI : MonoBehaviour
     // stores stats
     public DonutEnemyInfo myInfo;
 
+    // whether to display gizmos in the editor
     public bool showMovementGizmos = false;
     public bool showAttackGizmos = false;
 
+    // private variables
     private bool deployed;
     private float donutCircumference;
     private GameObject player;
@@ -33,13 +35,16 @@ public class DonutAI : MonoBehaviour
     // what types of pickups to drop
     public List<GameObject> pickupPrefabs;
 
+    // layer mask to use when spawning pickups
     private LayerMask pickupSpawnLayerMask;
 
     // reference to scoremanager
     private scoreManager scoremanager;
 
+    // event stuff
     __eHandle<object, __eArg<GameEvent>> events;
 
+    // flash variables
     [Tooltip("Color to flash when taking damage")]
     public Color flashColor;
     [Tooltip("How fast to flash when taking damage")]
@@ -50,19 +55,51 @@ public class DonutAI : MonoBehaviour
 
     #endregion
 
+    // runs when this script is first created (regardless of whether it is enabled)
     public void Awake()
     {
+        // set up event handling stuff
         events = new __eHandle<object, __eArg<GameEvent>>(HandleEvent);
         __event<GameEvent>.HandleEvent += events;
 
-        // find the player
-        player = GameObject.FindObjectOfType<Player>().gameObject;
+        // find and store needed components
+        findComponents();
 
-        // store animator
-        myAnimator = GetComponent<Animator>();
+        // calculate the circumference of the donut (this is used to roll at a believable speed regardless of the size of the donut)
+        findCircumference();
 
-        // get default info from enemyManager
-        if(GameObject.FindObjectOfType<EnemyManager>() != null)
+        // pick an initial target
+        pickTarget();
+
+        // set up the pickup spawn layer mask to exclude objects tagged Player and Enemy
+        pickupSpawnLayerMask = LayerMask.GetMask("Player", "Enemy");
+    }
+
+    // stores references to needed components
+    void findComponents()
+    {
+        // store a reference to the player GameObject (if it exists)
+        if (GameObject.FindObjectOfType<Player>() != null)
+        {
+            player = GameObject.FindObjectOfType<Player>().gameObject;
+        }
+        else
+        {
+            Debug.Log("Donut could not find the player");
+        }
+
+        // store a reference to the attached Animator component (if it exists)
+        if (GetComponent<Animator>() != null)
+        {
+            myAnimator = GetComponent<Animator>();
+        }
+        else
+        {
+            Debug.Log("Donut does not have an Animator component");
+        }
+
+        // get default info from EnemyManager (if it exists)
+        if (GameObject.FindObjectOfType<EnemyManager>() != null)
         {
             myInfo = GameObject.FindObjectOfType<EnemyManager>().defaultDonutInfo;
         }
@@ -71,25 +108,24 @@ public class DonutAI : MonoBehaviour
             Debug.Log("Donut could not find an EnemyManager");
         }
 
-        // calculate circumference (needed for nice rolling)
-        findCircumference();
-
-        pickTarget();
-
-        pickupSpawnLayerMask = LayerMask.GetMask("Player", "Enemy");
-
-        // find score manager (if it exists)
+        // store a reference to the score manager (if it exists)
         if (GameObject.FindObjectsOfType<scoreManager>().Length != 0)
         {
             scoremanager = GameObject.FindObjectsOfType<scoreManager>()[0];
         }
+        else
+        {
+            Debug.Log("Donut could not find score manager");
+        }
     }
 
+    // this is the main loop
     void Update()
     {
+        // if the game is not pasued
         if(!freeze)
         {
-            // either deploy or roll
+            // deploy or roll
             if (deployed)
             {
                 deploySequence();
@@ -98,14 +134,14 @@ public class DonutAI : MonoBehaviour
             {
                 roll();
             }
-        }
 
-        if (!dead)
-        {
             // flash if needed
-            if (flashing)
+            if (!dead)
             {
-                flash();
+                if (flashing)
+                {
+                    flash();
+                }
             }
         }
     }
@@ -116,31 +152,31 @@ public class DonutAI : MonoBehaviour
     void roll()
     {
         // find direction to target
-        Vector3 direction = (currentTarget - transform.position).normalized;
-        direction.y = 0;
+        Vector3 toPlayer = (currentTarget - transform.position).normalized;
+        toPlayer.y = 0;
 
         // rotate to look at target using lerping and turnSpeed
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(Vector3.up * 90) * Quaternion.LookRotation(direction), myInfo.turnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(Vector3.up * 90) * Quaternion.LookRotation(toPlayer), myInfo.turnSpeed * Time.deltaTime);
 
         // roll forward
         transform.Translate(-transform.right * myInfo.rollSpeed * Time.deltaTime, Space.World);
 
-        // avoid walls and otgher enemies
+        // avoid walls and other enemies
         if (Physics.Raycast(transform.position, -transform.right, out rollHitInfo, myInfo.avoidRadius))
         {
             if (rollHitInfo.collider.gameObject.tag == "Avoid" || rollHitInfo.collider.gameObject.tag == "Enemy")
             {
                 currentTarget += rollHitInfo.normal;
-                currentTarget.y = transform.position.y;
             }
         }
 
+        // if we are near the target repick a target
         if (nearTarget())
         {
             pickTarget();
         }
 
-        // deploy if within deployRange
+        // if we are near the player deploy
         if (nearPlayer())
         {
             deployed = true;
@@ -151,20 +187,20 @@ public class DonutAI : MonoBehaviour
     // sets donutCircumference
     void findCircumference()
     {
-        // get the boxCollider of the mesh
+        // get the boxCollider of the child mesh
         BoxCollider donutCollider = GetComponentInChildren<BoxCollider>();
 
         // get the "x" size of the collider (actually y)
-        // also takes into account scaling
+        // this also takes into account scaling
         float size = donutCollider.size.x * transform.localScale.y;
 
         // circumference is 2PIr aka PI * diameter
         donutCircumference = (size * Mathf.PI);
 
-        // position nicely above the ground
+        // position the donut nicely above the ground
         transform.position += Vector3.up * size / 2;
 
-        // set roll animation speed
+        // set roll animation speed to match size
         myAnimator.SetFloat("rollSpeed", (1.0f / donutCircumference) * myInfo.rollSpeed);
     }
 
@@ -175,40 +211,38 @@ public class DonutAI : MonoBehaviour
         Vector3 direction = (player.transform.position - transform.position).normalized;
         direction.y = 0;
 
-        // snap to look at player
+        // snap rotation to look at player
         transform.rotation = Quaternion.Euler(Vector3.up * 90) * Quaternion.LookRotation(direction);
 
+        // store the current animation state
         ANIMATIONSTATE currentAnimationState = (ANIMATIONSTATE)myAnimator.GetInteger("animationState");
 
-        // if the current animation is finished
-        switch (currentAnimationState)
+        // shoot at the player if the current animation state is shoot
+        if (currentAnimationState == ANIMATIONSTATE.SHOOT)
         {
-            case ANIMATIONSTATE.SHOOT:
-                shootPlayer();
-                break;
+            shootPlayer();
         }
 
-        // switch to the next animation
+        // if the current animation is finished
         if (myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && !myAnimator.IsInTransition(0))
         {
-            // run next animation (if the player is within range
+            // switch on the current animation
             switch (myAnimator.GetInteger("animationState"))
             {
+                // transition from getup back to rolling
                 case (int)ANIMATIONSTATE.GETUP:
-                    // transition back to rolling
-                    myAnimator.SetInteger("animationState", 0);
+                    myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.ROLL);
                     deployed = false;
                     break;
+                // stop shooting at the player when they leave our range
                 case (int)ANIMATIONSTATE.SHOOT:
-                    // keep shooting the player until they are out of range
                     if (!nearPlayer())
                     {
                         myAnimator.SetInteger("animationState", (int)ANIMATIONSTATE.LOWERGUN);
-                        //myLineRenderer.enabled = false;
                     }
                     break;
                 default:
-                    // transition into the next animation
+                    // transition into the next animation by default
                     myAnimator.SetInteger("animationState", myAnimator.GetInteger("animationState") + 1);
                     break;
             }
@@ -219,9 +253,10 @@ public class DonutAI : MonoBehaviour
     // do manager stuff
     void die()
     {
+        // debug that die has been called to check that it doesn't happen more than once
         Debug.Log("die has been called");
 
-        // stop flashing
+        // set our color back to normal (if it is changed from flashing)
         changeColor(Color.white);
 
         // tell enemy manager that an enemy has died
@@ -233,9 +268,13 @@ public class DonutAI : MonoBehaviour
             scoremanager.updatePoints(scoreManager.ENEMYTYPE.DONUT);
         }
 
-        // disable collider preventing more deaths
-        GetComponentInChildren<BoxCollider>().enabled = false;
+        // disable collider to prevent more deaths
+        if(GetComponentInChildren<BoxCollider>() != null)
+        {
+            GetComponentInChildren<BoxCollider>().enabled = false;
+        }
 
+        // maybe drop a pickup
         dropPickup();
 
         // find the regular model and the broken one
@@ -245,28 +284,33 @@ public class DonutAI : MonoBehaviour
         // parent the broken model to the root object (keep the same rotation)
         brokenModel.transform.parent = transform;
 
-        // swap the models
+        // swap the models (the broken model will then do physics)
         model.SetActive(false);
         brokenModel.SetActive(true);
 
-        // disable this script to prevent any more actions
+        // disable this script
         this.enabled = false;
 
         // destroy this gameobject after 5 seconds
         Destroy(this.gameObject, 5.0f);
     }
 
+    // stop handling events when we are destroyed
     public void OnDestroy()
     {
         __event<GameEvent>.HandleEvent -= events;
     }
 
+    // drops a pickup with a random chance
     void dropPickup()
     {
         // randomly drop a pickup (on the floor)
         if (Random.Range(0, 100) < myInfo.pickupDropRate * 100)
         {
+            // raycast downwards
             RaycastHit ammoDropRay;
+
+            // spawn the pickup on the floor
             if (Physics.Raycast(transform.position, -Vector3.up, out ammoDropRay, pickupSpawnLayerMask))
             {
                 Instantiate(pickupPrefabs[Random.Range(0, pickupPrefabs.Count)], ammoDropRay.point, Quaternion.identity);
@@ -274,6 +318,7 @@ public class DonutAI : MonoBehaviour
         }
     }
 
+    // changes the color of each child mesh
     void changeColor(Color newColor)
     {
         foreach (MeshRenderer child in GetComponentsInChildren<MeshRenderer>())
@@ -353,11 +398,19 @@ public class DonutAI : MonoBehaviour
                 Debug.DrawRay(transform.position, aimPoint, Color.red, 0.5f);
             }
 
-            // spawn confetti
-            GameObject newConfetti = Instantiate(confetti, transform.position, Quaternion.LookRotation(aimPoint));
-            newConfetti.GetComponent<ParticleSystem>().Play();
-            Destroy(newConfetti, 1.0f);
+            // spawn confetti (if it has been set up)
+            if(confetti != null)
+            {
+                GameObject newConfetti = Instantiate(confetti, transform.position, Quaternion.LookRotation(aimPoint));
+                newConfetti.GetComponent<ParticleSystem>().Play();
+                Destroy(newConfetti, 1.0f);
+            }
+            else
+            {
+                Debug.Log("Donut confetti has not been assigned");
+            }
 
+            // actually check if the player was hit
             if (Physics.Raycast(transform.position, aimPoint, out shootHitInfo))
             {
                 // if the player was hit by the shot
