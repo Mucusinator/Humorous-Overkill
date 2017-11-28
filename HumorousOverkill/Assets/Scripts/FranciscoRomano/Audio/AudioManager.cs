@@ -31,11 +31,24 @@ public class AudioManager : MonoBehaviour
     private Dictionary<AudioClip, AudioSource> sourceTable = new Dictionary<AudioClip, AudioSource>();
     private Dictionary<AudioClip, FadeInformation> fadeTable = new Dictionary<AudioClip, FadeInformation>();
     // :: functions
+    void Awake()
+    {
+        foreach (AudioClip clip in musicClips)
+        {
+            GameObject obj = Instantiate(new GameObject("manager-audio"), transform);
+            AudioSource source = obj.AddComponent<AudioSource>();
+            source.playOnAwake = false;
+            source.clip = clip;
+            source.Stop();
+            
+            sourceTable.Add(clip, source);
+        }
+    }
     void Update()
     {
         foreach (AudioClip clip in musicClips)
         {
-            if (sourceTable.ContainsKey(clip))
+            if (fadeTable.ContainsKey(clip))
             {
                 fadeTable[clip].Update();
                 if (fadeTable[clip].IsFadeComplete())
@@ -86,7 +99,7 @@ public class AudioManager : MonoBehaviour
         if (!sourceTable.ContainsKey(clip))
         {
             GameObject obj = Instantiate(new GameObject("manager-audio"), transform);
-            AudioSource source = new AudioSource();
+            AudioSource source = obj.AddComponent<AudioSource>();
             source.playOnAwake = false;
             source.clip = clip;
             source.Stop();
@@ -100,7 +113,7 @@ public class AudioManager : MonoBehaviour
         if (!sourceTable.ContainsKey(clip))
         {
             GameObject obj = Instantiate(new GameObject("manager-audio"), transform);
-            AudioSource source = new AudioSource();
+            AudioSource source = obj.AddComponent<AudioSource>();
             source.playOnAwake = false;
             source.clip = clip;
             source.Stop();

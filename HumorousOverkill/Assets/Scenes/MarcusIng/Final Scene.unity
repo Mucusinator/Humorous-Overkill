@@ -31380,9 +31380,7 @@ MonoBehaviour:
     m_lightIntensity: 0
     m_LightColor: {r: 0, g: 0, b: 0, a: 0}
     m_UIColor: {r: 0, g: 0, b: 0, a: 0}
-  m_data:
-    name: []
-    score: 
+  m_scoreManager: {fileID: 0}
   m_loading: {fileID: 388004862}
 --- !u!114 &889218443
 MonoBehaviour:
@@ -31419,10 +31417,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ab3906764cfad4f9057a087686bf37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fade: 1
   volume: 0.7
-  musics:
+  musicClips:
   - {fileID: 8300000, guid: edd5b2dbb9c971d4f990aabe735dbc28, type: 3}
+  soundClips: []
 --- !u!1 &889278807
 GameObject:
   m_ObjectHideFlags: 0
@@ -70969,6 +70967,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114620776584275070, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: weaponScript
+      value: 
+      objectReference: {fileID: 2119740794}
     - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
         type: 2}
       propertyPath: combinedScript
@@ -70985,11 +70988,6 @@ Prefab:
       value: 
       objectReference: {fileID: 889218443}
     - target: {fileID: 114380761682283410, guid: 30403f8d89b92a24e96897519077ab83,
-        type: 2}
-      propertyPath: weaponScript
-      value: 
-      objectReference: {fileID: 2119740794}
-    - target: {fileID: 114620776584275070, guid: 30403f8d89b92a24e96897519077ab83,
         type: 2}
       propertyPath: weaponScript
       value: 
