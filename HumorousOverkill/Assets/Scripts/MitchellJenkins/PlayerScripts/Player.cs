@@ -51,8 +51,6 @@ public class Player : MonoBehaviour {
         else if (m_ply.m_playerHealth < 0) m_ply.m_playerHealth = 0;
 
         if (m_ply.m_playerHealth <= 0) {
-            __event<GameEvent>.UnsubscribeAll();
-
             __event<GameEvent>.InvokeEvent(this, new __eArg<GameEvent>(GameEvent.STATE_LOSE_SCREEN, null, null, null));
         }
     }

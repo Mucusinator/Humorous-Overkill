@@ -82,6 +82,7 @@ public class UIManager : MonoBehaviour
     public void HandleMessage(object obj, __eArg<GameEvent> e)
     {
         if (obj == (object)this) return;
+        //if (e.type == typeof(GameManager)) return;
         switch (e.arg)
         {
             case GameEvent.UI_HEALTH:
@@ -102,6 +103,8 @@ public class UIManager : MonoBehaviour
             case GameEvent.STATE_RESTART:
             case GameEvent.STATE_CONTINUE:
             case GameEvent.STATE_DIFFICULTY:
+            case GameEvent.STATE_WIN_SCREEN:
+            case GameEvent.STATE_LOSE_SCREEN:
                 //if (e.type == typeof(GameManager)) break;
                 foreach (UIProperty property in propertyList)
                 {
