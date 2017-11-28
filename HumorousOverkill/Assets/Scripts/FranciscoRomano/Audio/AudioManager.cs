@@ -40,8 +40,7 @@ public class AudioManager : MonoBehaviour
             source.playOnAwake = false;
             source.clip = clip;
             source.Stop();
-
-            musicClips.Add(clip);
+            
             sourceTable.Add(clip, source);
         }
     }
