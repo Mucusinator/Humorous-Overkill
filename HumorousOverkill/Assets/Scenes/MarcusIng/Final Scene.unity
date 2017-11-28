@@ -42262,6 +42262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5792162098a9fd445b1598600d2a50e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clip: {fileID: 0}
   spawner: {fileID: 1724611378}
 --- !u!54 &1234974567
 Rigidbody:
