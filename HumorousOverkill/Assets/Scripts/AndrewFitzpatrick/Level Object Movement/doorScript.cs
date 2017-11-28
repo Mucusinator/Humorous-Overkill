@@ -28,6 +28,9 @@ public class doorScript : MonoBehaviour
         // setup points
         points[0] = transform.position;
         points[1] = transform.position + Vector3.up * openHeight;
+
+        // make sure there is no problems with divide by zero or negative numbers
+        openCloseTime = Mathf.Max(openCloseTime, 0.0001f);
     }
 
     void Update()
