@@ -9,15 +9,21 @@ public class SavingSystem {
 
     public static void Add(string name, int score) {
         if (m_data == null) m_data = new SavingData();
-        for (int i = 0; i < m_data.name.Count; i++) {
-            if (i > 5) return;
-            if (score > m_data.score[i]) {
-                m_data.name.Insert(i, name);
-                m_data.score.Insert(i, score);
+        if (m_data.name.Count == 0) {
+            m_data.name.Add(name);
+            m_data.score.Add(score);
+        } else {
+            for (int i = 0; i < m_data.name.Count; i++) {
+                if (i > 5) return;
+                if (score > m_data.score[i]) {
+                    m_data.name.Insert(i, name);
+                    m_data.score.Insert(i, score);
+                    break;
+                }
             }
-        }
-        if (m_data.name.Count > 5) {
-            m_data.name.RemoveRange(6, m_data.name.Count);
+            if (m_data.name.Count > 5) {
+                m_data.name.RemoveRange(6, m_data.name.Count);
+            }
         }
     }
     // saves all the data
