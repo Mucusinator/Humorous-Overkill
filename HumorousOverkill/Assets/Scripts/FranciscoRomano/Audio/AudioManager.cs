@@ -111,6 +111,8 @@ public class AudioManager : MonoBehaviour
     }
     public void StopMusic(int index) { StopClip(musicClips[index]); }
     public void StopSound(int index) { StopClip(soundClips[index]); }
+    public void StopMusic(AudioClip clip) { StopClip(clip); }
+    public void StopSound(AudioClip clip) { StopClip(clip); }
     public void PlayMusic(int index, bool repeat) { PlayClip(soundClips[index], repeat); }
     public void PlaySound(int index, bool repeat) { PlayClip(soundClips[index], repeat); }
     public void PlayMusic(AudioClip clip, bool repeat) { PlayClip(clip, repeat); }

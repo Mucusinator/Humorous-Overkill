@@ -178,8 +178,8 @@ public class CombinedScript : MonoBehaviour
         if (e.arg == GameEvent._NULL_)
             if (e.type == typeof(AudioManager)) {
                 m_audioManager = (AudioManager)s;
-                m_audioManager.Add(LazerSound);
-                m_audioManager.Add(shotgunSound);
+                m_audioManager.AddSound(LazerSound);
+                m_audioManager.AddSound(shotgunSound);
             }
         switch (e.arg)
         {
@@ -258,13 +258,13 @@ public class CombinedScript : MonoBehaviour
             shootShotgun();
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.RIFLE && currentRifleAmmo > 0) {
-            m_audioManager.Play(LazerSound);
+            m_audioManager.PlaySound(LazerSound,true);
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             animator.SetBool("IsFiring", false);
-            m_audioManager.Stop(LazerSound);
+            m_audioManager.StopSound(LazerSound);
         }
 
         if (stuff.showStatistics)
@@ -361,7 +361,7 @@ public class CombinedScript : MonoBehaviour
                 currentShotgunAmmo--;
 
                 animator.Play("Release");
-                m_audioManager.Play1(shotgunSound);
+                m_audioManager.PlaySound(shotgunSound,false);
                 for (int i = 0; i < pelletCount; i++)
                 {
 

@@ -75,7 +75,8 @@ public class GameManager : MonoBehaviour {
                 GameObject.FindObjectOfType<PlayerMovement>().enabled = true;
                 GameObject.FindObjectOfType<CombinedScript>().enabled = true;
 
-                GetComponent<AudioManager>().FadeIn(GetComponent<AudioManager>().musics[0], 1);
+                GetComponent<AudioManager>().FadeInMusic(0, 1);
+
                 m_loading.gameObject.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
