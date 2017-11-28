@@ -377,7 +377,6 @@ public class DonutAI : MonoBehaviour
 
             // if the the player height offset is lower than maximumTargetHeight add that height independant of range
             float playerHeightOffset = player.transform.position.y - transform.position.y;
-            Debug.Log(playerHeightOffset);
 
             // can't hit player (too high)
             if (playerHeightOffset > myInfo.maximumTargetHeight)
@@ -435,7 +434,6 @@ public class DonutAI : MonoBehaviour
             return;
         }
 
-        Debug.Log("Donut is handle event");
         switch (e.arg)
         {
             case GameEvent.ENEMY_DAMAGED:
