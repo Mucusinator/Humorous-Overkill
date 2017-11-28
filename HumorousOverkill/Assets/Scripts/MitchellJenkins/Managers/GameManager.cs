@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour {
             Time.timeScale = 1;
             if (m_loading.IsComplete())
             {
-                GetComponent<AudioManager>().FadeInMusic(0, 1);
+                GetComponent<AudioManager>().FadeInMusic(0, 5);
                 GameObject.FindObjectOfType<Player>().enabled = true;
                 GameObject.FindObjectOfType<PlayerCamera>().enabled = true;
                 GameObject.FindObjectOfType<PlayerMovement>().enabled = true;
