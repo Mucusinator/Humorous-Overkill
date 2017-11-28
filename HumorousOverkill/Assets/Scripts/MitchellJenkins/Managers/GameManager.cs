@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
     public scoreManager m_scoreManager;
     public Loading m_loading;
     public UnityEngine.UI.Text m_highScore;
+    public UnityEngine.UI.Text m_score;
 
     void Awake () {
         EventManager<GameEvent>.Add(HandleMessage);
@@ -52,6 +53,9 @@ public class GameManager : MonoBehaviour {
             }
             break;
         case GameEvent.STATE_HIGHSCORE:
+            m_score.text = "Score: " + m_scoreManager.getFinalScore();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             break;
         case GameEvent.STATE_LOSE_SCREEN:
             Cursor.lockState = CursorLockMode.None;
