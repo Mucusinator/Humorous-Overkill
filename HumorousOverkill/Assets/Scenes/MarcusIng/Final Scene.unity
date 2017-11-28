@@ -17780,14 +17780,14 @@ MonoBehaviour:
         points:
         - amount: 3
           position: {x: 4.26, y: -7.55, z: 6.23}
-        - amount: 3
+        - amount: 2
           position: {x: -12.28, y: -7.55, z: 1.1}
-    - rate: 3
+    - rate: 2
       units:
       - prefab: {fileID: 1031186524167282, guid: 625bbad958d2319458f6839684b8fa07,
           type: 2}
         points:
-        - amount: 4
+        - amount: 3
           position: {x: 7.08, y: -7.55, z: 6}
         - amount: 3
           position: {x: -10.76, y: -7.55, z: 0.02}
@@ -31345,7 +31345,7 @@ MonoBehaviour:
     hitRange: 12
     maximumTargetHeight: 20
     accuracy: 1
-    pickupDropRate: 99
+    pickupDropRate: 0.9
     targetRadius: 5
     avoidRadius: 10
     errorMargin: 2.5
