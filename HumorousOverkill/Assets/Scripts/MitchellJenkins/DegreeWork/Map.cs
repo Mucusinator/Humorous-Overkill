@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(MapEventHandler))]
-public class Map : MonoBehaviour {
+public class Map : MonoBehaviour
+{
 
     // Game Checks
     private bool isVisable = false;
@@ -32,7 +33,8 @@ public class Map : MonoBehaviour {
     float playerMapX;
     float playerMapZ;
 
-    void Awake () {
+    void Awake()
+    {
         // Raise and Invoke Event
         __event<MapState>.HandleEvent += new __eHandle<System.Object, __eArg<MapState>>(OnMapHandleEvent);
         __event<GameEvent>.HandleEvent += new __eHandle<System.Object, __eArg<GameEvent>>(OnGUIHandleEvent);
@@ -44,57 +46,64 @@ public class Map : MonoBehaviour {
                 MapState.PING,
                 this,
                 this,
-                GetType() ));
+                GetType()));
     }
 
-    float MapPos(float pos, float mapSize, float sceneSize) {
+    float MapPos(float pos, float mapSize, float sceneSize)
+    {
         return pos * mapSize / sceneSize;
     }
 
-    void Init () {
+    void Init()
+    {
         // Init Variables
 
-        
+
         // Initialization Finished
         isInitialized = true;
     }
 
-    void OnGUI () {
+    void OnGUI()
+    {
         if (!isInitialized) return;
         if (!isVisable) return;
         GUI.BeginGroup(new Rect(m_mapOffSetX, m_mapOffSetY, m_mapWidth, m_mapHeight), m_map);
         pX = MapPos(transform.position.x, m_mapWidth, m_sceneWidth);
         pZ = MapPos(transform.position.z, m_mapHeight, m_sceneHeight);
-        playerMapX = pX - (m_iconSize/2);
+        playerMapX = pX - (m_iconSize / 2);
         playerMapZ = ((pZ * -1) - (m_iconSize / 2)) + m_mapHeight;
         GUI.Box(new Rect(playerMapX * m_sceneOffSet, playerMapZ * m_sceneOffSet, m_iconSize, m_iconSize), m_playerIcon, new GUIStyle());
         GUI.EndGroup();
     }
 
-    public void OnGUIHandleEvent (object s, __eArg<GameEvent> e) {
+    public void OnGUIHandleEvent(object s, __eArg<GameEvent> e)
+    {
         if (e.type != null) return;
-        switch (e.arg) {
-        case GameEvent.STATE_START:
-        case GameEvent.STATE_CONTINUE:
-            isVisable = true;
-            break;
-        case GameEvent.STATE_MENU:
-        case GameEvent.STATE_PAUSE:
-        case GameEvent.STATE_RESTART:
-        case GameEvent.STATE_WIN_SCREEN:
-        case GameEvent.STATE_LOSE_SCREEN:
-        case GameEvent.STATE_DIFFICULTY:
-            isVisable = false;
-            break;
+        switch (e.arg)
+        {
+            case GameEvent.STATE_START:
+            case GameEvent.STATE_CONTINUE:
+                isVisable = true;
+                break;
+            case GameEvent.STATE_MENU:
+            case GameEvent.STATE_PAUSE:
+            case GameEvent.STATE_RESTART:
+            case GameEvent.STATE_WIN_SCREEN:
+            case GameEvent.STATE_LOSE_SCREEN:
+            case GameEvent.STATE_DIFFICULTY:
+                isVisable = false;
+                break;
         }
     }
 
-    public void OnMapHandleEvent (object s, __eArg<MapState> e) {
+    public void OnMapHandleEvent(object s, __eArg<MapState> e)
+    {
         // If not enabled, don't check for events
         if (!isEnabled) return;
 
         // Log Events that happen after Event has been Raised
-        if (e.target != (System.Object)this && s != (System.Object)this || e.target == __event<MapState>.SendToAll) {
+        if (e.target != (System.Object)this && s != (System.Object)this || e.target == __event<MapState>.SendToAll)
+        {
             // Logging
             //_Debug.Log(":: Args (" + e.arg.ToString() + ") To <" + e.target + ">\nfrom <" + s + "> This <" + this + ">");
 
@@ -108,12 +117,14 @@ public class Map : MonoBehaviour {
             if (e.arg == MapState.INIT && isEnabled) { Init(); }
 
             // Check if map is fullscreen
-            if (e.arg == MapState.FULLSCREENMAP) {
+            if (e.arg == MapState.FULLSCREENMAP)
+            {
                 isFullscreen = true;
             }
 
             // Check if map is minimized
-            if (e.arg == MapState.MINIMAP) {
+            if (e.arg == MapState.MINIMAP)
+            {
                 isFullscreen = false;
             }
         }
