@@ -25028,7 +25028,7 @@ Prefab:
       objectReference: {fileID: 816475116}
     - target: {fileID: 1782709184717326, guid: 30403f8d89b92a24e96897519077ab83, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30403f8d89b92a24e96897519077ab83, type: 2}
@@ -28587,7 +28587,6 @@ GameObject:
   m_Component:
   - component: {fileID: 917478560}
   - component: {fileID: 917478559}
-  - component: {fileID: 917478561}
   m_Layer: 0
   m_Name: cheat
   m_TagString: Untagged
@@ -28601,7 +28600,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 917478558}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f5384153b9f1d148ad87f011bcbe52c, type: 3}
   m_Name: 
@@ -28619,21 +28618,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &917478561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 917478558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8426c9cc25e138a4d83ef4e29c02da5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axis: 0
-  collidersize: {x: 1, y: 1, z: 1}
-  colliderPrefab: {fileID: 1420764520659534, guid: 7618f738a95e38f4fa69577a03660a66,
-    type: 2}
 --- !u!1 &919019601
 GameObject:
   m_ObjectHideFlags: 0
