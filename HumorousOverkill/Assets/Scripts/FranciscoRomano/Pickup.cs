@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class Pickup : MonoBehaviour
 {
     public int amount;
+    public bool infinite = false;
     public GameEvent type;
     public List<AudioClip> clips = new List<AudioClip>();
     private float previousTime = 0;
@@ -24,6 +25,7 @@ public class Pickup : MonoBehaviour
 
     void Update()
     {
+        if (infinite) return;
         if ((Time.time - previousTime) > 30)
         {
             Destroy(gameObject);
