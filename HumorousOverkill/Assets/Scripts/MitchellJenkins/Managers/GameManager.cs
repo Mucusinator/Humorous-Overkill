@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
 
 // Struct holding all the Game info
@@ -16,7 +14,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     [SerializeField] GameInfo m_gameInfo;
 
-    public SavingData m_data;
+    public scoreManager m_scoreManager;
     public Loading m_loading;
 
     void Awake () {
@@ -26,33 +24,12 @@ public class GameManager : MonoBehaviour {
 
     }
     void Start () {
+
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent._NULL_);
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(UIManager), GameEvent.STATE_MENU);
         Time.timeScale = 0;
-    }
 
-    public void Save () {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/Leaderboard.dat");
-
-        SavingData data = new SavingData();
-        data.name = m_data.name;
-        data.score = m_data.score;
-
-        bf.Serialize(file, data);
-        file.Close();
-    }
-    // Loads in all the data
-    public void Load () {
-        if (File.Exists(Application.persistentDataPath + "/Leaderboard.dat")) {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/Leaderboard.dat", FileMode.Open);
-            SavingData data = (SavingData)bf.Deserialize(file);
-            file.Close();
-
-            m_data.name = data.name;
-            m_data.score = data.score;
-        }
+        SavingSystem.Load();
     }
 
     public void HandleMessage(object s, __eArg<GameEvent> e) {
@@ -69,10 +46,8 @@ public class GameManager : MonoBehaviour {
             Cursor.visible = true;
             Time.timeScale = 0;
 
-            m_data = new SavingData();
-            m_data.score = new List<int>();
-            m_data.score.Add(50);
-            Save();
+            SavingSystem.Add(":NAME:", m_scoreManager.getFinalScore());
+            SavingSystem.Save();
 
             break;
         case GameEvent.STATE_MENU:
@@ -91,10 +66,15 @@ public class GameManager : MonoBehaviour {
             break;
         case GameEvent.STATE_START:
         case GameEvent.STATE_CONTINUE:
-            Time.timeScale = 1;
             if (e.type != GetType()) break;
+            Time.timeScale = 1;
             if (m_loading.IsComplete())
             {
+                GameObject.FindObjectOfType<Player>().enabled = true;
+                GameObject.FindObjectOfType<PlayerCamera>().enabled = true;
+                GameObject.FindObjectOfType<PlayerMovement>().enabled = true;
+                GameObject.FindObjectOfType<CombinedScript>().enabled = true;
+
                 GetComponent<AudioManager>().FadeIn(GetComponent<AudioManager>().musics[0], 1);
                 m_loading.gameObject.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
@@ -124,8 +104,3 @@ public class GameManager : MonoBehaviour {
     }
 }
 
-[System.Serializable]
-public struct SavingData {
-    public List<string> name;
-    public List<int> score;
-}
