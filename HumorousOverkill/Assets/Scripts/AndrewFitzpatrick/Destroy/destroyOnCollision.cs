@@ -5,7 +5,7 @@ using UnityEngine;
 public class destroyOnCollision : MonoBehaviour
 {
     // destroys a gameobject when it collides with anything
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag != "Enemy" && other.gameObject.tag != "Manager")
         {
