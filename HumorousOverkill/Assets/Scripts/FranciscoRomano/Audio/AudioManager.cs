@@ -35,13 +35,7 @@ public class AudioManager : MonoBehaviour
     {
         foreach (AudioClip clip in musicClips)
         {
-            GameObject obj = Instantiate(new GameObject("manager-audio"), transform);
-            AudioSource source = obj.AddComponent<AudioSource>();
-            source.playOnAwake = false;
-            source.clip = clip;
-            source.Stop();
-            
-            sourceTable.Add(clip, source);
+            AddClip(clip, 0);
         }
     }
     void Update()
@@ -53,10 +47,34 @@ public class AudioManager : MonoBehaviour
                 fadeTable[clip].Update();
                 if (fadeTable[clip].IsFadeComplete())
                 {
+                    Debug.Log("removing fade");
                     fadeTable.Remove(clip);
                 }
             }
         }
+        foreach (AudioClip clip in soundClips)
+        {
+            if (fadeTable.ContainsKey(clip))
+            {
+                fadeTable[clip].Update();
+                if (fadeTable[clip].IsFadeComplete())
+                {
+                    Debug.Log("removing fade");
+                    fadeTable.Remove(clip);
+                }
+            }
+        }
+    }
+    void AddClip(AudioClip clip, float volume)
+    {
+        if (sourceTable.ContainsKey(clip)) return;
+        GameObject obj = Instantiate(new GameObject("manager-audio"), transform);
+        AudioSource source = obj.AddComponent<AudioSource>();
+        source.playOnAwake = false;
+        source.volume = volume;
+        source.clip = clip;
+        source.Stop();
+        sourceTable.Add(clip, source);
     }
     void StopClip(AudioClip clip)
     {
@@ -81,52 +99,29 @@ public class AudioManager : MonoBehaviour
     }
     void FadeClip(AudioSource source, AudioClip clip, float speed)
     {
+        Debug.Log(speed < 0 ? "[Fade] adding fadeOut" : "[Fade] adding fadeIn");
         if (!musicClips.Contains(clip) && !soundClips.Contains(clip)) return;
         FadeInformation info = new FadeInformation();
         info.source = source;
         info.speed = speed;
-        if (sourceTable.ContainsKey(clip))
+        if (fadeTable.ContainsKey(clip))
         {
+            Debug.Log("[Fade] resetting clip");
             fadeTable[clip] = info;
         }
         else
         {
+            Debug.Log("[Fade] adding clip");
             fadeTable.Add(clip, info);
         }
     }
-    public void AddMusic(AudioClip clip)
-    {
-        if (!sourceTable.ContainsKey(clip))
-        {
-            GameObject obj = Instantiate(new GameObject("manager-audio"), transform);
-            AudioSource source = obj.AddComponent<AudioSource>();
-            source.playOnAwake = false;
-            source.clip = clip;
-            source.Stop();
-
-            musicClips.Add(clip);
-            sourceTable.Add(clip, source);
-        }
-    }
-    public void AddSound(AudioClip clip)
-    {
-        if (!sourceTable.ContainsKey(clip))
-        {
-            GameObject obj = Instantiate(new GameObject("manager-audio"), transform);
-            AudioSource source = obj.AddComponent<AudioSource>();
-            source.playOnAwake = false;
-            source.clip = clip;
-            source.Stop();
-
-            soundClips.Add(clip);
-            sourceTable.Add(clip, source);
-        }
-    }
+    public void AddMusic(AudioClip clip) { if (!musicClips.Contains(clip)) { AddClip(clip, 0); musicClips.Add(clip); } }
+    public void AddSound(AudioClip clip) { if (!soundClips.Contains(clip)) { AddClip(clip, 1); soundClips.Add(clip); } }
     public void StopMusic(int index) { StopClip(musicClips[index]); }
     public void StopSound(int index) { try { StopClip(soundClips[index]); } catch { } }
     public void StopMusic(AudioClip clip) { StopClip(clip); }
     public void StopSound(AudioClip clip) { StopClip(clip); }
-    public void PlayMusic(int index, bool repeat) { PlayClip(soundClips[index], repeat); }
+    public void PlayMusic(int index, bool repeat) { PlayClip(musicClips[index], repeat); }
     public void PlaySound(int index, bool repeat) { PlayClip(soundClips[index], repeat); }
     public void PlayMusic(AudioClip clip, bool repeat) { PlayClip(clip, repeat); }
     public void PlaySound(AudioClip clip, bool repeat) { PlayClip(clip, repeat); }
