@@ -6802,8 +6802,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5792162098a9fd445b1598600d2a50e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 0
-  type: 0
   spawner: {fileID: 1600833588}
 --- !u!54 &221564142
 Rigidbody:
