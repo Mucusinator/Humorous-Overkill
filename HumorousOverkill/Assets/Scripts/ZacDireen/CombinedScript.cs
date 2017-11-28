@@ -157,6 +157,9 @@ public class CombinedScript : MonoBehaviour
 
     void Awake() {
         EventManager<GameEvent>.Add(HandleMessage);
+        m_audioManager = FindObjectOfType<AudioManager>();
+        m_audioManager.AddSound(LazerSound);
+        m_audioManager.AddSound(shotgunSound);
     }
 
 
@@ -565,7 +568,7 @@ public class CombinedScript : MonoBehaviour
         
         Transform startingRaycastPoint = EndOfGun.transform;
 
-        Ray ray = new Ray(EndOfGun.transform.position, EndOfGun.transform.forward);
+        Ray ray = new Ray(startingRaycastPoint.position, startingRaycastPoint.forward);
 
 
         //remove a round of ammunition 
