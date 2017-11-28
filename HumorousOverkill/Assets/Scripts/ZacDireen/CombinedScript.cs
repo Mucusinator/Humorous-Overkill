@@ -67,7 +67,7 @@ public class CombinedScript : MonoBehaviour
     // Shared/Unique variables. variables
 
     // This boolean tests if you are already reloading or not.
-    public bool isReloading;
+    public bool isReloadingRifle, isReloadingShotgun;
     // This animatior is resonsible for the reloading mechanic of the weapons.
     public Animator animator;
     public AudioClip LazerSound;
@@ -137,6 +137,7 @@ public class CombinedScript : MonoBehaviour
         public int ReflectAmount;
 
     }
+
 
     [SerializeField]
     public BachelorStuff stuff;
@@ -236,7 +237,7 @@ public class CombinedScript : MonoBehaviour
 
 
 
-        if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE && !isReloading)
+        if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE && !isReloadingRifle)
         {
             animator.SetBool("IsFiring", true);
             shootRifle();
@@ -286,7 +287,7 @@ public class CombinedScript : MonoBehaviour
         if (currentShotgunAmmo <= 0)
         {
 
-            if (ReloadTimer(reloadShotgunTime))
+            if (ReloadTimerShotgun(reloadShotgunTime))
             {
                 if (maxShotgunAmmo < magTubeSize)
                 {
@@ -311,7 +312,7 @@ public class CombinedScript : MonoBehaviour
             glitchRifleEffect = false;
         }
 
-        if (isReloading)
+        if (isReloadingRifle)
         {
 
             glitchRifleEffect = false;
@@ -323,7 +324,7 @@ public class CombinedScript : MonoBehaviour
         {
             gunType = GunType.RIFLE;
 
-            if (ReloadTimer(reloadRifleTime))
+            if (ReloadTimerRifle(reloadRifleTime))
             {
                 if (maxRifleAmmo < rifleMagSize)
                 {
@@ -363,7 +364,7 @@ public class CombinedScript : MonoBehaviour
 
     void shootShotgun()
     {
-        if (currentShotgunAmmo > 0)
+        if (currentShotgunAmmo > 0 )
         {
             if (currentState == GameEvent.STATE_START || currentState == GameEvent.STATE_CONTINUE)
             {
@@ -484,7 +485,7 @@ public class CombinedScript : MonoBehaviour
     /// </summary>
     /// <param name="time"> used to keep track of time.</param>
     /// <returns>void</returns>
-    bool ReloadTimer(float time)
+    bool ReloadTimerShotgun(float time)
     {
         if (m_timer <= 0)
         {
@@ -493,18 +494,46 @@ public class CombinedScript : MonoBehaviour
 
         if (m_timer > 0)
         {
-            isReloading = true;
+            isReloadingShotgun = true;
             m_timer -= Time.deltaTime;
 
             if (m_timer <= 0)
             {
-                isReloading = false;
+                isReloadingShotgun = false;
                 return true;
             }
         }
         else
         {
-            isReloading = false;
+            isReloadingShotgun = false;
+            return true;
+        }
+        return false;
+
+    }
+
+
+    bool ReloadTimerRifle(float time)
+    {
+        if (m_timer <= 0)
+        {
+            m_timer = time;
+        }
+
+        if (m_timer > 0)
+        {
+            isReloadingRifle = true;
+            m_timer -= Time.deltaTime;
+
+            if (m_timer <= 0)
+            {
+                isReloadingRifle = false;
+                return true;
+            }
+        }
+        else
+        {
+            isReloadingRifle = false;
             return true;
         }
         return false;
@@ -512,7 +541,7 @@ public class CombinedScript : MonoBehaviour
     }
     void Glitching()
     {
-        if (glitchRifleEffect == true && !isReloading && gunType == GunType.RIFLE)
+        if (glitchRifleEffect == true && !isReloadingRifle && gunType == GunType.RIFLE)
         {
 
             fpsCam.GetComponent<GlitchPostRender>().offset += 0.003f * Time.deltaTime;
@@ -550,24 +579,7 @@ public class CombinedScript : MonoBehaviour
     }
 
 
-    private IEnumerator Shot()
-    {
-        var shotDelay = 0.5f;
-        if (gunType == GunType.RIFLE)
-        {
-            //shotDelay = 0;
-            //shotTrail.enabled = true;
-            yield return shotDelay;
-            //shotTrail.enabled = false;
-        }
-        if (gunType == GunType.SHOTGUN)
-        {
-            //shotDelay = 0;
-            //shotTrail.enabled = true;
-            yield return shotDelay;
-            //shotTrail.enabled = false;
-        }
-    }
+
 
 
     void ShootReflect()
@@ -876,11 +888,7 @@ public class CombinedScript : MonoBehaviour
             }
         }
     }
-    void OnEnable()
-    {
-        isReloading = false;
-        //animator.SetBool("Reloading", false);
-    }
+  
 
 
    
