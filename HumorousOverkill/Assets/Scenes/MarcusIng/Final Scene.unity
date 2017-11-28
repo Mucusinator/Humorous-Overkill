@@ -42262,6 +42262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5792162098a9fd445b1598600d2a50e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clip: {fileID: 0}
   spawner: {fileID: 1724611378}
 --- !u!54 &1234974567
 Rigidbody:
@@ -44867,6 +44868,16 @@ Prefab:
     - target: {fileID: 4670634694982798, guid: 2736c0b4c328346479805e25a4721737, type: 2}
       propertyPath: m_LocalRotation.w
       value: 0.58661085
+      objectReference: {fileID: 0}
+    - target: {fileID: 114742998846885310, guid: 2736c0b4c328346479805e25a4721737,
+        type: 2}
+      propertyPath: maxRifleAmmo
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114742998846885310, guid: 2736c0b4c328346479805e25a4721737,
+        type: 2}
+      propertyPath: currentRifleAmmo
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2736c0b4c328346479805e25a4721737, type: 2}
@@ -70655,6 +70666,111 @@ Prefab:
     - target: {fileID: 1718538513202678, guid: 30403f8d89b92a24e96897519077ab83, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: EasyMode.playerHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: HardMode.playerHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: NightmareMode.playerHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: EasyMode.spawnMultiplier
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: EasyMode.PickupMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: EasyMode.DonutHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: EasyMode.DroneHealth
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: HardMode.DonutHealth
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: HardMode.DroneHealth
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: NightmareMode.DonutHealth
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: NightmareMode.DroneHealth
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: HardMode.spawnMultiplier
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: NightmareMode.spawnMultiplier
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: HardMode.PickupMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: NightmareMode.PickupMultiplier
+      value: 0.38591
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: EasyMode.PelletDamage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: HardMode.PelletDamage
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: NightmareMode.PelletDamage
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: HardMode.RifleDamage
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: NightmareMode.RifleDamage
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566025060350062, guid: 30403f8d89b92a24e96897519077ab83,
+        type: 2}
+      propertyPath: EasyMode.RifleDamage
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30403f8d89b92a24e96897519077ab83, type: 2}
