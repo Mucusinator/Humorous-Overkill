@@ -20,7 +20,7 @@ public class DifficultyManager : MonoBehaviour
         public int DonutHealth;
         public int DroneHealth;
         public float spawnMultiplier;
-        public int PickupMultiplier;
+        public float PickupMultiplier;
     }
     [SerializeField]
     DifficultySettings EasyMode;

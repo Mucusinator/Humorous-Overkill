@@ -169,7 +169,10 @@ public class DonutAI : MonoBehaviour
         {
             if (rollHitInfo.collider.gameObject.tag == "Avoid" || rollHitInfo.collider.gameObject.tag == "Enemy")
             {
-                currentTarget += rollHitInfo.normal * myInfo.avoidRadius;
+                if (Time.timeScale != 0)
+                {
+                    currentTarget += rollHitInfo.normal * myInfo.avoidRadius;
+                }
             }
         }
 

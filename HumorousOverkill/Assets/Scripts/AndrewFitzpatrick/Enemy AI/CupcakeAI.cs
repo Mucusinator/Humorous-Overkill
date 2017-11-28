@@ -63,8 +63,6 @@ public class CupcakeAI : MonoBehaviour
             Debug.Log("Cupcake could not find an EnemyManager");
         }
 
-        startHealth = myInfo.health;
-
         pickTarget();
 
         pickupSpawnLayerMask = LayerMask.GetMask("Player", "Enemy");
@@ -99,7 +97,10 @@ public class CupcakeAI : MonoBehaviour
         {
             if (wanderHitInfo.collider.gameObject.tag == "Avoid" || wanderHitInfo.collider.gameObject.tag == "Enemy")
             {
-                currentTarget += wanderHitInfo.normal;
+                if(Time.timeScale != 0)
+                {
+                    currentTarget += wanderHitInfo.normal;
+                }
             }
         }
 
