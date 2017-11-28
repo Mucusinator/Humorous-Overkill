@@ -53,7 +53,7 @@ public class DifficultyManager : MonoBehaviour
 
                 //enemyManager.defaultDonutInfo.pickupDropRate = 0.3f;
                 //enemyManager.defaultDroneInfo.pickupDropRate = 0.3f;
-                //EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
+                EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 break;
             case GameEvent.DIFFICULTY_HARD:
                 playerManager.m_playerInfo.m_playerHealth = 75;
