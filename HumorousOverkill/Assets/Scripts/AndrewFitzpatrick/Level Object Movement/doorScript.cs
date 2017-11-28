@@ -5,10 +5,12 @@ using UnityEngine;
 // opens and closes doors
 public class doorScript : MonoBehaviour
 {
-    public GameObject openPoint;
-    public EnemySpawner attachedWave;
+    public float openHeight;
     private Vector3[] points = new Vector3[2];
-    bool open = false;
+
+    // door can only open once
+    private bool canOpen = true;
+    public bool open = false;
 
     private float currentFactor = 0.0f;
 
@@ -19,7 +21,7 @@ public class doorScript : MonoBehaviour
     {
         // setup points
         points[0] = transform.position;
-        points[1] = openPoint.transform.position;
+        points[1] = transform.position + Vector3.up * openHeight;
     }
 
     void Update()
@@ -38,48 +40,17 @@ public class doorScript : MonoBehaviour
         transform.position = Vector3.Lerp(points[0], points[1], currentFactor);
     }
 
-	void OnTriggerEnter(Collider other)
+    public void openDoor()
     {
-        // when the player enters the door trigger
-        if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player>() != null)
+        if(canOpen)
         {
-            // player is at the entrance
-            if(entrance == Vector3.zero)
-            {
-                entrance = other.gameObject.transform.position;
-            }
-            Debug.Log("player has entered the door");
-
-            // the wave is finished so open
-            if(attachedWave != null)
-            {
-                if (attachedWave.IsGroupComplete())
-                {
-                    // the wave is complete
-                    if ((other.gameObject.transform.position - entrance).magnitude < 1.0f)
-                    {
-                        // player is entering the entrance
-                        open = true;
-                    }
-                }
-            }
-            else
-            {
-                open = true;
-            }
+            open = true;
         }
     }
 
-    void OnTriggerExit(Collider other)
+    public void closeDoor()
     {
-        // when the player exits the door trigger
-        if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player>() != null)
-        {
-            if((other.gameObject.transform.position - entrance).magnitude > 1.0f)
-            {
-                // player exited
-                open = false;
-            }
-        }
+        open = false;
+        canOpen = false;
     }
 }
