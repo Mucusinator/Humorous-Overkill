@@ -1493,7 +1493,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1031186524167282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 107.52431, y: 12.726274, z: 22.866135}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4711188393925026}
@@ -5548,9 +5548,9 @@ MonoBehaviour:
   showMovementGizmos: 1
   showAttackGizmos: 1
   freeze: 0
-  confetti: {fileID: 1065315539927964, guid: 673fb61783aaa04459f3a61188a5db72, type: 2}
+  confetti: {fileID: 1065315539927964, guid: 715bb1122c3fead499176d207b1676c6, type: 2}
   pickupPrefabs:
   - {fileID: 1047466508615190, guid: 7f265e36d39fec84da1f38d7aacf4c14, type: 2}
   - {fileID: 1680843322557176, guid: cbd1a3b2321aa5d44bf126afb8a98351, type: 2}
-  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashColor: {r: 0.9338235, g: 0.020599067, b: 0.020599067, a: 0}
   flashSpeed: 3

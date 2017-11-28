@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
     void Start () {
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent._NULL_);
         EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(UIManager), GameEvent.STATE_MENU);
+        Time.timeScale = 0;
     }
 
     public void Save () {
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour {
         case GameEvent.STATE_LOSE_SCREEN:
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            EventManager<GameEvent>.InvokeGameState(this, null, null, null, e.arg);
             Time.timeScale = 0;
             break;
         case GameEvent.STATE_WIN_SCREEN:
