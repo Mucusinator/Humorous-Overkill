@@ -47358,7 +47358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5792162098a9fd445b1598600d2a50e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: c121698f6d06fe843a5635d6cf304089, type: 3}
   spawner: {fileID: 1724611378}
 --- !u!54 &1234974567
 Rigidbody:
@@ -80785,21 +80784,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114997741057925728, guid: 30403f8d89b92a24e96897519077ab83,
-        type: 2}
-      propertyPath: audioManager
-      value: 
-      objectReference: {fileID: 889218444}
-    - target: {fileID: 114997741057925728, guid: 30403f8d89b92a24e96897519077ab83,
-        type: 2}
-      propertyPath: playerCamera
-      value: 
-      objectReference: {fileID: 1811505487}
-    - target: {fileID: 114997741057925728, guid: 30403f8d89b92a24e96897519077ab83,
-        type: 2}
-      propertyPath: playerMovement
-      value: 
-      objectReference: {fileID: 1665072365}
     - target: {fileID: 114620776584275070, guid: 30403f8d89b92a24e96897519077ab83,
         type: 2}
       propertyPath: weaponScript
@@ -80849,8 +80833,6 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-=======
     - target: {fileID: 224842868954164590, guid: 30403f8d89b92a24e96897519077ab83,
         type: 2}
       propertyPath: m_AnchorMin.y
@@ -80910,7 +80892,6 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
->>>>>>> 85ba67f44f3d785be95a8c556ee1672b915528b7
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30403f8d89b92a24e96897519077ab83, type: 2}
   m_IsPrefabParent: 0
