@@ -5,21 +5,29 @@ using UnityEngine;
 // opens and closes doors
 public class doorScript : MonoBehaviour
 {
-    public GameObject openPoint;
-    public EnemySpawner attachedWave;
+    [Tooltip("how far up to move when opening")]
+    public float openHeight;
+
+    [Tooltip("time in seconds that it takes for the door to open / close")]
+    public float openCloseTime = 1.0f;
+
+    // points to move between
     private Vector3[] points = new Vector3[2];
-    bool open = false;
 
+    [Tooltip("When the door has closed this many times it will never open again")]
+    public int closeCount = 1;
+
+    // whether the door is open
+    public bool open = false;
+
+    // current close factor
     private float currentFactor = 0.0f;
-
-    // which side is the entrance
-    Vector3 entrance = Vector3.zero;
 
     void Start()
     {
         // setup points
         points[0] = transform.position;
-        points[1] = openPoint.transform.position;
+        points[1] = transform.position + Vector3.up * openHeight;
     }
 
     void Update()
@@ -27,59 +35,28 @@ public class doorScript : MonoBehaviour
         // update factor
         if (open)
         {
-            currentFactor = Mathf.Min(currentFactor + Time.deltaTime, 1.0f);
+            currentFactor = Mathf.Min(currentFactor + Time.deltaTime / openCloseTime, 1.0f);
         }
         else
         {
-            currentFactor = Mathf.Max(currentFactor - Time.deltaTime, 0.0f);
+            currentFactor = Mathf.Max(currentFactor - Time.deltaTime / openCloseTime, 0.0f);
         }
 
         // update position
         transform.position = Vector3.Lerp(points[0], points[1], currentFactor);
     }
 
-	void OnTriggerEnter(Collider other)
+    public void openDoor()
     {
-        // when the player enters the door trigger
-        if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player>() != null)
+        if(closeCount > 0)
         {
-            // player is at the entrance
-            if(entrance == Vector3.zero)
-            {
-                entrance = other.gameObject.transform.position;
-            }
-            Debug.Log("player has entered the door");
-
-            // the wave is finished so open
-            if(attachedWave != null)
-            {
-                if (attachedWave.IsGroupComplete())
-                {
-                    // the wave is complete
-                    if ((other.gameObject.transform.position - entrance).magnitude < 1.0f)
-                    {
-                        // player is entering the entrance
-                        open = true;
-                    }
-                }
-            }
-            else
-            {
-                open = true;
-            }
+            open = true;
         }
     }
 
-    void OnTriggerExit(Collider other)
+    public void closeDoor()
     {
-        // when the player exits the door trigger
-        if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player>() != null)
-        {
-            if((other.gameObject.transform.position - entrance).magnitude > 1.0f)
-            {
-                // player exited
-                open = false;
-            }
-        }
+        open = false;
+        closeCount--;
     }
 }

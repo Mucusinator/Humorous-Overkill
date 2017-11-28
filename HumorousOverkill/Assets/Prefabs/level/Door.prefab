@@ -11,21 +11,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1743317835965474}
   m_IsPrefabParent: 1
---- !u!1 &1196950959747204
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4224407102066574}
-  m_Layer: 0
-  m_Name: door_openpoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1743317835965474
 GameObject:
   m_ObjectHideFlags: 0
@@ -37,7 +22,6 @@ GameObject:
   - component: {fileID: 33034692341548544}
   - component: {fileID: 23884746969481876}
   - component: {fileID: 65586512683352466}
-  - component: {fileID: 65990310596763096}
   - component: {fileID: 114110369694790878}
   m_Layer: 0
   m_Name: Door
@@ -46,19 +30,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4224407102066574
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1196950959747204}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.5, z: 0}
-  m_LocalScale: {x: 0.6666667, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4339467679790244}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4339467679790244
 Transform:
   m_ObjectHideFlags: 1
@@ -68,8 +39,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4224407102066574}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -122,20 +92,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.9999998, y: 7.3653493, z: 0.23554778}
+  m_Size: {x: 4, y: 7.3653493, z: 0.23554778}
   m_Center: {x: 0, y: 3.6778424, z: 0}
---- !u!65 &65990310596763096
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1743317835965474}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 15, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114110369694790878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,5 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfb7e1c00cd676741ba9c99d14c686d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openPoint: {fileID: 1196950959747204}
-  attachedWave: {fileID: 0}
+  openHeight: 7.5
+  closeCount: 1
+  open: 1

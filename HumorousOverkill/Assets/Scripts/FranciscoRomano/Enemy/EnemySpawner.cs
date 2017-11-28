@@ -34,7 +34,18 @@ public class EnemySpawner : EventHandle
         {
             active = true;
             stage.Next();
-            foreach (GameObject door in doors) door.SetActive(true);
+            foreach (GameObject door in doors)
+            {
+                // make sure door script is not null
+                if (door.GetComponent<doorScript>() != null)
+                {
+                    door.GetComponent<doorScript>().closeDoor();
+                }
+                else
+                {
+                    Debug.Log("door did not have doorScript attached");
+                }
+            }
         }
     }
     public void SpawnerCreate()
@@ -47,7 +58,18 @@ public class EnemySpawner : EventHandle
     }
     public void SpawnerFinish()
     {
-        foreach (GameObject door in doors) door.SetActive(false);
+        foreach (GameObject door in doors)
+        {
+            // make sure door script is not null
+            if (door.GetComponent<doorScript>() != null)
+            {
+                door.GetComponent<doorScript>().openDoor();
+            }
+            else
+            {
+                Debug.Log("door did not have doorScript attached");
+            }
+        }
     }
     public void SpawnerRemove()
     {
