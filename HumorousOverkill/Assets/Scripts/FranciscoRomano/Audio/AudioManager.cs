@@ -111,6 +111,8 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayMusic(int index, bool repeat) { PlayClip(soundClips[index], repeat); }
     public void PlaySound(int index, bool repeat) { PlayClip(soundClips[index], repeat); }
+    public void PlayMusic(AudioClip clip, bool repeat) { PlayClip(clip, repeat); }
+    public void PlaySound(AudioClip clip, bool repeat) { PlayClip(clip, repeat); }
     public void FadeInMusic(int index, float speed) { FadeInMusic(musicClips[index], speed); }
     public void FadeInMusic(AudioClip clip, float speed) { FadeClip(sourceTable[clip], clip, speed); }
     public void FadeOutMusic(int index, float speed) { FadeInMusic(musicClips[index], speed); }
