@@ -65,7 +65,6 @@ public class Loading : MonoBehaviour
         source.Stop();
         source.clip = clip;
         source.loop = false;
-        source.playOnAwake = false;
         source.Play();
         running = true;
         complete = false;

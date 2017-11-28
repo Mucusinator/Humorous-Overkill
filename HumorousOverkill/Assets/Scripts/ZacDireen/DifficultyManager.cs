@@ -26,7 +26,7 @@ public class DifficultyManager : MonoBehaviour
     {
         // if this event is being sent to itself, just skip it
         if (sender == (object)this) return;
-        Debug.Log(e.arg.ToString());
+        //Debug.Log(e.arg.ToString());
         switch (e.arg)
         {
             case GameEvent.DIFFICULTY_EASY:
