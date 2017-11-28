@@ -2738,6 +2738,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 82019364}
   m_Mesh: {fileID: 4300000, guid: fb7177fbc778a90449f48a36b2df8cb4, type: 3}
+--- !u!114 &85333784 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114274094993518776, guid: 30403f8d89b92a24e96897519077ab83,
+    type: 2}
+  m_PrefabInternal: {fileID: 816475113}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &86026445
 GameObject:
   m_ObjectHideFlags: 0
@@ -4743,6 +4749,10 @@ Prefab:
       propertyPath: attachedWave
       value: 
       objectReference: {fileID: 1750439763}
+    - target: {fileID: 1743317835965474, guid: 3414656a646917e479edd37ed41b0eb8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3414656a646917e479edd37ed41b0eb8, type: 2}
   m_IsPrefabParent: 0
@@ -20227,7 +20237,7 @@ MonoBehaviour:
   fadeOutSpeed: 1
   sprites:
   - {fileID: 21300000, guid: e73d395236eed4349b6e2f93731f2d7d, type: 3}
-  source: {fileID: 0}
+  source: {fileID: 85333784}
 --- !u!65 &633313384
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25152,7 +25162,7 @@ MonoBehaviour:
   fadeOutSpeed: 1
   sprites:
   - {fileID: 21300000, guid: cc0d6709c47b272479207e6fe395a2c2, type: 3}
-  source: {fileID: 0}
+  source: {fileID: 85333784}
 --- !u!65 &817963809
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27254,6 +27264,18 @@ Prefab:
     - target: {fileID: 100000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2616236ad771fed43a76e228306137e9, type: 2}
+    - target: {fileID: 100000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
@@ -32552,6 +32574,10 @@ Prefab:
       propertyPath: attachedWave
       value: 
       objectReference: {fileID: 1842159544}
+    - target: {fileID: 1743317835965474, guid: 3414656a646917e479edd37ed41b0eb8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3414656a646917e479edd37ed41b0eb8, type: 2}
   m_IsPrefabParent: 0
@@ -33466,7 +33492,7 @@ MonoBehaviour:
   fadeOutSpeed: 1
   sprites:
   - {fileID: 21300000, guid: f1f832b4763d3e743882e10994940521, type: 3}
-  source: {fileID: 0}
+  source: {fileID: 85333784}
 --- !u!65 &1068550155
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -46028,6 +46054,18 @@ Prefab:
     - target: {fileID: 100000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2616236ad771fed43a76e228306137e9, type: 2}
+    - target: {fileID: 100000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 350a1dd02a0cdb84a945694273166c2a, type: 3}
@@ -58981,7 +59019,7 @@ MonoBehaviour:
   fadeOutSpeed: 1
   sprites:
   - {fileID: 21300000, guid: 73f201b09521b0a419b3d3157db4a040, type: 3}
-  source: {fileID: 0}
+  source: {fileID: 85333784}
 --- !u!65 &1762273038
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -68916,6 +68954,10 @@ Prefab:
       propertyPath: attachedWave
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1743317835965474, guid: 3414656a646917e479edd37ed41b0eb8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3414656a646917e479edd37ed41b0eb8, type: 2}
   m_IsPrefabParent: 0
@@ -70359,6 +70401,18 @@ Prefab:
     - target: {fileID: 100000, guid: 425e9f55981539e4ebecbe6913fc83b0, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 425e9f55981539e4ebecbe6913fc83b0, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 425e9f55981539e4ebecbe6913fc83b0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2616236ad771fed43a76e228306137e9, type: 2}
+    - target: {fileID: 100000, guid: 425e9f55981539e4ebecbe6913fc83b0, type: 3}
+      propertyPath: m_TagString
+      value: Avoid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 425e9f55981539e4ebecbe6913fc83b0, type: 3}
