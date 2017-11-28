@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private CharacterController m_cc;
     private PlayerCamera m_camera;
-    [SerializeField] private PlayerInfo m_ply;
+    [HideInInspector] public PlayerInfo m_ply;
     private Transform m_transform;
     private Animator m_animator;
     
