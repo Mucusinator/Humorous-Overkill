@@ -22,7 +22,18 @@ public class levelSelect : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-
+            player.transform.position = new Vector3(47.0f, 7.8f, 28.9f);
+            player.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-	}
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            player.transform.position = new Vector3(40.0f, 1.0f, 41.6f);
+            player.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            player.transform.position = new Vector3(16.2f, 22.3f, 59.8f);
+            player.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
 }
