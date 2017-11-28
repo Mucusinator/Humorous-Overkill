@@ -48,7 +48,7 @@ public class AudioManager : MonoBehaviour
     {
         foreach (AudioClip clip in musicClips)
         {
-            if (sourceTable.ContainsKey(clip))
+            if (fadeTable.ContainsKey(clip))
             {
                 fadeTable[clip].Update();
                 if (fadeTable[clip].IsFadeComplete())
