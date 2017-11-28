@@ -11,6 +11,7 @@ public class DifficultyManager : MonoBehaviour
     public bool NoSpawnPoints;
     private List<FranciscoRomano.Spawn.Stage> copyStages = new List<FranciscoRomano.Spawn.Stage>();
 
+    [System.Serializable]
     public struct DifficultySettings
     {
         public int playerHealth;
@@ -21,9 +22,11 @@ public class DifficultyManager : MonoBehaviour
         public float spawnMultiplier;
         public int PickupMultiplier;
     }
-
+    [SerializeField]
     DifficultySettings EasyMode;
+    [SerializeField]
     DifficultySettings HardMode;
+    [SerializeField]
     DifficultySettings NightmareMode;
 
 
