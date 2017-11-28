@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
         foreach (AudioClip clip in musicClips)
         {
             GameObject obj = Instantiate(new GameObject("manager-audio"), transform);
-            AudioSource source = new AudioSource();
+            AudioSource source = obj.AddComponent<AudioSource>();
             source.playOnAwake = false;
             source.clip = clip;
             source.Stop();
@@ -99,7 +99,7 @@ public class AudioManager : MonoBehaviour
         if (!sourceTable.ContainsKey(clip))
         {
             GameObject obj = Instantiate(new GameObject("manager-audio"), transform);
-            AudioSource source = new AudioSource();
+            AudioSource source = obj.AddComponent<AudioSource>();
             source.playOnAwake = false;
             source.clip = clip;
             source.Stop();
@@ -113,7 +113,7 @@ public class AudioManager : MonoBehaviour
         if (!sourceTable.ContainsKey(clip))
         {
             GameObject obj = Instantiate(new GameObject("manager-audio"), transform);
-            AudioSource source = new AudioSource();
+            AudioSource source = obj.AddComponent<AudioSource>();
             source.playOnAwake = false;
             source.clip = clip;
             source.Stop();
