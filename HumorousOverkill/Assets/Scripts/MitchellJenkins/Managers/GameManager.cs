@@ -48,8 +48,8 @@ public class GameManager : MonoBehaviour {
             Cursor.visible = true;
             Time.timeScale = 0;
 
-            SavingSystem.Add(":NAME:", m_scoreManager.getFinalScore());
-            SavingSystem.Save();
+            //SavingSystem.Add(":NAME:", m_scoreManager.getFinalScore());
+            //SavingSystem.Save();
 
             break;
         case GameEvent.STATE_MENU:
