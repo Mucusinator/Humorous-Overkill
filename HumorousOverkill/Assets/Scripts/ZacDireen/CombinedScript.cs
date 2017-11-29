@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using EventHandler;
 
-//[BindListener("Enemy", typeof(EnemyManager))]
-//[BindListener("Player", typeof(PlayerManager))]
-//[BindListener("UI", typeof(UIManager))]
+
 public class CombinedScript : MonoBehaviour
 {
 
@@ -69,10 +67,18 @@ public class CombinedScript : MonoBehaviour
 
     // Shared/Unique variables. variables
 
-    // This boolean tests if you are already reloading or not.
+    /// <summary>
+    /// These booleans are responsible for checking if you are reloading your rifle or shotgun currently.
+    /// </summary>
     public bool isReloadingRifle, isReloadingShotgun;
-    // This animatior is resonsible for the reloading mechanic of the weapons.
+
+    /// <summary>
+    /// This animatior is resonsible for the reloading mechanic of the weapons.
+    /// </summary>
     public Animator animator;
+    /// <summary>
+    /// These two audio clips are the sounds when you fire the Rifle or shotgun.
+    /// </summary>
     public AudioClip LazerSound;
     public AudioClip shotgunSound;
     //Audio manager
@@ -95,8 +101,6 @@ public class CombinedScript : MonoBehaviour
     /// This is where the start of the weapon raycast is held.
     /// </summary>
     public GameObject WeaponRaycast;
-    // This is the UI text element for the UI.
-    //public Text Ammo;
     /// <summary>
     ///  this is the end of the gun shown as a game object.
     /// </summary>
@@ -112,23 +116,40 @@ public class CombinedScript : MonoBehaviour
     public AudioClip enemyDeathSound;
 
 
-
+    /// <summary>
+    /// Set the current game state to be null by default.
+    /// </summary>
     public GameEvent currentState = GameEvent._NULL_;
 
-    // This boolean is for the rifle, to show if it is active or not.
-    // public bool isRifleSelected;
 
-    // This boolean is for if the user has access to the rifle.
 
+   
+    /// <summary>
+    /// This boolean is used to toggle the glitch rifle effect.
+    /// </summary>
     public bool glitchRifleEffect;
 
+    /// <summary>
+    /// This is the timer used to help in calculating reload timers.
+    /// </summary>
+    float m_timer = 0;
+    
 
-    public float m_timer = 0;
-    // THIS IS BACHELOR STUFF 
 
-    // Indirection is the reflection vector.
+
+    /// <summary>
+    /// BELOW IS BACHELOR STUFF, THIS STUFF IS TO BE DISABLED FOR THE ADVANCED DIPLOMA VERSION OF THE GAME.
+    /// </summary>
+    
+    /// <summary>
+    ///  Indirection is the reflection vector, this is used for reflection of lazers.
+    ///</summary>
     Vector3 inDirection;
 
+
+    /// <summary>
+    /// This struct contains all the values that I use for bachelor items.
+    /// </summary>
     [System.Serializable]
     public struct BachelorStuff
     {
@@ -136,10 +157,7 @@ public class CombinedScript : MonoBehaviour
         public bool ReflectiveShots;
         // A int for a percentage of damage that the reflective shots will have.
         public int ReflectMultiplier;
-        // Testing the damage of the reflective shots.
-        public Text enemyHealth;
-
-        public bool showEnemyHealth;
+     
 
         public bool showStatistics;
 
@@ -600,10 +618,10 @@ public class CombinedScript : MonoBehaviour
 
     void ShootReflect()
     {
-        int nPoints = stuff.ReflectAmount;
-        
+       //This is the starting point of the raycast for the reflective shots. 
         Transform startingRaycastPoint = EndOfGun.transform;
 
+        // this is the starting ray for the raycast.
         Ray ray = new Ray(startingRaycastPoint.position, startingRaycastPoint.forward);
 
 
