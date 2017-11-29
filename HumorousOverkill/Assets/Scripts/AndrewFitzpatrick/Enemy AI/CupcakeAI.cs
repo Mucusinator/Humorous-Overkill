@@ -198,7 +198,7 @@ public class CupcakeAI : MonoBehaviour
             // play sound effect
             if(audioSource != null && audioSettings.shootSound != null)
             {
-                audioSource.PlayOneShot(audioSettings.shootSound, audioSettings.shootSoundVolume);
+                audioSource.PlayOneShot(audioSettings.shootSound, audioSettings.shootSoundVolume * audioSource.volume);
             }
         }
     }
@@ -246,14 +246,14 @@ public class CupcakeAI : MonoBehaviour
         // play sound effect(s)
         if(audioSource != null && audioSettings.deathSound != null)
         {
-            audioSource.PlayOneShot(audioSettings.deathSound, audioSettings.deathSoundVolume);
+            audioSource.PlayOneShot(audioSettings.deathSound, audioSettings.deathSoundVolume * audioSource.volume);
 
             // there must be at least one random sound
             if(audioSettings.randomDeathSoundChance > 0 && audioSettings.randomDeathSounds.Count > 0)
             {
                 if (Random.Range(0, 100) / 100.0f < audioSettings.randomDeathSoundChance)
                 {
-                    audioSource.PlayOneShot(audioSettings.randomDeathSounds[Random.Range(0, audioSettings.randomDeathSounds.Count)], audioSettings.randomDeathSoundsVolume);
+                    audioSource.PlayOneShot(audioSettings.randomDeathSounds[Random.Range(0, audioSettings.randomDeathSounds.Count)], audioSettings.randomDeathSoundsVolume * audioSource.volume);
                 }
             }
         }

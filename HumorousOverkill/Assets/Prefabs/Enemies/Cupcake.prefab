@@ -2843,12 +2843,15 @@ MonoBehaviour:
   - {fileID: 1047466508615190, guid: 7f265e36d39fec84da1f38d7aacf4c14, type: 2}
   audioSettings:
     deathSound: {fileID: 8300000, guid: 76c0db6fefd7b634bb02dc79cb0433de, type: 3}
+    deathSoundVolume: 1
     randomDeathSoundChance: 0.75
     randomDeathSounds:
     - {fileID: 8300000, guid: c1d6add35c794604a8c2aac80b93a8d3, type: 3}
     - {fileID: 8300000, guid: ddefdcfbbc613a04597b1d8fd51fdba2, type: 3}
     - {fileID: 8300000, guid: 86a8a4fa69320604ea7afb6bac570226, type: 3}
+    randomDeathSoundsVolume: 1
     shootSound: {fileID: 8300000, guid: 02bb1c7c3be661f41b72e2e6f2841d13, type: 3}
+    shootSoundVolume: 1
 --- !u!198 &198527054021264090
 ParticleSystem:
   m_ObjectHideFlags: 1
