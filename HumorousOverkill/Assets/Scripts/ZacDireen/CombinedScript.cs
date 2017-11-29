@@ -37,6 +37,9 @@ public class CombinedScript : MonoBehaviour
     private float nextTimeToFire = 0f;
 
 
+
+
+
     // Shotgun Variables.
 
     // This is the shotgun's damage per pellet.
@@ -74,13 +77,23 @@ public class CombinedScript : MonoBehaviour
     public AudioClip shotgunSound;
     //Audio manager
     private AudioManager m_audioManager;
-    // This is a public int of the currently selected weapon.
+    /// <summary>
+    /// This is a public int of the currently selected weapon.
+    /// </summary>
+     
     public int SelectedWeapon = 0;
-    // This is the two different weapon types.
+    /// <summary>
+    /// This will store the two different weapon types.
+    /// </summary>
     public GunType gunType;
-    // This is where the player raycast of the camera will begin from.
+   
+    /// <summary>
+    ///  This is where the player raycast of the camera will begin from.
+    /// </summary>
     public GameObject StartOfPlayerRaycast;
-    // Weapon Raycast.
+    /// <summary>
+    /// This is where the start of the weapon raycast is held.
+    /// </summary>
     public GameObject WeaponRaycast;
     // This is the UI text element for the UI.
     //public Text Ammo;
@@ -93,9 +106,11 @@ public class CombinedScript : MonoBehaviour
     /// </summary>
     public Camera fpsCam;
 
-    //private bool stillGlitching;
+    /// <summary>
+    /// This is the Audio clip for when the enemys are killed.
+    /// </summary>
+    public AudioClip enemyDeathSound;
 
-    //private bool switchingWeapon;
 
 
     public GameEvent currentState = GameEvent._NULL_;
@@ -161,6 +176,7 @@ public class CombinedScript : MonoBehaviour
         m_audioManager = FindObjectOfType<AudioManager>();
         m_audioManager.AddSound(LazerSound);
         m_audioManager.AddSound(shotgunSound);
+        m_audioManager.AddSound(enemyDeathSound);
     }
 
 
@@ -701,6 +717,7 @@ public class CombinedScript : MonoBehaviour
 
                             if (hit.collider.gameObject.GetComponentInParent<CupcakeAI>().myInfo.health <= 0)
                             {
+                                m_audioManager.PlaySound(enemyDeathSound, false);
                                 stuff.killedCount++;
                                 PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
                             }
@@ -712,6 +729,7 @@ public class CombinedScript : MonoBehaviour
                             PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + RifleDamage);
                             if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
                             {
+                                m_audioManager.PlaySound(enemyDeathSound, false);
                                 stuff.killedCount++;
                                 PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
                             }
@@ -808,6 +826,7 @@ public class CombinedScript : MonoBehaviour
 
                         if (hit.collider.gameObject.GetComponentInParent<CupcakeAI>().myInfo.health <= 0)
                         {
+                            m_audioManager.PlaySound(enemyDeathSound, false);
                             stuff.killedCount++;
                             PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
 
@@ -819,6 +838,7 @@ public class CombinedScript : MonoBehaviour
                         PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + PelletDamage);
                         if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
                         {
+                            m_audioManager.PlaySound(enemyDeathSound, false);
                             stuff.killedCount++;
                             PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
                         }
@@ -852,6 +872,7 @@ public class CombinedScript : MonoBehaviour
                                 PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + PelletDamage * stuff.ReflectMultiplier/ 100);
                                 if (hit.collider.gameObject.GetComponentInParent<CupcakeAI>().myInfo.health <= 0)
                                 {
+                                    m_audioManager.PlaySound(enemyDeathSound, false);
                                     stuff.killedCount++;
                                     PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
                                 }
@@ -862,6 +883,7 @@ public class CombinedScript : MonoBehaviour
                                 PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + PelletDamage * stuff.ReflectMultiplier / 100);
                                 if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
                                 {
+                                    m_audioManager.PlaySound(enemyDeathSound, false);
                                     stuff.killedCount++;
                                     PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
                                 }
