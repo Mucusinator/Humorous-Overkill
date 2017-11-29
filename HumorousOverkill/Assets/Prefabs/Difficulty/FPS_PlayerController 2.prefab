@@ -2863,7 +2863,7 @@ MonoBehaviour:
   reloadRifleTime: 2.5
   ShotsPerSecond: 0
   RoundsPerMinute: 600
-  PelletDamage: 10
+  PelletDamage: 6
   pelletCount: 8
   magTubeSize: 6
   ShotgunMuzzleEffect: {fileID: 198358607727608202}
@@ -2874,7 +2874,8 @@ MonoBehaviour:
   currentShotgunAmmo: 0
   reloadShotgunTime: 2.5
   FireDelay: 0.4
-  isReloading: 0
+  isReloadingRifle: 0
+  isReloadingShotgun: 0
   animator: {fileID: 95437148778507630}
   LazerSound: {fileID: 8300000, guid: de3c5d3602a09a64b93fbe60d56eedc7, type: 3}
   shotgunSound: {fileID: 8300000, guid: 1b1aba6f874b1c14baecce546d842c99, type: 3}
@@ -2884,14 +2885,12 @@ MonoBehaviour:
   WeaponRaycast: {fileID: 1641311901381414}
   EndOfGun: {fileID: 1730044118312698}
   fpsCam: {fileID: 20715158619280520}
+  enemyDeathSound: {fileID: 0}
   currentState: 0
   glitchRifleEffect: 0
-  m_timer: 0
   stuff:
     ReflectiveShots: 0
     ReflectMultiplier: 0
-    enemyHealth: {fileID: 0}
-    showEnemyHealth: 0
     showStatistics: 0
     enemiesKilled: {fileID: 0}
     killedCount: 0
