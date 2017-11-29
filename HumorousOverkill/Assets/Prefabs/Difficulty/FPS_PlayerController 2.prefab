@@ -2021,7 +2021,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1730652580203490}
-  m_LocalRotation: {x: -0.36942792, y: -0.6346858, z: -0.3414452, w: 0.58661085}
+  m_LocalRotation: {x: -0.3694279, y: -0.63468575, z: -0.34144518, w: 0.5866108}
   m_LocalPosition: {x: -0.03312643, y: -1.0928519e-17, z: -1.1863261e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2074,7 +2074,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1499256379283692}
-  m_LocalRotation: {x: -0.36942792, y: -0.6346858, z: -0.3414452, w: 0.58661085}
+  m_LocalRotation: {x: -0.3694279, y: -0.63468575, z: -0.34144518, w: 0.5866108}
   m_LocalPosition: {x: -0.03312643, y: -1.0928519e-17, z: -1.1863261e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2812,19 +2812,19 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1057642791807706}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5c193739f1f0954a91db2c7eb7c7128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnabled: 1
+  isEnabled: 0
 --- !u!114 &114589904461981416
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1057642791807706}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a00f9f5c1fa89845888504ed82f079b, type: 3}
   m_Name: 
@@ -2853,12 +2853,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3efa8794e2cf464eb21b37a06bf6d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RifleDamage: 10
+  RifleDamage: 15
   RifleRange: 100
   RifleMuzzleEffect: {fileID: 198585337459673244}
   impactForce: 30
-  maxRifleAmmo: 500
-  currentRifleAmmo: 50
+  maxRifleAmmo: 0
+  currentRifleAmmo: 0
   rifleMagSize: 50
   reloadRifleTime: 2.5
   ShotsPerSecond: 0
@@ -2870,7 +2870,7 @@ MonoBehaviour:
   pelletForce: 30
   spreadWidth: 2
   Range: 10
-  maxShotgunAmmo: 20
+  maxShotgunAmmo: 40
   currentShotgunAmmo: 0
   reloadShotgunTime: 2.5
   FireDelay: 0.4
