@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using EventHandler;
 
-//[BindListener("Enemy", typeof(EnemyManager))]
-//[BindListener("Player", typeof(PlayerManager))]
-//[BindListener("UI", typeof(UIManager))]
+
 public class CombinedScript : MonoBehaviour
 {
 
@@ -35,6 +33,9 @@ public class CombinedScript : MonoBehaviour
     public float RoundsPerMinute = 600.0f;
     // this is the nextTimeToFire.
     private float nextTimeToFire = 0f;
+
+
+
 
 
     // Shotgun Variables.
@@ -66,24 +67,40 @@ public class CombinedScript : MonoBehaviour
 
     // Shared/Unique variables. variables
 
-    // This boolean tests if you are already reloading or not.
-    public bool isReloading;
-    // This animatior is resonsible for the reloading mechanic of the weapons.
+    /// <summary>
+    /// These booleans are responsible for checking if you are reloading your rifle or shotgun currently.
+    /// </summary>
+    public bool isReloadingRifle, isReloadingShotgun;
+
+    /// <summary>
+    /// This animatior is resonsible for the reloading mechanic of the weapons.
+    /// </summary>
     public Animator animator;
+    /// <summary>
+    /// These two audio clips are the sounds when you fire the Rifle or shotgun.
+    /// </summary>
     public AudioClip LazerSound;
     public AudioClip shotgunSound;
     //Audio manager
     private AudioManager m_audioManager;
-    // This is a public int of the currently selected weapon.
+    /// <summary>
+    /// This is a public int of the currently selected weapon.
+    /// </summary>
+     
     public int SelectedWeapon = 0;
-    // This is the two different weapon types.
+    /// <summary>
+    /// This will store the two different weapon types.
+    /// </summary>
     public GunType gunType;
-    // This is where the player raycast of the camera will begin from.
+   
+    /// <summary>
+    ///  This is where the player raycast of the camera will begin from.
+    /// </summary>
     public GameObject StartOfPlayerRaycast;
-    // Weapon Raycast.
+    /// <summary>
+    /// This is where the start of the weapon raycast is held.
+    /// </summary>
     public GameObject WeaponRaycast;
-    // This is the UI text element for the UI.
-    //public Text Ammo;
     /// <summary>
     ///  this is the end of the gun shown as a game object.
     /// </summary>
@@ -93,27 +110,46 @@ public class CombinedScript : MonoBehaviour
     /// </summary>
     public Camera fpsCam;
 
-    //private bool stillGlitching;
+    /// <summary>
+    /// This is the Audio clip for when the enemys are killed.
+    /// </summary>
+    public AudioClip enemyDeathSound;
 
-    //private bool switchingWeapon;
 
-
+    /// <summary>
+    /// Set the current game state to be null by default.
+    /// </summary>
     public GameEvent currentState = GameEvent._NULL_;
 
-    // This boolean is for the rifle, to show if it is active or not.
-    // public bool isRifleSelected;
 
-    // This boolean is for if the user has access to the rifle.
 
+   
+    /// <summary>
+    /// This boolean is used to toggle the glitch rifle effect.
+    /// </summary>
     public bool glitchRifleEffect;
 
+    /// <summary>
+    /// This is the timer used to help in calculating reload timers.
+    /// </summary>
+    float m_timer = 0;
+    
 
-    public float m_timer = 0;
-    // THIS IS BACHELOR STUFF 
 
-    // Indirection is the reflection vector.
+
+    /// <summary>
+    /// BELOW IS BACHELOR STUFF, THIS STUFF IS TO BE DISABLED FOR THE ADVANCED DIPLOMA VERSION OF THE GAME.
+    /// </summary>
+    
+    /// <summary>
+    ///  Indirection is the reflection vector, this is used for reflection of lazers.
+    ///</summary>
     Vector3 inDirection;
 
+
+    /// <summary>
+    /// This struct contains all the values that I use for bachelor items.
+    /// </summary>
     [System.Serializable]
     public struct BachelorStuff
     {
@@ -121,10 +157,7 @@ public class CombinedScript : MonoBehaviour
         public bool ReflectiveShots;
         // A int for a percentage of damage that the reflective shots will have.
         public int ReflectMultiplier;
-        // Testing the damage of the reflective shots.
-        public Text enemyHealth;
-
-        public bool showEnemyHealth;
+     
 
         public bool showStatistics;
 
@@ -137,6 +170,7 @@ public class CombinedScript : MonoBehaviour
         public int ReflectAmount;
 
     }
+
 
     [SerializeField]
     public BachelorStuff stuff;
@@ -160,6 +194,7 @@ public class CombinedScript : MonoBehaviour
         m_audioManager = FindObjectOfType<AudioManager>();
         m_audioManager.AddSound(LazerSound);
         m_audioManager.AddSound(shotgunSound);
+        m_audioManager.AddSound(enemyDeathSound);
     }
 
 
@@ -236,7 +271,7 @@ public class CombinedScript : MonoBehaviour
 
 
 
-        if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE && !isReloading)
+        if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE && !isReloadingRifle)
         {
             animator.SetBool("IsFiring", true);
             shootRifle();
@@ -286,7 +321,7 @@ public class CombinedScript : MonoBehaviour
         if (currentShotgunAmmo <= 0)
         {
 
-            if (ReloadTimer(reloadShotgunTime))
+            if (ReloadTimerShotgun(reloadShotgunTime))
             {
                 if (maxShotgunAmmo < magTubeSize)
                 {
@@ -311,7 +346,7 @@ public class CombinedScript : MonoBehaviour
             glitchRifleEffect = false;
         }
 
-        if (isReloading)
+        if (isReloadingRifle)
         {
 
             glitchRifleEffect = false;
@@ -323,7 +358,7 @@ public class CombinedScript : MonoBehaviour
         {
             gunType = GunType.RIFLE;
 
-            if (ReloadTimer(reloadRifleTime))
+            if (ReloadTimerRifle(reloadRifleTime))
             {
                 if (maxRifleAmmo < rifleMagSize)
                 {
@@ -363,7 +398,7 @@ public class CombinedScript : MonoBehaviour
 
     void shootShotgun()
     {
-        if (currentShotgunAmmo > 0)
+        if (currentShotgunAmmo > 0 )
         {
             if (currentState == GameEvent.STATE_START || currentState == GameEvent.STATE_CONTINUE)
             {
@@ -484,7 +519,7 @@ public class CombinedScript : MonoBehaviour
     /// </summary>
     /// <param name="time"> used to keep track of time.</param>
     /// <returns>void</returns>
-    bool ReloadTimer(float time)
+    bool ReloadTimerShotgun(float time)
     {
         if (m_timer <= 0)
         {
@@ -493,18 +528,46 @@ public class CombinedScript : MonoBehaviour
 
         if (m_timer > 0)
         {
-            isReloading = true;
+            isReloadingShotgun = true;
             m_timer -= Time.deltaTime;
 
             if (m_timer <= 0)
             {
-                isReloading = false;
+                isReloadingShotgun = false;
                 return true;
             }
         }
         else
         {
-            isReloading = false;
+            isReloadingShotgun = false;
+            return true;
+        }
+        return false;
+
+    }
+
+
+    bool ReloadTimerRifle(float time)
+    {
+        if (m_timer <= 0)
+        {
+            m_timer = time;
+        }
+
+        if (m_timer > 0)
+        {
+            isReloadingRifle = true;
+            m_timer -= Time.deltaTime;
+
+            if (m_timer <= 0)
+            {
+                isReloadingRifle = false;
+                return true;
+            }
+        }
+        else
+        {
+            isReloadingRifle = false;
             return true;
         }
         return false;
@@ -512,7 +575,7 @@ public class CombinedScript : MonoBehaviour
     }
     void Glitching()
     {
-        if (glitchRifleEffect == true && !isReloading && gunType == GunType.RIFLE)
+        if (glitchRifleEffect == true && !isReloadingRifle && gunType == GunType.RIFLE)
         {
 
             fpsCam.GetComponent<GlitchPostRender>().offset += 0.003f * Time.deltaTime;
@@ -550,32 +613,15 @@ public class CombinedScript : MonoBehaviour
     }
 
 
-    private IEnumerator Shot()
-    {
-        var shotDelay = 0.5f;
-        if (gunType == GunType.RIFLE)
-        {
-            //shotDelay = 0;
-            //shotTrail.enabled = true;
-            yield return shotDelay;
-            //shotTrail.enabled = false;
-        }
-        if (gunType == GunType.SHOTGUN)
-        {
-            //shotDelay = 0;
-            //shotTrail.enabled = true;
-            yield return shotDelay;
-            //shotTrail.enabled = false;
-        }
-    }
+
 
 
     void ShootReflect()
     {
-        int nPoints = stuff.ReflectAmount;
-        
+       //This is the starting point of the raycast for the reflective shots. 
         Transform startingRaycastPoint = EndOfGun.transform;
 
+        // this is the starting ray for the raycast.
         Ray ray = new Ray(startingRaycastPoint.position, startingRaycastPoint.forward);
 
 
@@ -689,6 +735,7 @@ public class CombinedScript : MonoBehaviour
 
                             if (hit.collider.gameObject.GetComponentInParent<CupcakeAI>().myInfo.health <= 0)
                             {
+                                m_audioManager.PlaySound(enemyDeathSound, false);
                                 stuff.killedCount++;
                                 PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
                             }
@@ -700,6 +747,7 @@ public class CombinedScript : MonoBehaviour
                             PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + RifleDamage);
                             if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
                             {
+                                m_audioManager.PlaySound(enemyDeathSound, false);
                                 stuff.killedCount++;
                                 PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
                             }
@@ -796,6 +844,7 @@ public class CombinedScript : MonoBehaviour
 
                         if (hit.collider.gameObject.GetComponentInParent<CupcakeAI>().myInfo.health <= 0)
                         {
+                            m_audioManager.PlaySound(enemyDeathSound, false);
                             stuff.killedCount++;
                             PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
 
@@ -807,6 +856,7 @@ public class CombinedScript : MonoBehaviour
                         PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + PelletDamage);
                         if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
                         {
+                            m_audioManager.PlaySound(enemyDeathSound, false);
                             stuff.killedCount++;
                             PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
                         }
@@ -840,6 +890,7 @@ public class CombinedScript : MonoBehaviour
                                 PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + PelletDamage * stuff.ReflectMultiplier/ 100);
                                 if (hit.collider.gameObject.GetComponentInParent<CupcakeAI>().myInfo.health <= 0)
                                 {
+                                    m_audioManager.PlaySound(enemyDeathSound, false);
                                     stuff.killedCount++;
                                     PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
                                 }
@@ -850,6 +901,7 @@ public class CombinedScript : MonoBehaviour
                                 PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + PelletDamage * stuff.ReflectMultiplier / 100);
                                 if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
                                 {
+                                    m_audioManager.PlaySound(enemyDeathSound, false);
                                     stuff.killedCount++;
                                     PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
                                 }
@@ -876,11 +928,7 @@ public class CombinedScript : MonoBehaviour
             }
         }
     }
-    void OnEnable()
-    {
-        isReloading = false;
-        //animator.SetBool("Reloading", false);
-    }
+  
 
 
    
