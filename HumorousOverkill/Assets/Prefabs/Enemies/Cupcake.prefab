@@ -2841,6 +2841,13 @@ MonoBehaviour:
   - {fileID: 1680843322557176, guid: cbd1a3b2321aa5d44bf126afb8a98351, type: 2}
   - {fileID: 1987807335771420, guid: 0093c3e35370a1e49a5a17207350087f, type: 2}
   - {fileID: 1047466508615190, guid: 7f265e36d39fec84da1f38d7aacf4c14, type: 2}
+  audioSettings:
+    deathSound: {fileID: 8300000, guid: 76c0db6fefd7b634bb02dc79cb0433de, type: 3}
+    randomDeathSoundChance: 0.75
+    randomDeathSounds:
+    - {fileID: 8300000, guid: c1d6add35c794604a8c2aac80b93a8d3, type: 3}
+    - {fileID: 8300000, guid: ddefdcfbbc613a04597b1d8fd51fdba2, type: 3}
+    - {fileID: 8300000, guid: 86a8a4fa69320604ea7afb6bac570226, type: 3}
 --- !u!198 &198527054021264090
 ParticleSystem:
   m_ObjectHideFlags: 1

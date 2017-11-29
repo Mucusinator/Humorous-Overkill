@@ -8,7 +8,8 @@
 using System;
 using UnityEngine;
 #if DEBUG_LOG
-public static class _Debug {
+public static class _Debug
+{
     public static void Log(string msg) { Debug.Log(msg); }
 }
 #else
@@ -18,10 +19,11 @@ public static class _Debug {
 #endif
 
 // Event Handle
-public delegate void __eHandle<S, E> (S sender, E eventArgs);
+public delegate void __eHandle<S, E>(S sender, E eventArgs);
 
 // Event Args
-public class __eArg<_T> {
+public class __eArg<_T>
+{
     /// <summary>
     /// Arguments for the event
     /// </summary>
@@ -29,12 +31,13 @@ public class __eArg<_T> {
     /// <param name="target">Object that is being targeted</param>
     /// <param name="value">Value that is being sent</param>
     /// <param name="type">Type of object that send the event</param>
-    public __eArg (
+    public __eArg(
         _T sender,              // Object that sent the event
         System.Object target,   // Object that is being targeted
         System.Object value,    // Value that is being sent
         System.Type type        // Type of object that send the event
-        ) { this.arg = sender; this.target = target; this.value = value; this.type = type; }
+        )
+    { this.arg = sender; this.target = target; this.value = value; this.type = type; }
     public System.Object target { get; private set; }
     public System.Object value { get; private set; }
     public System.Type type { get; private set; }
@@ -42,23 +45,28 @@ public class __eArg<_T> {
 }
 
 
-public static class EventManager<T> {
-    public class Arg : __eArg<T> { public Arg (T sender, object target, object value, Type type) : base(sender, target, value, type) { } };
-    public delegate void EventDelegate (object s, __eArg<T> e);
-    public static void Add (EventDelegate del) {
+public static class EventManager<T>
+{
+    public class Arg : __eArg<T> { public Arg(T sender, object target, object value, Type type) : base(sender, target, value, type) { } };
+    public delegate void EventDelegate(object s, __eArg<T> e);
+    public static void Add(EventDelegate del)
+    {
         __event<T>.HandleEvent += new __eHandle<System.Object, __eArg<T>>(del);
     }
-    public static void Unsubscribe (EventDelegate del) {
+    public static void Unsubscribe(EventDelegate del)
+    {
         __event<T>.HandleEvent -= new __eHandle<System.Object, __eArg<T>>(del);
     }
-    public static void InvokeGameState (System.Object sender, System.Object target, System.Object value, System.Type type, T e) {
+    public static void InvokeGameState(System.Object sender, System.Object target, System.Object value, System.Type type, T e)
+    {
         __event<T>.InvokeEvent(sender, new __eArg<T>(e, target, value, type));
     }
-    public static void UnsubscribeAll () { __event<T>.UnsubscribeAll(); }
+    public static void UnsubscribeAll() { __event<T>.UnsubscribeAll(); }
 }
 
 // Event
-public class __event<_T> {
+public class __event<_T>
+{
     /// <summary>
     /// Empty object that tells the handler that it should be read by all
     /// </summary>
@@ -72,18 +80,20 @@ public class __event<_T> {
     /// </summary>
     /// <param name="sender">The sender of the event</param>
     /// <param name="e">arguments for the event</param>
-    public static void InvokeEvent (
+    public static void InvokeEvent(
         System.Object sender,   // The sender of the event
         __eArg<_T> e            // arguments for the event
-        ) { if (HandleEvent != null) HandleEvent(sender, e); }
+        )
+    { if (HandleEvent != null) HandleEvent(sender, e); }
     /// <summary>
     /// Unsubscribe all event function attached to handler
     /// </summary>
-    public static void UnsubscribeAll () { HandleEvent = null; }
+    public static void UnsubscribeAll() { HandleEvent = null; }
 }
 
 // Event states that are passed as events
-public enum MapState{
+public enum MapState
+{
     PING,
     NOTENABLED,
     INIT,
@@ -92,10 +102,12 @@ public enum MapState{
     FULLSCREENMAP
 }
 
-class MapEventHandler : MonoBehaviour {
+class MapEventHandler : MonoBehaviour
+{
     public bool isEnabled = true;
 
-    private void Awake () {
+    private void Awake()
+    {
         // Raise and Invoke Event
 
         if (isEnabled)
@@ -111,7 +123,7 @@ class MapEventHandler : MonoBehaviour {
                     MapState.NOTENABLED,
                     __event<MapState>.SendToAll,
                     null,
-                    GetType() ));
+                    GetType()));
 
         // Ping its location to all others that are listening
         __event<MapState>.InvokeEvent(
@@ -120,10 +132,11 @@ class MapEventHandler : MonoBehaviour {
                 MapState.PING,
                 this,
                 this,
-                GetType() ));
+                GetType()));
     }
 
-    private void Start () {
+    private void Start()
+    {
         // Invoke event for init
         __event<MapState>.InvokeEvent(
             this,
@@ -131,11 +144,13 @@ class MapEventHandler : MonoBehaviour {
                 MapState.INIT,
                 __event<MapState>.SendToAll,
                 null,
-                GetType() ));
+                GetType()));
     }
 
-    public void Update () {
-        if (Input.GetKeyDown(KeyCode.Tab)) {
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
             // Invoke event for fullscreen Map
             __event<MapState>.InvokeEvent(
                 this,
@@ -143,8 +158,10 @@ class MapEventHandler : MonoBehaviour {
                     MapState.FULLSCREENMAP,
                     __event<MapState>.SendToAll,
                     null,
-                    GetType() ));
-        } if (Input.GetKeyUp(KeyCode.Tab)) {
+                    GetType()));
+        }
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
             // Invoke event for mini Map
             __event<MapState>.InvokeEvent(
                 this,
@@ -152,11 +169,12 @@ class MapEventHandler : MonoBehaviour {
                     MapState.MINIMAP,
                     __event<MapState>.SendToAll,
                     null,
-                    GetType() ));
+                    GetType()));
         }
     }
 
-    private void OnApplicationQuit () {
+    private void OnApplicationQuit()
+    {
         // Invoke event for close
         __event<MapState>.InvokeEvent(
             this,
@@ -164,10 +182,11 @@ class MapEventHandler : MonoBehaviour {
                 MapState.CLOSE,
                 __event<MapState>.SendToAll,
                 null,
-                GetType() ));
+                GetType()));
     }
 
-    public void OnHandleEvent (object s, __eArg<MapState> e) {
+    public void OnHandleEvent(object s, __eArg<MapState> e)
+    {
         // Log Events that happen after Event has been Raised
         //if (e.target != (System.Object)this && s != (System.Object)this)
         //    _Debug.Log(":: Args (" + e.arg.ToString() + ") To <" + e.target + ">\nfrom <" + s + "> This <" + this +">");
