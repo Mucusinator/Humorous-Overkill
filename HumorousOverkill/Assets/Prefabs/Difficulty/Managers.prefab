@@ -369,8 +369,6 @@ MonoBehaviour:
           position: {x: 16.7, y: -3, z: -3.2}
         - amount: 4
           position: {x: -12.2, y: -3, z: 7.1}
-        - amount: 3
-          position: {x: -4.82, y: -3, z: -5.38}
   doors:
   - {fileID: 0}
 --- !u!114 &114293465880754124
@@ -421,9 +419,9 @@ MonoBehaviour:
       - prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
           type: 2}
         points:
-        - amount: 5
+        - amount: 4
           position: {x: 10, y: -8, z: 7}
-        - amount: 5
+        - amount: 4
           position: {x: 10, y: -8, z: -8.2}
         - amount: 4
           position: {x: 6, y: -8, z: -0.8}
@@ -432,24 +430,24 @@ MonoBehaviour:
       - prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
           type: 2}
         points:
-        - amount: 5
+        - amount: 4
           position: {x: 5, y: 0, z: 7.63}
-        - amount: 5
+        - amount: 4
           position: {x: 5, y: 0, z: -8.67}
-        - amount: 5
+        - amount: 4
           position: {x: 10, y: 0, z: -1.01}
     - rate: 2
       units:
       - prefab: {fileID: 1377578828845052, guid: 60422adb5247d6a489139be8e02b6b2c,
           type: 2}
         points:
-        - amount: 6
+        - amount: 4
           position: {x: -3.62, y: 6, z: 6.33}
-        - amount: 6
+        - amount: 4
           position: {x: 10.12, y: 6, z: 6.11}
-        - amount: 6
+        - amount: 4
           position: {x: 2.8, y: 6, z: -1.15}
-        - amount: 6
+        - amount: 4
           position: {x: -2.52, y: 6, z: -8.07}
   doors:
   - {fileID: 0}
