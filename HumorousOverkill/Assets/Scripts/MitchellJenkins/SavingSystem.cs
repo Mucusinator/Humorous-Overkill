@@ -4,35 +4,62 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public class SavingSystem {
+public class SavingSystem
+{
     public static SavingData m_data;
 
-    public static void Add(string name, int score) {
+    public static void Add(string name, int score)
+    {
+        if (name == "") return;
         if (m_data == null) m_data = new SavingData();
-        if (m_data.name.Count == 0) {
+        if (m_data.name.Count == 0)
+        {
             m_data.name.Add(name);
             m_data.score.Add(score);
-        } else {
-            if (m_data.name.Count > 4) {
-                for (int i = 0; i < Mathf.Min(m_data.name.Count, 5); i++) {
-                    if (score > m_data.score[i]) {
+        }
+        else
+        {
+            if (m_data.name.Count > 4)
+            {
+                for (int i = 0; i < Mathf.Min(m_data.name.Count, 5); i++)
+                {
+                    if (score > m_data.score[i])
+                    {
                         m_data.name.Insert(i, name);
                         m_data.score.Insert(i, score);
                         break;
                     }
                 }
-            } else {
-                m_data.name.Add(name);
-                m_data.score.Add(score);
+            }
+            else
+            {
+                int k = 0;
+                for (; k < m_data.name.Count;)
+                {
+                    if (score > m_data.score[k])
+                    {
+                        m_data.name.Insert(k, name);
+                        m_data.score.Insert(k, score);
+                        break;
+                    }
+                    k++;
+                }
+                if (k == m_data.name.Count)
+                {
+                    m_data.name.Add(name);
+                    m_data.score.Add(score);
+                }
             }
 
-            if (m_data.name.Count > 5) {
+            if (m_data.name.Count > 5)
+            {
                 m_data.name.RemoveRange(6, m_data.name.Count);
             }
         }
     }
     // saves all the data
-    public static void Save () {
+    public static void Save()
+    {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/Leaderboard.dat");
 
@@ -44,11 +71,13 @@ public class SavingSystem {
         file.Close();
     }
     // Loads in all the data
-    public static void Load () {
+    public static void Load()
+    {
         if (m_data == null)
             m_data = new SavingData();
 
-        if (File.Exists(Application.persistentDataPath + "/Leaderboard.dat")) {
+        if (File.Exists(Application.persistentDataPath + "/Leaderboard.dat"))
+        {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/Leaderboard.dat", FileMode.Open);
             SavingData data = (SavingData)bf.Deserialize(file);
@@ -60,8 +89,10 @@ public class SavingSystem {
     }
 }
 [System.Serializable]
-public class SavingData {
-    public SavingData () {
+public class SavingData
+{
+    public SavingData()
+    {
         name = new List<string>();
         score = new List<int>();
     }
