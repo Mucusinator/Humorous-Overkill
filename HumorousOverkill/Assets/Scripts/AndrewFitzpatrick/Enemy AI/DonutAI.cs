@@ -53,6 +53,12 @@ public class DonutAI : MonoBehaviour
     private float flashTimer = 0;
     private bool flashing = false;
 
+    // reference to audio source
+    private AudioSource audioSource;
+
+    // audio settings
+    public EnemyAudioSettings audioSettings;
+
     #endregion
 
     // runs when this script is first created (regardless of whether it is enabled)
@@ -61,6 +67,16 @@ public class DonutAI : MonoBehaviour
         // set up event handling stuff
         events = new __eHandle<object, __eArg<GameEvent>>(HandleEvent);
         __event<GameEvent>.HandleEvent += events;
+
+        // find AudioSource (if it exists)
+        if (GameObject.FindObjectOfType<AudioSource>() != null)
+        {
+            audioSource = GameObject.FindObjectOfType<AudioSource>();
+        }
+        else
+        {
+            Debug.Log("Cupcake could not find AudioSource");
+        }
 
         // find and store needed components
         findComponents();
@@ -290,6 +306,21 @@ public class DonutAI : MonoBehaviour
         // swap the models (the broken model will then do physics)
         model.SetActive(false);
         brokenModel.SetActive(true);
+
+        // play sound effect(s)
+        if (audioSource != null && audioSettings.deathSound != null)
+        {
+            audioSource.PlayOneShot(audioSettings.deathSound);
+
+            // there must be at least one random sound
+            if (audioSettings.randomDeathSoundChance > 0 && audioSettings.randomDeathSounds.Count > 0)
+            {
+                if (Random.Range(0, 100) / 100.0f < audioSettings.randomDeathSoundChance)
+                {
+                    audioSource.PlayOneShot(audioSettings.randomDeathSounds[Random.Range(0, audioSettings.randomDeathSounds.Count)]);
+                }
+            }
+        }
 
         // disable this script
         this.enabled = false;

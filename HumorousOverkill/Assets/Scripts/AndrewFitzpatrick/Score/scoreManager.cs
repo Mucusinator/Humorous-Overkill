@@ -62,6 +62,8 @@ public class scoreManager : MonoBehaviour
 
     public void Awake()
     {
+        EventManager<GameEvent>.Add(HandleEvent);
+
         // get Text
         myText = GetComponent<Text>();
 
@@ -140,5 +142,24 @@ public class scoreManager : MonoBehaviour
 
         // round and return
         return Mathf.RoundToInt(finalScore);
+    }
+
+    public void HandleEvent(object s, __eArg<GameEvent> e)
+    {
+        switch (e.arg)
+        {
+            case GameEvent.DIFFICULTY_EASY:
+                difficulty = DIFFICULTY.EASY;
+                break;
+            case GameEvent.DIFFICULTY_MEDI:
+                difficulty = DIFFICULTY.NORMAL;
+                break;
+            case GameEvent.DIFFICULTY_HARD:
+                difficulty = DIFFICULTY.HARD;
+                break;
+            case GameEvent.DIFFICULTY_NM:
+                difficulty = DIFFICULTY.NIGHTMARE;
+                break;
+        }
     }
 }
