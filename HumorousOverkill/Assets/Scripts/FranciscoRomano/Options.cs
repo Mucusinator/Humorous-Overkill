@@ -21,6 +21,10 @@ public class Options : MonoBehaviour
     {
         audioManager.volume = volumeSlider.value;
         loadingAudioSource.volume = volumeSlider.value;
+        foreach (AudioSource source in audioManager.sourceTable.Values)
+        {
+            source.volume = volumeSlider.value;
+        }
     }
     public void UpdateMouseSensitivity()
     {
