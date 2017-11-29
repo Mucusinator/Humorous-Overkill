@@ -8,6 +8,7 @@ public class KILL : MonoBehaviour {
     {
         if (c.transform.tag == "Enemy")
         {
+            EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(EnemyManager), GameEvent.ENEMY_SPAWNER_REMOVE);
             Destroy(c.gameObject);
         }
     }
