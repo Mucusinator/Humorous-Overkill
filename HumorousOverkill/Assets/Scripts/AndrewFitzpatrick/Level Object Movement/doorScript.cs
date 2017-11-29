@@ -25,7 +25,11 @@ public class doorScript : MonoBehaviour
 
     // audio for door open / close
     public AudioClip openSound;
+    [Range(0, 1)]
+    public float openSoundVolume;
     public AudioClip closeSound;
+    [Range(0, 1)]
+    public float closeSoundVolume;
 
     // reference to audiosource
     private AudioSource audioSource;
@@ -71,7 +75,7 @@ public class doorScript : MonoBehaviour
             // play open sound effect
             if(audioSource != null && openSound != null)
             {
-                audioSource.PlayOneShot(openSound);
+                audioSource.PlayOneShot(openSound, openSoundVolume * audioSource.volume);
             }
         }
     }
@@ -84,7 +88,7 @@ public class doorScript : MonoBehaviour
         // play close sound effect
         if (audioSource != null && closeSound != null)
         {
-            audioSource.PlayOneShot(closeSound);
+            audioSource.PlayOneShot(closeSound, closeSoundVolume * audioSource.volume);
         }
     }
 }
