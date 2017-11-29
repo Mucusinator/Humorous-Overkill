@@ -35,7 +35,7 @@ public class DamageSplash : MonoBehaviour
                 }
                 // update fade effect
                 float delta = (float)e.value < 0.55f ? 1 : -1;
-                float alpha = Mathf.Clamp(fadeSpeed * delta * Time.deltaTime, 0, 1);
+                float alpha = Mathf.Clamp(imageSource.color.a + fadeSpeed * delta * Time.deltaTime, 0, 1);
                 imageSource.color = new Color(imageSource.color.r, imageSource.color.g, imageSource.color.b, alpha);
                 break;
         }
