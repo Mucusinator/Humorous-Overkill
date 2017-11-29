@@ -5561,3 +5561,4 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 139684c2f88b3064e9f2888bd60a0662, type: 3}
     - {fileID: 8300000, guid: ed7178fe3c2e62740ae599c573aa9c79, type: 3}
     - {fileID: 8300000, guid: 5dcec35dfe631fc449016adac9b3dfb5, type: 3}
+    shootSound: {fileID: 8300000, guid: a71af05f074532443b8eb126fe1865ff, type: 3}
