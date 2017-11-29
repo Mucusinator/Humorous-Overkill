@@ -23,6 +23,13 @@ public class doorScript : MonoBehaviour
     // current close factor
     private float currentFactor = 0.0f;
 
+    // audio for door open / close
+    public AudioClip openSound;
+    public AudioClip closeSound;
+
+    // reference to audiosource
+    private AudioSource audioSource;
+
     void Start()
     {
         // setup points
@@ -31,6 +38,12 @@ public class doorScript : MonoBehaviour
 
         // make sure there is no problems with divide by zero or negative numbers
         openCloseTime = Mathf.Max(openCloseTime, 0.0001f);
+
+        // find an AudioSource (if one exists)
+        if(GameObject.FindObjectOfType<AudioSource>() != null)
+        {
+            audioSource = GameObject.FindObjectOfType<AudioSource>();
+        }
     }
 
     void Update()
@@ -54,6 +67,12 @@ public class doorScript : MonoBehaviour
         if(closeCount > 0)
         {
             open = true;
+
+            // play open sound effect
+            if(audioSource != null && openSound != null)
+            {
+                audioSource.PlayOneShot(openSound);
+            }
         }
     }
 
@@ -61,5 +80,11 @@ public class doorScript : MonoBehaviour
     {
         open = false;
         closeCount--;
+
+        // play close sound effect
+        if (audioSource != null && closeSound != null)
+        {
+            audioSource.PlayOneShot(closeSound);
+        }
     }
 }

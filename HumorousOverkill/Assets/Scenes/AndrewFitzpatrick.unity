@@ -39512,8 +39512,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1208708067}
   m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 51.938663, y: 2.52, z: 19.28}
-  m_LocalScale: {x: 0.13159, y: 0.13159, z: 0.13159}
+  m_LocalPosition: {x: 51.938663, y: 2.52, z: 19.279999}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 1218633158}
   m_RootOrder: 116
@@ -43291,6 +43291,16 @@ Prefab:
       propertyPath: openCloseTime
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 114110369694790878, guid: 3414656a646917e479edd37ed41b0eb8,
+        type: 2}
+      propertyPath: openSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 76c0db6fefd7b634bb02dc79cb0433de, type: 3}
+    - target: {fileID: 114110369694790878, guid: 3414656a646917e479edd37ed41b0eb8,
+        type: 2}
+      propertyPath: closeSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ee62e2cc49adac043af056cba12256d8, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3414656a646917e479edd37ed41b0eb8, type: 2}
   m_IsPrefabParent: 0
@@ -46691,6 +46701,16 @@ Prefab:
       propertyPath: openCloseTime
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 114110369694790878, guid: 3414656a646917e479edd37ed41b0eb8,
+        type: 2}
+      propertyPath: openSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 76c0db6fefd7b634bb02dc79cb0433de, type: 3}
+    - target: {fileID: 114110369694790878, guid: 3414656a646917e479edd37ed41b0eb8,
+        type: 2}
+      propertyPath: closeSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ee62e2cc49adac043af056cba12256d8, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3414656a646917e479edd37ed41b0eb8, type: 2}
   m_IsPrefabParent: 0
@@ -62232,6 +62252,16 @@ Prefab:
       propertyPath: openCloseTime
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 114110369694790878, guid: 3414656a646917e479edd37ed41b0eb8,
+        type: 2}
+      propertyPath: openSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 76c0db6fefd7b634bb02dc79cb0433de, type: 3}
+    - target: {fileID: 114110369694790878, guid: 3414656a646917e479edd37ed41b0eb8,
+        type: 2}
+      propertyPath: closeSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ee62e2cc49adac043af056cba12256d8, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3414656a646917e479edd37ed41b0eb8, type: 2}
   m_IsPrefabParent: 0
