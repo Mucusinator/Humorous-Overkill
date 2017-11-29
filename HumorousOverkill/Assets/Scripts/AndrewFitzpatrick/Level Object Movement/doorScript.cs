@@ -75,7 +75,7 @@ public class doorScript : MonoBehaviour
             // play open sound effect
             if(audioSource != null && openSound != null)
             {
-                audioSource.PlayOneShot(openSound, openSoundVolume * audioSource.volume);
+                audioSource.PlayOneShot(openSound, openSoundVolume * GameObject.FindObjectOfType<AudioManager>().volume);
             }
         }
     }
@@ -88,7 +88,7 @@ public class doorScript : MonoBehaviour
         // play close sound effect
         if (audioSource != null && closeSound != null)
         {
-            audioSource.PlayOneShot(closeSound, closeSoundVolume * audioSource.volume);
+            audioSource.PlayOneShot(closeSound, closeSoundVolume * GameObject.FindObjectOfType<AudioManager>().volume);
         }
     }
 }
