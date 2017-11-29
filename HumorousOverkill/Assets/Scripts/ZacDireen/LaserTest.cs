@@ -62,7 +62,8 @@ public class LaserTest : MonoBehaviour
                         // set the current laser parts color
                         //int currentColor = (laserColors.Count - 1 - (i + (int)colorOffset) % laserColors.Count);
                         //currentPart.GetComponentInChildren<Renderer>().material.SetColor("_TintColor", laserColors[currentColor]);
-                        currentPart.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(Time.time, 0);
+
+                        //currentPart.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(Time.time, 0);
 
 
 
@@ -93,7 +94,7 @@ public class LaserTest : MonoBehaviour
         // destroy each part
         foreach (GameObject laserPart in laserParts)
         {
-            Destroy(laserPart);
+            Destroy(laserPart.gameObject);
         }
         // clear list
         laserParts.Clear();

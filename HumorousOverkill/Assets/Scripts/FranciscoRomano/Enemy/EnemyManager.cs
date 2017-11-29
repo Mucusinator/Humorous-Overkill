@@ -63,22 +63,22 @@ public class EnemyManager : EventHandler.EventHandle
         EventManager<GameEvent>.InvokeGameState(this, null, defaultDroneInfo, GetType(), GameEvent._NULL_);
     }
 
-    void OnGUI()
-    {
-        // check spawner status
-        if (spawner == null) return;
-        // draw box
-        GUI.Box(new Rect(0, 0, 220, 180), "");
-        // draw stage status
-        GUI.Label(new Rect(10, 20, 200, 20), "-------------------- Stage --------------------");
-        GUI.Label(new Rect(10, 40, 200, 20), "is complete? = " + spawner.IsStageComplete());
-        // draw stage wave status
-        GUI.Label(new Rect(10,  60, 200, 20), "--------------- Current Group ----------------");
-        GUI.Label(new Rect(10,  80, 200, 20), "spawn rate = " + spawner.stage.current.rate);
-        GUI.Label(new Rect(10, 100, 200, 20), "is complete? = " + spawner.IsGroupComplete());
-        GUI.Label(new Rect(10, 120, 200, 20), "active units = " + spawner.units);
-        GUI.Label(new Rect(10, 140, 200, 20), "----------------------------------------------");
-    }
+    //void OnGUI()
+    //{
+    //    // check spawner status
+    //    if (spawner == null) return;
+    //    // draw box
+    //    GUI.Box(new Rect(0, 0, 220, 180), "");
+    //    // draw stage status
+    //    GUI.Label(new Rect(10, 20, 200, 20), "-------------------- Stage --------------------");
+    //    GUI.Label(new Rect(10, 40, 200, 20), "is complete? = " + spawner.IsStageComplete());
+    //    // draw stage wave status
+    //    GUI.Label(new Rect(10,  60, 200, 20), "--------------- Current Group ----------------");
+    //    GUI.Label(new Rect(10,  80, 200, 20), "spawn rate = " + spawner.stage.current.rate);
+    //    GUI.Label(new Rect(10, 100, 200, 20), "is complete? = " + spawner.IsGroupComplete());
+    //    GUI.Label(new Rect(10, 120, 200, 20), "active units = " + spawner.units);
+    //    GUI.Label(new Rect(10, 140, 200, 20), "----------------------------------------------");
+    //}
     void Update()
     {
         // check spawner status

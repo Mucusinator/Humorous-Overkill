@@ -244,19 +244,19 @@ public class CupcakeAI : MonoBehaviour
         }
 
         // play sound effect(s)
-        if(audioSource != null && audioSettings.deathSound != null)
-        {
-            audioSource.PlayOneShot(audioSettings.deathSound, audioSettings.deathSoundVolume * GameObject.FindObjectOfType<AudioManager>().volume);
+        //if(audioSource != null && audioSettings.deathSound != null)
+        //{
+            //audioSource.PlayOneShot(audioSettings.deathSound, audioSettings.deathSoundVolume * GameObject.FindObjectOfType<AudioManager>().volume);
 
             // there must be at least one random sound
-            if(audioSettings.randomDeathSoundChance > 0 && audioSettings.randomDeathSounds.Count > 0)
-            {
-                if (Random.Range(0, 100) / 100.0f < audioSettings.randomDeathSoundChance)
-                {
-                    audioSource.PlayOneShot(audioSettings.randomDeathSounds[Random.Range(0, audioSettings.randomDeathSounds.Count)], audioSettings.randomDeathSoundsVolume * GameObject.FindObjectOfType<AudioManager>().volume);
-                }
-            }
-        }
+            //if(audioSettings.randomDeathSoundChance > 0 && audioSettings.randomDeathSounds.Count > 0)
+            //{
+                //if (Random.Range(0, 100) / 100.0f < audioSettings.randomDeathSoundChance)
+                //{
+                    //audioSource.PlayOneShot(audioSettings.randomDeathSounds[Random.Range(0, audioSettings.randomDeathSounds.Count)], audioSettings.randomDeathSoundsVolume * GameObject.FindObjectOfType<AudioManager>().volume);
+                //}
+            //}
+        //}
 
         // disable this script to prevent any more actions
         this.enabled = false;
