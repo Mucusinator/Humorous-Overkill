@@ -28,7 +28,7 @@ public class AudioManager : MonoBehaviour
     [Range(0, 1)] public float volume = 0.5f;
     public List<AudioClip> musicClips = new List<AudioClip>();
     public List<AudioClip> soundClips = new List<AudioClip>();
-    private Dictionary<AudioClip, AudioSource> sourceTable = new Dictionary<AudioClip, AudioSource>();
+    public Dictionary<AudioClip, AudioSource> sourceTable = new Dictionary<AudioClip, AudioSource>();
     private Dictionary<AudioClip, FadeInformation> fadeTable = new Dictionary<AudioClip, FadeInformation>();
     // :: functions
     void Awake()
@@ -95,6 +95,7 @@ public class AudioManager : MonoBehaviour
             }
             else
             {
+                sourceTable[clip].volume = volume;
                 sourceTable[clip].PlayOneShot(clip);
             }
         }
@@ -117,7 +118,7 @@ public class AudioManager : MonoBehaviour
         info.Update();
     }
     public void AddMusic(AudioClip clip) { if (!musicClips.Contains(clip)) { AddClip(clip, 0); musicClips.Add(clip); } }
-    public void AddSound(AudioClip clip) { if (!soundClips.Contains(clip)) { AddClip(clip, 1); soundClips.Add(clip); } }
+    public void AddSound(AudioClip clip) { if (!soundClips.Contains(clip)) { AddClip(clip, volume); soundClips.Add(clip); } }
     public void StopMusic(int index) { StopClip(musicClips[index]); }
     public void StopSound(int index) { try { StopClip(soundClips[index]); } catch { } }
     public void StopMusic(AudioClip clip) { StopClip(clip); }
