@@ -5826,6 +5826,31 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 0.5866108
       objectReference: {fileID: 0}
+    - target: {fileID: 114742998846885310, guid: 2736c0b4c328346479805e25a4721737,
+        type: 2}
+      propertyPath: enemyDeathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 842c02052e588db4398a5686ab1ee24f, type: 3}
+    - target: {fileID: 114742998846885310, guid: 2736c0b4c328346479805e25a4721737,
+        type: 2}
+      propertyPath: stuff.lineRenderer
+      value: 
+      objectReference: {fileID: 1487076365}
+    - target: {fileID: 114742998846885310, guid: 2736c0b4c328346479805e25a4721737,
+        type: 2}
+      propertyPath: stuff.ReflectiveShots
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114742998846885310, guid: 2736c0b4c328346479805e25a4721737,
+        type: 2}
+      propertyPath: stuff.ReflectMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114742998846885310, guid: 2736c0b4c328346479805e25a4721737,
+        type: 2}
+      propertyPath: stuff.ReflectAmount
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2736c0b4c328346479805e25a4721737, type: 2}
   m_IsPrefabParent: 0
@@ -6889,6 +6914,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0093c3e35370a1e49a5a17207350087f, type: 2}
   m_IsPrefabParent: 0
+--- !u!120 &1487076365 stripped
+LineRenderer:
+  m_PrefabParentObject: {fileID: 120805334187207962, guid: 2736c0b4c328346479805e25a4721737,
+    type: 2}
+  m_PrefabInternal: {fileID: 1308250640}
 --- !u!114 &1536759061
 MonoBehaviour:
   m_ObjectHideFlags: 0

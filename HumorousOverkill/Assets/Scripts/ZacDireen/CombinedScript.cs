@@ -169,6 +169,9 @@ public class CombinedScript : MonoBehaviour
 
         public int ReflectAmount;
 
+
+        public LineRenderer lineRenderer;
+
     }
 
 
@@ -303,6 +306,8 @@ public class CombinedScript : MonoBehaviour
         {
             animator.SetBool("IsFiring", false);
             m_audioManager.StopSound(LazerSound);
+
+            stuff.lineRenderer.positionCount = 0;
         }
 
         if (stuff.showStatistics)
@@ -618,13 +623,21 @@ public class CombinedScript : MonoBehaviour
 
     void ShootReflect()
     {
-       //This is the starting point of the raycast for the reflective shots. 
+        //This is the starting point of the raycast for the reflective shots. 
         Transform startingRaycastPoint = EndOfGun.transform;
 
         // this is the starting ray for the raycast.
         Ray ray = new Ray(startingRaycastPoint.position, startingRaycastPoint.forward);
 
 
+        // the amount of points the line will render.
+        int points = stuff.ReflectAmount;
+
+
+        //stuff.lineRenderer.SetVertexCount(points);
+        stuff.lineRenderer.positionCount = points;
+
+        stuff.lineRenderer.SetPosition(0, EndOfGun.transform.position);
         //remove a round of ammunition 
         currentRifleAmmo--;
         // play the rifle effect.
@@ -633,7 +646,7 @@ public class CombinedScript : MonoBehaviour
         // THe two different Raycast hit variables to gather information on the collision. 
         RaycastHit hit, hit2;
 
-        
+
 
         Debug.DrawRay(fpsCam.transform.position, fpsCam.transform.forward * Range, Color.red, 3.0f);
 
@@ -659,18 +672,63 @@ public class CombinedScript : MonoBehaviour
                         Debug.DrawRay(ray.origin, Vector3.Reflect(hit2.point - EndOfGun.transform.position, hit2.normal), Color.green, 5);
 
                         // Draw the normal - can only seen at the scene tab, for debugging purposes
-                        Debug.DrawRay(hit2.point, hit.normal * 3, Color.blue,5);
+                        Debug.DrawRay(hit2.point, hit.normal * 3, Color.blue, 5);
                         //represent the ray using a line that can only be viewed at scene tab
-                        Debug.DrawRay(hit2.point, inDirection * 100, Color.magenta,5);
+                        Debug.DrawRay(hit2.point, inDirection * 100, Color.magenta, 5);
+
+
+
+                        if (stuff.ReflectAmount == 1)
+                        {
+                            stuff.lineRenderer.positionCount = ++points;
+                        }
+
+                        stuff.lineRenderer.SetPosition(i + 1, hit2.point);
+                        if (hit.collider.gameObject.tag == "Enemy")
+                        {
+                            if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
+                            {
+                                //hit.collider.gameObject.GetComponent<CupcakeAI>().HandleEvent(GameEvent.ENEMY_DAMAGED, RifleDamage);
+                                EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)RifleDamage, typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
+
+                                PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + RifleDamage);
+
+                                if (hit.collider.gameObject.GetComponentInParent<CupcakeAI>().myInfo.health <= 0)
+                                {
+                                    m_audioManager.PlaySound(enemyDeathSound, false);
+                                    stuff.killedCount++;
+                                    PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
+                                }
+
+                            }
+                            if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
+                            {
+                                EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject.transform.parent.gameObject, (float)RifleDamage, typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
+                                PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + RifleDamage);
+                                if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
+                                {
+                                    m_audioManager.PlaySound(enemyDeathSound, false);
+                                    stuff.killedCount++;
+                                    PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
+                                }
+
+
+                            }
+
+                            if (stuff.ReflectAmount == 0)
+                            {
+                                stuff.lineRenderer.SetPosition(i + 1, hit2.point);
+                            }
+                            //stuff.lineRenderer.SetPosition(i + 1, hit2.point);
+                        }
 
                     }
-
                 }
             }
             else
             {
-                //Debug.DrawRay(ray.origin, inDirection * 3, Color.green, 5);
-                if (Physics.Raycast(ray.origin, ray.direction, out hit2, 1000))
+             
+                if (Physics.Raycast(ray.origin, ray.direction, out hit2, 100))
                 {
                     inDirection = Vector3.Reflect(inDirection, hit2.normal);
 
@@ -684,15 +742,23 @@ public class CombinedScript : MonoBehaviour
                     //Print the name of the object the cast ray has hit, at the console  
                     Debug.Log("Object name: " + hit2.transform.name);
 
+
+
+                    //add a new vertex to the line renderer  
+                    stuff.lineRenderer.positionCount = ++points;
+                    //set the position of the next vertex at the line renderer to be the same as the hit point  
+                    stuff.lineRenderer.SetPosition(i + 1, hit2.point);
+
                 }
 
 
-            
+
             }
+            }
+
         }
 
-    }
-
+    
 
     void Shoot()
     {
