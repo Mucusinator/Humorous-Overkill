@@ -9,15 +9,21 @@ public class SteamStats : MonoBehaviour {
     private bool show = false;
     public Button SteamButton;
     public Text statText;
+    private string userName;
+    private string id;
+
 
     void Start()
     {
         Button btn = SteamButton.GetComponent<Button>();
+        
         btn.onClick.AddListener(ShowStats);
     }
 
     void ShowStats()
     {
+        userName = Client.Instance.Username.ToString();
+        id = Client.Instance.SteamId.ToString();
         if (!show)
         {
             show = true;
@@ -38,7 +44,9 @@ public class SteamStats : MonoBehaviour {
     {
         if (show)
         {
-            statText.text = Client.Instance.Username;
+            statText.text = "Steam Username is:" + userName + "\n";
+            statText.text += "Steam ID:" + id + "\n";
+
             Debug.Log(Client.Instance.Username);
            
         }
