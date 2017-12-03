@@ -8,22 +8,20 @@ public class EndCheck : MonoBehaviour
 {
     public AudioClip clip;
     public EnemySpawner spawner;
+
+    private bool isStageDone = false;
 	
 	void Start ()
     {
         // set collider as trigger
         GetComponent<BoxCollider>().isTrigger = true;
-        FindObjectOfType<AudioManager>().AddSound(clip);
+        //FindObjectOfType<AudioManager>().AddSound(clip);
 	}
 
-    void OnTriggerStay(Collider collider)
-    {
-        // check if player
-        if (collider.tag == "Player" && spawner.IsStageComplete())
-        {
-            FindObjectOfType<AudioManager>().StopMusic(0);
-            FindObjectOfType<AudioManager>().PlaySound(clip, false);
-            EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(PlayerManager), GameEvent.STATE_HIGHSCORE);
+    private void Update () {
+        if (spawner.IsStageComplete() && !isStageDone) {
+            isStageDone = true;
+            EventManager<GameEvent>.InvokeGameState(this, null, null, null, GameEvent.STATE_HIGHSCORE);
         }
     }
 

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// This is a Script that Andrew created, but that I tweaked in order for it to be able to work with current mechanics.
+/// </summary>
 public class LaserTest : MonoBehaviour
 {
     RaycastHit hit = new RaycastHit();
@@ -34,7 +38,7 @@ public class LaserTest : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * 1000.0f, Color.yellow);
 
         // if the mouse is clicked
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !WeaponScript.stuff.ReflectiveShots)
         {
 
             if (WeaponScript.gunType == CombinedScript.GunType.RIFLE)

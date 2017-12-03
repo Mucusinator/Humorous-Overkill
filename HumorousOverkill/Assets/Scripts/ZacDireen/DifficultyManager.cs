@@ -1,16 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// This script was fully created by Zackary Direen. It is responsible for difficulty settings in the game.
+/// </summary>
 public class DifficultyManager : MonoBehaviour
 {
-
+    // Takes on these parameters to have access to variables within the script.
     public CombinedScript combinedScript;
     public EnemyManager enemyManager;
     public PlayerManager playerManager;
+    // This bool is for Nightmare mode (no spawn points.)
     public bool NoSpawnPoints;
+    
+
     private List<FranciscoRomano.Spawn.Stage> copyStages = new List<FranciscoRomano.Spawn.Stage>();
 
+    // This struct keeps track of the values we want to change based on the difficulty.
     [System.Serializable]
     public struct DifficultySettings
     {
@@ -22,6 +28,11 @@ public class DifficultyManager : MonoBehaviour
         public float spawnMultiplier;
         public float PickupMultiplier;
     }
+
+    /// <summary>
+    /// These are 3 different structs based on the one above that will store values.
+    /// there is not one for normal, as normal will have the default settings.
+    /// </summary>
     [SerializeField]
     DifficultySettings EasyMode;
     [SerializeField]
@@ -29,7 +40,7 @@ public class DifficultyManager : MonoBehaviour
     [SerializeField]
     DifficultySettings NightmareMode;
 
-
+    //On start
     void Start()
     {
         EventManager<GameEvent>.Add(HandleEvent);
@@ -45,9 +56,11 @@ public class DifficultyManager : MonoBehaviour
     {
         // if this event is being sent to itself, just skip it
         if (sender == (object)this) return;
-        //Debug.Log(e.arg.ToString());
+        
+        // Based on the difficulty selected...
         switch (e.arg)
         {
+            // Easy
             case GameEvent.DIFFICULTY_EASY:
                 playerManager.m_playerInfo.m_playerHealth = EasyMode.playerHealth;
                 combinedScript.PelletDamage = EasyMode.PelletDamage;
@@ -61,19 +74,11 @@ public class DifficultyManager : MonoBehaviour
                 enemyManager.defaultDroneInfo.pickupDropRate = EasyMode.PickupMultiplier;
                 EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 break;
+                // Medium (this wont change any values.
             case GameEvent.DIFFICULTY_MEDI:
-                //playerManager.m_playerInfo.m_playerHealth = 100;
-                //enemyManager.defaultDonutInfo.health = 50;
-                //enemyManager.defaultDroneInfo.health = 50;
-                //combinedScript.PelletDamage = 3.5f;
-                //combinedScript.RifleDamage = 32.5f;
-
-                //UpdateSpawners(5, 7, 1.0f);
-
-                //enemyManager.defaultDonutInfo.pickupDropRate = 0.3f;
-                //enemyManager.defaultDroneInfo.pickupDropRate = 0.3f;
                 EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 break;
+                // Hard
             case GameEvent.DIFFICULTY_HARD:
                 playerManager.m_playerInfo.m_playerHealth = HardMode.playerHealth;
                 enemyManager.defaultDonutInfo.health = HardMode.DonutHealth;
@@ -87,6 +92,7 @@ public class DifficultyManager : MonoBehaviour
                 enemyManager.defaultDroneInfo.pickupDropRate = HardMode.PickupMultiplier;
                 EventManager<GameEvent>.InvokeGameState(this, null, null, typeof(GameManager), GameEvent.STATE_START);
                 break;
+                // Nightmare.
             case GameEvent.DIFFICULTY_NM:
 
                 playerManager.m_playerInfo.m_playerHealth = NightmareMode.playerHealth;
@@ -104,7 +110,11 @@ public class DifficultyManager : MonoBehaviour
                 break;
         }
     }
-
+    /// <summary>
+    /// This function within this script was created by Francisco. it was created to update the enemy spawners, as well as the pickup drop rates
+    /// based on a multiplier.
+    /// </summary>
+    /// <param name="multiplier"></param>
     void UpdateSpawners(float multiplier)
     {
         EnemySpawner[] spawners = GameObject.FindObjectsOfType<EnemySpawner>();

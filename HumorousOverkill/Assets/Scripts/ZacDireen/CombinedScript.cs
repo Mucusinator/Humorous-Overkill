@@ -233,7 +233,7 @@ public class CombinedScript : MonoBehaviour
     /// <param name="e"> this is the event itself. defined as a enum.</param>
     public void HandleMessage(object s, __eArg<GameEvent> e) {
         if (s == (object)this) return;
-        if (e.arg == GameEvent._NULL_)
+        if (e.arg == GameEvent._NULL_) return;
    
         switch (e.arg)
         {
