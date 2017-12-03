@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class singleLevelDeletion : MonoBehaviour {
 
-    public GameObject boxCollider, level, door;
+    public GameObject boxCollider, level, door, behindDoor;
 
     void OnTriggerEnter(Collider other)
     {
@@ -18,6 +18,10 @@ public class singleLevelDeletion : MonoBehaviour {
             }
             boxCollider.SetActive(false);
 
+            if (behindDoor != null)
+            {
+                behindDoor.SetActive(true);
+            }
         }
     }
 }

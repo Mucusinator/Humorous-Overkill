@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using EventHandler;
 
-
+/// <summary>
+/// This class was fully created by Zackary Direen. It is responsible for for the shooting mechanics of the player, as well as sending damage effects, swapping of weapons, laser mechanics, shotgun confetti effects.
+/// Reflective Shots and damage, as well the glitching effect and for tracking statistics.
+/// </summary>
 public class CombinedScript : MonoBehaviour
 {
 
@@ -158,18 +161,22 @@ public class CombinedScript : MonoBehaviour
         // A int for a percentage of damage that the reflective shots will have.
         public int ReflectMultiplier;
      
-
+        // A bool that will show statistics in game if checked.
         public bool showStatistics;
 
-        public Text enemiesKilled;
-
+        // This is the text field that will show the information.
+        public Text statisticText;
+        // This will show the amount of enemies killed.
         public int killedCount;
 
+        // this will be the damage that is dealt.
         public float damageDealt;
 
-        public int ReflectAmount;
+        // This is the amount of reflections my script will allow, with 1 being the minimum.
+        [Range(1,5)]
+        public int ReflectPoints;
 
-
+        // This is the line renderer lazer.
         public LineRenderer lineRenderer;
 
     }
@@ -180,8 +187,6 @@ public class CombinedScript : MonoBehaviour
 
 
 
-    // Keys for the PlayerPrefs.
-    //private const string enemiesKilled, timesJumped, damagedDealt;
 
 
     // This is the two different weapon types.
@@ -192,6 +197,10 @@ public class CombinedScript : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// This Awake function will add the game events on awake.
+    /// </summary>
+
     void Awake() {
         EventManager<GameEvent>.Add(HandleMessage);
         m_audioManager = FindObjectOfType<AudioManager>();
@@ -200,7 +209,9 @@ public class CombinedScript : MonoBehaviour
         m_audioManager.AddSound(enemyDeathSound);
     }
 
-
+    /// <summary>
+    /// This code will enable on start.
+    /// </summary>
     void Start()
     {
         EventManager<GameEvent>.InvokeGameState(this, null, null, GetType(), GameEvent._NULL_);
@@ -208,20 +219,22 @@ public class CombinedScript : MonoBehaviour
 
 
         // Default the playerPrefs
-        PlayerPrefs.SetInt("enemiesKilled", 0);
+        PlayerPrefs.SetInt("statisticText", 0);
         PlayerPrefs.SetInt("timesJumped", 0);
         PlayerPrefs.SetInt("damageDealt", 0);
         PlayerPrefs.SetInt("shotgunRoundsFired", 0);
     }
 
+    /// <summary>
+    /// This code is responsible for storaging what state the game is currently in. this is important as this will get used for comparisons
+    /// to determine when the player will be able to shoot.
+    /// </summary>
+    /// <param name="s"> this is the sender, who sent the message.</param>
+    /// <param name="e"> this is the event itself. defined as a enum.</param>
     public void HandleMessage(object s, __eArg<GameEvent> e) {
         if (s == (object)this) return;
         if (e.arg == GameEvent._NULL_)
-            if (e.type == typeof(AudioManager)) {
-                //m_audioManager = (AudioManager)s;
-                //m_audioManager.AddSound(LazerSound);
-                //m_audioManager.AddSound(shotgunSound);
-            }
+   
         switch (e.arg)
         {
             case GameEvent.STATE_MENU:
@@ -236,49 +249,47 @@ public class CombinedScript : MonoBehaviour
                 break;
         }
     }
-
-    // Update is called once per frame
+    /// <summary>
+    /// This is the Update loop, when the game is running, this code will execute.
+    /// </summary>
     void Update()
     {
 
 
 
-
+        // Display the ammo to the player.
         DisplayAmmo();
 
-
+        // Check iof the player wants to swap weapons.
         RightClickSwitching();
 
-
+        // If the shotgun is out, check if it needs reloading.
         if (gunType == GunType.SHOTGUN)
         {
             checkReloadShotgun();
         }
 
-
-
-
-
-        //if (gunType == GunType.SHOTGUN)
+        // If the rifle is out, check if it needs reloading.
         if (gunType == GunType.RIFLE)
         {
             checkReloadRifle();
         }
 
 
-
+        // If the user hits r, do the reloading function.
         if (Input.GetKey(KeyCode.R))
         {
             ManualReloading();
         }
 
 
-
+        // Do the animation for shooting the laser if the user left clicks the mouse button.
         if (Input.GetKey(KeyCode.Mouse0) && gunType == GunType.RIFLE && !isReloadingRifle)
         {
             animator.SetBool("IsFiring", true);
             shootRifle();
         }
+        // Check after the rifle has been shot if its still okay to have the animation playing.
         if (currentRifleAmmo > 0)
         {
             animator.SetBool("HasAmmo", true);
@@ -289,19 +300,21 @@ public class CombinedScript : MonoBehaviour
         }
 
 
-
+        // Check if its okay to run the glitch effect.
         GlitchCheck();
+        // Do or dont do the glitch effect.
         Glitching();
 
-
+        // Shoot the shotgun if its the current weapon, the left mouse button has been clicked and its not before the delay.
         if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.SHOTGUN && Time.time >= nextTimeToFire)
         {
             shootShotgun();
         }
+        // Play the lazer sound if the rifle is out and shooting.
         if (Input.GetKeyDown(KeyCode.Mouse0) && gunType == GunType.RIFLE && currentRifleAmmo > 0) {
             m_audioManager.PlaySound(LazerSound,true);
         }
-
+        // if the pouse button gets released, stop the animation.
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             animator.SetBool("IsFiring", false);
@@ -309,7 +322,7 @@ public class CombinedScript : MonoBehaviour
 
             stuff.lineRenderer.positionCount = 0;
         }
-
+        // if we want to show stats, show them.
         if (stuff.showStatistics)
         {
             ShowDeadCount();
@@ -320,7 +333,9 @@ public class CombinedScript : MonoBehaviour
 
 
 
-
+    /// <summary>
+    /// This function os 
+    /// </summary>
     void checkReloadShotgun()
     {
         if (currentShotgunAmmo <= 0)
@@ -631,7 +646,7 @@ public class CombinedScript : MonoBehaviour
 
 
         // the amount of points the line will render.
-        int points = stuff.ReflectAmount;
+        int points = stuff.ReflectPoints;
 
 
         //stuff.lineRenderer.SetVertexCount(points);
@@ -652,7 +667,7 @@ public class CombinedScript : MonoBehaviour
 
 
         // For the amount of reflections
-        for (int i = 0; i <= stuff.ReflectAmount; i++)
+        for (int i = 0; i <= stuff.ReflectPoints; i++)
         {
             // if we havent hit anything initally
             if (i == 0)
@@ -678,7 +693,7 @@ public class CombinedScript : MonoBehaviour
 
 
 
-                        if (stuff.ReflectAmount == 1)
+                        if (stuff.ReflectPoints == 1)
                         {
                             stuff.lineRenderer.positionCount = ++points;
                         }
@@ -697,7 +712,7 @@ public class CombinedScript : MonoBehaviour
                                 {
                                     m_audioManager.PlaySound(enemyDeathSound, false);
                                     stuff.killedCount++;
-                                    PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
+                                    PlayerPrefs.SetInt("statisticText", PlayerPrefs.GetInt("statisticText") + 1);
                                 }
 
                             }
@@ -709,13 +724,13 @@ public class CombinedScript : MonoBehaviour
                                 {
                                     m_audioManager.PlaySound(enemyDeathSound, false);
                                     stuff.killedCount++;
-                                    PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
+                                    PlayerPrefs.SetInt("statisticText", PlayerPrefs.GetInt("statisticText") + 1);
                                 }
 
 
                             }
 
-                            if (stuff.ReflectAmount == 0)
+                            if (stuff.ReflectPoints == 0)
                             {
                                 stuff.lineRenderer.SetPosition(i + 1, hit2.point);
                             }
@@ -803,7 +818,7 @@ public class CombinedScript : MonoBehaviour
                             {
                                 m_audioManager.PlaySound(enemyDeathSound, false);
                                 stuff.killedCount++;
-                                PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
+                                PlayerPrefs.SetInt("statisticText", PlayerPrefs.GetInt("statisticText") + 1);
                             }
 
                         }
@@ -815,7 +830,7 @@ public class CombinedScript : MonoBehaviour
                             {
                                 m_audioManager.PlaySound(enemyDeathSound, false);
                                 stuff.killedCount++;
-                                PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
+                                PlayerPrefs.SetInt("statisticText", PlayerPrefs.GetInt("statisticText") + 1);
                             }
 
 
@@ -843,14 +858,14 @@ public class CombinedScript : MonoBehaviour
 
     void ShowDeadCount()
     {
-        //stuff.enemiesKilled.text = "Enemies Killed: " + stuff.killedCount;
-        stuff.enemiesKilled.text = "Enemies Killed: ";
+        //stuff.statisticText.text = "Enemies Killed: " + stuff.killedCount;
+        stuff.statisticText.text = "Enemies Killed: ";
 
-        stuff.enemiesKilled.text += PlayerPrefs.GetInt("enemiesKilled").ToString() + "\n";
+        stuff.statisticText.text += PlayerPrefs.GetInt("statisticText").ToString() + "\n";
 
-        stuff.enemiesKilled.text += "Times Jumped: " + PlayerPrefs.GetInt("timesJumped").ToString() + "\n";
+        stuff.statisticText.text += "Times Jumped: " + PlayerPrefs.GetInt("timesJumped").ToString() + "\n";
 
-        stuff.enemiesKilled.text += "Damage Dealt: " + PlayerPrefs.GetFloat("damageDealt").ToString();
+        stuff.statisticText.text += "Damage Dealt: " + PlayerPrefs.GetFloat("damageDealt").ToString();
 
     }
 
@@ -911,8 +926,8 @@ public class CombinedScript : MonoBehaviour
                         if (hit.collider.gameObject.GetComponentInParent<CupcakeAI>().myInfo.health <= 0)
                         {
                             m_audioManager.PlaySound(enemyDeathSound, false);
-                            stuff.killedCount++;
-                            PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
+                            //stuff.killedCount++;
+                            PlayerPrefs.SetInt("statisticText", PlayerPrefs.GetInt("statisticText") + 1);
 
                         }
                     }
@@ -923,8 +938,8 @@ public class CombinedScript : MonoBehaviour
                         if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
                         {
                             m_audioManager.PlaySound(enemyDeathSound, false);
-                            stuff.killedCount++;
-                            PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
+                            //stuff.killedCount++;
+                            PlayerPrefs.SetInt("statisticText", PlayerPrefs.GetInt("statisticText") + 1);
                         }
 
 
@@ -935,63 +950,56 @@ public class CombinedScript : MonoBehaviour
 
 
                 }
-                Debug.DrawLine(EndOfGun.transform.position, hit.point, Color.red, 5.0f);
-                Vector3 incomingVec = hit.point - EndOfGun.transform.position;
-                Vector3 reflectVec = Vector3.Reflect(incomingVec, hit.normal);
+                //Debug.DrawLine(EndOfGun.transform.position, hit.point, Color.red, 5.0f);
+                //Vector3 incomingVec = hit.point - EndOfGun.transform.position;
+                //Vector3 reflectVec = Vector3.Reflect(incomingVec, hit.normal);
 
-                Ray r2 = new Ray(hit.point, reflectVec);
-                RaycastHit hit2;
-                if (stuff.ReflectiveShots == true)
-                {
-                    if (Physics.Raycast(r2, out hit2, 400))
-                    {
-                        //Debug.DrawRay(hit2.point, -hit2.normal, Color.yellow, 5.0f);
-                        //Debug.Log(gameObject);
-                        Debug.DrawRay(hit.point, reflectVec, Color.green, 5.0f);
-                        if (hit.collider.gameObject.tag == "Enemy")
-                        {
-                            if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
-                            {
-                                EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)(PelletDamage * stuff.ReflectMultiplier / 100), typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
-                                PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + PelletDamage * stuff.ReflectMultiplier/ 100);
-                                if (hit.collider.gameObject.GetComponentInParent<CupcakeAI>().myInfo.health <= 0)
-                                {
-                                    m_audioManager.PlaySound(enemyDeathSound, false);
-                                    stuff.killedCount++;
-                                    PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
-                                }
-                            }
-                            if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
-                            {
-                                EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)(PelletDamage * stuff.ReflectMultiplier / 100), typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
-                                PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + PelletDamage * stuff.ReflectMultiplier / 100);
-                                if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
-                                {
-                                    m_audioManager.PlaySound(enemyDeathSound, false);
-                                    stuff.killedCount++;
-                                    PlayerPrefs.SetInt("enemiesKilled", PlayerPrefs.GetInt("enemiesKilled") + 1);
-                                }
-                            }
-                            Debug.Log("I have shot " + hit.collider.gameObject.name);
-
-
-                        }
+                //Ray r2 = new Ray(hit.point, reflectVec);
+                //RaycastHit hit2;
+                //if (stuff.ReflectiveShots == true)
+                //{
+                //    if (Physics.Raycast(r2, out hit2, 400))
+                //    {
+                //        //Debug.DrawRay(hit2.point, -hit2.normal, Color.yellow, 5.0f);
+                //        //Debug.Log(gameObject);
+                //        Debug.DrawRay(hit.point, reflectVec, Color.green, 5.0f);
+                //        if (hit.collider.gameObject.tag == "Enemy")
+                //        {
+                //            if (hit.collider.gameObject.GetComponent<CupcakeAI>() != null)
+                //            {
+                //                EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)(PelletDamage * stuff.ReflectMultiplier / 100), typeof(CupcakeAI), GameEvent.ENEMY_DAMAGED);
+                //                PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + PelletDamage * stuff.ReflectMultiplier/ 100);
+                //                if (hit.collider.gameObject.GetComponentInParent<CupcakeAI>().myInfo.health <= 0)
+                //                {
+                //                    m_audioManager.PlaySound(enemyDeathSound, false);
+                //                    stuff.killedCount++;
+                //                    PlayerPrefs.SetInt("statisticText", PlayerPrefs.GetInt("statisticText") + 1);
+                //                }
+                //            }
+                //            if (hit.collider.gameObject.GetComponentInParent<DonutAI>() != null)
+                //            {
+                //                EventManager<GameEvent>.InvokeGameState(this, hit.collider.gameObject, (float)(PelletDamage * stuff.ReflectMultiplier / 100), typeof(DonutAI), GameEvent.ENEMY_DAMAGED);
+                //                PlayerPrefs.SetFloat("damageDealt", PlayerPrefs.GetFloat("damageDealt") + PelletDamage * stuff.ReflectMultiplier / 100);
+                //                if (hit.collider.gameObject.GetComponentInParent<DonutAI>().myInfo.health <= 0)
+                //                {
+                //                    m_audioManager.PlaySound(enemyDeathSound, false);
+                //                    stuff.killedCount++;
+                //                    PlayerPrefs.SetInt("statisticText", PlayerPrefs.GetInt("statisticText") + 1);
+                //                }
+                //            }
+                //            Debug.Log("I have shot " + hit.collider.gameObject.name);
 
 
+                //        }
 
-                    }
+
+
+                //    }
                 }
 
 
 
 
-            }
-            else
-            {
-                //Vector3 centreCam = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
-
-                Debug.DrawLine(StartOfPlayerRaycast.transform.position, fpsCam.transform.forward * Range, Color.cyan, 3.0f);
-            }
         }
     }
   

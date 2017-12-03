@@ -707,7 +707,6 @@ GameObject:
   - component: {fileID: 95660477962947404}
   - component: {fileID: 114742998846885310}
   - component: {fileID: 120805334187207962}
-  - component: {fileID: 114128774367801756}
   m_Layer: 8
   m_Name: Weapon Holder
   m_TagString: Untagged
@@ -2689,20 +2688,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -2729,30 +2714,6 @@ MonoBehaviour:
     m_cameraSensitivity: 0
     m_cameraMinimumAngle: 0
     m_cameraMaximumAngle: 0
---- !u!114 &114128774367801756
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1641311901381414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1330c886aecf08468792961c1d77168, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laser: {fileID: 1426574552836422, guid: 7c8190cb4b470484cb2bbb45f5095e25, type: 2}
-  cam: {fileID: 20715158619280520}
-  laserColors:
-  - {r: 0.84148824, g: 0.015030292, b: 1, a: 0}
-  - {r: 0.15862082, g: 0, b: 1, a: 0}
-  - {r: 0, g: 0.91724133, b: 1, a: 0}
-  - {r: 0, g: 1, b: 0.37931037, a: 0}
-  - {r: 1, g: 0, b: 0, a: 0}
-  - {r: 0.94482756, g: 1, b: 0, a: 0}
-  - {r: 1, g: 0, b: 0, a: 0}
-  shootPoint: {fileID: 1730044118312698}
-  laserSpeed: 5
-  WeaponScript: {fileID: 114742998846885310}
 --- !u!114 &114128777351283294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2885,17 +2846,18 @@ MonoBehaviour:
   WeaponRaycast: {fileID: 1641311901381414}
   EndOfGun: {fileID: 1730044118312698}
   fpsCam: {fileID: 20715158619280520}
-  enemyDeathSound: {fileID: 0}
+  enemyDeathSound: {fileID: 8300000, guid: 842c02052e588db4398a5686ab1ee24f, type: 3}
   currentState: 0
   glitchRifleEffect: 0
   stuff:
-    ReflectiveShots: 0
-    ReflectMultiplier: 0
-    showStatistics: 0
-    enemiesKilled: {fileID: 0}
+    ReflectiveShots: 1
+    ReflectMultiplier: 25
+    showStatistics: 1
+    statisticText: {fileID: 0}
     killedCount: 0
     damageDealt: 0
-    ReflectAmount: 0
+    ReflectPoints: 1
+    lineRenderer: {fileID: 120805334187207962}
 --- !u!114 &114846590935781826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2926,7 +2888,7 @@ LineRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1641311901381414}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 0
